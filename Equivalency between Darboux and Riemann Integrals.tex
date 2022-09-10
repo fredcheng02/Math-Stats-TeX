@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage{setspace}
+
+\onehalfspacing
+\pagestyle{empty}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+
+\begin{center}
+    \Large Equivalency between Darboux and Riemann Integrals
+\end{center}
+
+\begin{proof}
+    Recall the Cauchy condition states that a function $f$ is Darboux integrable iff 
+    \begin{equation}
+        \forall \epsilon>0, \exists \text{ a partition } P_\epsilon \text{ such that } U(f, P_\epsilon) - L(f, P_\epsilon) < \epsilon.
+    \end{equation}
+    We may first show that the Riemann integral definition is equivalent to saying that
+    \begin{equation}
+        \forall \epsilon > 0, \exists \delta > 0 \text{ such that for any partition } P \text{ with } \|P\| < \delta, U(f, P) - L(f, P) < \epsilon,
+    \end{equation}
+    which we will then show is equivalent to the Cauchy condition above. 
+    
+    We write the Riemann sum based on $P$ with $n$ subintervals as $S = \sum_{i = 1}^{n} f(t_i) \Delta x_i$, where $t_i$ can take any value within $[ x_{i-1}, x_{i}]$. Riemann integral exists when this $S$ converges to a limit $T$ as $\|P\| \to 0$.
+    
+    \emph{Step I.} Riemann integral $\Longleftrightarrow$ (2).
+    Suppose $f$ is Riemann integrable, then $$\forall \epsilon > 0, \exists \delta > 0 \text{ such that for any partition } P \text{ with } \|P\| < \delta, |S - T| < \frac{\epsilon}{2}.$$
+    As a result, $T - \frac{\epsilon}{2} < S < T + \frac{\epsilon}{2}$, and taking the infimum and supremum of $S$ over $t_i$'s gives us $T - \frac{\epsilon}{2} \leq L(f,P)$ and $T + \frac{\epsilon}{2} \geq U(f,P)$. Therefore, $U(f,P) - L(f,P) \leq \epsilon$ for any fixed $P_{\epsilon,\delta}$.
+    
+    Conversely, $L(f,P) < S < U(f,P)$, and we only have to show that a constant $T$ exists between $U(f,P)$ and $L(f,P)$ for arbitrary $P$ with $\|P\| < \delta$, so that $|S - T| < U(f,P) - L(f,P) < \epsilon$. This is always true because $U(f,P) \geq L(f,Q)$ for any possible partitions $P$ and $Q$.
+    
+    \emph{Step II.} (2) $\Longleftrightarrow$ (1). The $\Longleftarrow$ direction is trivial because the partition we get from (2) is the partition that satisfies (1) as well.
+    The other direction is more involved. The basic idea is to construct any partition $P$ with $\|P\| < \delta$ from the existing $P_\epsilon$ from the Cauchy condition.
+    
+    Let $P_\epsilon = \{y_0, y_1,...,y_N\}$ be the partition in (1), and let $K = \sup \{|f(x)|: x \in [a,b]\}$ so that $M_i - m_i \leq 2K$ in each of the $N$ subintervals. Also, let $\delta = \frac{\epsilon}{4NK}$. Now for any partition $P = \{x_0, x_1, ..., x_n\}$ with $\|P\| < \delta$, we divide the sum $$U(f,P) - L(f,P) = \sum_{i=1}^n (M_i - m_i) (x_i - x_{i-1})$$ into two categories based on the intervals. First, we have terms with intervals $[x_{i-1}, x_i] \subseteq [y_{j-1}, y_j]$ for some $j$. The sum of these terms $$S_1 \leq U(f, P_\epsilon) - L(f, P_\epsilon) < \frac{\epsilon}{2}.$$ For the intervals that are left out, they must necessarily contain points of $P_\epsilon$ in it. Therefore, the number of intervals is at most $N$, and it follows that the sum of the corresponding terms $$S_2 < N \cdot 2K \cdot \delta = \frac{\epsilon}{2}.$$ And thus we have $U(f,P) - L(f,P) = S_1 + S_2 < \epsilon$ for any partition $P$ with $\|P\| < \delta$.
+\end{proof}
+
+\end{document}
