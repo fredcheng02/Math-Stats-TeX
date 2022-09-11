@@ -11,6 +11,10 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\s}{\text{span}}
 \newcommand{\n}{\text{null }}
+\newcommand{\LVW}{\mathcal{L}(V,W)}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\bv}{v_1,...,v_n}
+\newcommand{\bw}{w_1,...,w_n}
 \renewcommand{\r}{\text{range }}
 \renewcommand{\d}{\text{dim }}
 
@@ -94,7 +98,7 @@
 \end{itemize}
 
 \section{Linear Maps}
-\subsection{}
+\subsection{The Vector Space of Linear Maps}
 \begin{itemize}
     \item A linear map(ping)/transformation is a homomorphism of vector spaces under addition and scalar multiplication. The linear structure is preserved after the transformation $T$. To use symbols, a linear map is a function $T: V \rightarrow W$ such that for all $u,v \in V$ and $\lambda \in \F$ (the field of $V$ and $W$),
     \begin{equation*}
@@ -112,7 +116,7 @@
     \end{itemize}
 \end{itemize}
 
-\subsection{}
+\subsection{Null Spaces and Ranges}
 \begin{itemize}
     \item The \textit{nullspace}/\textit{kernel} $\n T$ is the preimage of $0_W$. The \textit{range}/\textit{image} $\r T$ is defined the same as the range of a function. The nullspace and the range are respectively subspaces of $V$ and $W$ (by checking the three criterion). If the nullspace (resp. range) is finite-dimensional, then its dimension is the \textit{nullity} (resp. \textit{rank}) of $T$.
     \item We are now endowed with all the tools to prove the \textbf{rank-nullity theorem}: for a FDVS $V$ and $T$ from $V$ to $W$, $\r T$ is finite-dimensional with $$\d V = \d \n T + \d \r T.$$
@@ -127,13 +131,30 @@
     \end{itemize}
     \item Solving systems of linear equations is a direct application of this.
     \begin{itemize}
-        \item A homogeneous system of linear equations with more variables than equations has nonzero solutions. Here we can view the system as a linear map $T$ that maps the vector of unknown variables $\mathbf{x} \in \F^n$ to $\mathbf{0} \in \F^m$ with $n > m$. The nullity of $T$ is greater than 0 as a result.
+        \item A homogeneous system of linear equations with more variables than equations has nonzero solutions. Here we can view the system as a linear map $T$ that maps the vector of unknown variables $x \in \F^n$ to $0 \in \F^m$ with $n > m$. The nullity of $T$ is greater than 0 as a result.
         \item Similarly, the $T$ associated with an inhomogeneous equation with more equations than variables is not surjective, and thus some choices of constants on the right side will give no solutions to the system.
     \end{itemize}
 \end{itemize}
 
-\subsection{}
+\subsection{Matrices}
+\begin{itemize}
+    \item Consider the $n$-dimensional $V$ with basis $\bv$ and $m$-dimensional $W$ with basis $\bw$. For $T \in \LVW$, we can find for every $v_k$, a list of $a_{i,k}$'s such that $Tv_k = a_{1,k}w_1 +...+ a_{m,k}w_m = \sum_{j=1}^m a_{j,k}w_j$. As a result, we have $n$ lists of scalar $a$'s, each of length $m$, and we can put them into an $m \times n$ matrix $A$, with entries $a_{i,j}$ in the $i$-th row and $j$-th column. This matrix $\mathcal{M}(T,(\bv),(\bw))$ uniquely determines the linear map $T \in \LVW$.
+    \item We define matrix addition entry-wise, because under this definition, matrix representation of linear maps preserves addition, i.e. $\M(S+T) = \M(S) + \M(T)$ for $S,T \in \LVW$, assuming $S+T$, $S$, and $T$ share the same ordered bases.
+    \item Similarly entry-wise scalar multiplication with matrices give us $\M(\lambda T) = \lambda \M(T)$.
+    \item Given the definition of matrix addition and scalar multiplication, $\F^{m,n}$, the set of matrices with $m$ rows and $n$ columns over $\F$, is a vector space of dimension $mn$.
+    \item The reason why we represent linear maps from $n$-dimensional VS to $m$-dimensional VS is that we want to preserve the ordering of "$S$" and "$T$" after matrix representation, i.e., $\M(ST) = \M(S)\M(T)$ instead of $\M(T)\M(S)$, under the usual definition of matrix multiplication: $$(AC)_{j,k} = \sum_{r = 1}^n A_{j,r}C_{r,k}.$$
+    \begin{itemize}
+        \item Remember that matrix multiplication is not commutative, but is associative and distributive.
+    \end{itemize}
+    \item The book defines $A_{j,\cdot}$ and $A_{\cdot,k}$ as the $j$-th row and the $k$-th column of matrix $A$, and thus $(AC)_{j,k} = A_{j,\cdot}C_{\cdot,k}$. Also, $k$-th column of matrix product equals matrix times the $k$-th column of the second matrix: $$(AC)_{\cdot,k} = AC_{\cdot,k},$$ which is an alternative to understanding matrix multiplication. Obviously there is a row equivalent version that says $j$-th row of the matrix product equals $j$-th row times the second matrix.
+    \item When we are considering matrix $A$ times a column vector $c$, we can see $Ac$ as the linear combination $c_1A_{\cdot,1} + ... + c_nA_{\cdot,n}$.
+\end{itemize}
 
+\subsection{Invertibility and Isomorphic Vector Spaces}
+\begin{itemize}
+    \item $T \in \LVW$ is invertible if there exists $S \in \mathcal{L}(W,V)$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. By the associativity of linear maps, the inverse is unique.
+    \item Invertibility is equivalent to bijectivity in vector spaces. 
+\end{itemize}
 
 \section{Polynomials}
 
