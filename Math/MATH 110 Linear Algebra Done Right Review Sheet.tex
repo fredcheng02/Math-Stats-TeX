@@ -13,8 +13,8 @@
 \newcommand{\n}{\text{null }}
 \newcommand{\LVW}{\mathcal{L}(V,W)}
 \newcommand{\M}{\mathcal{M}}
-\newcommand{\bv}{v_1,...,v_n}
-\newcommand{\bw}{w_1,...,w_n}
+\newcommand{\bv}{v_1,\dots,v_n}
+\newcommand{\bw}{w_1,\dots,w_n}
 \renewcommand{\r}{\text{range }}
 \renewcommand{\d}{\text{dim }}
 
@@ -35,9 +35,9 @@
     \item $\F^S$ denotes the set of functions from $S$ to $\F$. It is a vector space over $\F$ under the sum and scalar multiplication of functions defined in the usual pointwise way.
     \item A vector space holds the cancellation law and has a unique additive identity and a unique additive inverse because it is a group. $0v = 0$, $a0 = 0$, and $(-1)v = -v$ hold by the distributive property.
     \item A subset $U$ of the whole vector space $V$ that is still a vector space is called a vector subspace. Usually we use the three criteria i) $0_V \in U$ (or $U$ is nonempty), ii) closed under addition in $U$, and iii) closed under scalar multiplication in $U$ to verify. To show the criteria are equivalent to the definition, in one direction we show that $0_V$ is the (unique) identity element of $U$ and in the other direction we only need to check the additive inverse property.
-    \item The sum $U_1 + U_2 +...+ U_m$, where $U_i$'s are subsets of $V$, is the set of all possible sums of the respective elements from each $U_i$.
+    \item The sum $U_1 + U_2 +\cdots+ U_m$, where $U_i$'s are subsets of $V$, is the set of all possible sums of the respective elements from each $U_i$.
     \item When the $U_i$'s are subspaces of $V$, then the sum is the smallest vector space containing all $U_i$'s.
-    \item When the $U_i$'s are subspaces of $V$, and every element of the sum $U_1 + U_2 +...+ U_m$ can be written in only one way as $u_1+u_2+...+u_m$, we call the sum a \textit{direct sum}, denoted by $\oplus$ replacing $+$.
+    \item When the $U_i$'s are subspaces of $V$, and every element of the sum $U_1 + U_2 +\cdots+ U_m$ can be written in only one way as $u_1+u_2+\cdots+u_m$, we call the sum a \textit{direct sum}, denoted by $\oplus$ replacing $+$.
     \item The equivalent criterion for direct sum is that the only way to express $0$ is to write it as the sum of $0$'s from each $U_i$. One direction is trivial, while the other direction employs the common trick of subtracting two different expressions of the same vector $v \in V$.
     \item If we are only discussing two subspaces $U$ and $W$ of $V$, then $U+W$ is a direct sum iff their intersection is the $\{0\}$. The proof of this, in both directions, considers $0 = v + (-v)$. The fact $W$ always contain an element and its inverse will give us the answer.
     \item Arbitrary intersection of subspaces of $V$ is a subspace of $V$, and the union of two subspaces is still a subspace iff one is contained in the other.
@@ -49,34 +49,34 @@
 
 \begin{itemize}
     \item The \textit{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, span($\emptyset$) $\coloneqq \{0\}$.
-    \item Similar to the fact that the sum $U_1 + U_2 +...+ U_m$ is the smallest vector space containing all $U_i$'s, span($S$) is the smallest subspace of $V$ containing all the vectors in $S$. The proof of the two are almost exactly the same.
-    \item A polynomial $p$ in an indeterminate $z$ with coefficients in $\F$ is the \textbf{expression} $a_n z^n + ... + a_1 z + a_0$ with all $a_i$'s in $\F$. The \textit{degree} of a polynomial is the largest exponent of $z$ with nonzero coefficient, and if all the coefficients are 0, we customarily define its degree to be $-\infty$ in the book, or $-1$ elsewhere.
+    \item Similar to the fact that the sum $U_1 + U_2 +\cdots+ U_m$ is the smallest vector space containing all $U_i$'s, span($S$) is the smallest subspace of $V$ containing all the vectors in $S$. The proof of the two are almost exactly the same.
+    \item A polynomial $p$ in an indeterminate $z$ with coefficients in $\F$ is the \textbf{expression} $a_n z^n + \cdots + a_1 z + a_0$ with all $a_i$'s in $\F$. The \textit{degree} of a polynomial is the largest exponent of $z$ with nonzero coefficient, and if all the coefficients are 0, we customarily define its degree to be $-\infty$ in the book, or $-1$ elsewhere.
     \begin{itemize}
-        \item Since we are dealing with $z$ and coefficients in $\F = \R$ or $\C$ in this book, a polynomial here can be alternatively defined as the \textbf{function} $p: \F \rightarrow \F$ with $p(z) = a_n z^n + ... + a_1 z + a_0$. The reason behind is that a polynomial function with coefficients from an infinite field can be written into only one polynomial expression with its unique coefficients. See Chapter 4 of this book or Appendix E, Theorem 10 of \textit{Linear Algebra} by Friedberg, Insel, and Spence. It is the consequence of the fact that a polynomial of degree $n \geq 1$ has at most $n$ distinct zeros. We will proceed with this definition of polynomials.
+        \item Since we are dealing with $z$ and coefficients in $\F = \R$ or $\C$ in this book, a polynomial here can be alternatively defined as the \textbf{function} $p: \F \rightarrow \F$ with $p(z) = a_n z^n + \cdots + a_1 z + a_0$. The reason behind is that a polynomial function with coefficients from an infinite field can be written into only one polynomial expression with its unique coefficients. See Chapter 4 of this book or Appendix E, Theorem 10 of \textit{Linear Algebra} by Friedberg, Insel, and Spence. It is the consequence of the fact that a polynomial of degree $n \geq 1$ has at most $n$ distinct zeros. We will proceed with this definition of polynomials.
         \item We denote the set of all polynomials with coefficients in $\F$ by $\mathcal{P}(\F)$. Under the usual coefficient-wise addition and scalar multiplication, it is obvious that $\mathcal{P}(\F)$ is a vector space over $\F$. In addition, the set of all polynomials with degree at most $m$, denoted by $\mathcal{P}_m(\F)$ is a vector subspace of $\mathcal{P}(\F)$.
     \end{itemize}
-    \item Linear independence and dependence can be characterized in multiple ways. A set $S$ of vectors is linearly independent iff the only way to write 0 as $a_1v_1 + a_2v_2 + ... +a_mv_m$ is the trivial way. It is equivalent to saying that every linear combination has its only representation, or none of the vectors is in the span of the other vectors (can be written as a linear combination of them). Linear dependence is the negation of independence, but in particular we should remember that it means there exists at least one vector $v_i$ that is in the span of the rest of the vectors.
+    \item Linear independence and dependence can be characterized in multiple ways. A set $S$ of vectors is linearly independent iff the only way to write 0 as $a_1v_1 + a_2v_2 + \cdots +a_mv_m$ is the trivial way. It is equivalent to saying that every linear combination has its only representation, or none of the vectors is in the span of the other vectors (can be written as a linear combination of them). Linear dependence is the negation of independence, but in particular we should remember that it means there exists at least one vector $v_i$ that is in the span of the rest of the vectors.
     \begin{itemize}
         \item Obviously removing such vector $v_i$ from $S$ will not change the span.
-        \item In particular, for a linearly independent set $S = \{s_1, s_2, ... , s_m\} \subsetneq$ a linearly dependent set $T = \{s_1, s_2, ... , s_m, t_1, t_2, ... , t_n\}$, one such vector is always in $T \backslash S$. This is because for the nontrivial way of writing $0 = a_1s_1 + ... +a_ms_m + b_1 t_1 + ... + b_n t_n$, if all $b$'s are 0, then all $a$'s will also be 0. Thus, some $b_i$ must be nonzero, and the corresponding $t_i$ can be removed without changing the span.
+        \item In particular, for a linearly independent set $S = \{s_1, s_2, \dots , s_m\} \subsetneq$ a linearly dependent set $T = \{s_1, s_2, \dots , s_m, t_1, t_2, \dots , t_n\}$, one such vector is always in $T \backslash S$. This is because for the nontrivial way of writing $0 = a_1s_1 + \cdots +a_ms_m + b_1 t_1 + \cdots + b_n t_n$, if all $b$'s are 0, then all $a$'s will also be 0. Thus, some $b_i$ must be nonzero, and the corresponding $t_i$ can be removed without changing the span.
         \begin{itemize}
             \item The special case $n=1$ of the contraposition will be useful to us. If one new vector is added the linearly independent $S$ but does not belong to span($S$), then the resulting set is still linearly independent.
         \end{itemize}
         \item Note that a linearly independent set of vectors cannot have the $0$ vector.
     \end{itemize}
-    \item We now have the essential tools to prove the following important theorem, that if a vector space $V$ can be spanned by $S = \{w_1, w_2, ...,w_n\}$, then all linearly independent sets of vector $\{u_1,u_2,...,u_m\} \subseteq V$ must have $m \leq n$. The proof suggests adding a new $u_i$ into $S$ and then remove another $w_j$ from $S$ in each step. In the end all the $u$'s will be added and the corresponding number of $w$'s are removed from $S$. Therefore, $m \leq n$.
+    \item We now have the essential tools to prove the following important theorem, that if a vector space $V$ can be spanned by $S = \{w_1, w_2, \dots,w_n\}$, then all linearly independent sets of vector $\{u_1,u_2,\dots,u_m\} \subseteq V$ must have $m \leq n$. The proof suggests adding a new $u_i$ into $S$ and then remove another $w_j$ from $S$ in each step. In the end all the $u$'s will be added and the corresponding number of $w$'s are removed from $S$. Therefore, $m \leq n$.
     \begin{itemize}
         \item The direct consequence of this theorem is the definition of dimension. But before that we need to introduce the notion of a basis and its existence.
     \end{itemize}
     \item A \textit{basis} of $V$ is a linearly independent spanning set of $V$. A set is a basis iff all vectors in $V$ can be written as a unique linear combination of the basis vectors. This follows directly from the definition.
     \item Most of time we are concerned with vector spaces with finite bases. The vector spaces that have a finite spanning set are called \textit{finite-dimensional vector spaces} (FDVS), and we will soon know why they bear this name. First of all, we can show that every finite spanning set of a FDVS $V$ can be reduced to a finite basis. Furthermore, every linearly independent set of a FDVS $V$ can be extended to a basis.
     \begin{itemize}
-        \item To prove the first claim, we construct our basis $B$ from scratch and try to add all the elements of the spanning set $S = \{v_1, v_2, ..., v_n\}$ one by one into the basis, as long as the element added is not in the span of the existing vectors in $B$. In this way, every time a new vector is added to $B$, $B$ will still be linearly independent, and this $B$ will be linearly independent in the end. Furthermore, span$(B) = $ span$(S) = V$ because all the $v$'s left out are in span($B$).
+        \item To prove the first claim, we construct our basis $B$ from scratch and try to add all the elements of the spanning set $S = \{v_1, v_2, \dots, v_n\}$ one by one into the basis, as long as the element added is not in the span of the existing vectors in $B$. In this way, every time a new vector is added to $B$, $B$ will still be linearly independent, and this $B$ will be linearly independent in the end. Furthermore, span$(B) = $ span$(S) = V$ because all the $v$'s left out are in span($B$).
         \begin{itemize}
             \item It is also possible to start $B$ from $S$ and check from $v_1$ to $v_n$ whether each vector is in the span of the rest of the vectors in $B$. If it is, then we remove it from $B$; if it is not, then we keep it. In the end, span($B$) $=$ span($S$) and none of the vectors in $B$ is in the span of the others. However, this is top-down approach is harder in practice to actually find the basis.
             \item This claim shows that every FDVS has a finite basis.
         \end{itemize}
-        \item To prove the second claim, similarly construct our basis from the given linearly independent set $L$. We pick a finite basis $B = \{b_1, b_2,...,b_n\}$ of $V$ and check whether the next $b$ may be added to $L$ (same to what we did above). In the end, all the $b$'s are in the span of $L$ and $L$ remains linearly independent.
+        \item To prove the second claim, similarly construct our basis from the given linearly independent set $L$. We pick a finite basis $B = \{b_1, b_2,\dots,b_n\}$ of $V$ and check whether the next $b$ may be added to $L$ (same to what we did above). In the end, all the $b$'s are in the span of $L$ and $L$ remains linearly independent.
     \end{itemize}
     
     \item Choose two finite bases of a vector space. The fact that they are both linearly independent and both span $V$ tells us that the two bases should have the same size, which we define as the \textit{dimension} of a vector space. Thus, the vector spaces with finite bases are called \textit{finite-dimensional}. From now on, $V$ is by default finite-dimensional.
@@ -91,7 +91,7 @@
     \item There are two more things that deserves mentioning. For FDVS $V$ and its subspace $U$, we can always find subspace $W$ such that $V = U \oplus W$. The idea is to find a basis $B_U$ of $U$ and extend it to the basis $B_V$ of $V$. $\s (B_V \backslash B_U)$ is our desired W. We then only have to show $V = U+W$ and $U \cap W = \{0\}$, which is not difficult.
     \item The dimension of the sum of two vector spaces $U_1$ and $U_2$ can be expressed as follows: $$\d (U_1 + U_2) = \d U_1 + \d U_2 - \d (U_1 \cap U_2).$$
     \begin{itemize}
-        \item Despite the fact that it looks like the inclusion-exclusion formula, $+$ and $\cup$ are essentially different, and this cannot be extended to higher orders. To prove the formula, start from a basis $\{u_1,u_2,...,u_m\}$ of $U_1 \cap U_2$ (intersection is a subspace). $U_1$ and $U_2$ then have their respective bases $B_1$ and $B_2$. We can show $B_1 \cup B_2$ is a basis of $U_1 + U_2$. See page 47 of the book for the full proof.
+        \item Despite the fact that it looks like the inclusion-exclusion formula, $+$ and $\cup$ are essentially different, and this cannot be extended to higher orders. To prove the formula, start from a basis $\{u_1,u_2,\dots,u_m\}$ of $U_1 \cap U_2$ (intersection is a subspace). $U_1$ and $U_2$ then have their respective bases $B_1$ and $B_2$. We can show $B_1 \cup B_2$ is a basis of $U_1 + U_2$. See page 47 of the book for the full proof.
         \item Note that when the sum is a direct sum, then the formula is just $\d(U_1 \oplus U_2) = \d U_1 + \d U_2$.
     \end{itemize}
     
@@ -106,9 +106,9 @@
         T (\lambda u) = \lambda T(u).
     \end{equation*}
     \item The zero transformation maps every vector of $V$ to $0_W$. The identity transformation $I_V: V \rightarrow V$ maps each element of $V$ to itself in $V$.
-    \item We define the addition and scalar multiplication of linear maps in the vector-wise way: $$(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),$$ following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. We also define the \textit{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties ($(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$) obviously hold as well.
+    \item We define the addition and scalar multiplication of linear maps in the vector-wise way: $$(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),$$ following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. In addition to the linear properties, we define the \textit{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. Why the product is essential will become clear later. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties ($(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$) obviously hold as well.
     \item If $T: \F^n \to \F^m$ has linear outputs of the entries, it is a linear map. For a linear map $T \in \mathcal{L}(\F^n,\F^m)$, it must be of this form.
-    \item The uniqueness of the linear map that takes basis vectors $v_1, v_2, ..., v_n$ to corresponding vectors $w_1, w_2, ..., w_n$ is the most fundamental theorem in this section. It is our first step toward showing that linear maps and matrices are isomorphic. To prove the theorem, for arbitrary $c_i$'s, let $$T: \sum_{i=1}^n c_i v_i \mapsto \sum_{i=1}^n c_i w_i.$$
+    \item The uniqueness of the linear map that takes basis vectors $v_1, v_2, \dots, v_n$ to corresponding vectors $w_1, w_2, \dots, w_n$ is the most fundamental theorem in this section. It is our first step toward showing that linear maps and matrices are isomorphic. To prove the theorem, for arbitrary $a_i$'s, let $$T: \sum_{i=1}^n a_i v_i \mapsto \sum_{i=1}^n a_i w_i.$$
     \item Here are a few properties that are useful in linear maps. The proofs are quite routine.
     \begin{itemize}
         \item $T(0_V) = 0_W;$
@@ -119,15 +119,18 @@
 \subsection{Null Spaces and Ranges}
 \begin{itemize}
     \item The \textit{nullspace}/\textit{kernel} $\n T$ is the preimage of $0_W$. The \textit{range}/\textit{image} $\r T$ is defined the same as the range of a function. The nullspace and the range are respectively subspaces of $V$ and $W$ (by checking the three criterion). If the nullspace (resp. range) is finite-dimensional, then its dimension is the \textit{nullity} (resp. \textit{rank}) of $T$.
+    \begin{itemize}
+        \item Since $\d U = \d W$ for subspace $U$ of $W$ implies $U = W$, $\text{rank }T = \d W$ implies surjectivity.
+    \end{itemize}
     \item We are now endowed with all the tools to prove the \textbf{rank-nullity theorem}: for a FDVS $V$ and $T$ from $V$ to $W$, $\r T$ is finite-dimensional with $$\d V = \d \n T + \d \r T.$$
     \begin{itemize}
-        \item As always, we need to construct a basis to work with first. Let ${u_1, u_2, ..., u_n}$ be a basis of $\n T$, and thus can be extended to ${u_1,...,u_m,v_1,...,v_n}$ a basis of $V$. We prove $T(\{v_1, v_2, ..., v_n\})$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $T(v_1), ...,T(v_n)$ spans $V$. To show the elements are linearly independent, consider that $$a_1 T(v_1)+...+a_n T(v_n) = 0$$ implies $a_1v_1+...+a_nv_n \in \n T$. Yet we also have $b_1u_1+...+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
+        \item As always, we need to construct a basis to work with first. Let ${u_1, u_2, \dots, u_n}$ be a basis of $\n T$, and thus can be extended to ${u_1,\dots,u_m,v_1,\dots,v_n}$ a basis of $V$. We prove $T(\{v_1, v_2, \dots, v_n\})$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $T(v_1), \dots,T(v_n)$ spans $V$. To show the elements are linearly independent, consider that $$a_1 T(v_1)+\cdots+a_n T(v_n) = 0$$ implies $a_1v_1+\dots+a_nv_n \in \n T$. Yet we also have $b_1u_1+\dots+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
     \end{itemize}
     \item The rank-nullity theorem gives rise to a number of equivalent characterizations regarding injectivity and surjectivity. First of all, there is a criterion that says $T$ is injective iff $\n T = {0}$ (proof follows straight from the definition of nullspace). The results below follow.
     \begin{itemize}
         \item A map to a smaller dimensional space cannot be injective because $\d (\n T) > 0$.
         \item A map to a large dimensional space cannot be surjective because $\d (\r T) \leq \d V < \d W$.
-        \item $V$ and $W$ are FDVS of equal dimension, then $$T \text{ is injective } \Longleftrightarrow T \text{ is surjective } \Longleftrightarrow \r T = \d V.$$
+        \item $V$ and $W$ are FDVS of equal dimension, then $$T \text{ is injective } \Longleftrightarrow T \text{ is surjective } \Longleftrightarrow \text{rank } T = \d V.$$
     \end{itemize}
     \item Solving systems of linear equations is a direct application of this.
     \begin{itemize}
@@ -138,22 +141,50 @@
 
 \subsection{Matrices}
 \begin{itemize}
-    \item Consider the $n$-dimensional $V$ with basis $\bv$ and $m$-dimensional $W$ with basis $\bw$. For $T \in \LVW$, we can find for every $v_k$, a list of $a_{i,k}$'s such that $Tv_k = a_{1,k}w_1 +...+ a_{m,k}w_m = \sum_{j=1}^m a_{j,k}w_j$. As a result, we have $n$ lists of scalar $a$'s, each of length $m$, and we can put them into an $m \times n$ matrix $A$, with entries $a_{i,j}$ in the $i$-th row and $j$-th column. This matrix $\mathcal{M}(T,(\bv),(\bw))$ uniquely determines the linear map $T \in \LVW$.
+    \item Consider the $n$-dimensional $V$ with basis $\bv$ and $m$-dimensional $W$ with basis $w_1,\dots,w_m$. For $T \in \LVW$, we can find for every $v_k$, a list of $A_{i,k}$'s such that $Tv_k = A_{1,k}w_1 +\cdots+ A_{m,k}w_m = \sum_{j=1}^m A_{j,k}w_j$. As a result, we have $n$ lists of scalar $a$'s, each of length $m$, and we can put them into an $m \times n$ matrix $A$, with entries $a_{i,j}$ in the $i$-th row and $j$-th column. $\mathcal{M}(T,(\bv),(\bw))$ uniquely determines the linear map $T \in \LVW$.
+    \begin{itemize}
+        \item Assume
+        \begin{align*}
+            Tv_1 & = A'_{1,1} w_1 + \dots + A'_{1,m} w_m, \\
+            & \vdotswithin{=} \\
+            Tv_n & = A'_{n,1} w_1 + \dots + A'_{n,m} w_m,
+        \end{align*}
+        from which we get the $m \times n$ matrix $A'$. Its transpose $n \times m$ $A$ is our defined matrix representation of $T$. The reason for taking transpose will become clear later.
+    \end{itemize}
     \item We define matrix addition entry-wise, because under this definition, matrix representation of linear maps preserves addition, i.e. $\M(S+T) = \M(S) + \M(T)$ for $S,T \in \LVW$, assuming $S+T$, $S$, and $T$ share the same ordered bases.
     \item Similarly entry-wise scalar multiplication with matrices give us $\M(\lambda T) = \lambda \M(T)$.
     \item Given the definition of matrix addition and scalar multiplication, $\F^{m,n}$, the set of matrices with $m$ rows and $n$ columns over $\F$, is a vector space of dimension $mn$.
-    \item The reason why we represent linear maps from $n$-dimensional VS to $m$-dimensional VS is that we want to preserve the ordering of "$S$" and "$T$" after matrix representation, i.e., $\M(ST) = \M(S)\M(T)$ instead of $\M(T)\M(S)$, under the usual definition of matrix multiplication: $$(AC)_{j,k} = \sum_{r = 1}^n A_{j,r}C_{r,k}.$$
+    \item The reason why we represent linear maps from $n$-dimensional VS to $m$-dimensional VS is that we want to preserve the ordering of $``S"$ and $``T"$ after matrix representation, i.e., $\M(ST) = \M(S)\M(T)$ instead of $\M(T)\M(S)$, under the usual definition of matrix multiplication: $$(AC)_{j,k} = \sum_{r = 1}^n A_{j,r}C_{r,k}.$$
     \begin{itemize}
         \item Remember that matrix multiplication is not commutative, but is associative and distributive.
     \end{itemize}
     \item The book defines $A_{j,\cdot}$ and $A_{\cdot,k}$ as the $j$-th row and the $k$-th column of matrix $A$, and thus $(AC)_{j,k} = A_{j,\cdot}C_{\cdot,k}$. Also, $k$-th column of matrix product equals matrix times the $k$-th column of the second matrix: $$(AC)_{\cdot,k} = AC_{\cdot,k},$$ which is an alternative to understanding matrix multiplication. Obviously there is a row equivalent version that says $j$-th row of the matrix product equals $j$-th row times the second matrix.
-    \item When we are considering matrix $A$ times a column vector $c$, we can see $Ac$ as the linear combination $c_1A_{\cdot,1} + ... + c_nA_{\cdot,n}$.
+    \item When we are considering matrix $A$ times a column vector $c$, we can see $Ac$ as the linear combination $c_1A_{\cdot,1} + \cdots + c_nA_{\cdot,n}$.
 \end{itemize}
 
 \subsection{Invertibility and Isomorphic Vector Spaces}
 \begin{itemize}
-    \item $T \in \LVW$ is invertible if there exists $S \in \mathcal{L}(W,V)$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. By the associativity of linear maps, the inverse is unique.
-    \item Invertibility is equivalent to bijectivity in vector spaces. 
+    \item $T \in \LVW$ is \textit{invertible} if there exists $S$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. One can show that the inverse must be linear and thus belongs to $\mathcal{L}(W,V)$. By the associativity of linear maps, the inverse is unique.
+    \item Invertibility is equivalent to bijectivity between vector spaces. Linear maps are functions, so the proof is exactly the same.
+    \item An \textit{isomorphism} is an invertible linear map; if an isomorphism exists between two vector spaces, then the vector spaces are \textit{isomorphic}.
+    \item Two FDVS over $\F$ are isomorphic iff they have the same dimension. Injectivity gives us $\text{nullity } = 0$ and surjectivity gives us $\text{rank } T = \d W$. The rank-nullity theorem tells us $\d V = \d W$. On the other hand to prove isomorphism, we show $T(a_1v_1+\cdots+a_nv_n) = a_1w_1+\cdots+a_nw_n$ is both injective and surjective, which is not hard.
+    \begin{itemize}
+        \item The theorem above implies $n$-dimensional VS is always isomorphic to $\F^n$.
+    \end{itemize}
+    \item Now we show the isomorphism between a linear map and its corresponding matrix. When the orders of the bases $\bv$ and $w_1,w_2,\dots,w_m$ are fixed, then $\M$ is a function from $\LVW$ to $\F^{m,n}$. As we have noted earlier $\M$ is linear. Thus, it suffices to show that $\M$ is bijective. A linear map and its matrix representation are homomorphic not merely with respect to linearity, but also with respect to the preservation of the order of the product $\M(ST) = \M(S)\M(T)$.
+    \begin{itemize}
+        \item For all $A \in \F^{m,n}$, let $$Tv_k = \sum_{j = 1}^m A_{j,k}w_j.$$ Then this is the \textit{unique} (recall the theorem we emphasized in 3.1) $T$ such that $A = \M(T)$.
+    \end{itemize}
+    \item By the theorems on isomorphism above, $\d \LVW = mn = (\d V) (\d W)$.
+    \item We now shift our focus from the matrix representing an entire linear map to the matrix/column vector representing a vector in the same $V$. We fix the basis $\bv$, then for any $v \in V$, we define
+    \begin{equation*}
+        \M(v) = 
+        \begin{bmatrix}
+            a1 \\ \vdots \\ a_n
+        \end{bmatrix},
+    \end{equation*}
+    where $a_1,\dots,a_n$ are given by $v = a_1v_1+\cdots+a_nv_n$.
+    
 \end{itemize}
 
 \section{Polynomials}
