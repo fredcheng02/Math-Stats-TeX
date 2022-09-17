@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amsthm,amssymb}
+\usepackage{amsmath,amsthm,amssymb,tikz-cd}
 \usepackage{enumitem}
 \usepackage{fullpage}
 \usepackage{setspace}
@@ -11,6 +11,7 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\s}{\text{span}}
 \newcommand{\n}{\text{null }}
+\newcommand{\LV}{\mathcal{L}(V)}
 \newcommand{\LVW}{\mathcal{L}(V,W)}
 \newcommand{\M}{\mathcal{M}}
 \newcommand{\bv}{v_1,\dots,v_n}
@@ -107,7 +108,7 @@
     \end{equation*}
     \item The zero transformation maps every vector of $V$ to $0_W$. The identity transformation $I_V: V \rightarrow V$ maps each element of $V$ to itself in $V$.
     \item We define the addition and scalar multiplication of linear maps in the vector-wise way: $$(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),$$ following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. In addition to the linear properties, we define the \textit{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. Why the product is essential will become clear later. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties ($(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$) obviously hold as well.
-    \item If $T: \F^n \to \F^m$ has linear outputs of the entries, it is a linear map. For a linear map $T \in \mathcal{L}(\F^n,\F^m)$, it must be of this form.
+    \item If $T(x_1,\dots,x_n) = (a_{11}x_1+\cdots+a_{1n}x_n,\dots,a_{m1}x_1+\cdots+a_{mn}x_n)$, then $T$ is obviously a linear map from $\F^n$ to $\F^m$. For a linear map $T \in \mathcal{L}(\F^n,\F^m)$, it must be of this form, and all the $a_{ij}$'s are determined by the mapping of the $n$ canonical basis vectors of $\F^n$.
     \item The uniqueness of the linear map that takes basis vectors $v_1, v_2, \dots, v_n$ to corresponding vectors $w_1, w_2, \dots, w_n$ is the most fundamental theorem in this section. It is our first step toward showing that linear maps and matrices are isomorphic. To prove the theorem, for arbitrary $a_i$'s, let $$T: \sum_{i=1}^n a_i v_i \mapsto \sum_{i=1}^n a_i w_i.$$
     \item Here are a few properties that are useful in linear maps. The proofs are quite routine.
     \begin{itemize}
@@ -121,6 +122,7 @@
     \item The \textit{nullspace}/\textit{kernel} $\n T$ is the preimage of $0_W$. The \textit{range}/\textit{image} $\r T$ is defined the same as the range of a function. The nullspace and the range are respectively subspaces of $V$ and $W$ (by checking the three criterion). If the nullspace (resp. range) is finite-dimensional, then its dimension is the \textit{nullity} (resp. \textit{rank}) of $T$.
     \begin{itemize}
         \item Since $\d U = \d W$ for subspace $U$ of $W$ implies $U = W$, $\text{rank }T = \d W$ implies surjectivity.
+        \item A simple theorem to always keep in mind is that the mapping of the basis vectors of $V$ spans $\r T$.
     \end{itemize}
     \item We are now endowed with all the tools to prove the \textbf{rank-nullity theorem}: for a FDVS $V$ and $T$ from $V$ to $W$, $\r T$ is finite-dimensional with $$\d V = \d \n T + \d \r T.$$
     \begin{itemize}
@@ -165,26 +167,56 @@
 \subsection{Invertibility and Isomorphic Vector Spaces}
 \begin{itemize}
     \item $T \in \LVW$ is \textit{invertible} if there exists $S$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. One can show that the inverse must be linear and thus belongs to $\mathcal{L}(W,V)$. By the associativity of linear maps, the inverse is unique.
-    \item Invertibility is equivalent to bijectivity between vector spaces. Linear maps are functions, so the proof is exactly the same.
+    \item Invertibility is equivalent to bijectivity between vector spaces. Linear maps are functions, so beyond showing that the inverse is linear, the proof is exactly the same.
     \item An \textit{isomorphism} is an invertible linear map; if an isomorphism exists between two vector spaces, then the vector spaces are \textit{isomorphic}.
     \item Two FDVS over $\F$ are isomorphic iff they have the same dimension. Injectivity gives us $\text{nullity } = 0$ and surjectivity gives us $\text{rank } T = \d W$. The rank-nullity theorem tells us $\d V = \d W$. On the other hand to prove isomorphism, we show $T(a_1v_1+\cdots+a_nv_n) = a_1w_1+\cdots+a_nw_n$ is both injective and surjective, which is not hard.
     \begin{itemize}
         \item The theorem above implies $n$-dimensional VS is always isomorphic to $\F^n$.
     \end{itemize}
-    \item Now we show the isomorphism between a linear map and its corresponding matrix. When the orders of the bases $\bv$ and $w_1,w_2,\dots,w_m$ are fixed, then $\M$ is a function from $\LVW$ to $\F^{m,n}$. As we have noted earlier $\M$ is linear. Thus, it suffices to show that $\M$ is bijective. A linear map and its matrix representation are homomorphic not merely with respect to linearity, but also with respect to the preservation of the order of the product $\M(ST) = \M(S)\M(T)$.
+    \item Now we show the isomorphism between a linear map and its corresponding matrix. When the orders of the bases $\bv$ and $w_1,w_2,\dots,w_m$ are fixed, then $\M$ is a function from $\LVW$ to $\F^{m,n}$. As we have noted earlier $\M$ is linear. Thus, it suffices to show that $\M$ is bijective.
     \begin{itemize}
         \item For all $A \in \F^{m,n}$, let $$Tv_k = \sum_{j = 1}^m A_{j,k}w_j.$$ Then this is the \textit{unique} (recall the theorem we emphasized in 3.1) $T$ such that $A = \M(T)$.
+        \item A linear map and its matrix representation are homomorphic not merely in regards to linearity, but also in regards to the preservation of the order of the product $\M(ST) = \M(S)\M(T)$.
     \end{itemize}
     \item By the theorems on isomorphism above, $\d \LVW = mn = (\d V) (\d W)$.
     \item We now shift our focus from the matrix representing an entire linear map to the matrix/column vector representing a vector in the same $V$. We fix the basis $\bv$, then for any $v \in V$, we define
     \begin{equation*}
         \M(v) = 
         \begin{bmatrix}
-            a1 \\ \vdots \\ a_n
+            a_1 \\ \vdots \\ a_n
         \end{bmatrix},
     \end{equation*}
-    where $a_1,\dots,a_n$ are given by $v = a_1v_1+\cdots+a_nv_n$.
+    where $a_1,\dots,a_n$ are given by $v = a_1v_1+\cdots+a_nv_n$. Here $\M$ is an isomorphism from $V$ to $F^{n(, 1)}$.
+    \begin{itemize}
+        \item Following this definition, $\M(T)_{\cdot,k} = \M(Tv_k)$.
+        \item More importantly, the linear map of a vector can now be completely described by matrix-multiplication. Symbolically, we want to prove $\M(Tv) = \M(T)\M(v)$ for all $v \in V$. Since $v = a_1v_1 + \cdots +a_nv_n$ and $\M$ is linear,
+        \begin{align*}
+            \M(Tv) & = a_1\M(Tv_1) + \cdots + a_n \M(Tv_n) \\ & = a_1\M(T)_{\cdot, 1} + \cdots a_n\M(T)_{\cdot, n} \\ & = \M(T)\M(v).
+        \end{align*}
+        \item How do we interpret this? Consider the following graph under the appropriate bases for $V$ and $W$.
+        \begin{equation*}
+            \begin{tikzcd}
+            V \arrow[r,"T"] \arrow[d,"\simeq"]& W \arrow[d,"\simeq"] \\
+            \F^{n,1} \arrow[r,"\M(T)"] \arrow[u,"\M"] & \F^{m,1} \arrow[u,"\M"]
+            \end{tikzcd}
+        \end{equation*}
+        For a vector $v \in V$, its image $\M(v)$ under the isomorphism $\M$ of $V$ belongs to $\F^{n,1}$. Matrix multiplication with $\M(T)$ gives us $\M(Tv) \in \F^{m,1}$, which we identify with $Tv$ under the isomorphism $\M$ of $W$. This is why a linear map can be described entirely by its matrix representation.
+        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication. Think about the Jacobian matrix representation of the total derivative in the Euclidean space.
+    \end{itemize}
+    \item A \textit{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
+    \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.)
+        
+    (a) $\implies$ (b) by the theorem we proved earlier.
+        
+    (b) $\implies$ (c) by checking the rank-nullity theorem. Injectivity means nullity $T = 0$, which implies rank $T = \d V$.
+        
+    (c) $\implies$ (a) by showing $T$ is injective, as nullity $T = \d V - $ rank $T$, which is 0.
+    \item
     
+        
+    \subsection{Products and Quotients of Vector Spaces}
+    
+    \subsection{Duality}
 \end{itemize}
 
 \section{Polynomials}
