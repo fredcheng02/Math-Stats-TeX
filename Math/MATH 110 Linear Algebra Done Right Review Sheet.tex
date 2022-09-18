@@ -18,6 +18,7 @@
 \newcommand{\bw}{w_1,\dots,w_n}
 \renewcommand{\r}{\text{range }}
 \renewcommand{\d}{\text{dim }}
+\renewcommand{\phi}{\varphi}
 
 \onehalfspacing
 \setlength{\parskip}{0em}
@@ -121,14 +122,14 @@
 \begin{itemize}
     \item The \textit{nullspace}/\textit{kernel} $\n T$ is the preimage of $0_W$. The \textit{range}/\textit{image} $\r T$ is defined the same as the range of a function. The nullspace and the range are respectively subspaces of $V$ and $W$ (by checking the three criterion). If the nullspace (resp. range) is finite-dimensional, then its dimension is the \textit{nullity} (resp. \textit{rank}) of $T$.
     \begin{itemize}
-        \item Since $\d U = \d W$ for subspace $U$ of $W$ implies $U = W$, $\text{rank }T = \d W$ implies surjectivity.
+        \item Since $\d U = \d W$ for subspace $U$ of $W$ implies $U = W$, $\text{rank }T = \d W$ implies surjection.
         \item A simple theorem to always keep in mind is that the mapping of the basis vectors of $V$ spans $\r T$.
     \end{itemize}
     \item We are now endowed with all the tools to prove the \textbf{rank-nullity theorem}: for a FDVS $V$ and $T$ from $V$ to $W$, $\r T$ is finite-dimensional with $$\d V = \d \n T + \d \r T.$$
     \begin{itemize}
         \item As always, we need to construct a basis to work with first. Let ${u_1, u_2, \dots, u_n}$ be a basis of $\n T$, and thus can be extended to ${u_1,\dots,u_m,v_1,\dots,v_n}$ a basis of $V$. We prove $T(\{v_1, v_2, \dots, v_n\})$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $T(v_1), \dots,T(v_n)$ spans $V$. To show the elements are linearly independent, consider that $$a_1 T(v_1)+\cdots+a_n T(v_n) = 0$$ implies $a_1v_1+\dots+a_nv_n \in \n T$. Yet we also have $b_1u_1+\dots+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
     \end{itemize}
-    \item The rank-nullity theorem gives rise to a number of equivalent characterizations regarding injectivity and surjectivity. First of all, there is a criterion that says $T$ is injective iff $\n T = {0}$ (proof follows straight from the definition of nullspace). The results below follow.
+    \item The rank-nullity theorem gives rise to a number of equivalent characterizations regarding injection and surjection. First of all, there is a criterion that says $T$ is injective iff $\n T = {0}$ (proof follows straight from the definition of nullspace). The results below follow.
     \begin{itemize}
         \item A map to a smaller dimensional space cannot be injective because $\d (\n T) > 0$.
         \item A map to a large dimensional space cannot be surjective because $\d (\r T) \leq \d V < \d W$.
@@ -169,13 +170,13 @@
     \item $T \in \LVW$ is \textit{invertible} if there exists $S$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. One can show that the inverse must be linear and thus belongs to $\mathcal{L}(W,V)$. By the associativity of linear maps, the inverse is unique.
     \item Invertibility is equivalent to bijectivity between vector spaces. Linear maps are functions, so beyond showing that the inverse is linear, the proof is exactly the same.
     \item An \textit{isomorphism} is an invertible linear map; if an isomorphism exists between two vector spaces, then the vector spaces are \textit{isomorphic}.
-    \item Two FDVS over $\F$ are isomorphic iff they have the same dimension. Injectivity gives us $\text{nullity } = 0$ and surjectivity gives us $\text{rank } T = \d W$. The rank-nullity theorem tells us $\d V = \d W$. On the other hand to prove isomorphism, we show $T(a_1v_1+\cdots+a_nv_n) = a_1w_1+\cdots+a_nw_n$ is both injective and surjective, which is not hard.
+    \item Two FDVS over $\F$ are isomorphic iff they have the same dimension. Injection gives us $\text{nullity } = 0$ and surjection gives us $\text{rank } T = \d W$. The rank-nullity theorem tells us $\d V = \d W$. On the other hand to prove isomorphism, we show $T(a_1v_1+\cdots+a_nv_n) = a_1w_1+\cdots+a_nw_n$ is both injective and surjective, which is not hard.
     \begin{itemize}
         \item The theorem above implies $n$-dimensional VS is always isomorphic to $\F^n$.
     \end{itemize}
     \item Now we show the isomorphism between a linear map and its corresponding matrix. When the orders of the bases $\bv$ and $w_1,w_2,\dots,w_m$ are fixed, then $\M$ is a function from $\LVW$ to $\F^{m,n}$. As we have noted earlier $\M$ is linear. Thus, it suffices to show that $\M$ is bijective.
     \begin{itemize}
-        \item For all $A \in \F^{m,n}$, let $$Tv_k = \sum_{j = 1}^m A_{j,k}w_j.$$ Then this is the \textit{unique} (recall the theorem we emphasized in 3.1) $T$ such that $A = \M(T)$.
+        \item For all $A \in \F^{m,n}$, let $$Tv_k = \sum_{j = 1}^m A_{j,k}w_j.$$ Then this is the \textit{unique} (recall the theorem we emphasized in \S3.1) $T$ such that $A = \M(T)$.
         \item A linear map and its matrix representation are homomorphic not merely in regards to linearity, but also in regards to the preservation of the order of the product $\M(ST) = \M(S)\M(T)$.
     \end{itemize}
     \item By the theorems on isomorphism above, $\d \LVW = mn = (\d V) (\d W)$.
@@ -191,7 +192,7 @@
         \item Following this definition, $\M(T)_{\cdot,k} = \M(Tv_k)$.
         \item More importantly, the linear map of a vector can now be completely described by matrix-multiplication. Symbolically, we want to prove $\M(Tv) = \M(T)\M(v)$ for all $v \in V$. Since $v = a_1v_1 + \cdots +a_nv_n$ and $\M$ is linear,
         \begin{align*}
-            \M(Tv) & = a_1\M(Tv_1) + \cdots + a_n \M(Tv_n) \\ & = a_1\M(T)_{\cdot, 1} + \cdots a_n\M(T)_{\cdot, n} \\ & = \M(T)\M(v).
+            \M(Tv) & = a_1\M(Tv_1) + \cdots + a_n \M(Tv_n) \\ & = a_1\M(T)_{\cdot, 1} + \cdots + a_n\M(T)_{\cdot, n} \\ & = \M(T)\M(v).
         \end{align*}
         \item How do we interpret this? Consider the following graph under the appropriate bases for $V$ and $W$.
         \begin{equation*}
@@ -206,17 +207,41 @@
     \item A \textit{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
     \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.)
         
-    (a) $\implies$ (b) by the theorem we proved earlier.
+    (a) $\implies$ (b) we proved earlier.
         
-    (b) $\implies$ (c) by checking the rank-nullity theorem. Injectivity means nullity $T = 0$, which implies rank $T = \d V$.
+    (b) $\implies$ (c) by checking the rank-nullity theorem. Injection means nullity $T = 0$, which implies rank $T = \d V$.
         
     (c) $\implies$ (a) by showing $T$ is injective, as nullity $T = \d V - $ rank $T$, which is 0.
-    \item
-    
         
     \subsection{Products and Quotients of Vector Spaces}
+    \begin{itemize}
+        \item The \textit{product} $V_1 \times \dots \times V_n$ of vector spaces $V_1,\dots,V_n$ over $\F$ is the set $$\{(v_1,\dots,v_n) \mid v_1 \in V_1,\dots, v_n \in V_n\}.$$ The addition and scalar multiplication on the product is defined in the usual entry-wise way. It is routine to prove that this product is a vector space over $\F$ as well.
+        \item $\d (V_1\times \dots \times V_n) = \d V_1 + \dots + \d V_n$. Why? Choose a basis for each $V_i$, then put every basis vector of $V_i$ into the $i$-th entry of $(v_1,\dots,v_n)$ and let other entries be 0. These vectors are linearly independent and span the product and thus is a basis of the product.
+        \item For subspaces $U_1,\dots,U_n$ of $V$, define the linear map $\Gamma: U_1 \times \dots \times U_n \to U_1 + \dots + U_n$ by $$\Gamma(u_1,\dots,u_n) = u_1+\dots+u_n.$$ Then $U_1+\dots+U_n$ is a direct sum iff $\Gamma$ is injective (or invertible, since $\Gamma$ is surjective by its definition.) To prove this, we just need to show $\n T = {0}$ iff the only way to write $0 = u_1+\dots+u_n$ is to let all $u$'s be 0. This is quite clear.
+        \item The last two theorems lead to the following one. A sum of subspaces $U$'s of $V$ is a direct sum iff dimensions add up. This is because two isomorphic vector spaces must have the same dimension. Therefore, $$\d (U_1+\dots+U_n) = \d (U_1 \times \dots \times U_n) = \d U_1 + \dots + \d U_n.$$
+        Construct the linear map $\Gamma$ above from the product of subspaces makes the proof really clean. Recall that we have proved the special case $n=2$ already.
+        \item An \textit{affine subset} of $V$ is a subset of $V$ of the form $v+U = \{v+u \mid u \in U\}$ for some vector $v \in V$ and some subspace $U$ of $V$. Here the affine subset $v+U$ is said to be \textit{parallel} to $U$.
+        \item Under the same setting, the quotient space $V/U$ is the set of all affine subsets of $V$ parallel to $U$, i.e., $V/U = \{v+U \mid v \in V\}$.
+        \item
+    \end{itemize}
     
     \subsection{Duality}
+    \begin{itemize}
+        \item A \textit{linear functional} on $V$ is a linear map belonging to $\mathcal{L}(V,\F)$. The \textit{dual space} of $V$, denoted usually by $V^*$ or $V'$, is the vector space $\mathcal{L}(V,\F)$.
+        \item We proved earlier that $\d \LVW = (\d V)(\d W)$. Therefore, $\d V' = \d V$.
+        \item The \textit{dual basis} of $v_1,\dots,v_n$, basis of $V$, is a set of vectors $\phi_1,\dots,\phi_n$ in $V'$, where each $\phi_i$ is a linear functional defined by
+        \begin{equation*}
+            \phi_i(v_j) = \left\{
+                \begin{array}{rl}
+                    1 \quad & \text{if } i = j, \\
+                    0 \quad & \text{if } i \not= j.
+                \end{array}
+            \right.
+        \end{equation*}
+        As it turns out, these $\phi_i$'s indeed form a basis of $V'$. 
+        
+        \item
+    \end{itemize}
 \end{itemize}
 
 \section{Polynomials}
