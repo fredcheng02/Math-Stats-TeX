@@ -194,7 +194,7 @@
         \begin{align*}
             \M(Tv) & = a_1\M(Tv_1) + \cdots + a_n \M(Tv_n) \\ & = a_1\M(T)_{\cdot, 1} + \cdots + a_n\M(T)_{\cdot, n} \\ & = \M(T)\M(v).
         \end{align*}
-        \item How do we interpret this? Consider the following graph under the appropriate bases for $V$ and $W$.
+        \item How do we interpret this? Consider the following diagram under the appropriate bases for $V$ and $W$.
         \begin{equation*}
             \begin{tikzcd}
             V \arrow[r,"T"] \arrow[d,"\simeq"]& W \arrow[d,"\simeq"] \\
@@ -212,36 +212,58 @@
     (b) $\implies$ (c) by checking the rank-nullity theorem. Injection means nullity $T = 0$, which implies rank $T = \d V$.
         
     (c) $\implies$ (a) by showing $T$ is injective, as nullity $T = \d V - $ rank $T$, which is 0.
-        
-    \subsection{Products and Quotients of Vector Spaces}
+\end{itemize}
+
+\subsection{Products and Quotients of Vector Spaces}
+\begin{itemize}
+    \item The \textit{product} $V_1 \times \dots \times V_n$ of vector spaces $V_1,\dots,V_n$ over $\F$ is the set $$\{(v_1,\dots,v_n) \mid v_1 \in V_1,\dots, v_n \in V_n\}.$$ The addition and scalar multiplication on the product is defined in the usual entry-wise way. It is routine to prove that this product is a vector space over $\F$ as well.
+    \item $\d (V_1\times \dots \times V_n) = \d V_1 + \dots + \d V_n$. Why? Choose a basis for each $V_i$, then put every basis vector of $V_i$ into the $i$-th entry of $(v_1,\dots,v_n)$ and let other entries be 0. These vectors are linearly independent and span the product and thus is a basis of the product.
+    \item For subspaces $U_1,\dots,U_n$ of $V$, define the linear map $\Gamma: U_1 \times \dots \times U_n \to U_1 + \dots + U_n$ by $$\Gamma(u_1,\dots,u_n) = u_1+\dots+u_n.$$ (One can easily check that this map is indeed linear.) Then $U_1+\dots+U_n$ is a direct sum iff $\Gamma$ is injective (or invertible, since $\Gamma$ is surjective by its definition.) To prove this, we just need to show $\n T = {0}$ iff the only way to write $0 = u_1+\dots+u_n$ is to let all $u$'s be 0. This is quite clear.
+    \item The last two theorems lead to the following one. A sum of subspaces $U$'s of $V$ is a direct sum iff dimensions add up. This is because two isomorphic vector spaces must have the same dimension. Therefore, $$\d (U_1+\dots+U_n) = \d (U_1 \times \dots \times U_n) = \d U_1 + \dots + \d U_n.$$
+    Construct the linear map $\Gamma$ above from the product of subspaces makes the proof really clean. Recall that we have proved the special case $n=2$ already.
+    \item An \textit{affine subset} of $V$ is a subset of $V$ of the form $v+U = \{v+u \mid u \in U\}$ for some vector $v \in V$ and some subspace $U$ of $V$. Here the affine subset $v+U$ is said to be \textit{parallel} to $U$.
     \begin{itemize}
-        \item The \textit{product} $V_1 \times \dots \times V_n$ of vector spaces $V_1,\dots,V_n$ over $\F$ is the set $$\{(v_1,\dots,v_n) \mid v_1 \in V_1,\dots, v_n \in V_n\}.$$ The addition and scalar multiplication on the product is defined in the usual entry-wise way. It is routine to prove that this product is a vector space over $\F$ as well.
-        \item $\d (V_1\times \dots \times V_n) = \d V_1 + \dots + \d V_n$. Why? Choose a basis for each $V_i$, then put every basis vector of $V_i$ into the $i$-th entry of $(v_1,\dots,v_n)$ and let other entries be 0. These vectors are linearly independent and span the product and thus is a basis of the product.
-        \item For subspaces $U_1,\dots,U_n$ of $V$, define the linear map $\Gamma: U_1 \times \dots \times U_n \to U_1 + \dots + U_n$ by $$\Gamma(u_1,\dots,u_n) = u_1+\dots+u_n.$$ Then $U_1+\dots+U_n$ is a direct sum iff $\Gamma$ is injective (or invertible, since $\Gamma$ is surjective by its definition.) To prove this, we just need to show $\n T = {0}$ iff the only way to write $0 = u_1+\dots+u_n$ is to let all $u$'s be 0. This is quite clear.
-        \item The last two theorems lead to the following one. A sum of subspaces $U$'s of $V$ is a direct sum iff dimensions add up. This is because two isomorphic vector spaces must have the same dimension. Therefore, $$\d (U_1+\dots+U_n) = \d (U_1 \times \dots \times U_n) = \d U_1 + \dots + \d U_n.$$
-        Construct the linear map $\Gamma$ above from the product of subspaces makes the proof really clean. Recall that we have proved the special case $n=2$ already.
-        \item An \textit{affine subset} of $V$ is a subset of $V$ of the form $v+U = \{v+u \mid u \in U\}$ for some vector $v \in V$ and some subspace $U$ of $V$. Here the affine subset $v+U$ is said to be \textit{parallel} to $U$.
-        \item Under the same setting, the quotient space $V/U$ is the set of all affine subsets of $V$ parallel to $U$, i.e., $V/U = \{v+U \mid v \in V\}$.
-        \item
+        \item $v+U$ is a subspace of $V$ iff $v \in U$. If $v \in U$, then $v+U = U$, subspace of $V$. If $v \notin U$, then $0 \notin v+U$, and thus $v+U$ cannot be a subspace of $V$.
+    \end{itemize}
+    \item Under the same setting, the quotient space $V/U$ is the set of all affine subsets of $V$ parallel to $U$, i.e., $V/U = \{v+U \mid v \in V\}$.
+    \item For subspace $U$ of $V$ and $v,w \in U$, then
+        \begin{equation*}
+            \text{(a) } v-w \in U \iff \text{(b) } v+U = w+U \iff \text{(c) } (v+U) \cap (w+U) \not= \emptyset.
+        \end{equation*}
+    (a) $\implies$ (b) as $v+u = w+((v-w)+u) \in w+U$ (and the same for the other direction). (b) $\implies$ (c) because $v+U$ is not empty, while (c) $\implies$ (a) because $v+u_1=w+u_2$ for some $u_1$ and $u_2$, and we then move $v-w$ to the left side.
+    \item The addition and scalar multiplication on $V/U$ are defined by  $$(v+U)+(w+U) = (v+w)+U \quad \text{and} \quad \lambda(v+U) = \lambda v + U.$$ We should pay particular attention to this definition because \textbf{an affine subset do not have a unique representation} (for $v \not= v'$, it is possible that $v+U = v'+U$ still)! Therefore, one has to show that  different representations $v+U$ and $w+U$ of the same affine subsets of $U$ still gives us a \textbf{unique} $(v+w)+U$, so that the addition function above is well-defined (and similar for scalar multiplication). Suppose $v+U = v'+U$ and $w+U = w'+U$, then essentially we want to prove $(v+w)+U=(v'+w')+U$. By assumption $v-v'$ and $w-w' \in U$, $(v+w)-(v'+w') \in U$, and we reach the conclusion (and similar for scalar multiplication).
+    \item $V/U$ with the two operations above is a vector space. Showing this is routine, but one has to remember that $V/U$ is not a subspace of $V$. Despite all the elements of the quotient space is in the whole space, the additive identity is now $0+U=U$, and the additive inverse of $v+U$ is $-v+U$. (The quotient space is discussed with respect to a fixed subspace.) Therefore, we have to check the 8 VS properties.
+    \item To find the dimension of $V/U$, we appeal to the trick of constructing a linear map again. (One should check its linearity) The \textit{quotient map} $\pi: V \to V/U$ is given by $$\pi(v) = v+U.$$
+    For FDVS $V$ and its subspace $U$, $\d V/U = \d V - \d U$. $\pi$ is a map onto $V/U$ obviously, and $\n \pi = U$. Therefore the formula follows.
+    \item Now we define the induced map $\tilde{T}: V/(\n T) \to W$ of $T: V \to W$ by $$\tilde{T}(v+\n T) = Tv.$$ $u + \n T = v + \n T$ implies $u - v \in \n T$, and thus $Tu-Tv = 0$. Thus the induced map is well defined. Checking the linearity of $\tilde{T}$ is routine. Note that $T = \tilde{T} \circ \pi$.
+    \begin{equation*}
+            \begin{tikzcd}
+                V \arrow[rr,"T"] \arrow[dr,"\pi"] && W \\
+                & {V/\n T} \arrow[ur,"\tilde{T}"]
+            \end{tikzcd}
+        \end{equation*}
+    \item The definition leads to an important theorem that exists for different algebraic structures. For $T \in \LVW$, $\tilde{T}$ is injective and $\r \tilde{T} = \r T$. The latter simply follows from the definition, while the first requires us to prove $\n T = \{0+\n T\}$, the identity. $\tilde{T}(v+\n T) = Tv = 0$ gives us $v-0 \in \n T$. Hence, $v+\n T = 0+\n T$, and the conclusion follows.
+        \begin{itemize}
+            \item The two claims combined tell us $V/(\n T) \simeq \r T$ under $\tilde{T}$.
+        \end{itemize}
     \end{itemize}
     
-    \subsection{Duality}
-    \begin{itemize}
-        \item A \textit{linear functional} on $V$ is a linear map belonging to $\mathcal{L}(V,\F)$. The \textit{dual space} of $V$, denoted usually by $V^*$ or $V'$, is the vector space $\mathcal{L}(V,\F)$.
-        \item We proved earlier that $\d \LVW = (\d V)(\d W)$. Therefore, $\d V' = \d V$.
-        \item The \textit{dual basis} of $v_1,\dots,v_n$, basis of $V$, is a set of vectors $\phi_1,\dots,\phi_n$ in $V'$, where each $\phi_i$ is a linear functional defined by
-        \begin{equation*}
-            \phi_i(v_j) = \left\{
-                \begin{array}{rl}
-                    1 \quad & \text{if } i = j, \\
-                    0 \quad & \text{if } i \not= j.
-                \end{array}
-            \right.
-        \end{equation*}
-        As it turns out, these $\phi_i$'s indeed form a basis of $V'$. 
-        
-        \item
-    \end{itemize}
+\subsection{Duality}
+\begin{itemize}
+    \item A \textit{linear functional} on $V$ is a linear map belonging to $\mathcal{L}(V,\F)$. The \textit{dual space} of $V$, denoted usually by $V^*$ or $V'$, is the vector space $\mathcal{L}(V,\F)$.
+    \item We proved earlier that $\d \LVW = (\d V)(\d W)$. Therefore, $\d V' = \d V$.
+    \item The \textit{dual basis} of $v_1,\dots,v_n$, basis of $V$, is a set of vectors $\phi_1,\dots,\phi_n$ in $V'$, where each $\phi_i$ is a linear functional defined by
+    \begin{equation*}
+        \phi_i(v_j) = \left\{
+            \begin{array}{rl}
+                1 \quad & \text{if } i = j, \\
+                0 \quad & \text{if } i \not= j.
+            \end{array}
+        \right.
+    \end{equation*}
+    As it turns out, these $\phi_i$'s indeed form a basis of $V'$. 
+    
+    \item
 \end{itemize}
 
 \section{Polynomials}
