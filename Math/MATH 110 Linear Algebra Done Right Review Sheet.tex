@@ -205,7 +205,7 @@
         \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication. Think about the Jacobian matrix representation of the total derivative in the Euclidean space.
     \end{itemize}
     \item A \textit{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
-    \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.)
+    \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.) This is true for functions $f:S \to S$ (where $S$ is finite) in general, but for linear maps the proof is likely to be rather simple:
         
     (a) $\implies$ (b) we proved earlier.
         
@@ -231,6 +231,9 @@
             \text{(a) } v-w \in U \iff \text{(b) } v+U = w+U \iff \text{(c) } (v+U) \cap (w+U) \not= \emptyset.
         \end{equation*}
     (a) $\implies$ (b) as $v+u = w+((v-w)+u) \in w+U$ (and the same for the other direction). (b) $\implies$ (c) because $v+U$ is not empty, while (c) $\implies$ (a) because $v+u_1=w+u_2$ for some $u_1$ and $u_2$, and we then move $v-w$ to the left side.
+    \begin{itemize}
+        \item The theorem above tells us that two affine subset to $U$ are either the same or  disjoint. In particular, for any $v \in U$, $v+U$ is parallel to $U$ and is thus not a basis vector for $V/U$.
+    \end{itemize}
     \item The addition and scalar multiplication on $V/U$ are defined by  $$(v+U)+(w+U) = (v+w)+U \quad \text{and} \quad \lambda(v+U) = \lambda v + U.$$ We should pay particular attention to this definition because \textbf{an affine subset do not have a unique representation} (for $v \not= v'$, it is possible that $v+U = v'+U$ still)! Therefore, one has to show that  different representations $v+U$ and $w+U$ of the same affine subsets of $U$ still gives us a \textbf{unique} $(v+w)+U$, so that the addition function above is well-defined (and similar for scalar multiplication). Suppose $v+U = v'+U$ and $w+U = w'+U$, then essentially we want to prove $(v+w)+U=(v'+w')+U$. By assumption $v-v'$ and $w-w' \in U$, $(v+w)-(v'+w') \in U$, and we reach the conclusion (and similar for scalar multiplication).
     \item $V/U$ with the two operations above is a vector space. Showing this is routine, but one has to remember that $V/U$ is not a subspace of $V$. Despite all the elements of the quotient space is in the whole space, the additive identity is now $0+U=U$, and the additive inverse of $v+U$ is $-v+U$. (The quotient space is discussed with respect to a fixed subspace.) Therefore, we have to check the 8 VS properties.
     \item To find the dimension of $V/U$, we appeal to the trick of constructing a linear map again. (One should check its linearity) The \textit{quotient map} $\pi: V \to V/U$ is given by $$\pi(v) = v+U.$$
@@ -270,7 +273,7 @@
         \item first, every $\psi \in V'$ can be written as $\sum_{i=1}^n \psi(v_i)\phi_1$. Since $(\sum_{i=1}^n \psi(v_i)\phi_1)(v_j) = \psi(v_j)$, the sum and $\psi$ agrees on all basis vectors and they are equal.
         \item second, every $v \in V$ can be written as $\sum_{i=1}^n \phi_i(v)v_i$. For this claim one needs to prove that for $v = a_1v_1 + \dots +a_nv_n$, every $a_j = \phi_j(v)$. By linearity, $\phi_j(v) = \sum_{i=1}^n a_i \phi_j(v_i) = a_j$.
     \end{itemize}
-    \item The \textit{dual map} $T' \in \mathcal{L}(W',V')$ of $T \in \LVW$ given by $T'(\phi)=\phi \circ T$ for $\phi \in W'$. We have to be very clear about what this definition means. Here $T'$ maps a function to a function.
+    \item The \textit{dual map} $T' \in \mathcal{L}(W',V')$ of $T \in \LVW$ is given by $T'(\phi)=\phi \circ T$ for $\phi \in W'$. We have to be very clear about what this definition means. Here $T'$ maps a function to a function.
     \begin{equation*}
         \begin{tikzcd}
             W \arrow[dd, "\phi"'] &  & V 
@@ -290,16 +293,71 @@
         under the appropriate $S,T,$ and $\lambda$. The first two are routine, and the third one is manipulation of function compositions.
     \end{itemize}
     \item We define \textit{annihilator} $U^0$ of $U \subseteq V$ as $\{\phi \in V' \mid \phi(U)=0\}$, the subset of all linear functionals on $V$ whose image is 0.
-    \item There is a good example (3.104) in the book about annihilators. For the dual basis $\phi_1,\dots,\phi_5$ in $(\F^5)'$ that corresponds to $e_1,\dots,e_5$ in $\F^5$, $(\s(e_1,e_2))^0 = \s(\phi_3,\phi_4,\phi_5)$.
+    \item There is a good example (3.104) in the book about annihilators. For the dual basis $\phi_1,\dots,\phi_5$ in $(\F^5)'$ that corresponds to $e_1,\dots,e_5$ in $\F^5$, $(\s(e_1,e_2))^0 = \s(\phi_3,\phi_4,\phi_5)$, since $\phi_i$ takes out the $i$-th coordinate.
     \item As expected $U^0$ is a subspace of $V'$. The zero linear functional takes $U \subseteq V$ to $0$. $(\phi+\psi)(U) = 0$ and $\lambda\phi(U) = 0$ is omitted as usual.
-    \item For FDVS $V$ and its subspace $U$, $$\d U + \d U^0 = \d V.$$ The book mentions two proofs.
+    \item For FDVS $V$ and its subspace $U$, $$\d U + \d U^0 = \d V.$$ The book mentions two proofs. The first proof takes the usual "choose a basis and extend it" approach. The second proof is more obscure: consider the inclusion map $i \in \mathcal{L}(U,V)$ such that $i(u) = u$ for all $u \in U$, then $i' \in \mathcal{L}(V',U')$, which gives us $$\d \n i' + \d \r i' = \d V' = \d V.$$ Note that $i'(\phi) = \phi \circ i$ for $\phi \in V'$, giving us $\n i' = U^0$. The nullspace of $i'$ are the set of $\phi$'s such that $\phi \circ i = 0$, and therefore $\phi$ should map the entire $U$ to $0$.
+    
+    Now we show $U = \r i'$. A linear map defined on a subspace can always be extended to the whole space, and thus we may extend any $\phi \in U'$ to $\psi \in V'$. The dual map $i'$ maps $\psi$ back to $\phi$, so $\phi \in U' \implies \phi \in \r i'$, showing us what we desire.
+    \item The nullspace and range of the dual map $T'$ can now be characterized in terms of the concepts we have introduced.
+    \begin{itemize}
+        \item For $T \in \LVW$, $\n T' = (\r T')^0$: $$\phi \in \n T' \Longleftrightarrow (\phi \circ T')(v) = \phi(Tv) = 0 \Longleftrightarrow \phi \in (\r T)^0.$$
+        \item If $V,W$ are finite-dimensional, then we have
+        \begin{align*}
+            \d \n T' & = \d (\r T)^0 \\
+            & = \d W - \d \r T \\
+            & = \d W - (\d V - \d \n T) \\
+            & = \d \n T + \d W - \d V.
+        \end{align*}
+        \item $T$ is surjective iff $T'$ is injective, since $\r T = W$ iff $(\r T)^0 = {0}$ (0 here is the 0 linear functional on $W$) iff $\n T' = {0}$.
+    \end{itemize}
+    \item Similarly, we have $\r T' = (\r T)^0$ because $$\exists \psi \in W' $$
+    
+    
 \end{itemize}
 
 \section{Polynomials}
 
 \section{Eigenvalues, Eigenvectors, and Invariant Subspaces}
+\begin{itemize}
+    \item 
+\end{itemize}
 
 \section{Inner Product Spaces}
+\subsection{Inner Products and Norms}
+\begin{itemize}
+    \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$, the \textit{dot product} $$x \cdot y = x_1y_1+\dots+x_ny_n,$$ which is a scalar in $\R^n$.
+    \item The \textit{inner product} is the abstraction of the dot product to more complicated products of vectors on $V$ over $\R$ and $\C$. It is a function $\langle \cdot,\cdot \rangle: V \times V \to \F$ ($\R$ or $\C$) with the following properties:
+    \begin{itemize}
+        \item Positive definiteness: $\langle v,v \rangle \geq 0$, which achieves ``$=$" iff $v = 0$;
+        \item Linearity in the first slot: $\langle \lambda u+v,w \rangle = \lambda \langle u,w \rangle + \langle v,w \rangle$;
+        \item Conjugate symmetry: $\langle u,v \rangle = \overline{\langle v,u \rangle}$.
+    \end{itemize}
+    The properties that directly ensue include:
+    \begin{itemize}
+        \item Conjugate symmetry gives us ``linearity" in the second slot: $$\langle u, \lambda v+w \rangle = \bar{\lambda} \langle u, v \rangle + \langle u,w \rangle;$$
+        \item For fixed $w \in V$, $f: v \mapsto \langle v,w \rangle$ is a linear map from $V$ to $\F$ because of linearity in the first slot;
+        \item $\langle 0,v \rangle$ and $\langle v,0 \rangle = 0$ because linear maps take 0 to 0.
+    \end{itemize}
+    \item The \textit{norm} $\|v\| \coloneqq \sqrt{\langle v,v \rangle}.$ It has properties
+    \begin{itemize}
+        \item $\|v\| = 0$ iff $v = 0$, and 
+        \item $\|\lambda v\| = |\lambda| \|v\|$.
+    \end{itemize}
+    \item Two vectors are \textit{orthogonal} if their inner product is 0. Therefore, 0 is orthogonal to any vector and 0 is the only vector that is orthogonal to itself.
+    \item Introducing these concepts provide us with a list of useful equations and inequalities about \textit{inner product spaces} (vector spaces endowed with an inner product) that we know as facts for the Euclidean space.
+    \begin{itemize}
+        \item The Pythagorean theorem now holds for orthogonal vectors $u,v \in V$: $$\|u+v\|^2 = \|u\|^2 + \|v\|^2.$$
+        \item The method of orthogonal decomposition is extended to inner product spaces. 
+        \item The well-known Cauchy-Schwarz inequality states that $|\langle u,v \rangle| \leq \|u\|\|v\|$, which reaches equality iff $u = \lambda v$ for some scalar $\lambda$.
+        \item The triangle inequality
+        \item The parallelogram equality
+    \end{itemize}
+    
+\subsection{Orthonormal Bases}
+
+\subsection{Orthogonal Complements and
+Minimization Problems}
+\end{itemize}
 
 \section{Operators on Inner Product Spaces}
 
