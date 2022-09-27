@@ -85,15 +85,15 @@
     \begin{itemize}
         \item The fact that the bases of $V$ has a fixed size implies every spanning set or linearly independent set of this size $\d V$ is a basis itself (because the reduction/extension here is the trivial one).
     \end{itemize}
-    \item The subspace dimension $\d U$ is always $\leq$ the whole space dimension $\d V$. To accomplish this we have to resort to the classic procedure: we add vectors from $U$ that are not in the span of the existing ones in $L$. Thus $L$ always remain linearly independent, and it should always be smaller in size than $B$, a spanning set of $U$. Our procedure will eventually terminate and no more vectors can be added to $L$, i.e., all the vectors in $V$ is in \s($L$). $L$ is our desired basis, and $|L| = \d U \leq \d V = |B|$.
+    \item The subspace dimension $\d U$ is always $\leq$ the whole space dimension $\d V$. To accomplish this we have to resort to the classic procedure: we add vectors from $U$ that are not in the span of the existing ones in $L$. Thus $L$ always remains linearly independent, and it should always be smaller in size than $B$, a spanning set of $U$. Our procedure will eventually terminate and no more vectors can be added to $L$, i.e., all the vectors in $V$ is in \s($L$). $L$ is our desired basis, and $|L| = \d U \leq \d V = |B|$.
     \begin{itemize}
         \item Note it is WRONG to assume that a finite basis of the whole space can always be reduced to a finite basis of the subspace!
-        \item Corollary: for FDVS $V$ and its subspace $U$, if the two spaces have the same dimension, that they are the same space. This is an important result useful in many proofs.
+        \item Corollary: for FDVS $V$ and its subspace $U$, if the two spaces have the same dimension, then they are the same space. This is an important result useful in many proofs.
     \end{itemize}
-    \item There are two more things that deserves mentioning. For FDVS $V$ and its subspace $U$, we can always find subspace $W$ such that $V = U \oplus W$. The idea is to find a basis $B_U$ of $U$ and extend it to the basis $B_V$ of $V$. $\s (B_V \backslash B_U)$ is our desired W. We then only have to show $V = U+W$ and $U \cap W = \{0\}$, which is not difficult.
+    \item There are two more things that deserve mentioning. For FDVS $V$ and its subspace $U$, we can always find subspace $W$ such that $V = U \oplus W$. The idea is to find a basis $B_U$ of $U$ and extend it to the basis $B_V$ of $V$. $\s (B_V \backslash B_U)$ is our desired W. We then only have to show $V = U+W$ and $U \cap W = \{0\}$, which is not difficult.
     \item The dimension of the sum of two vector spaces $U_1$ and $U_2$ can be expressed as follows: $$\d (U_1 + U_2) = \d U_1 + \d U_2 - \d (U_1 \cap U_2).$$
     \begin{itemize}
-        \item Despite the fact that it looks like the inclusion-exclusion formula, $+$ and $\cup$ are essentially different, and this cannot be extended to higher orders. To prove the formula, start from a basis $\{u_1,u_2,\dots,u_m\}$ of $U_1 \cap U_2$ (intersection is a subspace). $U_1$ and $U_2$ then have their respective bases $B_1$ and $B_2$. We can show $B_1 \cup B_2$ is a basis of $U_1 + U_2$. See page 47 of the book for the full proof.
+        \item Despite the fact that it looks like the inclusion-exclusion formula, $+$ and $\cup$ are quite different, thus the formula cannot be similarly generalized to higher orders. To prove the formula, start from a basis $\{u_1,u_2,\dots,u_m\}$ of $U_1 \cap U_2$ (intersection is a subspace). $U_1$ and $U_2$ then have their respective bases $B_1$ and $B_2$. We can show $B_1 \cup B_2$ is a basis of $U_1 + U_2$. See page 47 of the book for the full proof.
         \item Note that when the sum is a direct sum, then the formula is just $\d(U_1 \oplus U_2) = \d U_1 + \d U_2$.
     \end{itemize}
     
@@ -127,13 +127,13 @@
     \end{itemize}
     \item We are now endowed with all the tools to prove the \textbf{rank-nullity theorem}: for a FDVS $V$ and $T$ from $V$ to $W$, $\r T$ is finite-dimensional with $$\d V = \d \n T + \d \r T.$$
     \begin{itemize}
-        \item As always, we need to construct a basis to work with first. Let ${u_1, u_2, \dots, u_n}$ be a basis of $\n T$, and thus can be extended to ${u_1,\dots,u_m,v_1,\dots,v_n}$ a basis of $V$. We prove $T(\{v_1, v_2, \dots, v_n\})$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $T(v_1), \dots,T(v_n)$ spans $V$. To show the elements are linearly independent, consider that $$a_1 T(v_1)+\cdots+a_n T(v_n) = 0$$ implies $a_1v_1+\dots+a_nv_n \in \n T$. Yet we also have $b_1u_1+\dots+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
+        \item As always, we need to construct a basis to work with first. Let ${u_1, u_2, \dots, u_n}$ be a basis of $\n T$, and thus can be extended to ${u_1,\dots,u_m,v_1,\dots,v_n}$ a basis of $V$. We prove $T(\{v_1, v_2, \dots, v_n\})$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $Tv_1, \dots,Tv_n$ spans $V$. To show the elements are linearly independent, consider that $$a_1 T(v_1)+\cdots+a_n T(v_n) = 0$$ implies $a_1v_1+\dots+a_nv_n \in \n T$. Yet we also have $b_1u_1+\dots+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
     \end{itemize}
     \item The rank-nullity theorem gives rise to a number of equivalent characterizations regarding injection and surjection. First of all, there is a criterion that says $T$ is injective iff $\n T = {0}$ (proof follows straight from the definition of nullspace). The results below follow.
     \begin{itemize}
         \item A map to a smaller dimensional space cannot be injective because $\d (\n T) > 0$.
         \item A map to a large dimensional space cannot be surjective because $\d (\r T) \leq \d V < \d W$.
-        \item $V$ and $W$ are FDVS of equal dimension, then $$T \text{ is injective } \Longleftrightarrow T \text{ is surjective } \Longleftrightarrow \text{rank } T = \d V.$$
+        \item $V$ and $W$ are FDVS of equal dimension, then $$T \text{ is injective } \Longleftrightarrow T \text{ is surjective } \Longleftrightarrow \d \r T = \d V.$$
     \end{itemize}
     \item Solving systems of linear equations is a direct application of this.
     \begin{itemize}
@@ -157,11 +157,11 @@
     \item We define matrix addition entry-wise, because under this definition, matrix representation of linear maps preserves addition, i.e. $\M(S+T) = \M(S) + \M(T)$ for $S,T \in \LVW$, assuming $S+T$, $S$, and $T$ share the same ordered bases.
     \item Similarly entry-wise scalar multiplication with matrices give us $\M(\lambda T) = \lambda \M(T)$.
     \item Given the definition of matrix addition and scalar multiplication, $\F^{m,n}$, the set of matrices with $m$ rows and $n$ columns over $\F$, is a vector space of dimension $mn$.
-    \item The reason why we represent linear maps from $n$-dimensional VS to $m$-dimensional VS is that we want to preserve the ordering of $``S"$ and $``T"$ after matrix representation, i.e., $\M(ST) = \M(S)\M(T)$ instead of $\M(T)\M(S)$, under the usual definition of matrix multiplication: $$(AC)_{j,k} = \sum_{r = 1}^n A_{j,r}C_{r,k}.$$
+    \item The reason why we represent linear maps from $n$-dimensional VS to $m$-dimensional VS is that we want to preserve the ordering of $``S"$ and $``T"$ after matrix representation, i.e., $\M(ST) = \M(S)\M(T)$ instead of $\M(T)\M(S)$, under the usual definition of matrix multiplication: $$[AC]_{j,k} = \sum_{r = 1}^n A_{j,r}C_{r,k}.$$
     \begin{itemize}
         \item Remember that matrix multiplication is not commutative, but is associative and distributive.
     \end{itemize}
-    \item The book defines $A_{j,\cdot}$ and $A_{\cdot,k}$ as the $j$-th row and the $k$-th column of matrix $A$, and thus $(AC)_{j,k} = A_{j,\cdot}C_{\cdot,k}$. Also, $k$-th column of matrix product equals matrix times the $k$-th column of the second matrix: $$(AC)_{\cdot,k} = AC_{\cdot,k},$$ which is an alternative to understanding matrix multiplication. Obviously there is a row equivalent version that says $j$-th row of the matrix product equals $j$-th row times the second matrix.
+    \item The book defines $A_{j,\cdot}$ and $A_{\cdot,k}$ as the $j$-th row and the $k$-th column of matrix $A$, and thus $[AC]_{j,k} = A_{j,\cdot}C_{\cdot,k}$. Also, $k$-th column of matrix product equals matrix times the $k$-th column of the second matrix: $$[AC]_{\cdot,k} = AC_{\cdot,k},$$ which is an alternative to understanding matrix multiplication. Obviously there is a row equivalent version that says $j$-th row of the matrix product equals $j$-th row times the second matrix.
     \item When we are considering matrix $A$ times a column vector $c$, we can see $Ac$ as the linear combination $c_1A_{\cdot,1} + \cdots + c_nA_{\cdot,n}$.
 \end{itemize}
 
@@ -202,7 +202,7 @@
             \end{tikzcd}
         \end{equation*}
         For a vector $v \in V$, its image $\M(v)$ under the isomorphism $\M$ of $V$ belongs to $\F^{n,1}$. Matrix multiplication with $\M(T)$ gives us $\M(Tv) \in \F^{m,1}$, which we identify with $Tv$ under the isomorphism $\M$ of $W$. This is why a linear map can be described entirely by its matrix representation.
-        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication. Think about the Jacobian matrix representation of the total derivative in the Euclidean space.
+        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication. Think about the Jacobian matrix representation of the total derivative in the Euclidean space. Left-multiplication by a matrix corresponds to the linear \textit{transformation} of a vector.
     \end{itemize}
     \item A \textit{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
     \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.) This is true for functions $f:S \to S$ (where $S$ is finite) in general, but for linear maps the proof is likely to be rather simple:
@@ -245,7 +245,7 @@
                 & {V/\n T} \arrow[ur,"\tilde{T}"]
             \end{tikzcd}
         \end{equation*}
-    \item The definition leads to an important theorem that exists for different algebraic structures. For $T \in \LVW$, $\tilde{T}$ is injective and $\r \tilde{T} = \r T$. The latter simply follows from the definition, while the first requires us to prove $\n T = \{0+\n T\}$, the identity. $\tilde{T}(v+\n T) = Tv = 0$ gives us $v-0 \in \n T$. Hence, $v+\n T = 0+\n T$, and the conclusion follows.
+    \item The definition leads to the isomorphism theorem that exists for different algebraic structures. For $T \in \LVW$, $\tilde{T}$ is injective and $\r \tilde{T} = \r T$. The latter simply follows from the definition, while the first requires us to prove $\n T = \{0+\n T\}$, the identity. $\tilde{T}(v+\n T) = Tv = 0$ gives us $v-0 \in \n T$. Hence, $v+\n T = 0+\n T$, and the conclusion follows.
         \begin{itemize}
             \item The two claims combined tell us $V/(\n T) \simeq \r T$ under $\tilde{T}$.
         \end{itemize}
@@ -294,7 +294,7 @@
     \end{itemize}
     \item We define \textit{annihilator} $U^0$ of $U \subseteq V$ as $\{\phi \in V' \mid \phi(U)=0\}$, the subset of all linear functionals on $V$ whose image is 0.
     \item There is a good example (3.104) in the book about annihilators. For the dual basis $\phi_1,\dots,\phi_5$ in $(\F^5)'$ that corresponds to $e_1,\dots,e_5$ in $\F^5$, $(\s(e_1,e_2))^0 = \s(\phi_3,\phi_4,\phi_5)$, since $\phi_i$ takes out the $i$-th coordinate.
-    \item As expected $U^0$ is a subspace of $V'$. The zero linear functional takes $U \subseteq V$ to $0$. $(\phi+\psi)(U) = 0$ and $\lambda\phi(U) = 0$ is omitted as usual.
+    \item As expected $U^0$ is a subspace of $V'$. The zero linear functional takes $U \subseteq V$ to $0$. $(\phi+\psi)(U) = 0$ and $\lambda\phi(U) = 0$ are omitted as usual.
     \item For FDVS $V$ and its subspace $U$, $$\d U + \d U^0 = \d V.$$ The book mentions two proofs. The first proof takes the usual "choose a basis and extend it" approach. The second proof is more obscure: consider the inclusion map $i \in \mathcal{L}(U,V)$ such that $i(u) = u$ for all $u \in U$, then $i' \in \mathcal{L}(V',U')$, which gives us $$\d \n i' + \d \r i' = \d V' = \d V.$$ Note that $i'(\phi) = \phi \circ i$ for $\phi \in V'$, giving us $\n i' = U^0$. The nullspace of $i'$ are the set of $\phi$'s such that $\phi \circ i = 0$, and therefore $\phi$ should map the entire $U$ to $0$.
     
     Now we show $U = \r i'$. A linear map defined on a subspace can always be extended to the whole space, and thus we may extend any $\phi \in U'$ to $\psi \in V'$. The dual map $i'$ maps $\psi$ back to $\phi$, so $\phi \in U' \implies \phi \in \r i'$, showing us what we desire.
@@ -334,7 +334,7 @@
     \end{itemize}
     The properties that directly ensue include:
     \begin{itemize}
-        \item Conjugate symmetry gives us ``linearity" in the second slot: $$\langle u, \lambda v+w \rangle = \bar{\lambda} \langle u, v \rangle + \langle u,w \rangle;$$
+        \item Conjugate symmetry gives us ``conjugate linearity" in the second slot: $$\langle u, \lambda v+w \rangle = \bar{\lambda} \langle u, v \rangle + \langle u,w \rangle;$$
         \item For fixed $w \in V$, $f: v \mapsto \langle v,w \rangle$ is a linear map from $V$ to $\F$ because of linearity in the first slot;
         \item $\langle 0,v \rangle$ and $\langle v,0 \rangle = 0$ because linear maps take 0 to 0.
     \end{itemize}
