@@ -9,15 +9,16 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
-\newcommand{\s}{\text{span}}
-\newcommand{\n}{\text{null }}
+\newcommand{\s}{\operatorname{span}}
+\newcommand{\n}{\operatorname{null}}
+\renewcommand{\r}{\operatorname{range}}
+\renewcommand{\d}{\dim}
 \newcommand{\LV}{\mathcal{L}(V)}
 \newcommand{\LVW}{\mathcal{L}(V,W)}
 \newcommand{\M}{\mathcal{M}}
+\newcommand{\PF}{\mathcal{P}(\F)}
 \newcommand{\bv}{v_1,\dots,v_n}
 \newcommand{\bw}{w_1,\dots,w_n}
-\renewcommand{\r}{\text{range }}
-\renewcommand{\d}{\text{dim }}
 \renewcommand{\phi}{\varphi}
 
 \onehalfspacing
@@ -50,7 +51,7 @@
 \textit{Remark}. Note that this section in the book builds on the notion of a list of vectors. FDVS is defined in terms of spanning list (set), and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
 
 \begin{itemize}
-    \item The \textit{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, span($\emptyset$) $\coloneqq \{0\}$.
+    \item The \textit{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, $\s(\emptyset)$ $\coloneqq \{0\}$.
     \item Similar to the fact that the sum $U_1 + U_2 +\cdots+ U_m$ is the smallest vector space containing all $U_i$'s, span($S$) is the smallest subspace of $V$ containing all the vectors in $S$. The proof of the two are almost exactly the same.
     \item A polynomial $p$ in an indeterminate $z$ with coefficients in $\F$ is the \textbf{expression} $a_n z^n + \cdots + a_1 z + a_0$ with all $a_i$'s in $\F$. The \textit{degree} of a polynomial is the largest exponent of $z$ with nonzero coefficient, and if all the coefficients are 0, we customarily define its degree to be $-\infty$ in the book, or $-1$ elsewhere.
     \begin{itemize}
@@ -85,7 +86,7 @@
     \begin{itemize}
         \item The fact that the bases of $V$ has a fixed size implies every spanning set or linearly independent set of this size $\d V$ is a basis itself (because the reduction/extension here is the trivial one).
     \end{itemize}
-    \item The subspace dimension $\d U$ is always $\leq$ the whole space dimension $\d V$. To accomplish this we have to resort to the classic procedure: we add vectors from $U$ that are not in the span of the existing ones in $L$. Thus $L$ always remains linearly independent, and it should always be smaller in size than $B$, a spanning set of $U$. Our procedure will eventually terminate and no more vectors can be added to $L$, i.e., all the vectors in $V$ is in \s($L$). $L$ is our desired basis, and $|L| = \d U \leq \d V = |B|$.
+    \item The subspace dimension $\d U$ is always $\leq$ the whole space dimension $\d V$. To accomplish this we have to resort to the classic procedure: we add vectors from $U$ that are not in the span of the existing ones in $L$. Thus $L$ always remains linearly independent, and it should always be smaller in size than $B$, a spanning set of $U$. Our procedure will eventually terminate and no more vectors can be added to $L$, i.e., all the vectors in $V$ is in $\s(L)$. $L$ is our desired basis, and $|L| = \d U \leq \d V = |B|$.
     \begin{itemize}
         \item Note it is WRONG to assume that a finite basis of the whole space can always be reduced to a finite basis of the subspace!
         \item Corollary: for FDVS $V$ and its subspace $U$, if the two spaces have the same dimension, then they are the same space. This is an important result useful in many proofs.
@@ -209,9 +210,9 @@
         
     (a) $\implies$ (b) we proved earlier.
         
-    (b) $\implies$ (c) by checking the rank-nullity theorem. Injection means nullity $T = 0$, which implies rank $T = \d V$.
+    (b) $\implies$ (c) by checking the rank-nullity theorem. Injection means $\operatorname{nullity} T = 0$, which implies $\operatorname{rank} T = \d V$.
         
-    (c) $\implies$ (a) by showing $T$ is injective, as nullity $T = \d V - $ rank $T$, which is 0.
+    (c) $\implies$ (a) by showing $T$ is injective, as $\operatorname{nullity} T = \d V - \operatorname{rank} T$, which is 0.
 \end{itemize}
 
 \subsection{Products and Quotients of Vector Spaces}
@@ -311,18 +312,20 @@
             & = \d W - (\d V - \d \n T) \\
             & = \d \n T + \d W - \d V.
         \end{align*}
-        \item $T$ is surjective iff $T'$ is injective, since $\r T = W$ iff $(\r T)^0 = {0}$ (0 here is the 0 linear functional on $W$) iff $\n T' = {0}$.
+        \item $\d \r T' = \d \r T$ easily follows from the rank-nullity theorem and the two bullet points above.
+        \item Also we can prove $\r T' = (\n T)^0$. Showing $\r T' \subseteq (\n T)^0$ is standard (just assume $T'$ maps $\phi$ to $\psi \in \r T'$), while the other  direction is quite tricky. The book assumes finite-dimension here and showed the two spaces have the same dimension: $$\d \r T' = \d \r T = \d V - \d \n T = \d (\n T)^0.$$
+        We have to make a side note here. When we proved the first bullet point, we did not assume finite-dimension of $V$ and $W$, so it is natural to consider if our proof of $\r T' \supseteq (\n T)^0$ also does not require the finite-dimension assumption either.
+        
+        We may formulate our question this way: for $T \in \LVW$ and $\phi \in V'$ with $\phi(\n T) = 0$, can we always find a $\psi \in W'$ such that $\phi = \psi \circ T$? This turns out to be true if we assume the axiom of choice from set theory, which has important corollaries in the theory of infinite-dimensional vector spaces. We will not get into details here, but it is interesting to know about this.
     \end{itemize}
-    \item Similarly, we have $\r T' = (\r T)^0$ because $$\exists \psi \in W' $$
-    
-    \item The corollary of the previous two theorems is the following:
+    \item The corollary of the previous claims are the following:
     $$T \text{ is surjective} \iff T' \text{ is injective} \quad \text{and} \quad T \text{ is injective} \iff T' \text{ is surjective}.$$ Proof of this is quite standard, and we show the first one here only: $$T \in \LVW \text{ surjective} \iff \r T = W \iff (\r T)^0 = {0} \iff \n T' = {0} \iff T' \text{ injective}.$$
     
     \item The \textit{row rank} and \textit{column rank} of matrix $A$ are defined to be the dimension of the span of the rows of $A$ in $\F^{1,n}$ and of the columns of $A$ in $\F^{m,1}$, respectively. As we know from lower-division matrix algebra, they are the same and represent the number of pivots in a reduced row echelon form of a matrix. We now prove this fact with the tools we have.
     
-    \item $\M(T') = (\M(T))^t$ 
+    \item $\M(T') = (\M(T))^t$. Consider the dual basis $\psi_j$ ($1 \leq j \leq m$) of $W'$ and $\phi_j$ ($1 \leq k \leq n$) of $V'$. Then $$T'(\psi_j) = \sum_{r=1}^n C_{r,j}\phi_r,$$ which we evaluate at $v_k$: $$(\psi_j \circ T)(v_k) = \sum_{r=1}^n C_{r,j}\phi_r(v_k) = C_{k,j}.$$ On the other hand, we have $$(\psi_j)(Tv_k) = \psi_j(\sum_{r=1}^mA_{r,k}w_r) = \sum_{r=1}^m A_{r,k}\psi_j(w_r) = A_{j,k}.$$
     
-    \item First, $\d \r T = \text{column rank } \M(T)$. From bases $\bv$ and $w_1,\dots,w_m$ of $V$ and $W$, we have $\s(\{Tv_1,\dots,Tv_n\})$ is isomorphic to $\s(\{\M(Tv_1),\dots,\M(Tv_n)\})$ under the isomorphism $M$. Thus, the two VS have the same dimensions, with $\d \s(\{\M(Tv_1),\dots,\M(Tv_n)\}) = $ column rank of $\M(T)$. Recall that $\s(\{Tv_1,\dots,Tv_n\}) = \r T$, thus $\d \r T = $ column rank of $\M(T)$, as desired.
+    \item First, $\d \r T = \text{column rank of } \M(T)$. From bases $\bv$ and $w_1,\dots,w_m$ of $V$ and $W$, we have $\s(\{Tv_1,\dots,Tv_n\})$ is isomorphic to $\s(\{\M(Tv_1),\dots,\M(Tv_n)\})$ under the isomorphism $M$. Thus, the two VS have the same dimensions, with $\d \s(\{\M(Tv_1),\dots,\M(Tv_n)\}) = $ column rank of $\M(T)$. Recall that $\s(\{Tv_1,\dots,Tv_n\}) = \r T$, thus $\d \r T = $ column rank of $\M(T)$, as desired.
     
     \item For $A \in \F^{m,n}$, define $T \in \LVW$ as the left multiplication by $A$ map (i.e., $Tx = Ax$). Then $A = \M(T)$ with respect to the canonical bases. It follows that
     \begin{align*}
@@ -331,25 +334,32 @@
         & = \text{column rank of } \M(T') = \text{column rank of } A^t
         = \text{row rank of } A.
     \end{align*}
-    Therefore, \text{rank} is a property of a finite matrix.
-    
-    \item Let $T$ be the linear map of left multiplication of $A$, i.e.,
+    Therefore, \textit{rank} is a property of a finite matrix.
 \end{itemize}
 
 \section{Polynomials}
 Remark. We will skim through this chapter, although the theory of polynomials is definitely something that one should know. Please refer to Chapter 4 of our textbook or Appendix E of \textit{Linear Algebra} by Friedberg, Insel, and Spence for the detailed development of major results.
 
 \begin{itemize}
-    \item The division algorithm for polynomials is similar to the one in number theory. For $p,s \in \mathcal{P}(\F)$ with $s \not= 0$, then there exist a pair of unique polynomials $q,r \in \mathcal{P}(\F)$ such that $p=sq+r$ and $\text{deg} r < \text{deg} s$.
+    \item The division algorithm for polynomials is similar to the one in number theory. For $p,s \in \mathcal{P}(\F)$ with $s \not= 0$, then there exist a pair of unique polynomials $q,r \in \mathcal{P}(\F)$ such that $p=sq+r$ and $\deg r < \deg s$.
     \begin{itemize}
-        \item With the tool of linear map this becomes easy to prove
+        \item With the tool of linear map this becomes easy to prove.
     \end{itemize}
-    \item Each zero of a polynomial corresponds to a degree-1 factor, i.e., 
+    \item Each zero of a polynomial corresponds to a degree-1 factor, i.e., for $p \in \PF$ and $\lambda \in \F$, $p(\lambda) = 0$ iff $\exists q \in \PF$ such that for all $z \in \F$, $p(z) = (z-\lambda)q(z)$. To prove the ``$\implies$'' direction, division algorithm gives us $p(z) = (z-\lambda)q(z) + r$ (here $r$ is a constant) as $(z-\lambda)$ is of degree 1. Thus, $p(\lambda) = 0$ gives us $r=0$.
     
-    \item Every nonconstant polynomial over $C$ has a unique factorization (up to the order of factors) of the form $$p(z) = c(z - \lambda_1)\dots(z-\lambda_m),$$ where $c, \lambda_1,\dots,\lambda_n \in \C$.
+    \item A polynomial $p \in \PF$ has at most as many zeros as its degree. $\deg = 0$ and 1 can be checked, and we proceed with induction on higher orders. If $p$ has no zeros, then done. If $p$ has one zero, let $$p(z) = (z-\lambda)q(z),$$ where $p$ is of degree $m+1$ and $q$ is of degree $m$ (with at most $m$ zeros).
+    
+    \item The proof of the fundamental theorem of algebra is omitted here for the obvious reason. Every nonconstant polynomial on $\C$ has a zero, which directly implies that a polynomial $p$ of degree $m$ has $m$ nondistinct roots, which we sketch through now.
     \begin{itemize}
-        \item To prove this, it is natural to again appeal to induction.
+        \item Every nonconstant polynomial over $\C$ has a unique factorization (up to the order of factors) of the form $$p(z) = c(z - \lambda_1)\dots(z-\lambda_m),$$ where $c, \lambda_1,\dots,\lambda_n \in \C$.
     \end{itemize}
+    \begin{itemize}
+        \item To prove this, by the fundamental theorem of algebra we can factorize $p(z)$ into $(z-\lambda)q(z)$, and again factorize $q(z)$, and so on. We have proved the existence of such factorization.
+        \item Now we proceed to prove the uniqueness. 
+    \end{itemize}
+    \item For polynomials $p \in \mathcal{P}(\C)$ with real coefficients, the complex conjugate of a root is still a root. This follows from $\lambda^m = \bar{\lambda}^m$
+    
+    \item For nonconstant $p \in \mathcal{P}(\R)$, $p$ has a unique factorization into linear and quadratic polynomials with the highest coefficients being 1, i.e., $$p(x)=c(x-\lambda_1)\cdots(x-\lambda_m)(x^2+b_1x+c)\cdots(x^2+b_Mx+c_M),$$ where $c,$ the $\lambda$'s, the $b$'s, and the $c$'s are all reals and each quadratic factors have negative discriminant.
 \end{itemize}
 
 
@@ -394,19 +404,42 @@ Matrices}
         \item The triangle inequality
         \item The parallelogram equality
     \end{itemize}
-    
+\end{itemize}
 \subsection{Orthonormal Bases}
 
-\subsection{Orthogonal Complements and
-Minimization Problems}
-\end{itemize}
+\subsection{Orthogonal Complement and Minimization Problems}
+
 
 \section{Operators on Inner Product Spaces}
+\subsection{Self-Adjoint and Normal Operators}
+
+\subsection{The Spectral Theorem}
+
+\subsection{Positive Operators and Isometries}
+
+\subsection{Polar Decomposition and Singular Value Decomposition}
+
 
 \section{Operators on Complex Vector Spaces}
+\subsection{Generalized Eigenvectors and Nilpotent Operators}
+
+\subsection{Decomposition of an Operator}
+
+\subsection{Characteristic and Minimal Polynomials}
+
+\subsection{Jordan Form}
+
 
 \section{Operators on Real Vector Spaces}
+\subsection{Complexification}
+
+\subsection{Operators on Real Inner Product Spaces}
+
 
 \section{Trace and Determinant}
+\subsection{Trace}
+
+\subsection{Determinant}
+
 
 \end{document}
