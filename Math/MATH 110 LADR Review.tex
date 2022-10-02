@@ -37,7 +37,7 @@
     \item A vector space $V$ is an abelian group under addition that has the distributive and associative properties in scalar multiplication and the multiplicative identity. (Here addition and scalar multiplication are closed operations in $V$.)
     \item $\F^S$ denotes the set of functions from $S$ to $\F$. It is a vector space over $\F$ under the sum and scalar multiplication of functions defined in the usual pointwise way.
     \item A vector space holds the cancellation law and has a unique additive identity and a unique additive inverse because it is a group. $0v = 0$, $a0 = 0$, and $(-1)v = -v$ hold by the distributive property.
-    \item A subset $U$ of the whole vector space $V$ that is still a vector space is called a vector subspace. Usually we use the three criteria i) $0_V \in U$ (or $U$ is nonempty), ii) closed under addition in $U$, and iii) closed under scalar multiplication in $U$ to verify. To show the criteria are equivalent to the definition, in one direction we show that $0_V$ is the (unique) identity element of $U$ and in the other direction we only need to check the additive inverse property.
+    \item A subset $U$ of the whole vector space $V$ that is still a vector space is called a vector subspace. Usually we use the three criteria i) $0_V \in U$ (or $U$ is nonempty), ii) closed under addition in $U$, and iii) closed under scalar multiplication in $U$ to verify. To show the criteria are equivalent to the definition, in one direction we show that $0_V$ is the (unique) identity element of $U$ and in the other direction we only need to check the additive inverse property (satisfied by $(-1)u = -u$).
     \item The sum $U_1 + U_2 +\cdots+ U_m$, where $U_i$'s are subsets of $V$, is the set of all possible sums of the respective elements from each $U_i$.
     \item When the $U_i$'s are subspaces of $V$, then the sum is the smallest vector space containing all $U_i$'s.
     \item When the $U_i$'s are subspaces of $V$, and every element of the sum $U_1 + U_2 +\cdots+ U_m$ can be written in only one way as $u_1+u_2+\cdots+u_m$, we call the sum a \textit{direct sum}, denoted by $\oplus$ replacing $+$.
@@ -338,20 +338,24 @@
 \end{itemize}
 
 \section{Polynomials}
-Remark. We will skim through this chapter, although the theory of polynomials is definitely something that one should know. Please refer to Chapter 4 of our textbook or Appendix E of \textit{Linear Algebra} by Friedberg, Insel, and Spence for the detailed development of major results.
+Remark. We used facts about polynomials in high school algebra. These facts were intuitively ``understood" by us back then, but we never had the chance to rigorously prove them. Although the theory of polynomials is definitely something one should know at this stage, we will skim through this chapter in our notes. Please refer to Chapter 4 of our textbook or Appendix E of \textit{Linear Algebra} by Friedberg, Insel, and Spence for the detailed development of major results.
 
 \begin{itemize}
     \item The division algorithm for polynomials is similar to the one in number theory. For $p,s \in \mathcal{P}(\F)$ with $s \not= 0$, then there exist a pair of unique polynomials $q,r \in \mathcal{P}(\F)$ such that $p=sq+r$ and $\deg r < \deg s$.
     \begin{itemize}
-        \item With the tool of linear map this becomes easy to prove.
+        \item With the theory of linear maps this becomes easy to prove.
     \end{itemize}
     \item Each zero of a polynomial corresponds to a degree-1 factor, i.e., for $p \in \PF$ and $\lambda \in \F$, $p(\lambda) = 0$ iff $\exists q \in \PF$ such that for all $z \in \F$, $p(z) = (z-\lambda)q(z)$. To prove the ``$\implies$'' direction, division algorithm gives us $p(z) = (z-\lambda)q(z) + r$ (here $r$ is a constant) as $(z-\lambda)$ is of degree 1. Thus, $p(\lambda) = 0$ gives us $r=0$.
     
-    \item A polynomial $p \in \PF$ has at most as many zeros as its degree. $\deg = 0$ and 1 can be checked, and we proceed with induction on higher orders. If $p$ has no zeros, then done. If $p$ has one zero, let $$p(z) = (z-\lambda)q(z),$$ where $p$ is of degree $m+1$ and $q$ is of degree $m$ (with at most $m$ zeros).
+    \item A polynomial $p \in \PF$ has at most as many zeros as its degree ($\geq 0$). $\deg = 0$ and 1 can be checked, and we proceed with induction on higher orders. If $p$ has no zeros, then done. If $p$ has one zero, let $$p(z) = (z-\lambda)q(z),$$ where $p$ is of degree $m+1$ and $q$ is of degree $m$ (with at most $m$ zeros).
+    
+    \item Recall the remark on polynomials we made in Chapter 2. Now we prove that polynomial functions over an infinite field $\F$ have a unique representation. Suppose $f,g \in \PF$ and $f(a)=g(a)$ for all $a \in \F$, we want to show that $f=g$.
+    
+    Define $h = f-g$, and then we have $\forall a\in\F, h(a) = 0$. Suppose $h$ is a nonzero polynomial of degree $n$, then by the division algorithm $h$ has at most $n$ zeroes, yet $\F$ is an infinite field, contradiction! Thus $h = f-g$ is the zero polynomial, and $f = g$ as a result.
     
     \item The proof of the fundamental theorem of algebra is omitted here for the obvious reason. Every nonconstant polynomial on $\C$ has a zero, which directly implies that a polynomial $p$ of degree $m$ has $m$ nondistinct roots, which we sketch through now.
     \begin{itemize}
-        \item Every nonconstant polynomial over $\C$ has a unique factorization (up to the order of factors) of the form $$p(z) = c(z - \lambda_1)\dots(z-\lambda_m),$$ where $c, \lambda_1,\dots,\lambda_n \in \C$.
+        \item Every nonconstant polynomial over $\C$ has a unique factorization (up to the order of factors) of the form $$p(z) = c(z - \lambda_1)\cdots(z-\lambda_m),$$ where $c, \lambda_1,\cdots,\lambda_n \in \C$.
     \end{itemize}
     \begin{itemize}
         \item To prove this, by the fundamental theorem of algebra we can factorize $p(z)$ into $(z-\lambda)q(z)$, and again factorize $q(z)$, and so on. We have proved the existence of such factorization.
@@ -366,7 +370,12 @@ Remark. We will skim through this chapter, although the theory of polynomials is
 \section{Eigenvalues, Eigenvectors, and Invariant Subspaces}
 \subsection{Invariant Subspaces}
 \begin{itemize}
-    \item 
+    \item For $T \in \LV$, the subspace $U$ of $V$ is \textit{$T$-invariant} if $T(U) \subseteq U$, or alternatively, $T|_U$ is an operator on $U$.
+    \item It can be easily verified that $\{0\}$, $V$, $\n V$, and $\r T$ are invariant subspaces of $V$ under $T$.
+    \item We now focus on invariant subspaces of dimension 1. Any 1-dimensional subspace $U$ has some vector $u \in V$ as the basis (actually any vector in $U$ can be the basis). To check if $T$ is invariant under $U$, we only need to check if the basis vectors are mapped into $U$ (so that the $\r T \subseteq U$). Since $Tu \in U$ iff $Tu = \lambda u$ for some $u \in U$, a subspace with dimension 1 is invariant iff a vector $u$ in the subspace has $Tu = \lambda u$.
+    \item For $T \in \LV$, $\lambda \in \F$ is an \textit{eigenvalue} of $T$ if there exists a nonzero $v \in V$ such that $Tv = \lambda v$. The $v$ here is called the \textit{eigenvector}.
+    \item To move $\lambda v$ to the left side, we consider the linear operator $\lambda I$ that maps $v$ to $\lambda v$. Therefore, we have $(T-\lambda I) v = 0$. Since $v \not= 0$, $T-\lambda I$ is not injective/surjective/invertible (since it is an operator on $V$).
+    \item Eigenvectors corresponding to distinct eigenvalues are linearly independent.
 \end{itemize}
 
 \subsection{Eigenvectors and Upper-Triangular
