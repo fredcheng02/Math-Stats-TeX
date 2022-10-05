@@ -8,6 +8,7 @@
 \usepackage[bookmarks]{hyperref}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\s}{\operatorname{span}}
 \newcommand{\n}{\operatorname{null}}
@@ -53,9 +54,9 @@
 \begin{itemize}
     \item The \textit{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, $\s(\emptyset)$ $\coloneqq \{0\}$.
     \item Similar to the fact that the sum $U_1 + U_2 +\cdots+ U_m$ is the smallest vector space containing all $U_i$'s, span($S$) is the smallest subspace of $V$ containing all the vectors in $S$. The proof of the two are almost exactly the same.
-    \item A polynomial $p$ in an indeterminate $z$ with coefficients in $\F$ is the \textbf{expression} $a_n z^n + \cdots + a_1 z + a_0$ with all $a_i$'s in $\F$. The \textit{degree} of a polynomial is the largest exponent of $z$ with nonzero coefficient, and if all the coefficients are 0, we customarily define its degree to be $-\infty$ in the book, or $-1$ elsewhere.
+    \item A polynomial $p$ in an indeterminate $z$ with coefficients in $\F$ is the \textbf{expression} $a_0 + a_1 z + \cdots + a_n z^n$ with all $a_i$'s in $\F$. The \textit{degree} of a polynomial is the largest exponent of $z$ with nonzero coefficient, and if all the coefficients are 0, we customarily define its degree to be $-\infty$ in the book, or $-1$ elsewhere.
     \begin{itemize}
-        \item Since we are dealing with $z$ and coefficients in $\F = \R$ or $\C$ in this book, a polynomial here can be alternatively defined as the \textbf{function} $p: \F \rightarrow \F$ with $p(z) = a_n z^n + \cdots + a_1 z + a_0$. The reason behind is that a polynomial function with coefficients from an infinite field can be written into only one polynomial expression with its unique coefficients. See Chapter 4 of this book or Appendix E, Theorem 10 of \textit{Linear Algebra} by Friedberg, Insel, and Spence. It is the consequence of the fact that a polynomial of degree $n \geq 1$ has at most $n$ distinct zeros. We will proceed with this definition of polynomials.
+        \item Since we are dealing with $z$ and coefficients in $\F = \R$ or $\C$ in this book, a polynomial here can be alternatively defined as the \textbf{function} $p: \F \rightarrow \F$ with $p(z) = a_0 + a_1 z + \cdots + a_n z^n$. The reason behind is that a polynomial function with coefficients from an infinite field can be written into only one polynomial expression with its unique coefficients. See Chapter 4 of this book or Appendix E, Theorem 10 of \textit{Linear Algebra} by Friedberg, Insel, and Spence. It is the consequence of the fact that a polynomial of degree $n \geq 1$ has at most $n$ distinct zeros. We will proceed with this definition of polynomials.
         \item We denote the set of all polynomials with coefficients in $\F$ by $\mathcal{P}(\F)$. Under the usual coefficient-wise addition and scalar multiplication, it is obvious that $\mathcal{P}(\F)$ is a vector space over $\F$. In addition, the set of all polynomials with degree at most $m$, denoted by $\mathcal{P}_m(\F)$ is a vector subspace of $\mathcal{P}(\F)$.
     \end{itemize}
     \item Linear independence and dependence can be characterized in multiple ways. A set $S$ of vectors is linearly independent iff the only way to write 0 as $a_1v_1 + a_2v_2 + \cdots +a_mv_m$ is the trivial way. It is equivalent to saying that every linear combination has its only representation, or none of the vectors is in the span of the other vectors (can be written as a linear combination of them). Linear dependence is the negation of independence, but in particular we should remember that it means there exists at least one vector $v_i$ that is in the span of the rest of the vectors.
@@ -63,7 +64,8 @@
         \item Obviously removing such vector $v_i$ from $S$ will not change the span.
         \item In particular, for a linearly independent set $S = \{s_1, s_2, \dots , s_m\} \subsetneq$ a linearly dependent set $T = \{s_1, s_2, \dots , s_m, t_1, t_2, \dots , t_n\}$, one such vector is always in $T \backslash S$. This is because for the nontrivial way of writing $0 = a_1s_1 + \cdots +a_ms_m + b_1 t_1 + \cdots + b_n t_n$, if all $b$'s are 0, then all $a$'s will also be 0. Thus, some $b_i$ must be nonzero, and the corresponding $t_i$ can be removed without changing the span.
         \begin{itemize}
-            \item The special case $n=1$ of the contraposition will be useful to us. If one new vector is added the linearly independent $S$ but does not belong to span($S$), then the resulting set is still linearly independent.
+            \item The special case $n=1$ of the contraposition will be useful to us. If one new vector is added to the linearly independent $S$ but does not belong to span($S$), then the resulting set is still linearly independent.
+            \item From this special case we know that for a linear dependent set $\{v_1,\cdot,v_n\}$, at some index $k \leq n$ we have $\{v_1,\cdot,v_{k-1}\}$ being linearly independent, while $v_k \in \s(\{v_1,\cdot,v_{k-1}\})$. (This is the well-ordering case of the linear dependence lemma 2.21 in book that we will use again in Chapter 5.)
         \end{itemize}
         \item Note that a linearly independent set of vectors cannot have the $0$ vector.
     \end{itemize}
@@ -375,12 +377,32 @@ Remark. We used facts about polynomials in high school algebra. These facts were
     \item We now focus on invariant subspaces of dimension 1. Any 1-dimensional subspace $U$ has some vector $u \in V$ as the basis (actually any vector in $U$ can be the basis). To check if $T$ is invariant under $U$, we only need to check if the basis vectors are mapped into $U$ (so that the $\r T \subseteq U$). Since $Tu \in U$ iff $Tu = \lambda u$ for some $u \in U$, a subspace with dimension 1 is invariant iff a vector $u$ in the subspace has $Tu = \lambda u$.
     \item For $T \in \LV$, $\lambda \in \F$ is an \textit{eigenvalue} of $T$ if there exists a nonzero $v \in V$ such that $Tv = \lambda v$. The $v$ here is called the \textit{eigenvector}.
     \item To move $\lambda v$ to the left side, we consider the linear operator $\lambda I$ that maps $v$ to $\lambda v$. Therefore, we have $(T-\lambda I) v = 0$. Since $v \not= 0$, $T-\lambda I$ is not injective/surjective/invertible (since it is an operator on $V$).
-    \item Eigenvectors corresponding to distinct eigenvalues are linearly independent.
+    \item Eigenvectors corresponding to distinct eigenvalues are linearly independent. The usual proof of this starts with 2 distinct eigenvalues and proceeds with induction, but the book uses the well-ordering principle instead. Suppose the $\bv$ corresponding to eigenvectors $\lambda_1,\dots,\lambda_n$ are linearly dependent, then at $k \leq n$ we have $v_k \in \s(v_1,\dots,v_{k-1})$ with $v_1,\dots,v_{k-1}$ being linearly dependent. Thus, 
+    \begin{equation}
+        v_k = a_1 v_1 + \dots + a_{k-1}v_{k-1}, \tag{$\star$}
+    \end{equation}
+    and by applying $T$ to both sides, we have $$\lambda_k v_k = a_1 \lambda_1 v_1 + \dots + a_{k-1} \lambda_{k-1}v_{k-1}.$$ If instead, we multiply ($\star$) by $\lambda_k$ on both sides, then $$\lambda_k v_k = a_1 \lambda_k v_1 + \dots + a_{k-1} \lambda_k v_{k-1}.$$ Subtracting the two equations above give us $$0 = a_1 (\lambda_1 - \lambda_k) + \dots + a_{k-1} (\lambda_{k-1}-\lambda_k) v_{k-1}$$. Since $v_1, \dots, v_{k-1}$ are linearly independent, all the coefficients are 0 and thus all the $a$'s are the same (because the $\lambda$'s are distinct). However, this implies $v_k = 0$, which contradicts with $v_k$ being an eigenvector. Therefore, the set of eigenvectors are linearly independent.
+    \item The direct corollary of this is that the number of eigenvalues of $T \in \LV$ cannot exceed the $\d V$.
+    \item Here we restate the $T|_U \in \mathcal{L}(U)$ as the \textit{restriction operator} of $T$. The \textit{quotient operator} $T/U \in \mathcal{L}(V/U)$ is given by $(T/U)(v+U) = Tv+U$ for any $v \in V$. Of course for the quotient operator we need to verify it is well-defined for different representation of the same quotient space, which is very similar to what we have done before and is thus omitted. These two operators provide nice information about the original $T$.
 \end{itemize}
 
 \subsection{Eigenvectors and Upper-Triangular
 Matrices}
-
+\begin{itemize}
+    \item Linear operators allow idempotent operations. Given $T \in \LV$, we define $T^m$ ($m \in \Z^+$) as $T$ composite with itself $m$ times, $T^0$ as the identity operator $I_V$, and $T^(-m)$ as $(T^{-1})^m$, given $T^{-1}$ exists.
+    \begin{itemize}
+        \item Obviously $T^mT^n = T^{m+n}$ and $(T^m)^n = T^{mn}$. (If $T$ is invertible then we can $m,n$ are allowed to be all integers.)
+    \end{itemize}
+    \item $p(T)$ is the polynomial $p$ taking $T$ as its indeterminate (although $T$ is not $\F$). For $p(z) = a_0 + a_1 z + \dots + a_n z^n$ over $\F$, we define $p(T) = a_0 I + a_1 T + \dots a_n T^n$.
+    \begin{itemize}
+        \item If we fix an operator $T$, the evaluation map $\PF$ to $\LV$ given by $p \mapsto p(T)$ is linear.
+    \end{itemize}
+    \item The product of $pq \in \PF$ of polynomials $p,q \in \PF$ is defined by $$(pq)(z) = p(z)q(z)$$ for all $z \in \F$. If we write out the polynomials, one can easily see that $(pq)(z) = p(z)q(z) = q(z)p(z) = (qp)(z)$. 
+    \begin{itemize}
+        \item It follows directly that $(pq)(T) = p(T)q(T)$ and $(pq)(T) = (qp)(T)$, because we only exchange the symbol $z$ by $T$.
+    \end{itemize}
+    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. The proof employs the fundamental theorem of algebra. 
+\end{itemize}
 \subsection{Eigenspaces and Diagonal Matrices}
 
 \section{Inner Product Spaces}
