@@ -49,7 +49,7 @@
 
 \section{Finite-Dimensional Vector Spaces}
 
-\textit{Remark}. Note that this section in the book builds on the notion of a list of vectors. FDVS is defined in terms of spanning list (set), and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
+\textit{Remark}. Note that this section in the book builds on the notion of a list of vectors. FDVS is defined in terms of spanning list (which are the same ), and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
 
 \begin{itemize}
     \item The \textit{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, $\s(\emptyset)$ $\coloneqq \{0\}$.
@@ -401,9 +401,32 @@ Matrices}
     \begin{itemize}
         \item It follows directly that $(pq)(T) = p(T)q(T)$ and $(pq)(T) = (qp)(T)$, because we only exchange the symbol $z$ by $T$.
     \end{itemize}
-    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. The proof employs the fundamental theorem of algebra. 
+    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector space) The proof employs the fundamental theorem of algebra. Choose a nonzero $v \in V$ and consider the list $$v, Tv, \dots, T^n v,$$ which must be linearly independent 
+    
+    \item A square matrix with all entries being 0 below the diagonal is called an \textit{upper-triangular matrix}, which is crucial in the theory of eigenvalues.
+    \item Suppose $T \in \LV$ and $v_1,\dots,v_n$ is a basis of $V$, then
+    \begin{enumerate}[label=(\alph*)]
+        \item $\M(T)$ is upper triangular.
+        \item $Tv_j \in \s(v_1,\dots,v_j)$ for each $j$ from 1 to $n$.
+        \item $\s(v_1,\dots,v_j)$ is invariant under $T$ for each $j$ from 1 to $n$.
+    \end{enumerate}
+    
+    \item For $V$ FD Complex VS and $T \in \LV$, then $\M(T)$ is upper triangular with respect to some basis of $V$.
+    
+    \item Upper-triangular matrices help us determine whether $T$ is invertible.
+    
+    \item By the previous theorem, we get the result that we have been familiar with from an elementary linear algebra class. 
 \end{itemize}
 \subsection{Eigenspaces and Diagonal Matrices}
+\begin{itemize}
+    \item A \textit{diagonal matrix} has all its entries off the diagonal 0.
+    \item The \textit{eigenspace} of $T \in \LV$ corresponding to $\lambda \in \F$ is given by $$E(\lambda,T) = \n (T-\lambda I) = \{v \in V \mid Tv = \lambda v\}.$$
+    The eigenspace is basically the vector subspace of $V$ with all eigenvectors corresponding to $v$, along with the 0 vector.
+    \item The sum of eigenspaces is a direct sum. We consider $u_1+\cdots+u_n = 0$, where each eigenvector $u_i$ is from the eigenspace $E(\lambda_i,T)$. Because eigenvectors corresponding to distinct eigenvalues are linearly independent, we get what we want. Furthermore, since $$E(\lambda_1,T)+\dots+E(\lambda_m,T)$$ is a direct sum, we have $$\d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T)) \leq \d V.$$
+    
+    
+    \item 
+\end{itemize}
 
 \section{Inner Product Spaces}
 \subsection{Inner Products and Norms}
