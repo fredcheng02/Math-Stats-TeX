@@ -28,7 +28,9 @@
 \begin{document}
 
 \begin{center}
-    {\Large MATH 110 based on \textit{Linear Algebra Done Right}} \vspace{0.5em}
+    {\Large MATH 110 Notes}
+    \\based on \textit{Linear Algebra Done Right}, third edition
+    \vspace{0.5em}
     \\ Cheng, Feng
     \vspace{-0.5em}
 \end{center}
@@ -363,7 +365,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
         \item To prove this, by the fundamental theorem of algebra we can factorize $p(z)$ into $(z-\lambda)q(z)$, and again factorize $q(z)$, and so on. We have proved the existence of such factorization.
         \item Now we proceed to prove the uniqueness. 
     \end{itemize}
-    \item For polynomials $p \in \mathcal{P}(\C)$ with real coefficients, the complex conjugate of a root is still a root. This follows from $\lambda^m = \bar{\lambda}^m$
+    \item For polynomials $p \in \mathcal{P}(\C)$ with real coefficients, the complex conjugate of a root is still a root. This follows from $\lambda^m = \bar{\lambda}^m$.
     
     \item For nonconstant $p \in \mathcal{P}(\R)$, $p$ has a unique factorization into linear and quadratic polynomials with the highest coefficients being 1, i.e., $$p(x)=c(x-\lambda_1)\cdots(x-\lambda_m)(x^2+b_1x+c)\cdots(x^2+b_Mx+c_M),$$ where $c,$ the $\lambda$'s, the $b$'s, and the $c$'s are all reals and each quadratic factors have negative discriminant.
 \end{itemize}
@@ -432,7 +434,15 @@ Matrices}
     \item The \textit{eigenspace} of $T \in \LV$ corresponding to $\lambda \in \F$ is given by $$E(\lambda,T) = \n (T-\lambda I) = \{v \in V \mid Tv = \lambda v\}.$$
     The eigenspace is basically the vector subspace of $V$ with all eigenvectors corresponding to $v$, along with the 0 vector.
     \item The sum of eigenspaces is a direct sum. We consider $u_1+\cdots+u_n = 0$, where each eigenvector $u_i$ is from the eigenspace $E(\lambda_i,T)$. Because eigenvectors corresponding to distinct eigenvalues are linearly independent, we get what we want. Furthermore, since $$E(\lambda_1,T)+\dots+E(\lambda_m,T)$$ is a direct sum, we have $$\d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T)) \leq \d V.$$
-    
+    \item An operator $T$ is \textit{diagonalizable} if the the operator has a diagonal matrix w.r.t. some basis of $T$.
+    \item For $T$ on FDVS $V$ and distinct eigenvalues $\lambda_1, \dots, \lambda_m$, diagonalizability of $T$ is equivalent to the following four conditions:
+    \begin{enumerate}[label=(\alph*)]
+        \item $V$ has a basis consisting of eigenvectors corresponding to each $\lambda_i$'s;
+        \item $V$ can be decomposed into $n$ 1-dimension subspaces $U_1$ to $U_n$, where $V = U_1 \oplus \cdots \oplus U_n$;
+        \item $V = E(\lambda_1,T) + \cdots + \d E(\lambda_n,T)$;
+        \item $\d V = \d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T))$
+    \end{enumerate}
+    We consider the whole list of eigenvalues $\lambda_1, \dots, \lambda_n$ with repetition ($n \geq m$).
     
     \item 
 \end{itemize}
