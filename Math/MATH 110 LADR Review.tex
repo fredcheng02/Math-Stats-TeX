@@ -327,9 +327,9 @@
     
     \item $\M(T') = (\M(T))^t$. Consider the dual basis $\psi_j$ ($1 \leq j \leq m$) of $W'$ and $\phi_j$ ($1 \leq k \leq n$) of $V'$. Then $$T'(\psi_j) = \sum_{r=1}^n C_{r,j}\phi_r,$$ which we evaluate at $v_k$: $$(\psi_j \circ T)(v_k) = \sum_{r=1}^n C_{r,j}\phi_r(v_k) = C_{k,j}.$$ On the other hand, we have $$(\psi_j)(Tv_k) = \psi_j(\sum_{r=1}^mA_{r,k}w_r) = \sum_{r=1}^m A_{r,k}\psi_j(w_r) = A_{j,k}.$$
     
-    \item First, $\d \r T = \text{column rank of } \M(T)$. From bases $\bv$ and $w_1,\dots,w_m$ of $V$ and $W$, we have $\s(\{Tv_1,\dots,Tv_n\})$ is isomorphic to $\s(\{\M(Tv_1),\dots,\M(Tv_n)\})$ under the isomorphism $M$. Thus, the two VS have the same dimensions, with $\d \s(\{\M(Tv_1),\dots,\M(Tv_n)\}) = $ column rank of $\M(T)$. Recall that $\s(\{Tv_1,\dots,Tv_n\}) = \r T$, thus $\d \r T = $ column rank of $\M(T)$, as desired.
+    \item First, $\d \r T = \text{column rank of } \M(T)$. From bases $\bv$ and $w_1,\dots,w_m$ of $V$ and $W$, we have $\s(\{Tv_1,\dots,Tv_n\})$ is isomorphic to $\s(\{\M(Tv_1),\dots,\M(Tv_n)\})$ under the isomorphism $\M$. Thus, the two VS have the same dimensions, with $\d \s(\{\M(Tv_1),\dots,\M(Tv_n)\}) = $ column rank of $\M(T)$. Recall that $\s(\{Tv_1,\dots,Tv_n\}) = \r T$, thus $\d \r T = $ column rank of $\M(T)$, as desired.
     
-    \item For $A \in \F^{m,n}$, define $T \in \LVW$ as the left multiplication by $A$ map (i.e., $Tx = Ax$). Then $A = \M(T)$ with respect to the canonical bases. It follows that
+    \item For $A \in \F^{m,n}$, define $T \in \LVW$ as the left-multiplication by $A$ map (i.e., $Tx = Ax$). Then $A = \M(T)$ with respect to the canonical bases. It follows that
     \begin{align*}
         \text{column rank of } A & = \text{column rank of } \M(T) \\
         & = \d \r T = \d \r T' \text{ (which we proved a moment ago)} \\
@@ -357,7 +357,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
     
     \item The proof of the fundamental theorem of algebra is omitted here for the obvious reason. Every nonconstant polynomial on $\C$ has a zero, which directly implies that a polynomial $p$ of degree $m$ has $m$ nondistinct roots, which we sketch through now.
     \begin{itemize}
-        \item Every nonconstant polynomial over $\C$ has a unique factorization (up to the order of factors) of the form $$p(z) = c(z - \lambda_1)\cdots(z-\lambda_m),$$ where $c, \lambda_1,\cdots,\lambda_n \in \C$.
+        \item Every nonconstant polynomial over $\C$ has a unique factorization (up to the order of factors) of the form $$p(z) = c(z - \lambda_1)\cdots(z-\lambda_m),$$ where $c, \lambda_1,\cdots,\lambda_m \in \C$.
     \end{itemize}
     \begin{itemize}
         \item To prove this, by the fundamental theorem of algebra we can factorize $p(z)$ into $(z-\lambda)q(z)$, and again factorize $q(z)$, and so on. We have proved the existence of such factorization.
@@ -381,7 +381,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
     \begin{equation}
         v_k = a_1 v_1 + \dots + a_{k-1}v_{k-1}, \tag{$\star$}
     \end{equation}
-    and by applying $T$ to both sides, we have $$\lambda_k v_k = a_1 \lambda_1 v_1 + \dots + a_{k-1} \lambda_{k-1}v_{k-1}.$$ If instead, we multiply ($\star$) by $\lambda_k$ on both sides, then $$\lambda_k v_k = a_1 \lambda_k v_1 + \dots + a_{k-1} \lambda_k v_{k-1}.$$ Subtracting the two equations above give us $$0 = a_1 (\lambda_1 - \lambda_k) + \dots + a_{k-1} (\lambda_{k-1}-\lambda_k) v_{k-1}$$. Since $v_1, \dots, v_{k-1}$ are linearly independent, all the coefficients are 0 and thus all the $a$'s are the same (because the $\lambda$'s are distinct). However, this implies $v_k = 0$, which contradicts with $v_k$ being an eigenvector. Therefore, the set of eigenvectors are linearly independent.
+    and by applying $T$ to both sides, we have $$\lambda_k v_k = a_1 \lambda_1 v_1 + \dots + a_{k-1} \lambda_{k-1}v_{k-1}.$$ If instead, we multiply ($\star$) by $\lambda_k$ on both sides, then $$\lambda_k v_k = a_1 \lambda_k v_1 + \dots + a_{k-1} \lambda_k v_{k-1}.$$ Subtracting the two equations above give us $$0 = a_1 (\lambda_1 - \lambda_k) + \dots + a_{k-1} (\lambda_{k-1}-\lambda_k) v_{k-1}.$$ Since $v_1, \dots, v_{k-1}$ are linearly independent, all the coefficients are 0 and thus all the $a$'s are the same (because the $\lambda$'s are distinct). However, this implies $v_k = 0$, which contradicts with $v_k$ being an eigenvector. Therefore, the set of eigenvectors are linearly independent.
     \item The direct corollary of this is that the number of eigenvalues of $T \in \LV$ cannot exceed the $\d V$.
     \item Here we restate the $T|_U \in \mathcal{L}(U)$ as the \textit{restriction operator} of $T$. The \textit{quotient operator} $T/U \in \mathcal{L}(V/U)$ is given by $(T/U)(v+U) = Tv+U$ for any $v \in V$. Of course for the quotient operator we need to verify it is well-defined for different representation of the same quotient space, which is very similar to what we have done before and is thus omitted. These two operators provide nice information about the original $T$.
 \end{itemize}
@@ -389,7 +389,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
 \subsection{Eigenvectors and Upper-Triangular
 Matrices}
 \begin{itemize}
-    \item Linear operators allow idempotent operations. Given $T \in \LV$, we define $T^m$ ($m \in \Z^+$) as $T$ composite with itself $m$ times, $T^0$ as the identity operator $I_V$, and $T^(-m)$ as $(T^{-1})^m$, given $T^{-1}$ exists.
+    \item Linear operators allow idempotent operations. Given $T \in \LV$, we define $T^m$ ($m \in \Z^+$) as $T$ composite with itself $m$ times, $T^0$ as the identity operator $I_V$, and $T^{-m}$ as $(T^{-1})^m$, given $T^{-1}$ exists.
     \begin{itemize}
         \item Obviously $T^mT^n = T^{m+n}$ and $(T^m)^n = T^{mn}$. (If $T$ is invertible then we can $m,n$ are allowed to be all integers.)
     \end{itemize}
@@ -399,23 +399,32 @@ Matrices}
     \end{itemize}
     \item The product of $pq \in \PF$ of polynomials $p,q \in \PF$ is defined by $$(pq)(z) = p(z)q(z)$$ for all $z \in \F$. If we write out the polynomials, one can easily see that $(pq)(z) = p(z)q(z) = q(z)p(z) = (qp)(z)$. 
     \begin{itemize}
-        \item It follows directly that $(pq)(T) = p(T)q(T)$ and $(pq)(T) = (qp)(T)$, because we only exchange the symbol $z$ by $T$.
+        \item It follows directly that $(pq)(T) = p(T)q(T)$ and $(pq)(T) = (qp)(T)$, because we only replace the symbol $z$ by $T$.
     \end{itemize}
-    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector space) The proof employs the fundamental theorem of algebra. Choose a nonzero $v \in V$ and consider the list $$v, Tv, \dots, T^n v,$$ which must be linearly independent 
+    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector spaces) The proof employs the fundamental theorem of algebra and is quite tricky. Choose a nonzero $v \in V$ ($\d V=n$) and consider the list $v, Tv, \dots, T^n v$, which must be linearly dependent. Thus, we have $$0 = a_0 v + a_1 Tv + \dots + a_n T^n v,$$ where the $a_i$'s are not all $0$. In particular, $a_1, \dots, a_n$ cannot all be 0 since $v \not= 0$ will then give us $a_0 = 0$. Thus, we have a nonconstant polynomial $a_0+a_1 z+\dots+a_m z^m$ ($m \leq n$), which can be factorized into $$c(z - \lambda_1)\cdots(z - \lambda_m)$$ over $\C$. For $$0=c(T - \lambda_1 I)\cdots(T - \lambda_m I)v,$$ the nonzero vector $w = (T - \lambda_{j+1} I) \cdots (T - \lambda_m I)v$ will be be taken to 0 by $(T - \lambda_j I)$. $(T - \lambda_j I)$ is thus not injective and $\lambda_j$ is our eigenvalue.
     
-    \item A square matrix with all entries being 0 below the diagonal is called an \textit{upper-triangular matrix}, which is crucial in the theory of eigenvalues.
-    \item Suppose $T \in \LV$ and $v_1,\dots,v_n$ is a basis of $V$, then
+    \item The matrix of an operator is a square matrix. A square matrix with all entries being 0 below the diagonal is called an \textit{upper-triangular matrix}, which is crucial in the theory of eigenvalues.
+    \item How are eigenvalues and vectors, invariant subspaces, and upper-triangular matrices connected? Suppose $T \in \LV$ and $v_1,\dots,v_n$ is a basis of $V$, then
     \begin{enumerate}[label=(\alph*)]
         \item $\M(T)$ is upper triangular.
         \item $Tv_j \in \s(v_1,\dots,v_j)$ for each $j$ from 1 to $n$.
         \item $\s(v_1,\dots,v_j)$ is invariant under $T$ for each $j$ from 1 to $n$.
     \end{enumerate}
+    The first two are equivalent follow straight from the definition. (b) $\implies$ (c) because for every $i$ between 1 and $j$, $Tv_i \in \s(v_1,\dots,v_j)$. $(c) \implies (b)$ is obvious as well.
+    \item For FDVS $V$ over $\C$ and $T \in \LV$, then $\M(T)$ is upper triangular with respect to some basis of $V$.
     
-    \item For $V$ FD Complex VS and $T \in \LV$, then $\M(T)$ is upper triangular with respect to some basis of $V$.
+    \item Upper-triangular matrices help us determine whether $T$ is invertible. If $T \in \LV$ has an upper-triangular $\M(T)$ w.r.t. some basis of $V$, then $T$ is invertible iff all entries on the diagonal of $\M(T)$ are nonzero.
     
-    \item Upper-triangular matrices help us determine whether $T$ is invertible.
-    
-    \item By the previous theorem, we get the result that we have been familiar with from an elementary linear algebra class. 
+    \item By the previous theorem, we can determine all the eigenvalues of $T$ if we are fortunate to find a basis that corresponds to an upper-triangular $\M(T)$. $\M(T - \lambda I)$ is of the form
+    \begin{equation*}
+        \begin{bmatrix}
+        \lambda_1 - \lambda & & & \ast \\
+         & \lambda_2 - \lambda & & \\
+         & & \ddots & \\
+         0 & & & \lambda_n - \lambda
+    \end{bmatrix}.
+    \end{equation*}
+    One of the $\lambda_i - \lambda$'s is 0 iff $T - \lambda I$ is invertible iff $\lambda$ is an eigenvalue. Therefore, all the entries $\lambda_i$'s on the diagonal are exactly all the eigenvalues.
 \end{itemize}
 \subsection{Eigenspaces and Diagonal Matrices}
 \begin{itemize}
@@ -431,7 +440,7 @@ Matrices}
 \section{Inner Product Spaces}
 \subsection{Inner Products and Norms}
 \begin{itemize}
-    \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$, the \textit{dot product} $$x \cdot y = x_1y_1+\dots+x_ny_n,$$ which is a scalar in $\R^n$.
+    \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$, the \textit{dot product} $$x \cdot y \coloneqq x_1y_1+\dots+x_ny_n,$$ which is a scalar in $\R^n$.
     \item The \textit{inner product} is the abstraction of the dot product to more complicated products of vectors on $V$ over $\R$ and $\C$. It is a function $\langle \cdot,\cdot \rangle: V \times V \to \F$ ($\R$ or $\C$) with the following properties:
     \begin{itemize}
         \item Positive definiteness: $\langle v,v \rangle \geq 0$, which achieves ``$=$" iff $v = 0$;
