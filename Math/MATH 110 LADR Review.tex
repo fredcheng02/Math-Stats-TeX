@@ -14,6 +14,10 @@
 \newcommand{\n}{\operatorname{null}}
 \renewcommand{\r}{\operatorname{range}}
 \renewcommand{\d}{\dim}
+\DeclarePairedDelimiter{\ip}\langle\rangle
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\inp}[2]{\langle #1, #2 \rangle}
+\newcommand{\nm}[1]{\| #1 \|}
 \newcommand{\LV}{\mathcal{L}(V)}
 \newcommand{\LVW}{\mathcal{L}(V,W)}
 \newcommand{\M}{\mathcal{M}}
@@ -369,7 +373,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
         \item To prove this, by the fundamental theorem of algebra we can factorize $p(z)$ into $(z-\lambda)q(z)$, and again factorize $q(z)$, and so on. We have proved the existence of such factorization.
         \item Now we proceed to prove the uniqueness. $c$ is clearly unique as the highest coefficient of $p(z)$. Consider $(z - \lambda_1)\cdots(z-\lambda_m)=(z - \tau_1)\cdots(z-\tau_m)$. We want to show that the $\lambda$'s and $\tau$'s are the same up to their ordering. Let $z = \lambda_1$, one of the $\lambda_1 - \tau_i$'s on the RHS must be 0. WLOG we assume $\lambda_1 = \tau_1$, and $(z - \lambda_2)\cdots(z-\lambda_m)=(z - \tau_2)\cdots(z-\tau_m)$ holds for all $z \in \F$ except for $\lambda_1$. Actually $$(z - \lambda_2)\cdots(z-\lambda_m) - (z - \tau_2)\cdots(z-\tau_m) = 0$$ must hold for all $z \in \F$ because we would have a nonzero polynomial with infinite many zeros. Thus, we can proceed to show $\lambda_2 = \tau_2$, and so on.
     \end{itemize}
-    \item For polynomials $p \in \mathcal{P}(\C)$ with real coefficients, the complex conjugate of a root is still a root. This follows from $\lambda^m = \bar{\lambda}^m$.
+    \item For polynomials $p \in \mathcal{P}(\C)$ with real coefficients, the complex conjugate of a root is still a root. This follows from $\lambda^m = \conj{\lambda}^m$.
     
     \item For nonconstant $p \in \mathcal{P}(\R)$, $p$ has a unique factorization into linear and quadratic polynomials with the highest coefficients being 1, i.e., $$p(x)=c(x-\lambda_1)\cdots(x-\lambda_m)(x^2+b_1x+c)\cdots(x^2+b_Mx+c_M),$$ where $c,$ the $\lambda$'s, the $b$'s, and the $c$'s are all reals and each quadratic factors have negative discriminant.
     \begin{itemize}
@@ -473,32 +477,48 @@ Matrices}
 \section{Inner Product Spaces}
 \subsection{Inner Products and Norms}
 \begin{itemize}
-    \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$, the \textit{dot product} $$x \cdot y \coloneqq x_1y_1+\dots+x_ny_n,$$ which is a scalar in $\R^n$.
-    \item The \textit{inner product} is the abstraction of the dot product to more complicated products of vectors on $V$ over $\R$ and $\C$. It is a function $\langle \cdot,\cdot \rangle: V \times V \to \F$ ($\R$ or $\C$) with the following properties:
+    \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$ (the real $n$-dimensional space), the \textit{dot product} $x \cdot y \coloneqq x_1y_1+\dots+x_ny_n$ is a scalar in $\R$. The norm $\|x\|$ on $\R^n$ is usually given by $\sqrt{x_1^2+\dots+x_n^2}$, which is the square root of the dot product of $x$ with itself.
+    \item The usual norm $\|z\| \coloneqq  \sqrt{|z_1|^2+\dots+|z_n|^2}$ on $\C^n$ (the real $n$-dimensional space) is also a scalar in $\R$.
+    \item Generally on both real and complex $n$-dimensional spaces, we define the \textit{Euclidean inner product} by $$\inp{(w_1,\dots,w_n)}{(z_1,\dots,z_n)} =  w_1\conj{z_1}+\dots+w_n\conj{z_n}.$$ This generalizes the definition of the dot product on $\R^n$. Moreover, we have $$\inp{(z_1,\dots,z_n)}{(z_1,\dots,z_n)} = z_1\conj{z_1}+\dots+z_n\conj{z_n} = |z_1|^2 + \dots + |z_n|^2 = \|z\|^2,$$ so that $\|z\|$ becomes the square root of the inner product of $z$ with itself.
+    
+    We regard $\R^n$ and $\C^n$ by default as the $n$-dimensional \textit{real and complex Euclidean spaces} endowed with the Euclidean inner product. 
+    
+    \item Observation on our definition of the Euclidean inner product suggests how we could possibly define a general abstract inner product on arbitrary real or complex vector spaces. The \textit{inner product} is a function $\inp{\cdot}{\cdot}: V \times V \to \F$ ($\R$ or $\C$) with the following properties:
     \begin{itemize}
-        \item Positive definiteness: $\langle v,v \rangle \geq 0$, which achieves ``$=$" iff $v = 0$;
-        \item Linearity in the first slot: $\langle \lambda u+v,w \rangle = \lambda \langle u,w \rangle + \langle v,w \rangle$;
-        \item Conjugate symmetry: $\langle u,v \rangle = \overline{\langle v,u \rangle}$.
+        \item Positive definiteness: $\inp{v}{v} \geq 0$ (\textbf{real} and nonnegative), which achieves ``$=$" iff $v = 0$;
+        \item Linearity in the first slot: $\inp{\lambda u+v}{w} = \lambda \inp{u}{w} + \inp{v}{w}$;
+        \item Conjugate symmetry: $\inp{u}{v} = \conj{\inp{v}{u}}$.
     \end{itemize}
     The properties that directly ensue include:
     \begin{itemize}
-        \item Conjugate symmetry gives us ``conjugate linearity" in the second slot: $$\langle u, \lambda v+w \rangle = \bar{\lambda} \langle u, v \rangle + \langle u,w \rangle;$$
-        \item For fixed $w \in V$, $f: v \mapsto \langle v,w \rangle$ is a linear map from $V$ to $\F$ because of linearity in the first slot;
-        \item $\langle 0,v \rangle$ and $\langle v,0 \rangle = 0$ because linear maps take 0 to 0.
+        \item Conjugate symmetry gives us ``conjugate linearity" (anti-linearity) in the second slot: $$\inp{u}{\lambda v+w} = \conj{\lambda} \inp{u}{v} + \inp{u}{w};$$
+        \item For fixed $w \in V$, $f: v \mapsto \inp{v}{w}$ is a linear map from $V$ to $\F$ because of linearity in the first slot;
+        \item $\inp{0}{v}$ and $\inp{v}{0} = 0$ because linear maps take 0 to 0.
     \end{itemize}
-    \item The \textit{norm} $\|v\| \coloneqq \sqrt{\langle v,v \rangle}.$ It has properties
+    \item The \textit{norm} $\|v\| \coloneqq \sqrt{\inp{v}{v}}.$ It has properties
     \begin{itemize}
         \item $\|v\| = 0$ iff $v = 0$, and 
         \item $\|\lambda v\| = |\lambda| \|v\|$.
     \end{itemize}
     \item Two vectors are \textit{orthogonal} if their inner product is 0. Therefore, 0 is orthogonal to any vector and 0 is the only vector that is orthogonal to itself.
-    \item Introducing these concepts provide us with a list of useful equations and inequalities about \textit{inner product spaces} (vector spaces endowed with an inner product) that we know as facts for the Euclidean space.
+    \item Introducing these concepts provide us with a list of useful equations and inequalities about \textit{inner product spaces} (vector spaces endowed with an inner product) that we know as facts for the Euclidean spaces.
     \begin{itemize}
-        \item The Pythagorean theorem now holds for orthogonal vectors $u,v \in V$: $$\|u+v\|^2 = \|u\|^2 + \|v\|^2.$$
-        \item The method of orthogonal decomposition is extended to inner product spaces. 
-        \item The well-known Cauchy-Schwarz inequality states that $|\langle u,v \rangle| \leq \|u\|\|v\|$, which reaches equality iff $u = \lambda v$ for some scalar $\lambda$.
-        \item The triangle inequality
-        \item The parallelogram equality
+        \item The Pythagorean theorem now holds for orthogonal vectors $u,v \in V$: $$\|u+v\|^2 = \|u\|^2 + \|v\|^2.$$ Expanding the LHS, we have $\|u+v\|^2 = \inp{u+v,u+v} = \inp{u}{u} + \inp{u}{v} + \inp{v}{u} + \inp{v}{v}$, where the two terms in the middle are 0.
+        The converse of this theorem holds in real inner product spaces because then we would have $\inp{u}{v}+\inp{v}{u} = 2\inp{u}{v} = 0$, showing that the two vectors are orthogonal.
+        \item The method of orthogonal decomposition is extended to inner product spaces. Suppose $u,v \in V$ with $v$ being nonzero, we wish write $u$ as the sum of scalar multiple of $v$ and another vector $w$ that is orthogonal to $v$.
+        
+        Basically we want to choose a scalar $c \in \F$ such that $$0 = \inp{u-cv}{v} = \inp{u}{v} - c\|v\|^2.$$ Let $c = \frac{\inp{u}{v}}{\|v\|^2}$ and we have $w = u - cv$ and we have our orthogonal decomposition $$\inp{w}{v} = 0 \quad \text{and} \quad u = cv+w.$$
+        \item The well-known Cauchy-Schwarz inequality states that $|\inp{u}{v}| \leq \|u\|\|v\|$, which reaches equality iff $u = \lambda v$ for some scalar $\lambda$. This can be proved using the orthogonal decomposition theorem we have above, but we choose to use the more standard method. When $v = 0$, the result is immediate. By the equality condition given, for $v \not= 0$ we may consider $$0 \leq \|u - cv\|^2 = \inp{u}{u} - \conj{c}\inp{u}{v} - c\inp{v}{u} + c\conj{c}\inp{v}{v}.$$ Set $c = \nm{\inp{u}{v}/\inp{v}{v}}$, then the RHS of the ``$=$" becomes $ \nm{u}^2 - \frac{|\inp{u}{v}|^2}{\nm{v}^2}$, as desired. The equality is achieved if and only if $u = cv$ or $v = 0$.
+        
+        Two special cases should be kept in mind.
+        \begin{itemize}
+            \item On real numbers, we have $|x_1y_1+\dots+x_ny_n|^2 \leq (x_1+\dots+x_n)^2(y_1+\dots+y_n)^2$.
+            \item One can define an inner product on function spaces such as the vector space $V$ of continuous functions from $[a,b]$ to $\F$. One can define the inner product on $V$ as such: $$\inp{f}{g} = \int_a^b f(x)\conj{g(x)} dx.$$ This is an important inner product that will be useful in later courses. If $\F = \R$, then we simply have $$\inp{f}{g} = \int_a^b f(x)g(x) dx.$$ By the Cauchy-Schwarz inequality, we then have (over $\R$) $$\left|\int_a^b f(x)g(x)dx\right|^2 \leq \left(\int_a^b (f(x))^2 dx \right) \left(\int_a^b (g(x))^2 dx \right).$$
+        \end{itemize}
+        \item The triangle inequality states that $\|u+v\| \leq \|u\|+\|v\|$, which reaches equality iff one of $u,v$ is a nonnegative real multiple of the other.
+        
+        
+        \item The parallelogram equality says that $\|u+v\|^2+\|u-v\|^2 = 2(\|u\|^2+ \|v\|^2)$. To prove, expand the LHS and after some cancellations, we get the RHS.
     \end{itemize}
 \end{itemize}
 \subsection{Orthonormal Bases}
