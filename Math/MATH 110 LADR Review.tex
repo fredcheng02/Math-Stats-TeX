@@ -437,13 +437,21 @@ Matrices}
     \item An operator $T$ is \textit{diagonalizable} if the the operator has a diagonal matrix w.r.t. some basis of $T$.
     \item For $T$ on FDVS $V$ and distinct eigenvalues $\lambda_1, \dots, \lambda_m$, diagonalizability of $T$ is equivalent to the following four conditions:
     \begin{enumerate}[label=(\alph*)]
-        \item $V$ has a basis consisting of eigenvectors corresponding to each $\lambda_i$'s;
+        \item $V$ has a basis consisting of eigenvectors of $T$;
         \item $V$ can be decomposed into $n$ 1-dimension subspaces $U_1$ to $U_n$, where $V = U_1 \oplus \cdots \oplus U_n$;
         \item $V = E(\lambda_1,T) + \cdots + \d E(\lambda_n,T)$;
         \item $\d V = \d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T))$
     \end{enumerate}
-    We consider the whole list of eigenvalues $\lambda_1, \dots, \lambda_n$ with repetition ($n \geq m$).
-    
+    We consider the whole list of eigenvalues $\lambda_1, \dots, \lambda_n$ with repetition ($n \geq m$). Looking at the matrix
+    \begin{equation*}
+        \begin{bmatrix}
+        \lambda_1 & & 0 \\
+         & \ddots & \\
+         0 & & \lambda_n
+    \end{bmatrix}
+    \end{equation*}
+    for a moment would tell us diagonalizability and (a) are equivalent. 
+    \item If $T \in \LV$ has $\d V$ number of distinct eigenvalues, then $T$ is necessarily diagonalizable. Having $\d V$ number of distinct eigenvalues tells us we have a basis of eigenvectors of $T$. With respect to this basis $\M(T)$ is a diagonal matrix.
     \item 
 \end{itemize}
 
