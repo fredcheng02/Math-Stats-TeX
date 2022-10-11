@@ -51,7 +51,7 @@
 
 \section{Finite-Dimensional Vector Spaces}
 
-\textit{Remark}. Note that this section in the book builds on the notion of a list of vectors. FDVS is defined in terms of spanning list (which are the same ), and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
+\textit{Remark}. Note that this section in the book builds on the notion of a list of vectors. FDVS is defined in terms of spanning list (which are the same because vector addition is commutative; we will them interchangeably later on as well), and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
 
 \begin{itemize}
     \item The \textit{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, $\s(\emptyset)$ $\coloneqq \{0\}$.
@@ -212,11 +212,11 @@
     \item A \textit{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
     \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.) This is true for functions $f:S \to S$ (where $S$ is finite) in general, but for linear maps the proof is likely to be rather simple:
         
-    (a) $\implies$ (b) we proved earlier.
+    (a)$\implies$(b) we proved earlier.
         
-    (b) $\implies$ (c) by checking the rank-nullity theorem. Injection means $\operatorname{nullity} T = 0$, which implies $\operatorname{rank} T = \d V$.
+    (b)$\implies$(c) by checking the rank-nullity theorem. Injection means $\operatorname{nullity} T = 0$, which implies $\operatorname{rank} T = \d V$.
         
-    (c) $\implies$ (a) by showing $T$ is injective, as $\operatorname{nullity} T = \d V - \operatorname{rank} T$, which is 0.
+    (c)$\implies$(a) by showing $T$ is injective, as $\operatorname{nullity} T = \d V - \operatorname{rank} T$, which is 0.
 \end{itemize}
 
 \subsection{Products and Quotients of Vector Spaces}
@@ -224,7 +224,7 @@
     \item The \textit{product} $V_1 \times \dots \times V_n$ of vector spaces $V_1,\dots,V_n$ over $\F$ is the set $$\{(v_1,\dots,v_n) \mid v_1 \in V_1,\dots, v_n \in V_n\}.$$ The addition and scalar multiplication on the product is defined in the usual entry-wise way. It is routine to prove that this product is a vector space over $\F$ as well.
     \item $\d (V_1\times \dots \times V_n) = \d V_1 + \dots + \d V_n$. Why? Choose a basis for each $V_i$, then put every basis vector of $V_i$ into the $i$-th entry of $(v_1,\dots,v_n)$ and let other entries be 0. These vectors are linearly independent and span the product and thus is a basis of the product.
     \item For subspaces $U_1,\dots,U_n$ of $V$, define the linear map $\Gamma: U_1 \times \dots \times U_n \to U_1 + \dots + U_n$ by $$\Gamma(u_1,\dots,u_n) = u_1+\dots+u_n.$$ (One can easily check that this map is indeed linear.) Then $U_1+\dots+U_n$ is a direct sum iff $\Gamma$ is injective (or invertible, since $\Gamma$ is surjective by its definition.) To prove this, we just need to show $\n T = {0}$ iff the only way to write $0 = u_1+\dots+u_n$ is to let all $u$'s be 0. This is quite clear.
-    \item The last two theorems lead to the following one. A sum of subspaces $U_i$'s of $V$ is a direct sum iff dimensions add up. This is because two isomorphic vector spaces must have the same dimension. Therefore, $$\d (U_1+\dots+U_n) = \d (U_1 \times \dots \times U_n) = \d U_1 + \dots + \d U_n.$$
+    \item The last two theorems lead to the following one. A sum of subspaces $U_i$'s of $V$ is a direct sum iff dimensions add up. This is because two isomorphic vector spaces must have the same dimension. In both directions we would encounter $$\d (U_1+\dots+U_n) = \d (U_1 \times \dots \times U_n) = \d U_1 + \dots + \d U_n.$$
     Construct the linear map $\Gamma$ above from the product of subspaces makes the proof really clean. Recall that we have proved the special case $n=2$ already.
     \item An \textit{affine subset} of $V$ is a subset of $V$ of the form $v+U = \{v+u \mid u \in U\}$ for some vector $v \in V$ and some subspace $U$ of $V$. Here the affine subset $v+U$ is said to be \textit{parallel} to $U$.
     \begin{itemize}
@@ -235,7 +235,7 @@
         \begin{equation*}
             \text{(a) } v-w \in U \iff \text{(b) } v+U = w+U \iff \text{(c) } (v+U) \cap (w+U) \not= \emptyset.
         \end{equation*}
-    (a) $\implies$ (b) as $v+u = w+((v-w)+u) \in w+U$ (and the same for the other direction). (b) $\implies$ (c) because $v+U$ is not empty, while (c) $\implies$ (a) because $v+u_1=w+u_2$ for some $u_1$ and $u_2$, and we then move $v-w$ to the left side.
+    (a)$\implies$(b) as $v+u = w+((v-w)+u) \in w+U$ (and the same for the other direction). (b)$\implies$(c) because $v+U$ is not empty, while (c)$\implies$(a) because $v+u_1=w+u_2$ for some $u_1$ and $u_2$, and we then move $v-w$ to the left side.
     \begin{itemize}
         \item The theorem above tells us that two affine subset to $U$ are either the same or  disjoint.
     \end{itemize}
@@ -349,13 +349,17 @@ Remark. We used facts about polynomials in high school algebra. These facts were
     \begin{itemize}
         \item With the theory of linear maps this becomes easy to prove.
     \end{itemize}
-    \item Each zero of a polynomial corresponds to a degree-1 factor, i.e., for $p \in \PF$ and $\lambda \in \F$, $p(\lambda) = 0$ iff $\exists q \in \PF$ such that for all $z \in \F$, $p(z) = (z-\lambda)q(z)$. To prove the ``$\implies$'' direction, division algorithm gives us $p(z) = (z-\lambda)q(z) + r$ (here $r$ is a constant) as $(z-\lambda)$ is of degree 1. Thus, $p(\lambda) = 0$ gives us $r=0$.
+    \item Each zero of a polynomial corresponds to a degree-1 factor, i.e., for $p \in \PF$ and $\lambda \in \F$, $p(\lambda) = 0$ iff $\exists q \in \PF$ such that for all $z \in \F$, $p(z) = (z-\lambda)q(z)$. To prove the $\implies$ direction, division algorithm gives us $p(z) = (z-\lambda)q(z) + r$ (here $r$ is a constant) as $(z-\lambda)$ is of degree 1. Thus, $p(\lambda) = 0$ gives us $r=0$.
     
     \item A polynomial $p \in \PF$ has at most as many zeros as its degree ($\geq 0$). $\deg = 0$ and 1 can be checked, and we proceed with induction on higher orders. If $p$ has no zeros, then done. If $p$ has one zero, let $$p(z) = (z-\lambda)q(z),$$ where $p$ is of degree $m+1$ and $q$ is of degree $m$ (with at most $m$ zeros).
     
-    \item Recall the remark on polynomials we made in Chapter 2. Now we prove that polynomial functions over an infinite field $\F$ have a unique representation. Suppose $f,g \in \PF$ and $f(a)=g(a)$ for all $a \in \F$, we want to show that $f=g$.
+    \item Recall the remark on polynomials we made in Chapter 2. Now we prove that polynomial functions over an infinite field $\F$ have a unique representation. Suppose $f,g \in \PF$ and $f(z)=g(z)$ for all $z \in \F$, we want to show that $f=g$.
     
-    Define $h = f-g$, and then we have $\forall a\in\F, h(a) = 0$. Suppose $h$ is a nonzero polynomial of degree $n$, then by the division algorithm $h$ has at most $n$ zeroes, yet $\F$ is an infinite field, contradiction! Thus $h = f-g$ is the zero polynomial, and $f = g$ as a result.
+    Define $h = f-g$, and then we have $\forall z\in\F, h(z) = 0$. Suppose $h$ is a nonzero polynomial of degree $n$, then by the division algorithm $h$ has at most $n$ zeros, yet $\F$ is an infinite field, contradiction! Thus $h = f-g$ is the zero polynomial, and $f = g$ as a result.
+    
+    \begin{itemize}
+        \item In the case of $\F = \C$ or $\R$, the book gives another proof of the contraposition that if one coefficient out of $$h(z) = a_0+a_1z+\dots+a_mz^m$$ is not zero, then $h(z) \not= 0$ for some $z \in \F$. Assume $m \not= 0$ and pick $$z = \frac{|a_0| + \dots + |a_{m-1}|}{|a_m|}+1 \geq 1.$$ Thus, $z^j \leq z^{m-1}$ for all $j \leq m-1$. By triangle inequality and $|a_m|z > |a_0|+ \dots + |a_{m-1}|$, $$|a_0+a_1z+\dots+a_{m-1}z^{m-1}| \leq (|a_0|+\dots+|a_{m-1}|)z^{m-1}< |a_m z^m|.$$ Therefore $a_0+a_1z+\dots+a_{m-1}z^{m-1} \not= -a_m z^m$.
+    \end{itemize}
     
     \item The proof of the fundamental theorem of algebra is omitted here for the obvious reason. Every nonconstant polynomial on $\C$ has a zero, which directly implies that a polynomial $p$ of degree $m$ has $m$ nondistinct roots, which we sketch through now.
     \begin{itemize}
@@ -363,11 +367,14 @@ Remark. We used facts about polynomials in high school algebra. These facts were
     \end{itemize}
     \begin{itemize}
         \item To prove this, by the fundamental theorem of algebra we can factorize $p(z)$ into $(z-\lambda)q(z)$, and again factorize $q(z)$, and so on. We have proved the existence of such factorization.
-        \item Now we proceed to prove the uniqueness. 
+        \item Now we proceed to prove the uniqueness. $c$ is clearly unique as the highest coefficient of $p(z)$. Consider $(z - \lambda_1)\cdots(z-\lambda_m)=(z - \tau_1)\cdots(z-\tau_m)$. We want to show that the $\lambda$'s and $\tau$'s are the same up to their ordering. Let $z = \lambda_1$, one of the $\lambda_1 - \tau_i$'s on the RHS must be 0. WLOG we assume $\lambda_1 = \tau_1$, and $(z - \lambda_2)\cdots(z-\lambda_m)=(z - \tau_2)\cdots(z-\tau_m)$ holds for all $z \in \F$ except for $\lambda_1$. Actually $$(z - \lambda_2)\cdots(z-\lambda_m) - (z - \tau_2)\cdots(z-\tau_m) = 0$$ must hold for all $z \in \F$ because we would have a nonzero polynomial with infinite many zeros. Thus, we can proceed to show $\lambda_2 = \tau_2$, and so on.
     \end{itemize}
     \item For polynomials $p \in \mathcal{P}(\C)$ with real coefficients, the complex conjugate of a root is still a root. This follows from $\lambda^m = \bar{\lambda}^m$.
     
     \item For nonconstant $p \in \mathcal{P}(\R)$, $p$ has a unique factorization into linear and quadratic polynomials with the highest coefficients being 1, i.e., $$p(x)=c(x-\lambda_1)\cdots(x-\lambda_m)(x^2+b_1x+c)\cdots(x^2+b_Mx+c_M),$$ where $c,$ the $\lambda$'s, the $b$'s, and the $c$'s are all reals and each quadratic factors have negative discriminant.
+    \begin{itemize}
+        \item 
+    \end{itemize}
 \end{itemize}
 
 
@@ -412,7 +419,7 @@ Matrices}
         \item $Tv_j \in \s(v_1,\dots,v_j)$ for each $j$ from 1 to $n$.
         \item $\s(v_1,\dots,v_j)$ is invariant under $T$ for each $j$ from 1 to $n$.
     \end{enumerate}
-    The first two are equivalent follow straight from the definition. (b) $\implies$ (c) because for every $i$ between 1 and $j$, $Tv_i \in \s(v_1,\dots,v_j)$. $(c) \implies (b)$ is obvious as well.
+    The first two are equivalent follow straight from the definition. (b)$\implies$(c) because for every $i$ between 1 and $j$, $Tv_i \in \s(v_1,\dots,v_j)$. (c)$\implies$(b) is obvious as well.
     \item For FDVS $V$ over $\C$ and $T \in \LV$, then $\M(T)$ is upper triangular with respect to some basis of $V$.
     
     \item Upper-triangular matrices help us determine whether $T$ is invertible. If $T \in \LV$ has an upper-triangular $\M(T)$ w.r.t. some basis of $V$, then $T$ is invertible iff all entries on the diagonal of $\M(T)$ are nonzero.
@@ -433,16 +440,18 @@ Matrices}
     \item A \textit{diagonal matrix} has all its entries off the diagonal 0.
     \item The \textit{eigenspace} of $T \in \LV$ corresponding to $\lambda \in \F$ is given by $$E(\lambda,T) = \n (T-\lambda I) = \{v \in V \mid Tv = \lambda v\}.$$
     The eigenspace is basically the vector subspace of $V$ with all eigenvectors corresponding to $v$, along with the 0 vector.
-    \item The sum of eigenspaces is a direct sum. We consider $u_1+\cdots+u_n = 0$, where each eigenvector $u_i$ is from the eigenspace $E(\lambda_i,T)$. Because eigenvectors corresponding to distinct eigenvalues are linearly independent, we get what we want. Furthermore, since $$E(\lambda_1,T)+\dots+E(\lambda_m,T)$$ is a direct sum, we have $$\d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T)) \leq \d V.$$
+    \item The sum of eigenspaces is a direct sum. We consider $u_1+\cdots+u_n = 0$, where each eigenvector $u_i$ is from the eigenspace $E(\lambda_i,T)$. Because eigenvectors corresponding to distinct eigenvalues are linearly independent, we get what we want. Furthermore, since $$E(\lambda_1,T)+\dots+E(\lambda_m,T)$$ is a direct sum, we have $$\d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T)) \leq \d V.$$ Recall the theorem in \S3.E that says a sum is a direct sum iff the dimensions add up.
     \item An operator $T$ is \textit{diagonalizable} if the the operator has a diagonal matrix w.r.t. some basis of $T$.
-    \item For $T$ on FDVS $V$ and distinct eigenvalues $\lambda_1, \dots, \lambda_m$, diagonalizability of $T$ is equivalent to the following four conditions:
+    \item For $T$ on FDVS $V$ with dimension $n$ and distinct eigenvalues $\lambda_1, \dots, \lambda_m$, diagonalizability of $T$ is equivalent to the following four conditions:
     \begin{enumerate}[label=(\alph*)]
         \item $V$ has a basis consisting of eigenvectors of $T$;
         \item $V$ can be decomposed into $n$ 1-dimension subspaces $U_1$ to $U_n$, where $V = U_1 \oplus \cdots \oplus U_n$;
         \item $V = E(\lambda_1,T) + \cdots + \d E(\lambda_n,T)$;
         \item $\d V = \d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T))$
     \end{enumerate}
-    We consider the whole list of eigenvalues $\lambda_1, \dots, \lambda_n$ with repetition ($n \geq m$). Looking at the matrix
+    The proof to this theorem is a little involved but not hard at all. One should get an intuitive idea of what each equivalent condition means.
+    \begin{itemize}
+    \item We consider the whole list of eigenvalues $\lambda_1, \dots, \lambda_n$ with repetition ($n \geq m$). Looking at the matrix
     \begin{equation*}
         \begin{bmatrix}
         \lambda_1 & & 0 \\
@@ -450,9 +459,15 @@ Matrices}
          0 & & \lambda_n
     \end{bmatrix}
     \end{equation*}
-    for a moment would tell us diagonalizability and (a) are equivalent. 
+    for a moment would tell us diagonalizability and (a) are equivalent.
+    \item (a)$\implies$(b): Let each $U_j = \s(v_j)$, each of which are invariant under $T$. Since $v_1,\dots,v_n$ is a basis of $V$, any $v \in V$ can be written uniquely as a linear combination of $v_1,\dots,v_n$, and thus a unique sum of elements from each $U_j$. Therefore, $V$ is a direct sum of the $U_j$'s. Trace this proof backward to show (b)$\implies$(a).
+    \item We now show (a)$\iff$(c)$\iff$(d). (c)$\iff$(d) follows from the theorem in \S3.5.
+    \begin{itemize}
+        \item (a)$\implies$(c) because $V$ has a basis of $n$ eigenvectors, each of which must belong to any of the $m$ distinct eigenspaces $E(\lambda_j,T)$. Therefore, $V$ is the sum of all these eigenspaces (and thus the direct sum of them).
+        \item To show (c) \& (d)$\implies$(a), choose a basis $B_j$ from each $E(\lambda_j,T)$. Therefore, we get a list of vectors $v_1, \dots, v_n$ of length $n = \d V$ by (d). To show the list is linearly independent, consider $0 = u_1+\dots+u_n$, where each $u_j$ is from $E(\lambda_j,T)$. All the $u_j$'s must be 0 because $V$ is a direct sum of the eigenspaces. If $0 = u_j$, since $u_j$ can be expressed as a linear combination of the basis vectors in $B_j$, the coefficients in the linear combination must be 0. Therefore our constructed list of eigenvectors $v_1, \dots, v_n$ is indeed a basis of $V$.
+    \end{itemize}
+    \end{itemize}
     \item If $T \in \LV$ has $\d V$ number of distinct eigenvalues, then $T$ is necessarily diagonalizable. Having $\d V$ number of distinct eigenvalues tells us we have a basis of eigenvectors of $T$. With respect to this basis $\M(T)$ is a diagonal matrix.
-    \item 
 \end{itemize}
 
 \section{Inner Product Spaces}
