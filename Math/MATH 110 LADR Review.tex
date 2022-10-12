@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{amsmath,amsthm,amssymb,tikz-cd}
 \usepackage{enumitem}
 \usepackage{fullpage}
@@ -501,7 +502,7 @@ Matrices}
         \item $\|\lambda v\| = |\lambda| \|v\|$.
     \end{itemize}
     \item Two vectors are \textit{orthogonal} if their inner product is 0. Therefore, 0 is orthogonal to any vector and 0 is the only vector that is orthogonal to itself.
-    \item Introducing these concepts provide us with a list of useful equations and inequalities about \textit{inner product spaces} (vector spaces endowed with an inner product) that we know as facts for the Euclidean spaces.
+    \item Introducing these concepts provide us with a list of useful equations and inequalities about \textit{inner product spaces} (vector spaces endowed with an inner product) that we know as facts in the Euclidean spaces.
     \begin{itemize}
         \item The Pythagorean theorem now holds for orthogonal vectors $u,v \in V$: $$\|u+v\|^2 = \|u\|^2 + \|v\|^2.$$ Expanding the LHS, we have $\|u+v\|^2 = \inp{u+v,u+v} = \inp{u}{u} + \inp{u}{v} + \inp{v}{u} + \inp{v}{v}$, where the two terms in the middle are 0.
         The converse of this theorem holds in real inner product spaces because then we would have $\inp{u}{v}+\inp{v}{u} = 2\inp{u}{v} = 0$, showing that the two vectors are orthogonal.
