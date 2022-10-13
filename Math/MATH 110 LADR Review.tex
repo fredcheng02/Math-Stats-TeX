@@ -15,7 +15,6 @@
 \newcommand{\n}{\operatorname{null}}
 \renewcommand{\r}{\operatorname{range}}
 \renewcommand{\d}{\dim}
-\DeclarePairedDelimiter{\ip}\langle\rangle
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
 \newcommand{\nm}[1]{\| #1 \|}
@@ -56,7 +55,7 @@
 
 \section{Finite-Dimensional Vector Spaces}
 
-\textit{Remark}. Note that this section in the book builds on the notion of a list of vectors. FDVS is defined in terms of spanning list (which are the same because vector addition is commutative; we will them interchangeably later on as well), and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
+\textit{Remark}. Note that this section in the book builds on the idea of a ``list" of vectors, which is no different than using a ``set'' of vectors because vector addition is commutative. (We will use either a list or a set of vectors later depending on whether we have to specify the ordering of these vectors.) Finite-dimensional is defined in terms of a spanning list, and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
 
 \begin{itemize}
     \item The \textit{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, $\s(\emptyset)$ $\coloneqq \{0\}$.
@@ -66,13 +65,13 @@
         \item Since we are dealing with $z$ and coefficients in $\F = \R$ or $\C$ in this book, a polynomial here can be alternatively defined as the \textbf{function} $p: \F \rightarrow \F$ with $p(z) = a_0 + a_1 z + \cdots + a_n z^n$. The reason behind is that a polynomial function with coefficients from an infinite field can be written into only one polynomial expression with its unique coefficients. See Chapter 4 of this book or Appendix E, Theorem 10 of \textit{Linear Algebra} by Friedberg, Insel, and Spence. It is the consequence of the fact that a polynomial of degree $n \geq 1$ has at most $n$ distinct zeros. We will proceed with this definition of polynomials.
         \item We denote the set of all polynomials with coefficients in $\F$ by $\mathcal{P}(\F)$. Under the usual coefficient-wise addition and scalar multiplication, it is obvious that $\mathcal{P}(\F)$ is a vector space over $\F$. In addition, the set of all polynomials with degree at most $m$, denoted by $\mathcal{P}_m(\F)$ is a vector subspace of $\mathcal{P}(\F)$.
     \end{itemize}
-    \item Linear independence and dependence can be characterized in multiple ways. A set $S$ of vectors is linearly independent iff the only way to write 0 as $a_1v_1 + a_2v_2 + \cdots +a_mv_m$ is the trivial way. It is equivalent to saying that every linear combination has its only representation, or none of the vectors is in the span of the other vectors (can be written as a linear combination of them). Linear dependence is the negation of independence, but in particular we should remember that it means there exists at least one vector $v_i$ that is in the span of the rest of the vectors.
+    \item Linear independence and dependence can be characterized in multiple ways. A set $S$ of vectors is linearly independent iff the only way to write 0 as $a_1v_1 + a_2v_2 + \cdots +a_mv_m$ is the trivial way. (We also sometimes say that some vectors themselves are linearly independent.) It is equivalent to saying that every linear combination has its only representation, or none of the vectors is in the span of the other vectors (can be written as a linear combination of them). Linear dependence is the negation of independence, but in particular we should remember that it means there exists at least one vector $v_i$ that is in the span of the rest of the vectors.
     \begin{itemize}
         \item Obviously removing such vector $v_i$ from $S$ will not change the span.
         \item In particular, for a linearly independent set $S = \{s_1, s_2, \dots , s_m\} \subsetneq$ a linearly dependent set $T = \{s_1, s_2, \dots , s_m, t_1, t_2, \dots , t_n\}$, one such vector is always in $T \backslash S$. This is because for the nontrivial way of writing $0 = a_1s_1 + \cdots +a_ms_m + b_1 t_1 + \cdots + b_n t_n$, if all $b$'s are 0, then all $a$'s will also be 0. Thus, some $b_i$ must be nonzero, and the corresponding $t_i$ can be removed without changing the span.
         \begin{itemize}
             \item The special case $n=1$ of the contraposition will be useful to us. If one new vector is added to the linearly independent $S$ but does not belong to span($S$), then the resulting set is still linearly independent.
-            \item From this special case we know that for a linear dependent set $\{v_1,\cdot,v_n\}$, at some index $k \leq n$ we have $\{v_1,\cdot,v_{k-1}\}$ being linearly independent, while $v_k \in \s(\{v_1,\cdot,v_{k-1}\})$. (This is the well-ordering case of the linear dependence lemma 2.21 in book that we will use again in Chapter 5.)
+            \item From this special case we know that for a linear dependent set $\{v_1,\dots,v_n\}$, at some index $k \leq n$ we have $\{v_1,\dots,v_{k-1}\}$ being linearly independent, while $v_k \in \s(\{v_1,\dots,v_{k-1}\})$. (This is the well-ordering case of the linear dependence lemma 2.21 in book that we will use again in Chapter 5.)
         \end{itemize}
         \item Note that a linearly independent set of vectors cannot have the $0$ vector.
     \end{itemize}
@@ -133,11 +132,11 @@
     \item The \textit{nullspace}/\textit{kernel} $\n T$ is the preimage of $0_W$. The \textit{range}/\textit{image} $\r T$ is defined the same as the range of a function. The nullspace and the range are respectively subspaces of $V$ and $W$ (by checking the three criterion). If the nullspace (resp. range) is finite-dimensional, then its dimension is the \textit{nullity} (resp. \textit{rank}) of $T$.
     \begin{itemize}
         \item Since $\d U = \d W$ for subspace $U$ of $W$ implies $U = W$, $\text{rank }T = \d W$ implies surjection.
-        \item A simple theorem to always keep in mind is that the mapping of the basis vectors of $V$ spans $\r T$.
+        \item An easy theorem to always keep in mind is that the map of the basis vectors of $V$ spans $\r T$. We will use it in the proof of the next theorem.
     \end{itemize}
     \item We are now endowed with all the tools to prove the \textbf{rank-nullity theorem}: for a FDVS $V$ and $T$ from $V$ to $W$, $\r T$ is finite-dimensional with $$\d V = \d \n T + \d \r T.$$
     \begin{itemize}
-        \item As always, we need to construct a basis to work with first. Let ${u_1, u_2, \dots, u_n}$ be a basis of $\n T$, and thus can be extended to ${u_1,\dots,u_m,v_1,\dots,v_n}$ a basis of $V$. We prove $T(\{v_1, v_2, \dots, v_n\})$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $Tv_1, \dots,Tv_n$ spans $V$. To show the elements are linearly independent, consider that $$a_1 T(v_1)+\cdots+a_n T(v_n) = 0$$ implies $a_1v_1+\dots+a_nv_n \in \n T$. Yet we also have $b_1u_1+\dots+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
+        \item As always, we need to construct a basis to work with first. Let ${u_1, u_2, \dots, u_n}$ be a basis of $\n T$, and thus can be extended to ${u_1,\dots,u_m,v_1,\dots,v_n}$ a basis of $V$. We prove $T(\{v_1, v_2, \dots, v_n\})$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $Tv_1, \dots,Tv_n$ spans $\r T$ (by the ``easy" theorem above). To show the elements are linearly independent, consider that $$a_1 T(v_1)+\cdots+a_n T(v_n) = 0$$ implies $a_1v_1+\dots+a_nv_n \in \n T$. Yet we also have $b_1u_1+\dots+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
     \end{itemize}
     \item The rank-nullity theorem gives rise to a number of equivalent characterizations regarding injection and surjection. First of all, there is a criterion that says $T$ is injective iff $\n T = {0}$ (proof follows straight from the definition of nullspace). The results below follow.
     \begin{itemize}
@@ -427,7 +426,7 @@ Matrices}
     The first two are equivalent follow straight from the definition. (b)$\implies$(c) because for every $i$ between 1 and $j$, $Tv_i \in \s(v_1,\dots,v_j)$. (c)$\implies$(b) is obvious as well.
     \item For FDVS $V$ over $\C$ and $T \in \LV$, then $\M(T)$ is upper triangular with respect to some basis of $V$.
     
-    \item Upper-triangular matrices help us determine whether $T$ is invertible. If $T \in \LV$ has an upper-triangular $\M(T)$ w.r.t. some basis of $V$, then $T$ is invertible iff all entries on the diagonal of $\M(T)$ are nonzero.
+    \item Upper-triangular matrices help us determine whether $T$ is invertible. If $T \in \LV$ has an upper-triangular $\M(T)$ with respect to some basis of $V$, then $T$ is invertible iff all entries on the diagonal of $\M(T)$ are nonzero.
     
     \item By the previous theorem, we can determine all the eigenvalues of $T$ if we are fortunate to find a basis that corresponds to an upper-triangular $\M(T)$. $\M(T - \lambda I)$ is of the form
     \begin{equation*}
@@ -445,14 +444,14 @@ Matrices}
     \item A \textit{diagonal matrix} has all its entries off the diagonal 0.
     \item The \textit{eigenspace} of $T \in \LV$ corresponding to $\lambda \in \F$ is given by $$E(\lambda,T) = \n (T-\lambda I) = \{v \in V \mid Tv = \lambda v\}.$$
     The eigenspace is basically the vector subspace of $V$ with all eigenvectors corresponding to $v$, along with the 0 vector.
-    \item The sum of eigenspaces is a direct sum. We consider $u_1+\cdots+u_n = 0$, where each eigenvector $u_i$ is from the eigenspace $E(\lambda_i,T)$. Because eigenvectors corresponding to distinct eigenvalues are linearly independent, we get what we want. Furthermore, since $$E(\lambda_1,T)+\dots+E(\lambda_m,T)$$ is a direct sum, we have $$\d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T)) \leq \d V.$$ Recall the theorem in \S3.E that says a sum is a direct sum iff the dimensions add up.
-    \item An operator $T$ is \textit{diagonalizable} if the the operator has a diagonal matrix w.r.t. some basis of $T$.
+    \item The sum of eigenspaces is a direct sum. We consider $u_1+\cdots+u_m = 0$, where each eigenvector $u_i$ is from the eigenspace $E(\lambda_i,T)$. Because eigenvectors corresponding to distinct eigenvalues are linearly independent, we get what we want. Furthermore, since $$E(\lambda_1,T)+\dots+E(\lambda_m,T)$$ is a direct sum, we have $$\d E(\lambda_1,T) + \cdots + \d E(\lambda_m,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_m,T)) \leq \d V.$$ Recall the theorem in \S3.E that says a sum is a direct sum iff the dimensions add up.
+    \item An operator $T$ is \textit{diagonalizable} if the the operator has a diagonal matrix with respect to some basis of $T$.
     \item For $T$ on FDVS $V$ with dimension $n$ and distinct eigenvalues $\lambda_1, \dots, \lambda_m$, diagonalizability of $T$ is equivalent to the following four conditions:
     \begin{enumerate}[label=(\alph*)]
         \item $V$ has a basis consisting of eigenvectors of $T$;
         \item $V$ can be decomposed into $n$ 1-dimension subspaces $U_1$ to $U_n$, where $V = U_1 \oplus \cdots \oplus U_n$;
-        \item $V = E(\lambda_1,T) + \cdots + \d E(\lambda_n,T)$;
-        \item $\d V = \d E(\lambda_1,T) + \cdots + \d E(\lambda_n,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_n,T))$
+        \item $V = E(\lambda_1,T) \oplus \cdots \oplus E(\lambda_m,T)$;
+        \item $\d V = \d E(\lambda_1,T) + \cdots + \d E(\lambda_m,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_m,T))$
     \end{enumerate}
     The proof to this theorem is a little involved but not hard at all. One should get an intuitive idea of what each equivalent condition means.
     \begin{itemize}
@@ -487,7 +486,7 @@ Matrices}
     \item Observation on our definition of the Euclidean inner product suggests how we could possibly define a general abstract inner product on arbitrary real or complex vector spaces. The \textit{inner product} is a function $\inp{\cdot}{\cdot}: V \times V \to \F$ ($\R$ or $\C$) with the following properties:
     \begin{itemize}
         \item Positive definiteness: $\inp{v}{v} \geq 0$ (\textbf{real} and nonnegative), which achieves ``$=$" iff $v = 0$;
-        \item Linearity in the first slot: $\inp{\lambda u+v}{w} = \lambda \inp{u}{w} + \inp{v}{w}$;
+        \item Linearity in the first slot: $\inp{\lambda u+v}{w} = \lambda \inp{u}{w} + \inp{v}{w}$; (This means $\phi_w(v) \coloneqq \inp{v}{w}$ with respect to a fixed $w$ gives us a linear functional on $V$.)
         \item Conjugate symmetry: $\inp{u}{v} = \conj{\inp{v}{u}}$.
     \end{itemize}
     The properties that directly ensue include:
@@ -504,12 +503,12 @@ Matrices}
     \item Two vectors are \textit{orthogonal} if their inner product is 0. Therefore, 0 is orthogonal to any vector and 0 is the only vector that is orthogonal to itself.
     \item Introducing these concepts provide us with a list of useful equations and inequalities about \textit{inner product spaces} (vector spaces endowed with an inner product) that we know as facts in the Euclidean spaces.
     \begin{itemize}
-        \item The Pythagorean theorem now holds for orthogonal vectors $u,v \in V$: $$\|u+v\|^2 = \|u\|^2 + \|v\|^2.$$ Expanding the LHS, we have $\|u+v\|^2 = \inp{u+v,u+v} = \inp{u}{u} + \inp{u}{v} + \inp{v}{u} + \inp{v}{v}$, where the two terms in the middle are 0.
+        \item The Pythagorean theorem now holds for orthogonal vectors $u,v \in V$: $$\|u+v\|^2 = \|u\|^2 + \|v\|^2.$$ Expanding the LHS, we have $\|u+v\|^2 = \inp{u+v}{u+v} = \inp{u}{u} + \inp{u}{v} + \inp{v}{u} + \inp{v}{v}$, where the two terms in the middle are 0.
         The converse of this theorem holds in real inner product spaces because then we would have $\inp{u}{v}+\inp{v}{u} = 2\inp{u}{v} = 0$, showing that the two vectors are orthogonal.
         \item The method of orthogonal decomposition is extended to inner product spaces. Suppose $u,v \in V$ with $v$ being nonzero, we wish write $u$ as the sum of scalar multiple of $v$ and another vector $w$ that is orthogonal to $v$.
         
         Basically we want to choose a scalar $c \in \F$ such that $$0 = \inp{u-cv}{v} = \inp{u}{v} - c\|v\|^2.$$ Let $c = \frac{\inp{u}{v}}{\|v\|^2}$ and we have $w = u - cv$ and we have our orthogonal decomposition $$\inp{w}{v} = 0 \quad \text{and} \quad u = cv+w.$$
-        \item The well-known Cauchy-Schwarz inequality states that $|\inp{u}{v}| \leq \|u\|\|v\|$, which reaches equality iff $u = \lambda v$ for some scalar $\lambda$. This can be proved using the orthogonal decomposition theorem we have above, but we choose to use the more standard method. When $v = 0$, the result is immediate. By the equality condition given, for $v \not= 0$ we may consider $$0 \leq \|u - cv\|^2 = \inp{u}{u} - \conj{c}\inp{u}{v} - c\inp{v}{u} + c\conj{c}\inp{v}{v}.$$ Set $c = \nm{\inp{u}{v}/\inp{v}{v}}$, then the RHS of the ``$=$" becomes $ \nm{u}^2 - \frac{|\inp{u}{v}|^2}{\nm{v}^2}$, as desired. The equality is achieved if and only if $u = cv$ or $v = 0$.
+        \item The well-known Cauchy-Schwarz inequality states that $|\inp{u}{v}| \leq \|u\|\|v\|$, which reaches equality iff one of $u,v$ is a scalar multiple of the other. This can be proved using the orthogonal decomposition theorem we have above, but we choose to use the more standard method. When $v = 0$, the result is immediate. By the equality condition given, for $v \not= 0$ we may consider $$0 \leq \|u - cv\|^2 = \inp{u}{u} - \conj{c}\inp{u}{v} - c\inp{v}{u} + c\conj{c}\inp{v}{v}.$$ Set $c = \nm{\inp{u}{v}/\inp{v}{v}}$, then the RHS of the ``$=$" becomes $ \nm{u}^2 - \frac{|\inp{u}{v}|^2}{\nm{v}^2}$, as desired. The equality is achieved if and only if $u = cv$ or $v = 0$.
         
         Two special cases should be kept in mind.
         \begin{itemize}
@@ -517,13 +516,66 @@ Matrices}
             \item One can define an inner product on function spaces such as the vector space $V$ of continuous functions from $[a,b]$ to $\F$. One can define the inner product on $V$ as such: $$\inp{f}{g} = \int_a^b f(x)\conj{g(x)} dx.$$ This is an important inner product that will be useful in later courses. If $\F = \R$, then we simply have $$\inp{f}{g} = \int_a^b f(x)g(x) dx.$$ By the Cauchy-Schwarz inequality, we then have (over $\R$) $$\left|\int_a^b f(x)g(x)dx\right|^2 \leq \left(\int_a^b (f(x))^2 dx \right) \left(\int_a^b (g(x))^2 dx \right).$$
         \end{itemize}
         \item The triangle inequality states that $\|u+v\| \leq \|u\|+\|v\|$, which reaches equality iff one of $u,v$ is a nonnegative real multiple of the other.
+        To prove, expanding the LHS gives us
+        \begin{align*}
+            \inp{u}{u}+\inp{v}{v}+\inp{u}{v}+\conj{\inp{u}{v}} & = \nm{u}^2+\nm{v}^2+2 \Re{\inp{u}{v}} \\ & \leq \nm{u}^2+\nm{v}^2+2|\inp{u}{v}| \\ & \leq \nm{u}^2+\nm{v}^2+2\nm{u}\nm{v} = (\nm{u}+\nm{v})^2.
+        \end{align*}
+        Taking the square root gives us the result. To have equality in the third row of our derivation, we need $|\inp{u}{v}| = \nm{u}\nm{v}$, which implies the equality in the second row because the norm is a real number. Therefore, the triangle inequality achieves equality iff $|\inp{u}{v}| = \nm{u}\nm{v}$.
         
-        
+        Note that $|\inp{u}{v}| = \nm{u}\nm{v}$ implies $u=cv$ or $v=0$ by the Cauchy-Schwarz inequality. Also, it is easy to show $u=cv$ or $v=0$ implies $|\inp{u}{v}| = \nm{u}\nm{v}$. Thus, the triangle inequality achieves equality iff one of $u,v$ is a scalar multiple of the other.
         \item The parallelogram equality says that $\|u+v\|^2+\|u-v\|^2 = 2(\|u\|^2+ \|v\|^2)$. To prove, expand the LHS and after some cancellations, we get the RHS.
     \end{itemize}
 \end{itemize}
-\subsection{Orthonormal Bases}
 
+\subsection{Orthonormal Bases}
+\begin{itemize}
+    \item A list (set) of vectors is \textit{orthonormal} if each vector is of norm 1 and is orthogonal to all other vectors in the list. That is to say for an orthonormal list of vectors $e_1,\dots,e_n \in V$,
+    \begin{equation*}
+    \inp{e_i}{e_j} = 
+        \left\{
+            \begin{array}{rl}
+                1 \quad & \text{if } i = j, \\
+                0 \quad & \text{if } i \not= j.
+            \end{array}
+        \right.
+    \end{equation*}
+    \begin{itemize}
+        \item Note that the canonical basis in $\F^n$ is orthonormal.
+    \end{itemize}
+    \item Given an orthonormal list $e_1,\dots,e_n$, by repeated use of the Pythagorean theorem, we get $$\nm{a_1 e_1 + \cdots + a_n e_n}^2 = |a_1|^2 + \cdots + |a_n|^2$$ for all scalars $a_1, \dots, a_m$.
+    \item It follows from the theorem above that if we set $a_1 e_1 + \cdots + a_n e_n = 0$, then all the $a_i$'s must be 0, showing that an orthonormal list of vectors $e_1,\dots,e_n$ are linearly independent. Therefore, an orthonormal list of length $\d V$ is an \textit{orthonormal basis}, i.e., an orthonormal list (set) that is also a basis.
+    \item Now any $v$ can be written as a unique linear combination of the orthonormal basis vectors $e_1,\dots,e_n$. For the coefficient of each $e_j$, it is just $a_j = \inp{v}{e_j}$.
+    
+    Consider $v = a_1 e_1 + \dots + a_n e_n$ and take an inner product with $e_j$ on both sides. Then, $\inp{v}{a_j} = a_j$, as desired. Note that $\nm{v}^2 = |\inp{v}{e_1}|^2 + \dots + |\inp{v}{e_n}|^2$.
+    \begin{itemize}
+        \item There is an important corollary to the theorem above. For an orthonormal basis of $V$ $e_1,\dots,e_n$, every $$Te_k = \inp{Te_k}{e_1}e_1 + \dots + \inp{Te_k}{e_n}e_n.$$ Therefore, we have $\M(T)_{j,k} = \inp{Te_k}{e_j}$ for the matrix representation of $T$ with respect to $e_1,\dots,e_n$.
+    \end{itemize}
+    \item The Gram-Schmidt process can now be proved. For a linearly independent list $v_1,\dots,v_n$ in $V$, define $e_1 = \frac{v_1}{\nm{v_1}}$, and then for $2 \leq j \leq n$, define $e_j$ inductively by $$e_j = \frac{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}{\nm{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}}.$$ Then for any $j \leq m$, $e_1, \dots, e_j$ is still orthonormal and has the same span as $v_1,\dots,v_j$. 
+    
+    
+    This algorithm for constructing an orthonormal basis from a given basis leads to two useful corollaries.
+    \begin{itemize}
+        \item Every FD inner product space has an orthonormal basis. Proof is trivial.
+        \item If $V$ is FD, then every orthonormal list of vectors can be extended to an orthonormal basis. We start with $e_1,\dots,e_m$ and extend the list to a basis $e_1,\dots,e_m,v_{m+1},\dots,v_n$ of $V$. It is easily observed that if we apply the Gram-Schmidt process from $e_1$ to $v_n$, then $e_1$ to $e_m$ will remain themselves, yet $v_{m+1},\dots,v_n$ will be orthonormalized to $f_{m+1},\dots,f_n$. Thus the $e$'s and the $f$'s become the basis extended from the original list of $e$'s.
+    \end{itemize}
+    \item If $T \in \LV$ has an upper-triangular matrix with respect to some basis of $V$, then it has an upper-triangular matrix with respect to some orthonormal basis of $V$.
+    
+    (In the case of $\F = \C$, since the condition always holds, $T$ must have an upper-triangular matrix with respect to some orthonormal basis of $V$. This is known as Schur's theorem.)
+    
+    Recall having upper-triangular $\M(T)$ is equivalent to $\s(v_1,\dots,v_j)$ being invariant under for each $1 \leq j \leq n$. This is ensured by the Gram-Schmidt process.
+    
+    
+    \item We briefly mentioned that an inner product with the second slot fixed is a linear functional. In fact the Riesz representation theorem states that for FDVS $v$ and any $\phi \in V'$, there exists a \textbf{unique} $u \in V$ such that $\phi_u(v) = \inp{v}{u}$ for every $v \in V$.
+    
+    To prove, choose an arbitrary orthonormal basis $e_1,\dots,e_n$. Then for any $v$,
+    \begin{align*}
+        \phi(v) & = \phi(\inp{v}{e_1}e_1+\cdots+\inp{v}{e_n}e_n) \\ & = \inp{v}{e_1}\phi(e_1)+\cdots+\inp{v}{e_n}\phi{e_n} \\ & = \inp{v}{\conj{\phi(e_1)}e_1+\cdots+\conj{\phi(e_n)}e_n}.
+    \end{align*}
+    Therefore $\conj{\phi(e_1)}e_1+\cdots+\conj{\phi(e_n)}e_n$ is our desired $u$. To show uniqueness, suppose $\phi(v) = \inp{v}{u_1} = \inp{v}{u_2}$, then $\inp{v}{u_1 - u_2} = 0$ for all $v$. And by setting $v = u_1 - u_2$ we have $u_1 = u_2$.
+    \begin{itemize}
+        \item By uniqueness, whatever what orthonormal basis $e_1,\dots,e_n$ we choose, the expression $\conj{\phi(e_1)}e_1+\cdots+\conj{\phi(e_n)}e_n$ remains the same.
+    \end{itemize}
+\end{itemize}
 \subsection{Orthogonal Complement and Minimization Problems}
 
 
