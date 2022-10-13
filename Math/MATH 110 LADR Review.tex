@@ -552,11 +552,19 @@ Matrices}
     \end{itemize}
     \item The Gram-Schmidt process can now be proved. For a linearly independent list $v_1,\dots,v_n$ in $V$, define $e_1 = \frac{v_1}{\nm{v_1}}$, and then for $2 \leq j \leq n$, define $e_j$ inductively by $$e_j = \frac{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}{\nm{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}}.$$ Then for any $j \leq m$, $e_1, \dots, e_j$ is still orthonormal and has the same span as $v_1,\dots,v_j$. 
     
+    We use induction for this proof. $j = 1$ obviously holds. Suppose for $1 < j < m$ we already have $$\s(v_1,\dots,v_{j-1}) = \s(e_1,\dots,e_{j-1}).$$ By linear independent of the list of $v$'s, $v_j \notin \s(v_1,\dots,v_{j-1})$ and thus $v_j \notin \s(e_1,\dots,e_{j-1})$. Therefore, $v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}$ is nonzero, and we can indeed divide it by its norm to get a new vector $e_j$ with norm 1.
     
-    This algorithm for constructing an orthonormal basis from a given basis leads to two useful corollaries.
+    For $1 \leq k < j$, we can show that the new vector $e_j$ is orthogonal to the existing $e_k$'s, as
+    \begin{align*}
+        \inp{e_j}{e_k} & = \inp{\frac{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}{\nm{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}}}{e_k} \\ & = \frac{\inp{v_j,e_k}{v_j,e_k}}{\nm{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}} = 0.
+    \end{align*}
+    $v_j \in \s(e_1,\dots,e_j)$ holds by construction and hence $\s(v_1,\dots,v_j)$ is a subspace of $\s(e_1,\dots,e_j)$. The two spaces have the same dimension and are thus equal. This finishes our inductive step.
+    \begin{itemize}
+        \item This algorithm for constructing an orthonormal basis from a given basis leads to two useful corollaries.
     \begin{itemize}
         \item Every FD inner product space has an orthonormal basis. Proof is trivial.
         \item If $V$ is FD, then every orthonormal list of vectors can be extended to an orthonormal basis. We start with $e_1,\dots,e_m$ and extend the list to a basis $e_1,\dots,e_m,v_{m+1},\dots,v_n$ of $V$. It is easily observed that if we apply the Gram-Schmidt process from $e_1$ to $v_n$, then $e_1$ to $e_m$ will remain themselves, yet $v_{m+1},\dots,v_n$ will be orthonormalized to $f_{m+1},\dots,f_n$. Thus the $e$'s and the $f$'s become the basis extended from the original list of $e$'s.
+    \end{itemize}
     \end{itemize}
     \item If $T \in \LV$ has an upper-triangular matrix with respect to some basis of $V$, then it has an upper-triangular matrix with respect to some orthonormal basis of $V$.
     
