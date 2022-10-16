@@ -252,6 +252,9 @@
     \end{itemize}
     \item To find the dimension of $V/U$, we appeal to the trick of constructing a linear map again. (One should check its linearity) The \textit{quotient map} $\pi: V \to V/U$ is given by $$\pi(v) = v+U.$$
     For FDVS $V$ and its subspace $U$, $\d V/U = \d V - \d U$. $\pi$ is a map onto $V/U$ obviously, and $\n \pi = U$. Therefore the formula follows.
+    \begin{itemize}
+        \item A basis from $V/U$ combined with a basis from $U$ form a basis of $V$. Suppose $v_1,\dots,v_n$ are the basis vectors of $V/U$ and $u_1,\dots,u_m$ are the basis vectors of $U$. If we write $$a_1v_1+\dots+a_nv_n + b_1u_1+\dots+b_mu_m = 0,$$ then necessarily $(a_1v_1+\dots+a_nv_n) \in U$, which implies that $$0+U = (a_1v_1+\dots+a_nv_n)+U = a_1(v_1+U)+\dots+a_n(v_n+U).$$ Because the $v+U$'s form a basis of $V/U$, the coefficients $a_1,\dots,a_n$ must be 0. Since $u_1,\dots,u_m$ form a basis of $U$, their coefficients $b_1,\dots,b_m$ must also be 0. And because $v_1,\dots,v_n,u_1,\dots,u_m$ is of length $n+m$, by the previous theorem this indeed is a basis of $V$.
+    \end{itemize}
     \item Now we define the induced map $\tilde{T}: V/(\n T) \to W$ of $T: V \to W$ by $$\tilde{T}(v+\n T) = Tv.$$ $u + \n T = v + \n T$ implies $u - v \in \n T$, and thus $Tu-Tv = 0$. Therefore the induced map is well defined. Checking the linearity of $\tilde{T}$ is routine. Note that $T = \tilde{T} \circ \pi$.
     \begin{equation*}
             \begin{tikzcd}
@@ -354,7 +357,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
     \item The division algorithm for polynomials is similar to the one in number theory. For $p,s \in \mathcal{P}(\F)$ with $s \not= 0$, then there exist a pair of unique polynomials $q,r \in \mathcal{P}(\F)$ such that $p=sq+r$ and $\deg r < \deg s$.
     \begin{itemize}
         \item For $\deg p < \deg s$, then $q = 0$ and $r = p$. If $\deg p = n \geq \deg s = m$, we define $T: \mathcal{P}_{n-m}(\F) \times \mathcal{P}_{m-1}(\F) \to \mathcal{P}_n(\F)$ by $$T(q,r) = sq+r.$$
-        Clearly $T$ is a linear map, and we basically want to show $T$ is bijective. For $sq+r=0$, we must have $q=0$ and $r=0$ because otherwise $\deg sq \geq m > \deg r$. We proceed to figure out that $\d(\mathcal{P}_{n-m}(\F) \times \mathcal{P}_{m-1}(\F)) = n+1 = \d \mathcal{P}_n(\F)$.
+        Clearly $T$ is a linear map, and we basically want to show $T$ is bijective. For $sq+r=0$, we must have $q=0$ and $r=0$ because otherwise $\deg sq \geq m > \deg r$. Also, notice that $\d(\mathcal{P}_{n-m}(\F) \times \mathcal{P}_{m-1}(\F)) = n+1 = \d \mathcal{P}_n(\F)$.
     \end{itemize}
     \item Each zero of a polynomial corresponds to a degree-1 factor, i.e., for $p \in \PF$ and $\lambda \in \F$, $p(\lambda) = 0$ iff $\exists q \in \PF$ such that for all $z \in \F$, $p(z) = (z-\lambda)q(z)$. To prove the $\implies$ direction, division algorithm gives us $p(z) = (z-\lambda)q(z) + r$ (here $r$ is a constant) as $(z-\lambda)$ is of degree 1. Thus, $p(\lambda) = 0$ gives us $r=0$.
     
@@ -368,7 +371,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
         \item In the case of $\F = \C$ or $\R$, the book gives another proof of the contraposition that if one coefficient out of $$h(z) = a_0+a_1z+\dots+a_mz^m$$ is not zero, then $h(z) \not= 0$ for some $z \in \F$. Assume $m \not= 0$ and pick $$z = \frac{|a_0| + \dots + |a_{m-1}|}{|a_m|}+1 \geq 1.$$ Thus, $z^j \leq z^{m-1}$ for all $j \leq m-1$. By triangle inequality and $|a_m|z > |a_0|+ \dots + |a_{m-1}|$, $$|a_0+a_1z+\dots+a_{m-1}z^{m-1}| \leq (|a_0|+\dots+|a_{m-1}|)z^{m-1}< |a_m z^m|.$$ Therefore $a_0+a_1z+\dots+a_{m-1}z^{m-1} \not= -a_m z^m$.
     \end{itemize}
     
-    \item The proof of the fundamental theorem of algebra is omitted here for the obvious reason. Every nonconstant polynomial on $\C$ has a zero, which directly implies that a polynomial $p$ of degree $m$ has $m$ nondistinct roots, which we sketch through now.
+    \item The proof of the fundamental theorem of algebra is omitted here for the obvious reason. Every nonconstant polynomial on $\C$ has a zero, which directly implies that a polynomial $p$ of degree $m$ has $m$ nondistinct roots, which we sketch below.
     \begin{itemize}
         \item Every nonconstant polynomial over $\C$ has a unique factorization (up to the order of factors) of the form 
         \begin{equation}
@@ -417,6 +420,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
 
 \subsection{Eigenvectors and Upper-Triangular
 Matrices}
+Remark. Most theorems in this section rely heavily on induction. This is because we will be considering bases and matrices of arbitrary finite dimensions.
 \begin{itemize}
     \item Linear operators allow idempotent operations. Given $T \in \LV$, we define $T^m$ ($m \in \Z^+$) as $T$ composite with itself $m$ times, $T^0$ as the identity operator $I_V$, and $T^{-m}$ as $(T^{-1})^m$, given $T^{-1}$ exists.
     \begin{itemize}
@@ -430,20 +434,35 @@ Matrices}
     \begin{itemize}
         \item It follows directly that $(pq)(T) = p(T)q(T)$ and $(pq)(T) = (qp)(T)$, because we only replace the symbol $z$ by $T$.
     \end{itemize}
-    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector spaces) The proof employs the fundamental theorem of algebra and is quite tricky. Choose a nonzero $v \in V$ ($\d V=n$) and consider the list $v, Tv, \dots, T^n v$, which must be linearly dependent. Thus, we have $$0 = a_0 v + a_1 Tv + \dots + a_n T^n v,$$ where the $a_i$'s are not all $0$. In particular, $a_1, \dots, a_n$ cannot all be 0 since $v \not= 0$ will then give us $a_0 = 0$. Thus, we have a nonconstant polynomial $a_0+a_1 z+\dots+a_m z^m$ ($m \leq n$), which can be factorized into $$c(z - \lambda_1)\cdots(z - \lambda_m)$$ over $\C$. For $$0=c(T - \lambda_1 I)\cdots(T - \lambda_m I)v,$$ the nonzero vector $w = (T - \lambda_{j+1} I) \cdots (T - \lambda_m I)v$ will be be taken to 0 by $(T - \lambda_j I)$. $(T - \lambda_j I)$ is thus not injective and $\lambda_j$ is our eigenvalue.
-    
+    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector spaces) The proof employs the fundamental theorem of algebra and is quite tricky. Choose a nonzero $v \in V$ ($\d V=n$) and consider the list $v, Tv, \dots, T^n v$, which must be linearly dependent. Thus, we have $$0 = a_0 v + a_1 Tv + \dots + a_n T^n v,$$ where the $a_i$'s are not all $0$. In particular, $a_1, \dots, a_n$ cannot all be 0 since $v \not= 0$ will then give us $a_0 = 0$. Thus, we have a nonconstant polynomial $a_0+a_1 z+\dots+a_m z^m$ ($m \leq n$), which can be factorized into $$c(z - \lambda_1)\cdots(z - \lambda_m)$$ over $\C$. For $$0=c(T - \lambda_1 I)\cdots(T - \lambda_m I)v,$$ the nonzero vector $w = (T - \lambda_{j+1} I) \cdots (T - \lambda_m I)v$ will be be taken to 0 by $(T - \lambda_j I)$. $(T - \lambda_j I)$ is thus not injective and $\lambda_j$ is an eigenvalue.
     \item We construct the matrix of an operator always with respect to only one ordered basis of $V$. The matrix $\M(T,(v_1,\dots,v_n))$ is a square matrix. In the $j$-th column of $\M(T)$, each entry corresponds to each coefficient from $a_1v_1+\dots+a_nv_n = Tv_j$. A square matrix with all entries being 0 below the diagonal is called an \textit{upper-triangular matrix}, which is crucial in the theory of eigenvalues.
-    \item How are eigenvalues and vectors, invariant subspaces, and upper-triangular matrices connected? Suppose $T \in \LV$ and $v_1,\dots,v_n$ is a basis of $V$, then
+    \item How are invariant subspaces and upper-triangular matrices connected? Suppose $T \in \LV$ and $v_1,\dots,v_n$ is a basis of $V$, then
     \begin{enumerate}[label=(\alph*)]
         \item $\M(T)$ is upper triangular.
         \item $Tv_j \in \s(v_1,\dots,v_j)$ for each $j$ from 1 to $n$.
         \item $\s(v_1,\dots,v_j)$ is invariant under $T$ for each $j$ from 1 to $n$.
     \end{enumerate}
     The first two are equivalent follow straight from the definition. (b)$\implies$(c) because for every $i$ between 1 and $j$, $Tv_i \in \s(v_1,\dots,v_j)$. (c)$\implies$(b) is obvious as well.
-    \item For FDVS $V$ over $\C$ and $T \in \LV$, then $\M(T)$ is upper triangular with respect to some basis of $V$.
+    \item For FDVS $V$ over $\C$ and $T \in \LV$, then $\M(T)$ is upper triangular with respect to some basis of $V$. The book gives two proofs relying on the induction on $\d V$. 
     
-    \item Upper-triangular matrices help us determine whether $T$ is invertible. If $T \in \LV$ has an upper-triangular $\M(T)$ with respect to some basis of $V$, then $T$ is invertible iff all entries on the diagonal of $\M(T)$ are nonzero.
+    The first proof first shows that $U = \r(T - \lambda I)$ is invariant under $T$, which shows that $U$ has a basis $u_1,\dots,u_m$ with respect to an upper triangular matrix (by the inductive hypothesis, and is equivalent to $Tu_j \in \s(u_1,\dots,u_j)$ for all $j$).
     
+    We extend $u_1,\dots,u_m$ to $u_1,\dots,u_m,v_1,\dots,v_n$, basis of $V$. Now set $Tv_k = (T-\lambda I)v_k+\lambda v_k$. Since $(T-\lambda I)v_k \in U$, $$Tv_k\ \in \s(u_1,\dots,u_m,v_1,\dots,v_k)$$ for all $1 \leq k \leq n$. This combined with $Tu_j \in \s(u_1,\dots,u_j)$ for all $j$ shows that $u_1,\dots,u_m,v_1,\dots,v_n$ is the basis of $V$ that has an upper triangular matrix.
+    
+    The second proof is nonstandard but quite interesting. It sets $U = \s(v_1)$ and looks at $V/U$ of dimension $n-1$ instead. $T/U \in \mathcal{L}(V/U)$ by the inductive hypothesis should have (for all $j$ between 2 and $n$) $$(T/U)(v_j+U) \in \s(v_2+U,\dots,v_j+U).$$ This implies that $Tv_j = \s(v_1,\dots,v_j)$ for $j$ between 1 and $n$. Recall in \S3.E we showed that $v_2,\dots,v_n$ combined with the basis vector $v_1$ from $U$ is a basis of $V$, and the conclusion follows.
+    
+    \item Upper-triangular matrices help us determine \textbf{whether $T$ is invertible}. If $T \in \LV$ has an upper-triangular $\M(T)$ with respect to some basis of $V$, then $T$ is invertible iff all entries on the diagonal of $\M(T)$ are nonzero.
+    \begin{equation*}
+        \begin{bmatrix}
+        \lambda_1 & & & \ast \\
+         & \lambda_2 & & \\
+         & & \ddots & \\
+         0 & & & \lambda_n
+    \end{bmatrix}.
+    \end{equation*}
+    Suppose the $\lambda$'s on the diagonal in the matrix above are all nonzero, then $Tv_1 = \lambda_1 v_1$ implies that $T(v_1/\lambda_1) = v_1$, so that $v_1 \in \r T$. Looking at the next column of the matrix we can continue to show that $T(v_2/\lambda_2)=av_1+v_2$, which implies that $v_2 \in \r T$. Following this fashion we can conclude that $v_1,\dots,v_n$ are all in $\r T$. Since $\d V = n$, $T$ is surjective and thus invertible.
+    
+    Suppose in the other direction that $T$ is invertible, then in the first place $\lambda_i \not= 0$ because otherwise $Tv_1 = 0$ (Since $v_1 \not= 0$, $T$ cannot be injective). For $1 < j \leq $ suppose $\lambda_j = 0$, ``looking" at the $j$-th column above we immediately know that $T|_{\s(v_1,\dots,v_j)}$ is not injective (it maps into $\s(v_1,\dots,v_{j-1})$ of dimension $j-1<j$). Thus $T$ (with respect to the whole $V$) is not injective (thus not invertible) as well. Thus, all the $\lambda$'s on the diagonal must be nonzero.
     \item By the previous theorem, we can determine all the eigenvalues of $T$ if we are fortunate to find a basis that corresponds to an upper-triangular $\M(T)$. $\M(T - \lambda I)$ is of the form
     \begin{equation*}
         \begin{bmatrix}
