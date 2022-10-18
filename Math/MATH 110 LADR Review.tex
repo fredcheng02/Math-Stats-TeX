@@ -351,13 +351,13 @@
 \end{itemize}
 
 \section{Polynomials}
-Remark. We used facts about polynomials in high school algebra. These facts were intuitively ``understood" by us back then, but we never had the chance to rigorously prove them. Although the theory of polynomials is definitely something one should know at this stage, we will skim through this chapter in our notes. Please refer to Chapter 4 of our textbook or Appendix E of \textit{Linear Algebra} by Friedberg, Insel, and Spence for the detailed development of major results.
+\textit{Remark}. We used facts about polynomials in high school algebra. These facts were intuitively ``understood" by us back then, but we never had the chance to rigorously prove them.
 
 \begin{itemize}
     \item The division algorithm for polynomials is similar to the one in number theory. For $p,s \in \mathcal{P}(\F)$ with $s \not= 0$, then there exist a pair of unique polynomials $q,r \in \mathcal{P}(\F)$ such that $p=sq+r$ and $\deg r < \deg s$.
     \begin{itemize}
         \item For $\deg p < \deg s$, then $q = 0$ and $r = p$. If $\deg p = n \geq \deg s = m$, we define $T: \mathcal{P}_{n-m}(\F) \times \mathcal{P}_{m-1}(\F) \to \mathcal{P}_n(\F)$ by $$T(q,r) = sq+r.$$
-        Clearly $T$ is a linear map, and we basically want to show $T$ is bijective. For $sq+r=0$, we must have $q=0$ and $r=0$ because otherwise $\deg sq \geq m > \deg r$. Also, notice that $\d(\mathcal{P}_{n-m}(\F) \times \mathcal{P}_{m-1}(\F)) = n+1 = \d \mathcal{P}_n(\F)$.
+        Clearly $T$ is a linear map, and we basically want to show $T$ is bijective. For $sq+r=0$, we must have $q=0$ and $r=0$ because otherwise $\deg sq \geq m > \deg r$. Also, notice that $$\d(\mathcal{P}_{n-m}(\F) \times \mathcal{P}_{m-1}(\F)) = n+1 = \d \mathcal{P}_n(\F).$$
     \end{itemize}
     \item Each zero of a polynomial corresponds to a degree-1 factor, i.e., for $p \in \PF$ and $\lambda \in \F$, $p(\lambda) = 0$ iff $\exists q \in \PF$ such that for all $z \in \F$, $p(z) = (z-\lambda)q(z)$. To prove the $\implies$ direction, division algorithm gives us $p(z) = (z-\lambda)q(z) + r$ (here $r$ is a constant) as $(z-\lambda)$ is of degree 1. Thus, $p(\lambda) = 0$ gives us $r=0$.
     
@@ -420,7 +420,7 @@ Remark. We used facts about polynomials in high school algebra. These facts were
 
 \subsection{Eigenvectors and Upper-Triangular
 Matrices}
-Remark. Most theorems in this section rely heavily on induction. This is because we will be considering bases and matrices of arbitrary finite dimensions.
+\textit{Remark}. (In the upcoming fourth edition, this section is rewritten in terms of minimal polynomials.) Most theorems in this section rely heavily on induction. This is because we will be considering bases and matrices of arbitrary finite dimensions.
 \begin{itemize}
     \item Linear operators allow idempotent operations. Given $T \in \LV$, we define $T^m$ ($m \in \Z^+$) as $T$ composite with itself $m$ times, $T^0$ as the identity operator $I_V$, and $T^{-m}$ as $(T^{-1})^m$, given $T^{-1}$ exists.
     \begin{itemize}
@@ -436,10 +436,10 @@ Remark. Most theorems in this section rely heavily on induction. This is because
     \end{itemize}
     \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector spaces) The proof employs the fundamental theorem of algebra and is quite tricky. Choose a nonzero $v \in V$ ($\d V=n$) and consider the list $v, Tv, \dots, T^n v$, which must be linearly dependent. Thus, we have $$0 = a_0 v + a_1 Tv + \dots + a_n T^n v,$$ where the $a_i$'s are not all $0$. In particular, $a_1, \dots, a_n$ cannot all be 0 since $v \not= 0$ will then give us $a_0 = 0$. Thus, we have a nonconstant polynomial $a_0+a_1 z+\dots+a_m z^m$ ($m \leq n$), which can be factorized into $$c(z - \lambda_1)\cdots(z - \lambda_m)$$ over $\C$. For $$0=c(T - \lambda_1 I)\cdots(T - \lambda_m I)v,$$ the nonzero vector $w = (T - \lambda_{j+1} I) \cdots (T - \lambda_m I)v$ will be be taken to 0 by $(T - \lambda_j I)$. $(T - \lambda_j I)$ is thus not injective and $\lambda_j$ is an eigenvalue.
     \item We construct the matrix of an operator always with respect to only one ordered basis of $V$. The matrix $\M(T,(v_1,\dots,v_n))$ is a square matrix. In the $j$-th column of $\M(T)$, each entry corresponds to each coefficient from $a_1v_1+\dots+a_nv_n = Tv_j$. A square matrix with all entries being 0 below the diagonal is called an \textit{upper-triangular matrix}, which is crucial in the theory of eigenvalues.
-    \item How are invariant subspaces and upper-triangular matrices connected? Suppose $T \in \LV$ and $v_1,\dots,v_n$ is a basis of $V$, then
+    \item How are invariant subspaces and upper triangular matrices connected? Suppose $T \in \LV$ and $v_1,\dots,v_n$ is a basis of $V$, then the following are equivalent:
     \begin{enumerate}[label=(\alph*)]
-        \item $\M(T)$ is upper triangular.
-        \item $Tv_j \in \s(v_1,\dots,v_j)$ for each $j$ from 1 to $n$.
+        \item $\M(T)$ is upper triangular;
+        \item $Tv_j \in \s(v_1,\dots,v_j)$ for each $j$ from 1 to $n$;
         \item $\s(v_1,\dots,v_j)$ is invariant under $T$ for each $j$ from 1 to $n$.
     \end{enumerate}
     The first two are equivalent follow straight from the definition. (b)$\implies$(c) because for every $i$ between 1 and $j$, $Tv_i \in \s(v_1,\dots,v_j)$. (c)$\implies$(b) is obvious as well.
@@ -510,6 +510,7 @@ Remark. Most theorems in this section rely heavily on induction. This is because
 \end{itemize}
 
 \section{Inner Product Spaces}
+\textit{Remark}. In this section $V$ is by default an inner product space.
 \subsection{Inner Products and Norms}
 \begin{itemize}
     \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$ (the real $n$-dimensional space), the \textit{dot product} $x \cdot y \coloneqq x_1y_1+\dots+x_ny_n$ is a scalar in $\R$. The norm $\|x\|$ on $\R^n$ is usually given by $\sqrt{x_1^2+\dots+x_n^2}$, which is the square root of the dot product of $x$ with itself.
@@ -579,15 +580,14 @@ Remark. Most theorems in this section rely heavily on induction. This is because
     \end{itemize}
     \item Given an orthonormal list $e_1,\dots,e_n$, by repeated use of the Pythagorean theorem, we get $$\nm{a_1 e_1 + \cdots + a_n e_n}^2 = |a_1|^2 + \cdots + |a_n|^2$$ for all scalars $a_1, \dots, a_m$.
     \item It follows from the theorem above that if we set $a_1 e_1 + \cdots + a_n e_n = 0$, then all the $a_i$'s must be 0, showing that an orthonormal list of vectors $e_1,\dots,e_n$ are linearly independent. Therefore, an orthonormal list of length $\d V$ is an \textit{orthonormal basis}, i.e., an orthonormal list (set) that is also a basis.
-    \item Now any $v$ can be written as a unique linear combination of the orthonormal basis vectors $e_1,\dots,e_n$. For the coefficient of each $e_j$, it is just $a_j = \inp{v}{e_j}$.
-    
+    \item Now any $v \in V$ can be written as a unique linear combination of the orthonormal basis vectors $e_1,\dots,e_n$. In fact, we have $$v = \inp{v}{e_1}e_1 + \dots + \inp{v}{e_n}e_n.$$
     Consider $v = a_1 e_1 + \dots + a_n e_n$ and take an inner product with $e_j$ on both sides. Then, $\inp{v}{a_j} = a_j$, as desired. Note that $\nm{v}^2 = |\inp{v}{e_1}|^2 + \dots + |\inp{v}{e_n}|^2$.
     \begin{itemize}
         \item There is an important corollary to the theorem above. For an orthonormal basis of $V$ $e_1,\dots,e_n$, every $$Te_k = \inp{Te_k}{e_1}e_1 + \dots + \inp{Te_k}{e_n}e_n.$$ Therefore, we have $\M(T)_{j,k} = \inp{Te_k}{e_j}$ for the matrix representation of $T$ with respect to $e_1,\dots,e_n$.
     \end{itemize}
     \item The Gram-Schmidt process can now be proved. For a linearly independent list $v_1,\dots,v_n$ in $V$, define $e_1 = \frac{v_1}{\nm{v_1}}$, and then for $2 \leq j \leq n$, define $e_j$ inductively by $$e_j = \frac{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}{\nm{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}}.$$ Then for any $j \leq m$, $e_1, \dots, e_j$ is still orthonormal and has the same span as $v_1,\dots,v_j$. 
     
-    We use induction for this proof. $j = 1$ obviously holds. Suppose for $1 < j < m$ we already have $$\s(v_1,\dots,v_{j-1}) = \s(e_1,\dots,e_{j-1}).$$ By linear independent of the list of $v$'s, $v_j \notin \s(v_1,\dots,v_{j-1})$ and thus $v_j \notin \s(e_1,\dots,e_{j-1})$. Therefore, $v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}$ is nonzero, and we can indeed divide it by its norm to get a new vector $e_j$ with norm 1.
+    We use induction for this proof. $j = 1$ obviously holds. Suppose for $1 < j \leq m$ we already have $$\s(v_1,\dots,v_{j-1}) = \s(e_1,\dots,e_{j-1}).$$ By linear independent of the list of $v$'s, $v_j \notin \s(v_1,\dots,v_{j-1})$ and thus $v_j \notin \s(e_1,\dots,e_{j-1})$. Therefore, $v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}$ is nonzero, and we can indeed divide it by its norm to get a new vector $e_j$ with norm 1.
     
     For $1 \leq k < j$, we can show that the new vector $e_j$ is orthogonal to the existing $e_k$'s, as
     \begin{align*}
@@ -619,8 +619,53 @@ Remark. Most theorems in this section rely heavily on induction. This is because
         \item By uniqueness, whatever what orthonormal basis $e_1,\dots,e_n$ we choose, the expression $\conj{\phi(e_1)}e_1+\cdots+\conj{\phi(e_n)}e_n$ remains the same.
     \end{itemize}
 \end{itemize}
-\subsection{Orthogonal Complement and Minimization Problems}
 
+\subsection{Orthogonal Complement and Minimization Problems}
+\begin{itemize}
+    \item For $U \subseteq V$ (we assume $U$ is nonempty by default), the \textit{orthogonal complement} of $U$ (denoted by $U^\perp$) is the set of all vectors in $V$ that are orthogonal to every vector in $U$, i.e., $$U^\perp = \{v \in V \mid \forall u \in U, \inp{u}{v}=0\}.$$
+    \begin{itemize}
+        \item It is good to see an example in $\R^3$: if $U$ is a line in $\R^3$ through the origin, then all the vectors perpendicular to the line $U$ form the orthogonal complement of $U$, the plane through the origin perpendicular to the line $U$. Similarly, if on the other hand, $U$ is a plane in $\R^3$ through the origin, then its orthogonal complement is the line through the origin perpendicular to the plane $U$.
+    \end{itemize}
+    \item It is easy to verify and understand the following properties of orthogonal complements:
+    \begin{enumerate}[label=(\alph*)]
+        \item For $U \subseteq V$, $U^\perp \in V$.
+        \item $0^\perp = V$.
+        \item $V^\perp = \{0\}$.
+        \item For $U \subseteq V$, $U \cap U^\perp = \left\{\begin{array}{rl} \{0\} & \text{if } 0 \in U, \\ \emptyset \;\, & \text{if } 0 \notin U. \end{array} \right.$
+        \item If $U \subseteq W \subseteq V$, then $W^\perp \subseteq U^\perp$.
+    \end{enumerate}
+    And we skip their proofs.
+    \item If in particular $U$ is a finite-dimensional subspace of $V$ ($V$ does not have to be finite-dimensional), then $V = U \oplus U^\perp$.
+    
+    First we prove $V = U + U^\perp$. Let $e_1,\dots,e_m$ be the orthonormal basis of $U$. Any $u \in U$ can be written as $$\{\inp{v}{e_1}e_1+\dots+\inp{v}{e_m}e_m\} + \{v - \inp{v}{e_1}e_1-\dots-\inp{v}{e_m}e_m\}.$$ Here $\inp{v}{e_1}e_1+\dots+\inp{v}{e_m}e_m \in U$, and one can easily show that for $w = v - \inp{v}{e_1}e_1-\dots-\inp{v}{e_m}e_m$, $\inp{w}{e_j} = \inp{v}{e_j} - \inp{v}{e_j} = 0$ (for all $j$ between 1 and $m$).
+    
+    Therefore, $w$ is orthogonal to $\s(e_1,\dots,e_m) = U$, meaning that $w \in U^\perp$. Since $U$ is a subspace and is thus nonempty, $U \cap U^\perp = \{0\}$, showing that $U + U^\perp$ is a direct sum.
+    \begin{itemize}
+        \item It follows directly that $\d U^\perp = \d V - \d U$.
+    \end{itemize}
+    \item Let $U$ again be a finite-dimensional subspace of $V$, then $U=(U^\perp)^\perp$. For the ``$\subseteq$" direction, any $u \in U$ is orthogonal to any vectors $v \in U^\perp$, while \textit{all} vectors in $(U^\perp)^\perp$ are orthogonal to any $v \in U^\perp$. (Note that we can prove ``$\supseteq$" this way because we do not know if $U$ contains all the vectors orthogonal to $U^\perp$.)
+    
+    For the ``$\supseteq$" direction, suppose $v \in (U^\perp)^\perp \subseteq V$. Then $v$ can be uniquely written as $u+w$, where $u \in U$ and $w \in U^\perp$. We have just proved that $U \subseteq (U^\perp)^\perp$, meaning that $u \in (U^\perp)^\perp$, subspace of $V$. Therefore, $w = v-u \in (U^\perp)^\perp$ and $w \in U^\perp$ simultaneously. Since $U$ is nonempty, $w = 0$ and thus $v = u \in U$.
+    \item The \textit{orthogonal projection} $P_U$ of $V$ to $U$ is the map $P_U: V \to U$ defined by $P_U(v) = u$, where $u \in U$ and $w \in U^\perp$ are the pair of \textit{unique} elements such that $v = u+w$. It is easy to verify $P_U \in \LV$ (note that $U \subseteq V$).
+    \item Also, for orthonormal basis $e_1,\dots,e_m$, $P_U(v) = \inp{v}{e_1}e_1+\dots+\inp{v}{e_m}e_m$, which we have showed earlier. In general, if we want to find $P_U(v)$, we should first use Gram-Schmidt process to find an orthonormal basis of $V$ and then use the expression above the find $P_U(v)$.
+    \item We give a list of properties of $P_U$ below.
+    \begin{enumerate}[label=(\alph*)]
+        \item $\forall u \in U, P_U(u) = u$; [for $u = u+0$]
+        \item $\forall w \in U^\perp, P_U(w) = 0$; [for $w = 0+w$]
+        \item $\r P_U = U$; [for $P_U \subseteq U$ by definition, and (a) above]
+        \item $v - P_U(v) \in U^\perp$; [true because $w = v - P_U(v)$ is unique in $U^\perp$]
+        \item $\n P_U = U^\perp$; [$U^\perp \subseteq \n P_U$ by (b); also, \\ for $v$ such that $P_U(v) = 0$, meaning that $v - 0 = v \in U^\perp$ by (c)]
+        \item $P_U$ is an idempotent operator; [by (b)]
+        \item $\nm{P_U(v)} \leq \nm{v}$; (since $\nm{u} \leq \nm{u} + \nm{w} = \nm{v}$)
+    \end{enumerate}
+    \item For finite-dimensional subspace $U$ of an inner product space $V$ and a fixed $v \in V$, the minimum distance between $v$ and all vectors on $U$ is achieved at $u = P_U(v)$, as expected. Formally, we want to show that for all $u \in U$, $$\nm{v - P_U(v)} \leq \nm{v-u},$$ which achieve equality iff $u = P_U(v)$.
+    
+    The proof obviously employs the Pythagorean theorem. We have
+    \begin{equation*}
+        \nm{v - P_U(v)}^2 \leq \nm{v - P_U(v)}^2+\nm{P_U(v) - u}^2 = \nm{v - u}^2,
+    \end{equation*}
+    because $v - P_U(v) \in U^\perp$ and $P_U(v) - u \in U$, so that the two are orthogonal. The equality condition is obvious.
+\end{itemize}
 
 \section{Operators on Inner Product Spaces}
 \subsection{Self-Adjoint and Normal Operators}

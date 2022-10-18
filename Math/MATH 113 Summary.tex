@@ -85,9 +85,9 @@
     \item There are several equivalent conditions to check that a subgroup is normal. Also, every subgroup of an abelian group is normal.
     \item The coset multiplication operation on $H \leq G$ is well-defined if and only if $H \trianglelefteq G$.
     \item Given $\phi: G \to H$ and the natural surjective homomorphism $\pi: G \to G/N$ with kernel $N$, $\tilde{\phi}: G/N \to H$ defined by $$\tilde{\phi}(gN) = \phi(g)$$ is well-defined if and only if $N \leq \ker \phi$.
-    \item The full version of the fundamental theorem of group homomorphism states that, given a group homomorphism $\phi: G \to H$, let $N$ be a normal subgroup in $G$ and $\pi: G \to G/N$ be the natural surjective homomorphism, if $N \leq \ker \phi$, then there exists a unique homomorphism $\tilde{\phi}: G/N \to H$ such that $\phi = \tilde{\phi} \circ \pi$.
+    \item The full version of the fundamental theorem of group homomorphism states that, given a group homomorphism $\phi: G \to H$, let $N$ be a normal subgroup in $G$ and $\pi: G \to G/N$ be the natural surjective homomorphism. If $N \leq \ker \phi$, then there exists a unique homomorphism $\tilde{\phi}: G/N \to H$ such that $\phi = \tilde{\phi} \circ \pi$.
     \begin{itemize}
-        \item In particular, if we let $\ker \pi = N = \ker \phi $, then $\ker \tilde{\phi}$ contains only the identity an it thus injective. Therefore, $\tilde{\phi}: G/N \to \phi(G)$ is an isomorphism.
+        \item In particular, if we let $\ker \pi = N = \ker \phi $, then $\ker \tilde{\phi}$ contains only the identity and is thus injective. Therefore, $\tilde{\phi}: G/N \to \phi(G)$ is an isomorphism.
     \end{itemize}
     \item The automorphism group $\aut(G) \coloneqq \{\phi: G \to G \mid \phi \text{ is an isomorphism}\}$. In particular $i_g: G \to G$ given by $i_g(x) = g x g^{-1}$ is an automorphism of $G$, called the inner automorphism of $G$. These $i_g$'s form $\inn(G) \coloneqq \{\phi \in \aut(G) \mid \phi = i_g \text{ for some } g \in G\}$, which turns out to be a normal subgroup of $\aut(G)$.
     \item $\operatorname{Out}(G) \coloneqq \aut(G)/\inn(G)$.
@@ -97,5 +97,13 @@
 \end{itemize}
 
 \section{Rings and Fields}
-
+\begin{itemize}
+    \item The definition of rings given in the book does not assume the existence of the multiplicative identity. A ring $\langle R,+,\cdot \rangle$ is a set $R$ endowed with two binary operations addition and multiplication, such that:
+    \begin{enumerate}%[label=(\alph*)]
+        \item $\langle R, + \rangle$ is an abelian group;
+        \item $R$ is associative under multiplication;
+        \item Left and right distributive laws hold.
+    \end{enumerate}
+    \item 
+\end{itemize}
 \end{document}
