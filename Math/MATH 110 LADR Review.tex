@@ -610,7 +610,7 @@ Matrices}
     Recall having upper-triangular $\M(T)$ is equivalent to $\s(v_1,\dots,v_j)$ being invariant under for each $1 \leq j \leq n$. This is ensured by the Gram-Schmidt process.
     
     
-    \item We briefly mentioned a while ago that an inner product with the second slot fixed is a linear functional. In fact there is a \textbf{one-to-one correspondence} between every $u \in V$ and every $\phi \in V'$. The Riesz representation theorem states that for FDVS $V$ and \textbf{any} $\phi \in V'$, there exists a \textbf{unique} $u \in V$ such that $\phi_u(v) = \inp{v}{u}$ for every $v \in V$. This is a very important theorem that leads to the definition of adjoint in Chapter 7.
+    \item We briefly mentioned a while ago that an inner product with the second slot fixed is a linear functional. In fact there is a \textbf{one-to-one correspondence} between every $u \in V$ and every $\phi \in V'$. The Riesz representation theorem states that for finite-dimensional inner product space $V$ and \textbf{any} $\phi \in V'$, there exists a \textbf{unique} $u \in V$ such that $\phi_u(v) = \inp{v}{u}$ for every $v \in V$. This is a very important theorem that leads to the definition of adjoint in Chapter 7.
     
     To prove, choose an arbitrary orthonormal basis $e_1,\dots,e_n$. Then for any $v$,
     \begin{align*}
@@ -618,7 +618,9 @@ Matrices}
     \end{align*}
     Therefore $\conj{\phi(e_1)}e_1+\cdots+\conj{\phi(e_n)}e_n$ is our desired $u$.
     
-    To show uniqueness, suppose $\phi(v) = \inp{v}{u_1} = \inp{v}{u_2}$, then $\inp{v}{u_1 - u_2} = 0$ for all $v$. And by setting $v = u_1 - u_2$ we have $u_1 = u_2$. (If two inner products are the same for any common first slot, then the second slot must be equal as well; we will use this frequently in Chapter 7.)
+    To show uniqueness, suppose $\phi(v) = \inp{v}{u_1} = \inp{v}{u_2}$, then $\inp{v}{u_1 - u_2} = 0$ for all $v$. And by setting $v = u_1 - u_2$ we have $u_1 = u_2$.
+    
+    \textit{(If two inner products are the same for any common first slot, then the second slot must be equal as well; we will use this frequently in Chapter 7.)}
     \begin{itemize}
         \item By uniqueness, whatever what orthonormal basis $e_1,\dots,e_n$ we choose, the expression $$\conj{\phi(e_1)}e_1+\cdots+\conj{\phi(e_n)}e_n$$ remains the same.
         \item Thus, if we choose any $u = a_1 e_1 + \dots + a_n e_n$ in $U$ and define a linear functional $\phi$ such that $$\phi(e_1)=\conj{a_1},\dots,\phi(e_n)=\conj{a_n},$$ then $\phi$ here is the \textbf{unique} linear functional such that $\phi(v) = \inp{v}{u}$.
@@ -679,14 +681,16 @@ Matrices}
 \begin{itemize}
     \item For $T \in \LVW$, the \textit{adjoint} of $T$ is the function $T^*: W \to V$ such that $$\inp{Tv}{w}_W = \inp{v}{T^*w}_V.$$
     
-    Pay attention to the fact that the inner product on the left is on $W$, while the inner product on the right is on $V$. What we have above is well-defined by the Riesz representation theorem in \S6.2. Fix $w$, then $\inp{Tv}{w}$ becomes a linear functional $\phi_w(v)$ on $V$, which uniquely determines a $u \in V$ such that $\inp{v}{u} = \phi_w(v)$. This unique $u$ is our $T^*w$. Thus, this $T^*$ always exists and is unique given $T$. To calculate $T^*$ based on $T$, fix the second slot $w$ in $\inp{Tv}{w}$ and convert $\inp{Tv}{w}_W$ into the form $\inp{v}{f(w)}_V$, where the function $f$ of $w$ is our desired $T^*$.
+    Pay attention to the fact that the inner product on the left is on $W$, while the inner product on the right is on $V$. What we have above is well-defined by the Riesz representation theorem in \S6.2. Fix $w$, then $\inp{Tv}{w}$ becomes a linear functional $\psi_{T,w}(v)$ on $V$ (because $T$ is linear), which uniquely determines a $u \in V$ such that $\inp{v}{u} = \psi_{T,w}(v)$. This unique $u$ is our $T^*w$. Thus, this $T^*$ always exists and is unique given $T$.
+    
+    To calculate $T^*$ based on $T$, fix the second slot $w$ in $\inp{Tv}{w}$ and convert $\inp{Tv}{w}_W$ into the form $\inp{v}{f(w)}_V$, where the function $f$ of $w$ is our desired $T^*$.
     \item As expected, $T^* \in \mathcal{L}(W,V)$, since
     \begin{align*}
         \inp{v}{T^*(\lambda w_1 + w_2)} = \inp{Tv}{\lambda w_1 + w_2} & = \conj{\lambda}\inp{Tv}{w_1} + \inp{Tv}{w_2} \\ & = \conj{\lambda}\inp{v}{T^*w_1} + \inp{v}{T^*w_2} \\ & = \inp{v}{\lambda T^* w_1 + T^*w_2}.
     \end{align*}
     The above is true for all $v$, and thus the second slot must be the same, showing that $T^*$ is linear.
-    \item Consider the scalar $\inp{v}{Sw}$ for any $S \in \mathcal{L}(W,V)$. Fix $w$. By the corollary we have after Riesz representation theorem in \S6.2, there exists a unique linear functional $\phi_w \in V'$ such that $$\phi_w(v) = \inp{Tv}{w} = \inp{v}{Sw}.$$ This shows that the map $^*: \LVW \to \mathcal{L}(W,V)$ given by $^*(T) = T^*$ is bijective.
-    \item Here are some properties of the adjoint. Move the adjoint from the second slot to the first slot and then back to the second slot will give these results. The map $^*: \LVW \to \mathcal{L}(W,V)$ discussed just now turns out to be conjugate-linear.
+    % \item Consider the scalar $\inp{v}{Sw}$ for any $S \in \mathcal{L}(W,V)$. Fix $w$. By the corollary we have after Riesz representation theorem in \S6.2, there exists a unique linear functional $\phi_{Sw} \in V'$ such that $$\phi_{Sw}(v) = \inp{v}{Sw} = \inp{Tv}{w}.$$ This shows that the map $^*: \LVW \to \mathcal{L}(W,V)$ given by $^*(T) = T^*$ is bijective.
+    \item Here are some properties of the adjoint. Move the adjoint from the second slot to the first slot and then back to the second slot will give these results.
     \begin{enumerate}[label=(\alph*)]
         \item $(S+T)^* = S^* + T^*$;
         \item $(\lambda T)^* = \conj{\lambda}T^*$;
@@ -694,6 +698,9 @@ Matrices}
         \item $I^* = I$;
         \item $(ST)^* = T^*S^*$ for all $T \in \LVW$ and $S \in \mathcal{L}(W,U)$.
     \end{enumerate}
+    We prove (c) here and omit the others. For any $v \in V$ and $w \in W$, $$\inp{w}{(T^*)^*v} = \inp{T^*w}{v} = \conj{\inp{v}{T^*w}} = \conj{\inp{Tv}{w}} = \inp{w}{Tv}.$$ The second slot must be the same for all $v$ and thus $(T^*)^*=T$.
+    
+    As you may have noticed from (a), (b), \& (c), the map $^*: \LVW \to \mathcal{L}(W,V)$ turns out to be a \textbf{conjugate-linear bijective map}. The map is injective because $$S^*=T^* \implies S=(S^*)^*=(T^*)^*=T;$$ the map is surjective because for any $S \in \mathcal{L}(W,V)$, we always have $S^* \in \LVW$ such that $(S^*)^*=S$.
     \item The nullspace and range of the adjoint of $T$ is connected to the orthogonal complement of $\n T$ and $\r T$. For $T \in \LVW$, we have
     \begin{enumerate}[label=(\alph*)]
         \item $\n T^* = (\r T)^\perp$;
@@ -703,31 +710,40 @@ Matrices}
     \end{enumerate}
     For (a), $w \in \n T^* \iff T^*(w) = 0 \iff \inp{v}{T^*(w)} = 0$ for all $v \in V \iff \inp{Tv}{w} = 0$ for all $v \in V \iff w \in (\r T)^\perp$.
     \item With respect to an orthonormal basis $e_1,\dots,e_n$ of $V$ and an orthonormal basis $f_1,\dots,f_m$ of $W$, $\M(T^*,(f_1,\dots,f_m),(e_1,\dots,e_n))$ is just the conjugate transpose of $\M(T,(e_1,\dots,e_n),(f_1,\dots,f_m))$. (If we are considering operators $T \in \LV$ instead, by default we use the same basis on the domain $V$ and on the range of $V$.)
-    \item 
+    
+    The entries in $k$-th column of $\M(T)$ are exactly the coefficients in
+    $$\inp{Te_k,f_1}f_1+\dots+\inp{Te_k,f_m}f_m = Te_k.$$ Therefore, $\M(T)_{j,k} = \inp{Te_k}{f_j}$. Similarly we can conclude that $\M(T^*)_{k,j} = \inp{T^*f_j}{e_k} = \inp{f_j}{Te_k}$, where $1 \leq j \leq m$ and $1 \leq k \leq n$. It is clear that $\M(T)$ and $\M(T^*)$ are conjugate transposes of one another.
     \item An operator $T \in \LV$ is \textit{self-adjoint} (or \textit{Hermitian}) if $T=T^*$. That is to say, $T$ is self-adjoint iff $\inp{Tv}{w}=\inp{v}{Tw}$ for all $v,w \in V$.
     \begin{itemize}
         \item It follows from definition that the sum of two self-adjoint operators is self-adjoint and the product of a real scalar and a self-adjoint operator is self-adjoint.
+        \item As the book points out, over $\C$ we can draw a parallel between the adjoint of an operator and the complex conjugation of a number. In some abstract sense saying that an operator is self-adjoint is similar to saying that a number is equal to its conjugation and is thus real. Self-adjoint operators are closely tied to real numbers, as we will see.
     \end{itemize}
-    \item 
-    \item Eigenvalues of self-adjoint operators are real. Consider the self-adjoint operator $T$ on $V$ and $Tv = \lambda v$ for nonzero $v \in V$, then $$\lambda \nm{v}^2 = \inp{\lambda v}{v} = \inp{Tv}{v} = \inp{v}{Tv} = \inp{v}{\lambda v} = \conj{\lambda}\nm{v}^2,$$ telling us $\lambda = \conj{\lambda}$. The i
-    \item ($\dagger$) For \textbf{complex} inner product space $V$ and $T \in \LV$, if $\inp{Tv}{v}=0$ for all $v \in V$, then $T = 0$. We prove this via some calculation tricks: for all $u,w \in V$,
+    \item Eigenvalues of self-adjoint operators are real. Consider the self-adjoint operator $T$ on $V$ and $Tv = \lambda v$ for nonzero $v \in V$, then $$\lambda \nm{v}^2 = \inp{\lambda v}{v} = \inp{Tv}{v} = \inp{v}{Tv} = \inp{v}{\lambda v} = \conj{\lambda}\nm{v}^2,$$ telling us $\lambda = \conj{\lambda}$.
+    \item ($\dagger$) For a \textbf{complex} inner product space $V$ and $T \in \LV$, if $\inp{Tv}{v}=0$ for all $v \in V$, then $T = 0$. We prove this via some calculation tricks: for all $u,w \in V$,
     \begin{align*}
         \inp{Tu}{w} = & \frac{\inp{T(u+w)}{u+w} - \inp{T(u-w)}{u-w}}{4} \\ & + i \frac{\inp{T(u+iw)}{u+iw} - \inp{T(u-iw)}{u-iw}}{4}.
     \end{align*}
     Therefore, $\inp{Tu}{w} = 0$ for all $u,w \in V$. Taking $w = Tu$ gives us $T = 0$.
-    \item For operator $T$ on an complex inner product spaces $V$, $T$ is self-adjoint iff for every $v \in V$, $\inp{Tv}{v} \in \R$.
-    \item If $T = T^*$ on (real or complex) inner product space $V$ and $\inp{Tv}{v}=0$ for all $v$, then $T = 0$. By ($\dagger$), now we only have to check this fact on real inner product space $V$. As one may check, $$\inp{Tu}{w} = \frac{\inp{T(u+w)}{u+w}-\inp{T(u-w)}{u-w}}{4}.$$ We let $w = Tu$ and get $T = 0$.
+    \item For operator $T$ on a \textbf{complex} inner product spaces $V$, $T$ is self-adjoint iff for every $v \in V$, $\inp{Tv}{v} \in \R$.
+    
+    Let us look at the equation
+    $$\inp{Tv}{v}-\conj{\inp{Tv}{v}}=\inp{Tv}{v}-\inp{v}{Tv}=\inp{(T-T^*)v}{v}.$$ If $\inp{Tv}{v} \in \R$ for every $v$, then $T-T^*=0$ by ($\dagger$). If in the other direction $T=T^*$, then $\inp{Tv}{v}=\conj{\inp{Tv}{v}}$ and is thus real for every $v$.
+    \item If $T = T^*$ on a (real or complex) inner product space $V$ and $\inp{Tv}{v}=0$ for all $v$, then $T = 0$. By ($\dagger$), now we only have to check this fact on real inner product space $V$. As one may check, $$\inp{Tu}{w} = \frac{\inp{T(u+w)}{u+w}-\inp{T(u-w)}{u-w}}{4}.$$ We let $w = Tu$ and get $T = 0$.
     \item An operator $T$ on $V$ is \textit{normal} if $TT^* = T^*T$. Obviously self-adjoint operators $T = T^*$ are normal.
     \item $T$ is normal iff $\nm{Tv}=\nm{T^*v}$ for all $v \in V$.
     
-    Note that $TT^* - T^*T$ is self-adjoint because $(TT^*-T^*T)^*=(TT^*)^*-(T^*T)^*=TT^* - T^*T$. Therefore,
+    To prove this, first note that $TT^* - T^*T$ is self-adjoint because $(TT^*-T^*T)^*=(TT^*)^*-(T^*T)^*=TT^* - T^*T$. Therefore,
     \begin{align*}
         TT^*-T^*T=0 & \iff \inp{(TT^*-T^*T)v}{v}=0 \text{ for all } v \in V \\ & \iff \inp{TT^*}{v} = \inp{T^*T}{v} \text{ for all } v \in V \iff \nm{T^*v}=\nm{Tv}.
     \end{align*}
     \begin{itemize}
         \item As a corollary, $Tv = 0 \iff T^*v = 0$, showing that $\n T = \n T^*$.
     \end{itemize}
-    \item $T$ and $T^*$ share the same eigenvectors. Suppose $T$ has eigenvector $v$ with $Tv = \lambda v$, then $T^*$ has the same eigenvector $v$ with $Tv = \conj{\lambda}v$.
+    \item All the eigenvalues of $T \in \LV$ are exactly the complex conjugates of all the eigenvalues in $T^*$. We basically need to prove that $\lambda$ is an eigenvalue of $T$ iff $\conj{\lambda}$ is an eigenvalue of $T^*$:
+    \begin{align*}
+        \lambda \text{ is not an eigenvalue of } T & \iff T - \lambda I \text{ is injective} \\ & \iff \n (T-\lambda I) = \{0\} \\ & \iff \r (T-\lambda I)^* = \{0\}^\perp = V \\ & \iff (T-\lambda I)^* = T^* - \conj{\lambda} I \text{ is surjective} \\ & \iff \conj{\lambda} \text{ is an eigenvalue of $T^*$}.
+    \end{align*}
+    \item If additionally $T$ is normal, $T$ and $T^*$ share the same set of eigenvectors. Suppose $T$ has eigenvector $v$ with $Tv = \lambda v$, then $T^*$ has the same eigenvector $v$ with $Tv = \conj{\lambda}v$.
     
     We first check $T-\lambda I$ is normal given $T$ is normal:
     \begin{equation*}
@@ -742,7 +758,7 @@ Matrices}
 \end{itemize}
 
 \subsection{The Spectral Theorem}
-Now extend the diagonalizability theorem we proved in Chapter 5 from general vector spaces to inner product spaces. 
+Now we extend the diagonalizability theorem proved in Chapter 5 from general vector spaces to inner product spaces. 
 \begin{itemize}
     \item The complex spectral theorem says that for operator $T$ on an complex inner product space $V$, the following are equivalent:
     \begin{enumerate}[label=(\alph*)]
@@ -771,7 +787,7 @@ Now extend the diagonalizability theorem we proved in Chapter 5 from general vec
 
 Schur's theorem gives us a shortcut to prove (a)$\implies$(c) by comparing $\M(T)$ and $\M(T^*)$. By contrast, in the spectral theorem for $T$ on real inner product spaces, (a)$\implies$(c) is not easy to prove because in the first place we do not know over $\R$ (unlike over $\C$) whether $T$ has an upper-triangular matrix with respect to some basis of $V$. Neither do we know whether any eigenvalue exists for $T \in \LV$ over $\R$.
 
-Therefore, a stronger condition on $T$ is required for the similar spectral theorem on real inner product spaces, and as you may guess, $T$ is now required to be self-adjoint. We leave (b) and (c) unchanged in the real spectral theorem. We can show if $T$ is self-adjoint, then $T$ must have an eigenvalue, from which we can prove that (a)$\implies$(b).
+Therefore, a stronger condition on $T$ is required for the similar spectral theorem on real inner product spaces, and as you may guess, $T$ is now required to be self-adjoint in (a). We leave (b) and (c) unchanged in the real spectral theorem. We can show if $T$ is self-adjoint, then $T$ must have an eigenvalue, from which we can prove that (a)$\implies$(b).
     \begin{itemize}
     \item Self-adjoint operators has at least an eigenvalue. Recall how we proved operators on complex vector spaces always have an eigenvalue in \S 5.2. The approach is exactly the same, but we use the polynomial factorization theorem over $\R$ instead of $\C$.
     \begin{itemize}
