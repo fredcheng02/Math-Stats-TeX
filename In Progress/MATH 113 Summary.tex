@@ -1,8 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsthm,amssymb,tikz-cd}
-\usepackage{cmbright}
-\usepackage[OT1]{fontenc}
+\usepackage[T1]{fontenc}
 \usepackage{enumitem}
 \usepackage{fullpage}
 \usepackage{setspace}
@@ -56,7 +55,7 @@
     \item The set of permutation $S_A$ is a group under permutation multiplication (composition).
     \item Permutation $S_n$ on $\{1,2,\dots,n\}$ is isomorphic to all permutations of order $n$, and can thus be taken as the prototype for permutations of order $n$.
     \item $S_3 \simeq D_3$ under renaming
-    \item For one-to-one function $\phi: G \to G'$ satisfying the homomorphism property, the image $\phi(G)$ is a subgroup of $G'$ and $\phi(G) \simeq G$. We use this to show Cayley's theorem that every group is isomorphic to a group of permutations.
+    \item For one-to-one function $\phi: G \to G'$ satisfying the homomorphism property, the image $\phi(G)$ is a subgroup of $G'$ and $\phi(G) \simeq G$. (This is actually true for algebraic structures in general because isomorphism is renaming.) We use this to show Cayley's theorem that every group is isomorphic to a group of permutations.
     \item Given $\sigma \in S_A$, the equivalence relation $\sim_\sigma$ given by $a \sim b$ ($a,b \in A$) if $b = \sigma^n(a)$ for some $n \in \Z$. This particular equivalence relation on the set $A$ determined by permutations on $A$ partitions the set $A$ into equivalence classes. The equivalence class determined by $\sim_\sigma$ is called the \textit{orbits} of $\sigma$.
     \item We now restrict to permutation on a finite set $A$, and we may take $S_n$ as the representative. These equivalence classes are exactly the \textit{cycles} of a permutation. Since $A$ is a finite set, it is impossible that no element $a \in A$ will never return to itself. Thus, an equivalence class of $A$ is a circle that starts from an element $a \in A$ and returns to $a$.
     \item Thus, every permutation on a finite set can always be broken down into a product of disjoint \textit{cycle permutations} (which only switches the ordering of elements on the orbit by 1).
@@ -106,5 +105,6 @@
         \item Left and right distributive laws hold.
     \end{enumerate}
     \item A \textit{0 divisor} of 
+    \item A polynomial $f(x)$ 
 \end{itemize}
 \end{document}

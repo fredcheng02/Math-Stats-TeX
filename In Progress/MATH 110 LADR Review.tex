@@ -582,6 +582,7 @@ Matrices}
     \end{itemize}
     \item Given an orthonormal list $e_1,\dots,e_n$, by repeated use of the Pythagorean theorem, we get $$\nm{a_1 e_1 + \cdots + a_n e_n}^2 = |a_1|^2 + \cdots + |a_n|^2$$ for all scalars $a_1, \dots, a_m$.
     \item It follows from the theorem above that if we set $a_1 e_1 + \cdots + a_n e_n = 0$, then all the $a_i$'s must be 0, showing that an orthonormal list of vectors $e_1,\dots,e_n$ are linearly independent. Therefore, an orthonormal list of length $\d V$ is an \textit{orthonormal basis}, i.e., an orthonormal list (set) that is also a basis.
+    \item Let $u_1,\dots,u_n$ be a basis of a vector space $U$, we may endow a natural inner product on $U$ (which you can verify) given by $$\inp{a_1u_1+\dots+a_nu_n}{b_1u_1+\dots+b_nu_n}=a_1b_1+\dots+a_nb_n.$$ What is special about this inner product is that $\inp{u_i}{u_i} = 1$ for all $i$, so that the list of $u_i$'s becomes an orthonormal basis of the inner product space $U$.
     \item Now any $v \in V$ can be written as a unique linear combination of the orthonormal basis vectors $e_1,\dots,e_n$. In fact, we have $$v = \inp{v}{e_1}e_1 + \dots + \inp{v}{e_n}e_n.$$
     Consider $v = a_1 e_1 + \dots + a_n e_n$ and take an inner product with $e_j$ on both sides. Then, $\inp{v}{a_j} = a_j$, as desired. Note that $\nm{v}^2 = |\inp{v}{e_1}|^2 + \dots + |\inp{v}{e_n}|^2$.
     \begin{itemize}
@@ -599,7 +600,7 @@ Matrices}
     \begin{itemize}
         \item This algorithm for constructing an orthonormal basis from a given basis leads to two useful corollaries.
     \begin{itemize}
-        \item Every FD inner product space has an orthonormal basis. Proof is trivial.
+        \item Every FD inner product space has an orthonormal basis. Proof is obvious.
         \item If $V$ is FD, then every orthonormal list of vectors can be extended to an orthonormal basis. We start with $e_1,\dots,e_m$ and extend the list to a basis $e_1,\dots,e_m,v_{m+1},\dots,v_n$ of $V$. It is easily observed that if we apply the Gram-Schmidt process from $e_1$ to $v_n$, then $e_1$ to $e_m$ will remain themselves, yet $v_{m+1},\dots,v_n$ will be orthonormalized to $f_{m+1},\dots,f_n$. Thus the $e$'s and the $f$'s become the basis extended from the original list of $e$'s.
     \end{itemize}
     \end{itemize}
@@ -700,7 +701,7 @@ Matrices}
     \end{enumerate}
     We prove (c) here and omit the others. For any $v \in V$ and $w \in W$, $$\inp{w}{(T^*)^*v} = \inp{T^*w}{v} = \conj{\inp{v}{T^*w}} = \conj{\inp{Tv}{w}} = \inp{w}{Tv}.$$ The second slot must be the same for all $v$ and thus $(T^*)^*=T$.
     
-    As you may have noticed from (a), (b), \& (c), the map $^*: \LVW \to \mathcal{L}(W,V)$ turns out to be a \textbf{conjugate-linear bijective map}. The map is injective because $$S^*=T^* \implies S=(S^*)^*=(T^*)^*=T;$$ the map is surjective because for any $S \in \mathcal{L}(W,V)$, we always have $S^* \in \LVW$ such that $(S^*)^*=S$.
+    As you may have noticed from (a), (b), \& (c), the map $^*: \LVW \to \mathcal{L}(W,V)$ turns out to be a \textbf{conjugate-linear bijective map}. The map is injective because $$S^*=T^* \implies S=(S^*)^*=(T^*)^*=T;$$ and the map is surjective because for any $S \in \mathcal{L}(W,V)$, we always have $S^* \in \LVW$ such that $(S^*)^*=S$.
     \item The nullspace and range of the adjoint of $T$ is connected to the orthogonal complement of $\n T$ and $\r T$. For $T \in \LVW$, we have
     \begin{enumerate}[label=(\alph*)]
         \item $\n T^* = (\r T)^\perp$;
@@ -846,8 +847,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
 \begin{itemize}
     \item $T \in \LV$ is \textit{positive} if $T$ is self-adjoint and $\inp{Tv}{v} \geq 0$ for all $v \in V$.
     \begin{itemize}
-        \item 
-        \item 
+        \item For example, we can verify that $P_U$ is a positive operator on $V$.
     \end{itemize}
     \item An operator $R$ is a \textit{square root} of $T$ if $R^2 = T$.
     \item For $T \in \LV$, the following are equivalent:
@@ -858,14 +858,40 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
         \item $T$ has a self-adjoint square root;
         \item there is an operator $R$ such that $T = R^* R$.
     \end{enumerate}
+    We provide some key steps to the proof below.
+    
+    (a)$\implies$(b): $T$ is positive implies $T$ is self-adjoint, which implies it must have an eigenvalue $\lambda$. Then for an eigenvector $v$ such that $Tv = \lambda v$, $$0 \leq \inp{Tv}{v} \leq \inp{\lambda v}{v} \leq \lambda\inp{v}{v}.$$
+    
+    (b)$\implies$(c): By the spectral theorems we have an orthonormal basis $e_1,\dots,e_n$ corresponding to nonnegative eigenvectors $\lambda_1,\dots,\lambda_n$. Construct $R \in \LV$ such that $Re_j = \sqrt(\lambda_j) e_j$ for every $e_j$. Then $R^2e_j = \lambda e_j = Te_j$, so that $R^2 = T$. Show that $R$ is a positive operator completes the proof.
+    
+    (c)$\implies$(d)$\implies$(e) is trivial.
+    
+    (e)$\implies$(a): $T^* = (R^*R)^* = R^*R = T$, and $\inp{Tv}{v}=\inp{Rv}{Rv} \geq 0$.
     
     \item Each positive operator on $V$ has a unique positive square root.
     
-    \item There are a series of equivalent characterizations of isometry. For $S \in \LV$, the following are equivalent:
-    \begin{enumerate}[label=(\alph*)]
+    \item An operator $S \in \LV$ is an \textit{isometry} if $\nm{Sv}=\nm{v}$ for all $v \in V$. (an operator that preserves norm)
     \item 
+    \item There are many equivalent characterizations of isometry. The following are equivalent for $S \in \LV$:
+    \begin{enumerate}[label=(\alph*)]
+    \item $S$ is an isometry;
+    \item $\inp{Su}{Sv} = \inp{u}{v}$ for all $u,v \in V$;
+    \item $Se_1,\dots,Se_n$ is orthonormal for every orthonormal list of vectors in $V$;
+    \item there exists an orthonormal basis $e_1,\dots,e_n$ of $V$ such that $Se_1,\dots,Se_n$ is orthonormal;
+    \item $S^*S = I$;
+    \item $SS^* = I$;
+    \item $S^*$ is an isometry;
+    \item $S$ is invertible and $S^{-1} = S^*$.
     \end{enumerate}
+    \item For scalars $\lambda_1,\dots,\lambda_n$ all with absolute value 1 satisfying $Se_j = \lambda_j e_j$ for orthonormal basis $e_1,\dots,e_n$ of $V$ and $S \in \LV$, $S$ must be an isometry.
+    
+    First, $Sv = \inp{v}{e_1}Se_1 + \dots + \inp{v}{e_n}Se_n = \lambda_1\inp{v}{e_1}e_1 + \dots + \lambda_n\inp{v}{e_n}$. Since the $\lambda$'s all have absolute value 1, $\nm{Sv} = |\inp{v}{e_1}|^2 + \dots + |\inp{v}{e_n}|^2 = \nm{v}^2$.
+    \item If we let $V$ be a complex inner product space, then the above example $S$ is the only type of isometry allowed.
+    
+    For an isometry $S \in \LV$ over $\C$, since $S$ is normal, by the complex spectral theorem we know that there is an orthonormal basis $e_1,\dots,e_n$ consisting of eigenvectors of $S$. For every $j$ between 1 and $n$, the eigenvalue $\lambda_j$ corresponding to $e_j$ has $$|\lambda_j|=\nm{\lambda_je_j}=\nm{Se_j}=\nm{e_j}=1.$$
+    Therefore, under $\C$, $S$ is an isometry is equivalent to saying that there is an orthonormal basis of $V$ consisting of eigenvalues of $S$ with corresponding eigenvalues all of absolute value 1.
 \end{itemize}
+
 
 \subsection{Polar Decomposition and Singular Value Decomposition}
 
