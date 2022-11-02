@@ -862,7 +862,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
     
     (a)$\implies$(b): $T$ is positive implies $T$ is self-adjoint, which implies it must have an eigenvalue $\lambda$. Then for an eigenvector $v$ such that $Tv = \lambda v$, $$0 \leq \inp{Tv}{v} \leq \inp{\lambda v}{v} \leq \lambda\inp{v}{v}.$$
     
-    (b)$\implies$(c): By the spectral theorems we have an orthonormal basis $e_1,\dots,e_n$ corresponding to nonnegative eigenvectors $\lambda_1,\dots,\lambda_n$. Construct $R \in \LV$ such that $Re_j = \sqrt(\lambda_j) e_j$ for every $e_j$. Then $R^2e_j = \lambda e_j = Te_j$, so that $R^2 = T$. Show that $R$ is a positive operator completes the proof.
+    (b)$\implies$(c): By the spectral theorems we have an orthonormal basis $e_1,\dots,e_n$ corresponding to nonnegative eigenvectors $\lambda_1,\dots,\lambda_n$. Construct $R \in \LV$ such that $Re_j = \sqrt{\lambda_j} e_j$ for every $e_j$. Then $R^2e_j = \lambda e_j = Te_j$, so that $R^2 = T$. Show that $R$ is a positive operator completes the proof.
     
     (c)$\implies$(d)$\implies$(e) is trivial.
     
@@ -870,23 +870,50 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
     
     \item Each positive operator on $V$ has a unique positive square root.
     
+    The idea is simple, for positive operator $T$, each eigenvalue $v$ of $T$ has $Tv = \lambda v$ for some nonnegative $\lambda$. Once we showed $Rv = \sqrt{\lambda}v$ for $R^2=T$, since the spectral theorem says that $V$ has a basis consisting entirely of these eigenvalues $v$ of $T$, we can show that $R$ is the unique square root.
+    
+    By the spectral theorem, there is an orthonormal basis $e_1,\dots,e_n$ consisting of eigenvectors of the positive operator $R$. Let $\sqrt{\lambda_1},\dots,\sqrt{\lambda_n}$ be the corresponding eigenvalues. If we now consider 
+    $$v = a_1 e_1+\dots+a_ne_n,$$ applying $R^2$ to both sides gives $$R^2v = a_1 \lambda_1 e_1 + \dots + a_n \lambda_n e_n,$$ while applying $T$ to both sides gives 
+    $$Tv = a_1 \lambda e_1 +\dots+ a_n \lambda e_n.$$ The two expressions above are equal, and since the $e$'s are a basis, we have $a_j(\lambda - \lambda_j) = 0$ for all $j$. Thus, 
+    $$v = \sum_{\{j: \lambda_j=\lambda\}}a_j e_j, \text{ and then } Rv = \sum_{\{j: \lambda_j=\lambda\}} a_j \sqrt{\lambda} e_j = \sqrt{\lambda}v.$$
+    
     \item An operator $S \in \LV$ is an \textit{isometry} if $\nm{Sv}=\nm{v}$ for all $v \in V$. (an operator that preserves norm)
-    \item 
     \item There are many equivalent characterizations of isometry. The following are equivalent for $S \in \LV$:
     \begin{enumerate}[label=(\alph*)]
     \item $S$ is an isometry;
     \item $\inp{Su}{Sv} = \inp{u}{v}$ for all $u,v \in V$;
-    \item $Se_1,\dots,Se_n$ is orthonormal for every orthonormal list of vectors in $V$;
+    \item $Se_1,\dots,Se_n$ is orthonormal for every orthonormal list of vectors $e_1,\dots,e_n$ in $V$;
     \item there exists an orthonormal basis $e_1,\dots,e_n$ of $V$ such that $Se_1,\dots,Se_n$ is orthonormal;
     \item $S^*S = I$;
     \item $SS^* = I$;
     \item $S^*$ is an isometry;
     \item $S$ is invertible and $S^{-1} = S^*$.
     \end{enumerate}
+    
+    (a)$\implies$(b) because inner products can be calculate from norms. On real and complex inner product spaces, respectively,
+    \begin{equation*}
+        \inp{u}{v} = \frac{\nm{u+v}^2-\nm{u-v}^2}{4} \quad \text{and} \quad \inp{u}{v} = \frac{\nm{u+v}^2-\nm{u-v}^2+\nm{u+iv}^2i+\nm{u-iv}^2i}{4}.
+    \end{equation*}
+    (b)$\implies$(c): replace $u$ and $v$ by $e_j$ and $e_k$
+    
+    (c)$\implies$(d): trivial
+    
+    (d)$\implies$(e): For orthonormal basis of $e_1,\dots,e_n$ that makes $Se_1,\dots,Se_n$ orthonormal, $$\inp{S^*Se_j}{e_k}=\inp{e_j}{e_k}.$$ By the fact that all $u,v \in V$ can be expressed as a linear combination of these $e$'s, one can show $\inp{S^*Su}{v}-\inp{u}{v} = \inp{(S^*S-I)u}{v} = 0$. If we set $v = (S^*S-I)u$, we will have $\nm{(S^*S-I)u}=0$ for all $u$, and thus $S^*S=I$.
+    
+    (e)$\implies$(f): It is not hard to prove the general case that $ST = I$ iff $TS =I$ for operators $S,T \in \LV$.
+    
+    (f)$\implies$(g) is standard: $\nm{S^*v}^2=\inp{SS^*v}{v} = \inp{Iv}{v} = \nm{v}^2$.
+    
+    (g)$\implies$(h): We can replace $S$ by $S^*$ in (a) and similarly get $SS^*=I$ [from (a)$\implies$(e)] and $S^*S=I$ [from (a)$\implies$(f)], showing that $S$ is invertible with $S^{-1}=S^*$.
+    
+    (h)$\implies$(a) is again standard: $\nm{Sv} = \inp{S^*Sv}{v} = \inp{Iv}{v} = \nm{v}^2$.
+    \begin{itemize}
+        \item Every isometry is normal by $(e)$ and $(f)$, and actually we can extend properties of normal operators to describe properties of isometry. The complex case is given below and the real case will be given later.
+    \end{itemize}
     \item For scalars $\lambda_1,\dots,\lambda_n$ all with absolute value 1 satisfying $Se_j = \lambda_j e_j$ for orthonormal basis $e_1,\dots,e_n$ of $V$ and $S \in \LV$, $S$ must be an isometry.
     
     First, $Sv = \inp{v}{e_1}Se_1 + \dots + \inp{v}{e_n}Se_n = \lambda_1\inp{v}{e_1}e_1 + \dots + \lambda_n\inp{v}{e_n}$. Since the $\lambda$'s all have absolute value 1, $\nm{Sv} = |\inp{v}{e_1}|^2 + \dots + |\inp{v}{e_n}|^2 = \nm{v}^2$.
-    \item If we let $V$ be a complex inner product space, then the above example $S$ is the only type of isometry allowed.
+    \item If we let $V$ be a \textbf{complex} inner product space, then the above example $S$ is the only type of isometry allowed.
     
     For an isometry $S \in \LV$ over $\C$, since $S$ is normal, by the complex spectral theorem we know that there is an orthonormal basis $e_1,\dots,e_n$ consisting of eigenvectors of $S$. For every $j$ between 1 and $n$, the eigenvalue $\lambda_j$ corresponding to $e_j$ has $$|\lambda_j|=\nm{\lambda_je_j}=\nm{Se_j}=\nm{e_j}=1.$$
     Therefore, under $\C$, $S$ is an isometry is equivalent to saying that there is an orthonormal basis of $V$ consisting of eigenvalues of $S$ with corresponding eigenvalues all of absolute value 1.
@@ -894,6 +921,31 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
 
 
 \subsection{Polar Decomposition and Singular Value Decomposition}
+\begin{itemize}
+\item \S 7.3 tells us that there is a unique positive square root of $T$. We denote it by $\sqrt{T}$.
+\item The polar decomposition theorem states that for $T \in \LV$, we can find an isometry $S$ such that $T = S \sqrt{T^*T}$. (breaking $T$ into a composition of $S$ with $\sqrt{T^*T}$)
+
+Note that $T^*T$ by its form is already a positive operator, so we know it has a positive square root.
+
+There is a good analogy of this theorem with the polar decomposition of a complex number. For nonzero $z \in \C$, we have $z = \left(\frac{z}{|z|}\right)\sqrt{\conj{z}z}$, where the first factor is a point on the unit circle and the second factor resembles $T^*T$. To prove the theorem, we need several steps:
+\begin{itemize}
+    \item \textit{Step I}. Define the function $S_1: \r \sqrt{T^*T} \to \r T$ by $S_1(\sqrt{T^*T}v)=Tv$.
+    
+    What is special about $\sqrt{T^*T}$ is that $\nm{Tv}=\nm{\sqrt{T^*T}v}$ for all $v$, and one uses this to prove that the function $S_1$ is well-defined and injective. One should also verify that $S_1$ is a linear map and thus a linear isometry. The linear map is surjective by definition.
+    
+    \item \textit{Step II}. Our idea is to extend $S_1$ on $\r T$ to $S$ on the entire $V$. 
+    
+    Because $S_1: \r \sqrt{T^*T} \to \r T$ is now bijective, $\d \sqrt{T^*T} = \d \r T$, from which we know $\d(\r \sqrt{T^*T})^\perp = \d(\r T)^\perp$ because both $T^*T$ and $T$ are linear operators on $V$. Thus we have an orthonormal basis $e_1,\dots,e_m$ of $(\r \sqrt{T^*T})^\perp$ and another orthonormal basis $f_1,\dots,f_m$ of $(\r T)^\perp$. If we let $S_2(e_1) = f_1,\dots,S_2(e_m)=f_m$, the fact that the $e$'s and the $f$'s are two orthonormal bases gives us an isometry $S_2$.
+    
+    \item \textit{Step III}. Merge $S_1$ and $S_2$ into an isometry $S$ on $V$.
+    
+    Because $v$ can be unique written into as the sum of $u \in \r \sqrt{T^*T}$ and $w \in (\r \sqrt{T^*T})^\perp$, defining $$Sv = S_1 u+ S_2 w$$ gives $S(\sqrt{T^*T}v) = S_1(\sqrt{T^*T}v) = Tv$ for all $v \in V$, so that $T=S\sqrt{T^*T}$. Furthermore, by the Pythagorean theorem and $S_1$ and $S_2$ are  isometries themselves, one can show $\nm{Sv}^2=\nm{v}^2$ for all $v$.
+\end{itemize}
+\item The \textit{singular values} of $T \in \LV$ are the eigenvalues of $\sqrt{T^*T}$, which each eigenvalue repeating $\d E(\lambda, \sqrt{T^*T})$ times. Naturally the singular values should all be nonnegative because $\sqrt{T^*T}$ is the positive square root.
+\item It quite naturally follows that singular values of $T \in \LV$ are the nonnegative square roots of the eigenvalues of $T^*T$, with each eigenvalue repeated $\d E(\lambda,T^*T)$ times.
+
+$T^*T$ is positive, so by the spectral theorem there is an orthonormal basis $e_1,\dots,e_n$ and nonnegative $\lambda_1,\dots,\lambda_n$ such that $T^*Te_j = \lambda_j e_j$ for every $j$. Thus, $\sqrt{T^*T}e_j=\sqrt{\lambda_j}e_j$, which we showed earlier in proving every positive operator has a unique positive square root.
+\end{itemize}
 
 
 \section{Operators on Complex Vector Spaces}
