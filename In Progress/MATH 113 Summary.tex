@@ -1,14 +1,14 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amsthm,amssymb,tikz-cd}
+\usepackage{amsmath,amssymb,tikz-cd,mathtools}
 \usepackage[T1]{fontenc}
 \usepackage{enumitem}
 \usepackage{fullpage}
 \usepackage{setspace}
-\usepackage{mathtools}
 \usepackage[bookmarks]{hyperref}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\aut}{\operatorname{Aut}}
@@ -99,12 +99,29 @@
 \section{Rings and Fields}
 \begin{itemize}
     \item The definition of rings given in the book does not assume the existence of the multiplicative identity. A ring $\langle R,+,\cdot \rangle$ is a set $R$ endowed with two binary operations addition and multiplication, such that:
-    \begin{enumerate}%[label=(\alph*)]
+    \begin{enumerate}[label=(\alph*)]
         \item $\langle R, + \rangle$ is an abelian group;
         \item $R$ is associative under multiplication;
         \item Left and right distributive laws hold.
     \end{enumerate}
+    \item $0a = a0 = 0, a(-b)=(-a)b=-(ab), (-a)(-b)=ab$
+    \item Ring homomorphism: homomorphism property holds with respect to both addition and multiplication
+    \item We can ignore the homomorphism equation with respect to multiplication, and all the properties we have proved about group homomorphism are inherited.
+    \item 
     \item A \textit{0 divisor} of 
-    \item A polynomial $f(x)$ 
-\end{itemize}
+    \item A polynomial $f(x)$ with coefficients in a ring $R$ is an infinite formal sum $$\sum_{i=0}^\infty a_i x^i = a_0 + a_1 x + \dots + a_n x^n + \dots,$$ where $a_i$ can be nonzero for only finite terms.
+    
+    
+    
+    \item The set $R[x]$ is a ring under polynomial addition and multiplication. $R$ being commutative implies $R[x]$ is commutative, while $R$ has unity $1 \not= 0$ implies $R[x]$ has unity 1.
+    \item If $D$ is an integral domain, so is $D[x]$. In particular, if we take $F$ to be a field, then $F[x]$ is an integral domain.
+    \item Existence and uniqueness of division algorithm
+    \item $a$ is a zero iff $f(x)$ can have a factor $(x-a)$.
+    \item By induction we can prove that a degree-$n$ polynomials has at most $n$ zeros.
+    \item 
+    
+    
+    \item 
+    
+    \end{itemize}
 \end{document}
