@@ -367,7 +367,7 @@
 
 \newpage
 \section{Polynomials}
-\textit{Remark}. We used facts about polynomials in high school algebra. These facts were intuitively ``understood'' by us back then, but we never had the chance to rigorously prove them.
+\textit{Remark}. We used facts about polynomials in high school algebra. These facts were intuitively ``understood'' back then, but we never had the chance to rigorously prove them. An abstract algebra course delves deep into some materials on polynomials, which we still take for granted in this book. For example, note that when evaluating a polynomial $p(z)q(z)$ at $z = a$, although we still directly plug $a$ in and compute $p(a)q(a)$ to get the result, this is formally not rigorous. This ``plugging-in'' step requires the machinery of \textit{evaluation homomorphism} to be justified. As another example, one should show that for polynomials with coefficients from a field (more generally from an integral domain), $\deg p + \deg q = \deg pq$ holds, before using it.
 
 \begin{itemize}
 	\item The product $pq \in \PF$ of polynomials $p(z)=\sum_{i=0}^m a_iz^i$ and $q(z)=\sum_{j=0}^m b_jz^j$ in $\PF$ is defined by $$(pq)(z) = p(z)q(z) = \sum_{i=0}^m\sum_{j=0}^n a_i b_j z^{i+j}$$ for all $z \in \F$ (``expanding out and collecting like terms''). We can interchange the Sigma notation and see that $p(z)q(z) = q(z)p(z)$. Two polynomials commute under multiplication.
@@ -450,8 +450,8 @@
     \end{itemize}
     \item $p(T)$ is the polynomial $p$ taking $T$ as its indeterminate (although $T$ is not $\F$). For $p(z) = a_0 + a_1 z + \dots + a_n z^n$ over $\F$, we define $p(T) = a_0 I + a_1 T + \dots a_n T^n$.
     \begin{itemize}
-        \item If we fix an operator $T$, the evaluation map $\PF$ to $\LV$ given by $p \mapsto p(T)$ is linear.
-    	\item Recall that $p(z)q(z) = q(z)p(z)$ for polynomials. It follows directly that $p(T)q(T) = q(T)p(T)$, because we only replace the symbol $z$ by $T$. Thus, when computing the polynomial of a linear map, the order of the factors does not matter.
+        \item If we fix an operator $T$, the evaluation map from $\PF$ to $\LV$ given by $p \mapsto p(T)$ is linear.
+    	\item Recall that $p(z)q(z) = q(z)p(z)$ for polynomials. It follows directly that $p(T)q(T) = q(T)p(T)$, because we are only replacing the indeterminate symbol $z$ by the operator symbol $T$. Thus, when computing the polynomial of a linear map, the order of the factors does not matter.
     \end{itemize}
     \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector spaces.) The proof employs the fundamental theorem of algebra and is quite tricky. Choose a nonzero $v \in V$ ($\d V=n$) and consider the list $v, Tv, \dots, T^n v$, which must be linearly dependent. Thus, we have $$0 = a_0 v + a_1 Tv + \dots + a_n T^n v,$$ where the $a_i$'s are not all $0$. In particular, $a_1, \dots, a_n$ cannot all be 0 since $v \not= 0$ will then give us $a_0 = 0$. Thus, we have a nonconstant polynomial $a_0+a_1 z+\dots+a_m z^m$ ($m \leq n$), which can be factorized into $$c(z - \lambda_1)\cdots(z - \lambda_m)$$ over $\C$. For $$0=c(T - \lambda_1 I)\cdots(T - \lambda_m I)v,$$ the nonzero vector $w = (T - \lambda_{j+1} I) \cdots (T - \lambda_m I)v$ will be be taken to 0 by $(T - \lambda_j I)$. $(T - \lambda_j I)$ is thus not injective and $\lambda_j$ is an eigenvalue.
     \item We construct the matrix of an operator always with respect to only one ordered basis of $V$. The matrix $\M(T,(v_1,\dots,v_n))$ is a square matrix. In the $j$-th column of $\M(T)$, each entry corresponds to each coefficient from $a_1v_1+\dots+a_nv_n = Tv_j$. A square matrix with all entries being 0 below the diagonal is called an \textit{upper-triangular matrix}, which is crucial in the theory of eigenvalues.
@@ -1098,6 +1098,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 \end{itemize}
 
 \subsection{Characteristic and Minimal Polynomials}
+\textit{Remark}. By default in this section, $q$ is the characteristic polynomial, and $p$ is the minimal polynomial.
 \begin{itemize}
     \item For an operator $T$ over a complex vector space $V$, let $\lambda_1, \dots, \lambda_m$ be all distinct eigenvalues of $T$, each with corresponding multiplicity $d_1,\dots, d_m$. Then the \textit{characteristic polynomial} of $T$ is defined to be \[(z-\lambda_1)^{d_1}\cdots (z-\lambda_m)^{d_m}.\]
     \begin{itemize}
@@ -1119,8 +1120,21 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     \begin{itemize}
         \item We remark that the Cayley-Hamilton theorem tells us that the minimal polynomial has to be of degree at most $\d V$, an upper bound stronger than $(\d V)^2 = \d \LV$, over $\C$. This holds over $\R$ as well as we will see in the next chapter.
     \end{itemize}
-    \item $q(T) = 0$ iff $q$ is a scalar multiple of the minimal polynomial $p$ of $T$.
+    \item $q(T) = 0$ iff $q$ is a polynomial multiple of the minimal polynomial $p$ of $T$ (i.e., there exists $s \in \PF$ such that $q=ps$).
 
+    ``$\impliedby$'' is obvious. For ``$\implies$'', suppose we have $q(z)$ such that $q(T) = 0$, then by the division algorithm with respect to the minimal polynomial $p(z)$, we have $q = ps+r$ for a (unique) pair of $s$ and $r$ with $\deg r < \deg p$. Then \[0 = q(T) = p(T)s(T)+r(T) = r(T).\] If $r$ is not the zero polynomial, then we may divide $r$ by its highest coefficient to get a monic polynomial $\tilde{r}$ such that $\tilde{r}(T) = 0$ still. Yet $\deg \tilde{r} < \deg p$, which leads to contradiction. Therefore, $r = 0$, and we have $q = ps$.
+    \begin{itemize}
+        \item It follows directly that for an operator $T$ on a complex vector space, the characteristic polynomial must be a polynomial multiple of the minimal polynomial. (We have not defined the characteristic polynomials in the case $\F = \R$, but the result is similarly true. See the next chapter.) This is an important criterion for us to find the minimal polynomial of an operator.
+    \end{itemize}
+    \item The following result is another important criterion for finding the minimal polynomial. For operator $T$ on $V$, the zeros of the minimal polynomial $p$ are \textbf{precisely} the eigenvalues of $T$.
+
+    Suppose $\lambda \in \F$ is a zero of $p$, so that $p(z) = (z-\lambda)q(z)$ for a monic polynomial $q$ (because $p$ is monic). Replace $z$ by $T$, and we have \[0 = p(T) = (T - \lambda I)q(T).\] Since $\deg q < \deg p$, for some $v \in V$ $q(T)v \ne 0$ so that $q$ is not a minimal polynomial. Therefore, $T - \lambda I$ is not injective, which means that $\lambda$ is an eigenvalue of $T$.
+
+    For the other direction, suppose $\lambda \in \F$ is an eigenvalue of $T$ instead, then $\exists v \in V\backslash \{0\}$ such that $Tv = \lambda v$. We have used a number of times already that $T^j = \lambda^j v$ for arbitrary integer exponent $j$. Thus
+    \begin{align*}
+        0 = p(T)v & = (a_0 I + a_1 T + \dots + a_{m-1} T^{m-1} + T^m)v \\ & = (a_0 + a_1 \lambda + \dots + a_{m-1} \lambda^{m-1} + \lambda^m)v \\ & = p(\lambda) v.
+    \end{align*}
+    Since $v \ne 0$, $p(\lambda) = 0$, as desired.
 \end{itemize}
 
 \subsection{Jordan Form}
