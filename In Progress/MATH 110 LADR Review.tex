@@ -85,7 +85,7 @@
         \item In particular, for a linearly independent set $S = \{s_1, s_2, \dots , s_m\} \subsetneq$ a linearly dependent set $T = \{s_1, s_2, \dots , s_m, t_1, t_2, \dots , t_n\}$, one such vector is always in $T \backslash S$. This is because for the nontrivial way of writing $0 = a_1s_1 + \cdots +a_ms_m + b_1 t_1 + \cdots + b_n t_n$, if all $b$'s are 0, then all $a$'s will also be 0. Thus, some $b_i$ must be nonzero, and the corresponding $t_i$ can be removed without changing the span.
         \begin{itemize}
             \item The special case $n=1$ of the contraposition will be useful to us. If one new vector is added to the linearly independent $S$ but does not belong to span($S$), then the resulting set is still linearly independent.
-            \item From this special case we know that for a linear dependent set $\{v_1,\dots,v_n\}$, at some index $k \leq n$ we have $\{v_1,\dots,v_{k-1}\}$ being linearly independent, while $v_k \in \s(\{v_1,\dots,v_{k-1}\})$. (This is the well-ordering case of the linear dependence lemma 2.21 in book that we will use again in Chapter 5.)
+            \item From this special case we know that for a linear dependent set $\{v_1,\dots,v_n\}$, at some index $k \leq n$ we have $\{v_1,\dots,v_{k-1}\}$ being linearly independent, while $v_k \in \s(\{v_1,\dots,v_{k-1}\})$. (This is the well-ordering case of the linear dependence lemma 2.21 in book that we will use again in Chapter 5 and Chapter 8.)
         \end{itemize}
         \item Note that a linearly independent set of vectors cannot have the $0$ vector.
     \end{itemize}
@@ -133,8 +133,8 @@
         T (\lambda u) = \lambda T(u).
     \end{equation*}
     \item The zero transformation maps every vector of $V$ to $0_W$. The identity transformation $I_V: V \rightarrow V$ maps each element of $V$ to itself in $V$.
-    \item We define the addition and scalar multiplication of linear maps in the vector-wise way: $$(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),$$ following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. In addition to the linear properties, we define the \textit{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. Why the product is essential will become clear later. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties ($(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$) obviously hold as well.
-    \item If $T(x_1,\dots,x_n) = (a_{11}x_1+\cdots+a_{1n}x_n,\dots,a_{m1}x_1+\cdots+a_{mn}x_n)$, then $T$ is obviously a linear map from $\F^n$ to $\F^m$. For a linear map $T \in \mathcal{L}(\F^n,\F^m)$, it must be of this form, and all the $a_{ij}$'s are determined by the mapping of the $n$ canonical basis vectors of $\F^n$.
+    \item We define the addition and scalar multiplication of linear maps in the vector-wise way: $$(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),$$ following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. In addition to the linear properties, we define the \textit{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. Why the product is essential will become clear later. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties [$(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$] obviously hold as well.
+    % \item If $T(x_1,\dots,x_n) = (a_{11}x_1+\cdots+a_{1n}x_n,\dots,a_{m1}x_1+\cdots+a_{mn}x_n)$, then $T$ is obviously a linear map from $\F^n$ to $\F^m$. For a linear map $T \in \mathcal{L}(\F^n,\F^m)$, it must be of this form, and all the $a_{ij}$'s are determined by the mapping of the $n$ canonical basis vectors of $\F^n$.
     \item The uniqueness of the linear map that takes basis vectors $v_1, v_2, \dots, v_n$ to corresponding vectors $w_1, w_2, \dots, w_n$ is the most fundamental theorem in this section. It is our first step toward showing that linear maps and matrices are isomorphic. To prove the theorem, for arbitrary $a_i$'s, let $$T: \sum_{i=1}^n a_i v_i \mapsto \sum_{i=1}^n a_i w_i.$$
     \item Here are a few properties that are useful in linear maps. The proofs are quite routine.
     \begin{itemize}
@@ -227,7 +227,7 @@
             \end{tikzcd}
         \end{equation*}
         For a vector $v \in V$, its image $\M(v)$ under the isomorphism $\M$ of $V$ belongs to $\F^{n,1}$. Matrix multiplication with $\M(T)$ gives us $\M(Tv) \in \F^{m,1}$, which we identify with $Tv$ under the isomorphism $\M$ of $W$. This is why a linear map can be described entirely by its matrix representation.
-        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication. Think about the Jacobian matrix representation of the total derivative in the Euclidean space. Left-multiplication by a matrix corresponds to the linear \textit{transformation} of a vector.
+        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication on the left. Think about the Jacobian matrix representation of the total derivative in the Euclidean space. Left-multiplication by a matrix corresponds to the linear \textit{transformation} of a vector.
     \end{itemize}
     \item A \textit{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
     \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.) This is true for functions $f:S \to S$ (where $S$ is finite) in general, but for linear maps the proof is likely to be rather simple:
@@ -428,7 +428,10 @@
     \item For $T \in \LV$, $\lambda \in \F$ is an \textit{eigenvalue} of $T$ if there exists a nonzero $v \in V$ such that $Tv = \lambda v$. The $v$ here is called the \textit{eigenvector}.
     
     Any nonzero vector in a 1-dimension space is an eigenvector. If $u$ is an eigenvector of $T$, then $\s(u)$ is invariant under $T$.
-    \item To move $\lambda v$ to the left side, we consider the linear operator $\lambda I$ that maps $v$ to $\lambda v$. Therefore, we have $(T-\lambda I) v = 0$. Since $v \not= 0$, $T-\lambda I$ is not injective/surjective/invertible (since it is an operator on $V$).
+    \item We may move $\lambda v$ to the left side: consider the linear operator $\lambda I$ that maps $v$ to $\lambda v$. Therefore, $Tv = \lambda v$ is equivalent to $(T-\lambda I) v = 0$. Since $v \not= 0$, this is equivalent to $T-\lambda I$ is not injective/surjective/invertible (since it is an operator on $V$).
+    \begin{itemize}
+        \item As a special case, $T$ is not invertible iff 0 is an eigenvalue of $T$. This will become useful in Chapter 8.
+    \end{itemize}
     \item Eigenvectors corresponding to distinct eigenvalues are linearly independent. The usual proof of this starts with 2 distinct eigenvalues and proceeds with induction, but the book uses the well-ordering principle instead. Suppose the $\bv$ corresponding to eigenvectors $\lambda_1,\dots,\lambda_n$ are linearly dependent, then at $k \leq n$ we have $v_k \in \s(v_1,\dots,v_{k-1})$ with $v_1,\dots,v_{k-1}$ being linearly dependent. Thus, 
     \begin{equation}
         v_k = a_1 v_1 + \dots + a_{k-1}v_{k-1},
@@ -998,7 +1001,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
         \end{itemize}
     \item For $T$ on $V$ with dimension $n$, we have $\n T^n = \n T^{n+1} = \cdots$.
     
-    For the proof, assume that $\n T^n = \n T^{n+1}$, then by the previous two claims we have
+    For the proof, assume that $\n T^n \ne \n T^{n+1}$, then by the previous two claims we have
     $$\{0\} = \n T^0 \subsetneq \n T^1 \subsetneq \cdots \subsetneq \n T^n \subsetneq \n T^{n+1}.$$
     Every proper subset means the dimension of the next one on the right must be one more than the dimension of the previous one on the left. Therefore, at the point $\n T^n$ is at least of dimension $n$, from which we can increase no further.
     
@@ -1011,8 +1014,8 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     Now we have $\d (\n T^n \oplus \r T^n) = \d\n T^n + \d\r T^n = \d V$. Since $\n T^n \oplus \r T^n$ is a subspace of $V$, the direct sum is $V$ itself.
     \item We now generalizes the concept of eigenvectors so that we will show soon that a complex vector space can be written into a direct sum of generalized eigenspaces. The \textit{generalized eigenvector} of $T$ corresponding to eigenvalue $\lambda$ is a nonzero vector $v \in V$ such that $(T-\lambda I)^j v = 0$ for some $j \in \Z^+$. (Note that when generalizing eigenvectors, no new eigenvalues are introduced because $T - \lambda I$ being injective implies that $(T -\lambda I)^n$ is injective.)
     
-    The \textit{generalized eigenspace} of $T$ corresponding to $\lambda$ is the set $$G(\lambda, T) = \{0\} \cup \text{ the set of generalized eigenvectors of $T$ corresponding to $\lambda$}.$$
-    Obviously $E(\lambda, T) \subseteq G(\lambda, T)$. When $\lambda$ is not an eigenvalue, $G(\lambda, T) = \{0\}$.
+    The \textit{generalized eigenspace} of $T$ corresponding to $\lambda$ is the set $$G(\lambda, T) = \{0\} \cup \text{the set of generalized eigenvectors of $T$ corresponding to $\lambda$}.$$
+    Obviously $E(\lambda, T) \subseteq G(\lambda, T)$. (The $E$ is actually a subspace of $G$ because $E$ is closed under the induced operations from $G$ again induced from $V$.) When $\lambda$ is not an eigenvalue, $G(\lambda, T) = \{0\}$.
     \item We now state that $G(\lambda, T) = \n (T - \lambda I)^n$, where $n = \d V$. (In particular, $G(0,T) = \n T^n$) You should already have an idea that the proof uses the nullspace power chain.
     \item A list of generalized eigenvectors corresponding to distinct eigenvalues still needs to be linearly independent. Let $\lambda_1,\dots,\lambda_m$ be the list of eigenvalues and $v_1,\dots,v_m$ be the list of corresponding eigenvectors we are considering. Suppose $0 = a_1v_1 + \dots + a_mv_m$.
     
@@ -1021,11 +1024,11 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     0 & = a_1 (T-\lambda_2 I)^n \cdots (T-\lambda_m I)^n (T-\lambda_1 I)^k v \\ & = a_1 (\lambda_1 -\lambda_2) \cdots (\lambda_1 - \lambda_m)^n w.
     \end{align*}
     Since $w$ is nonzero and the $\lambda_1$ is distinct from the other $\lambda$'s, $a_1 = 0$. In the same way, all the coefficients $a_i$ must be zero and thus the eigenvectors are linearly independent.
-	\item A operator $N$ is \textit{nilpotent} if $N^k = 0$ for some $k \in \Z^+$. A nilpotent operator cannot be injective/surjective. [Recall the composition of injective (surjective/bijective) functions must be injective (surjective/bijective).]
+	\item A operator $N$ on $V$ is \textit{nilpotent} if $N^k = 0$ for some $k \in \Z^+$. A nilpotent operator cannot be injective/surjective. [Recall the composition of injective (surjective/bijective) functions must be injective (surjective/bijective).]
 	\begin{itemize}
 	\item The only eigenvalue of a nilpotent operator is 0. Proof is obvious.
 	\end{itemize}
-	\item Given nilpotent $N$, $N^{\d V} = 0$, again by the nullspace power chain.
+	\item Given nilpotent operator $N$ on $V$, $N^{\d V} = 0$, again by the nullspace power chain. (The reverse direction is obviously true as well.)
 	\item $\M(N)$ with respect to some basis of $V$ has the form $	\begin{bmatrix}
 		0 & & \ast \\
 		 & \ddots & \\
@@ -1058,6 +1061,9 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     if we let $U = \r (T-\lambda_1)^n$. This $U$ is invariant under $T$ by applying the last theorem to $p(z) = (z-\lambda_1)^n$. Since $G(\lambda_1,T) \ne \{0\}$, we have $\d U < n$, so that we can (a) is true in $T|_U \in \mathcal{L}(U)$: \[U = G(\lambda_1,T|_U) \oplus \cdots \oplus G(\lambda_m,T|_U).\] Since $G(\lambda_1,T)$ contains all generalized eigenvectors corresponding to $\lambda_1$ by definition, the eigenvectors of $T|_U$ can only correspond to $\lambda_2,\dots,\lambda_m$.
 
     We now intend to prove that $G(\lambda_k,T|_U) = G(\lambda_k,T)$ for all $k$ between 2 and $m$, i.e., $U$ contains all the generalized eigenvectors of $T$ corresponding to $\lambda_k$. ``$\subseteq$'' is clear because, and we prove ``$\supseteq$'': suppose $v \in G(\lambda_k,T) \subseteq U$, then by (3) above, $v = v_1 + u$ for some $v_1 \in G(\lambda_1,T)$ and $u \in U$. Furthermore, $u$ can broken up into $v_2+\dots+v_m$ for each $v_j \in G(\lambda_j,T|_U) \subseteq G(\lambda_j,T)$ [which we proved just now], so that $v = v_1 + v_2 + \dots + v_m$. Because generalized eigenvectors corresponding to distinct eigenvalues of linearly independent, all the $v_1$ to $v_m$ on the RHS must be 0 except for $v_k$. In particular $v_1 = 0$, so that $v = u \in U$. Therefore, $v \in G(\lambda_k,T)$, as desired.
+    \begin{itemize}
+        \item Note that if $T$ is diagonalizable, since $E(\lambda_j,T) \subseteq G(\lambda_j,T)$, comparing the (a) here and $V = E(\lambda_1,T) \oplus \dots \oplus E(\lambda_m,T)$ gives us $E(\lambda_j,T) = G(\lambda_j,T)$ for all $j$, or otherwise the $G$'s would not give a direct sum.
+    \end{itemize}
     \item Because all the generalized eigenspaces $G(\lambda_j,T)$ are vector spaces, we can choose a basis from each of $G(\lambda_1,T)$ to $G(\lambda_m,T)$. Put all these bases together and by (a), we have a basis of $V$ consisting of generalized eigenvectors of $T$.
     \item For an eigenvalue $\lambda$ of $T \in \LV$, its \textit{algebraic multiplicity} is defined as $\d G(\lambda,T) = \d \n (T-\lambda I)^{\dim V}$, and its \textit{geometric multiplicity} is defined as $\d E(\lambda,T) = \d \n (T-\lambda I)$. By default, when the book says ``multiplicity'' it means specifically the algebraic multiplicity.
     \begin{itemize}
@@ -1098,7 +1104,22 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
         \item The characteristic polynomial must be of degree $\d V$ because $d_1+\dots+d_m = \d V$.
         \item The zeros of the characteristic polynomial are the eigenvalues of $T$.
     \end{itemize}
-    \item 
+    \item Now we prove the important \textbf{Cayley-Hamilton theorem} over complex vector spaces. With the tools of generalized eigenspaces we introduced in the last two sections, the proof becomes straightforward. Let $T$ be an operator on a complex vector space $V$. Let $q$ be the characteristic polynomial of $T$, then $q(T) = 0$.
+
+    Let $\lambda_1,\dots,\lambda_m$ are distinct eigenvalues of $T$ and $d_1,\dots,d_m$ be the corresponding dimensions of the generalized eigenspaces $G(\lambda_j,T)$, i.e., the multiplicities of these eigenvalues. We know the restricted operator $(T - \lambda_j I)|_{G(\lambda_j,T)}$ is nilpotent, and thus it raised to the power of $\d G(\lambda_j,T)$ is the zero operator: $(T - \lambda_j I)^{d_j}|_{G(\lambda_j,T)} = 0$.
+
+    Since every vector in $V$ is a sum of vectors in the individual generalized eigenspaces, it suffices to prove that each $q(T)|_{G(\lambda_j,T)} = 0$. Consider $q(T) = (T - \lambda_1 I)^{d_1} \cdots (T - \lambda_m I)^{d_m}$, in which the factor on the RHS are commutative. For any chosen $j$ between 1 and $m$, we may move the factor $(T - \lambda_j I)^{d_j}$ to the very right. Since for all $v \in G(\lambda_j,T)$, $(T - \lambda_j I)^{d_j}v = 0$, $q(T)|_G(\lambda_j,T)$ is the zero operator, as desired.
+
+    \item A \textit{monic polynomial} is polynomial with highest-term coefficient being 1.
+    \item For $T \in \LV$, then there exists a unique monic polynomial $p$ of smallest degree such that $p(T)=0$. We call it the \textit{minimal polynomial} of the operator $T$.
+    
+    Note $\d \LV = \d V \times \d V = n^2$, if we define $n = \d V$. Thus, the list of powers of $T$ of length $n+1$ \[I, T, T^2,\dots,T^{n^2}\] is linearly dependent. By the well-ordering principle applied to the linear dependence lemma, there exists a least $m$ such that \[I,T,T^2,\dots,T^{m-1}\] is linearly independent, while $T^m$ is in its span. Therefore, we have \[a_0 I + a_1 T + \dots + a_{m-1} T^{m-1} + T^m = 0.\] Accordingly we define $p(z) = a_0 + a_1 z + a_{m-1}z^{m-1} + z^m$, which is a monic polynomial of the smallest possible degree such that $p(T) = 0$.
+
+    For the uniqueness part, by the choice of $m$ if we have another minimal polynomial $q$, then $\deg q = m$ as well. Consider $(p-q)(z)$, which is of degree less than $m$ and has $(p-q)(T) = p(T) - q(T) = 0$. It follows that $p = q$ because otherwise $p$ cannot be the minimal polynomial.
+    \begin{itemize}
+        \item We remark that the Cayley-Hamilton theorem tells us that the minimal polynomial has to be of degree at most $\d V$, an upper bound stronger than $(\d V)^2 = \d \LV$, over $\C$. This holds over $\R$ as well as we will see in the next chapter.
+    \end{itemize}
+    \item $q(T) = 0$ iff $q$ is a scalar multiple of the minimal polynomial $p$ of $T$.
 
 \end{itemize}
 

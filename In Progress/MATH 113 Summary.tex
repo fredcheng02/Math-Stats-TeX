@@ -72,7 +72,7 @@
     \item For $(a_1, \dots, a_n) \in \prod_{i=1}^n G_i$, the order of this element is the lcm of the orders of each individual $a_i$'s.
     \item The fundamental theorem of finitely generated abelian groups states that every finitely generated abelian groups $G$ is isomorphic to a direct product of cyclic groups in the form $$\Z_{(p_1)^{r_1}} \times \Z_{(p_2)^{r_2}} \times \cdots \times \Z_{(p_n)^{r_n}} \times \Z \times \Z \times \cdots \times \Z,$$ where the $\Z$'s at the end have a fixed number called the \textit{Betti number} of $G$, and the $p_j$'s at the front do not need to be distinct.
     \item A group $G$ is \textit{decomposable} if it is isomorphic to a direct product of two nontrivial subgroups. The finite indecomposable abelian groups are exactly the ones with order a power of a prime.
-    \item If $m \mid |G|$, where $G$ is a \textbf{finite abelian group}, then $G$ has a subgroup of order $m$. Consider $$\langle (p_1)^{r_1 - s_1} \rangle \times \langle (p_2)^{r_2 - s_2} \rangle \times \cdots \times \langle (p_n)^{r_n - s_n} \rangle.$$
+    \item If $m$ divides $|G|$, where $G$ is a \textbf{finite abelian group}, then $G$ has a subgroup of order $m$. Consider $$\langle (p_1)^{r_1 - s_1} \rangle \times \langle (p_2)^{r_2 - s_2} \rangle \times \cdots \times \langle (p_n)^{r_n - s_n} \rangle.$$
     \item If $m$ is a square-free integer, then abelian group of order $m$ is cyclic.
 \end{itemize}
 
@@ -105,10 +105,14 @@
         \item Left and right distributive laws hold.
     \end{enumerate}
     \item $0a = a0 = 0, a(-b)=(-a)b=-(ab), (-a)(-b)=ab$
-    \item Ring homomorphism: homomorphism property holds with respect to both addition and multiplication
+    \item Ring homomorphism: homomorphism equations hold with respect to both addition and multiplication; the new homomorphism equation with respect to multiplication cannot conflict with the equation with respect to addition, so we can view 
     \item We can ignore the homomorphism equation with respect to multiplication, and all the properties we have proved about group homomorphism are inherited.
     \item 
-    \item A \textit{0 divisor} of 
+    \item A nonzero element $a \in R$ is a \textit{0 divisor} if $ab = 0$ for some nonzero $b \in R$.
+    \item In $\Z_n$, the elements that are not divisors of 0 are precisely those that are coprime with $n$.
+    \begin{itemize}
+        \item In $\Z_p$, all the nonzero elements are not divisors of 0.
+    \end{itemize}
     \item A polynomial $f(x)$ with coefficients in a ring $R$ is an infinite formal sum $$\sum_{i=0}^\infty a_i x^i = a_0 + a_1 x + \dots + a_n x^n + \dots,$$ where $a_i$ can be nonzero for only finite terms.
     
     
@@ -117,11 +121,30 @@
     \item If $D$ is an integral domain, so is $D[x]$. In particular, if we take $F$ to be a field, then $F[x]$ is an integral domain.
     \item Existence and uniqueness of division algorithm
     \item $a$ is a zero iff $f(x)$ can have a factor $(x-a)$.
-    \item By induction we can prove that a degree-$n$ polynomials has at most $n$ zeros.
+    \item By induction/well-ordering principle we can prove that a degree-$n$ polynomials has at most $n$ zeros.
+
+
+    
     \item 
     
+\end{itemize}
+\section{Ideals and Factor Rings}
+\begin{itemize}
+    \item If $\phi$ is a ring homomorphism from $R$ to $R'$, then
+    \begin{enumerate}[label=(\alph*)]
+        \item $\phi(0) = 0'$ and $\phi(-a) = - \phi(a)$ if we see $\phi$ as a group homomorphism with respect to ``$+$'';
+        \item for $S$ subring of $R$, $\phi(S)$ is a subring of $R$; for $S'$ subring of $R'$, $\phi^{-1}(S')$ is a subring of $R$;
+        \item if $R$ has unity 1, then $\phi(1)$ is the unity of the image ring $\phi(R) \subseteq R'$.
+    \end{enumerate}
+    \item A ring homomorphism $\phi: R \to R'$ is one-to-one if and only if $\ker \phi = \{0\}$.
+    \item An additive subgroup $N$ of $R$ is an \textit{ideal} if $aN \subseteq N$ and $Na \subseteq N$ for all $a \in R$.
     
-    \item 
+    Since $R$ is an abelian group, an ideal $N$ is a normal subgroup of $R$. Here $N$ is actually a subring of $R$, but we require stronger conditions that ask $N$ to be closed under left- and right-multiplication by \textbf{all} elements in $R$. These stronger conditions allows us to make coset multiplication well-defined.
+
+
+
     
-    \end{itemize}
+    \item A \textit{maximal ideal} of a ring $R$ is an ideal $M \subsetneq R$ such that there is no ideal $N$ such that $M \subsetneq N \subsetneq R$.
+    \item An ideal $N$ in a commutative ring $R$ is a \textit{prime ideal} if for $a,b \in R$, $ab \in N$ implies either $a$ or $b$ is in $N$.
+\end{itemize}
 \end{document}
