@@ -5,7 +5,7 @@
 \usepackage{enumitem}
 \usepackage{fullpage}
 \usepackage{setspace}
-\usepackage[bookmarks]{hyperref}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -20,13 +20,17 @@
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
-\begin{document}
+\title{MATH 113 Summary of Facts}
+\author{Cheng, Feng}
 
+\makeatletter
+\begin{document}
 \begin{center}
-    {\Large MATH 113 Summary of Facts} \vspace{0.5em}
-    \\ Cheng, Feng
+    {\Large \@title} \vspace{0.5em}
+    \\ \@author
     \vspace{-0.5em}
 \end{center}
+\makeatother
 
 \section{Groups and Subgroups}
 \begin{itemize}

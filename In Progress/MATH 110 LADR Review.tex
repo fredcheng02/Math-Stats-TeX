@@ -4,7 +4,8 @@
 \usepackage{amsmath,amssymb,tikz-cd,mathtools}
 \usepackage{enumitem}
 \usepackage{fullpage,setspace}
-\usepackage[bookmarks]{hyperref}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+\newcommand{\df}[1]{\underline{\textit{#1}}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -26,6 +27,8 @@
 \newcommand{\bw}{w_1,\dots,w_n}
 \renewcommand{\phi}{\varphi}
 
+\title{MATH 110 Notes}
+\author{Cheng, Feng}
 
 \onehalfspacing
 \setlength{\parskip}{0em}
@@ -33,20 +36,23 @@
 
 \begin{document}
 
+\makeatletter
 \begin{center}
-    {\Large MATH 110 Notes}
+    {\Large \@title}
     \\based on \textit{Linear Algebra Done Right}, third edition
     \vspace{0.5em}
-    \\ Cheng, Feng
+    \\ \@author
     \vspace{-0.5em}
 \end{center}
+\makeatother
 
 \section{Vector Spaces}
 \begin{itemize}
-    \item A vector space $V$ over a field $\F$
+    \item A \df{vector space} $V$ over a field $\F$
     \begin{enumerate}
-    \item [(a)] is an abelian group under addition and
-   	\item [(b)] has the multiplicative identity and distributive and associative properties in scalar multiplication.
+    \item [(1)] is an abelian group under addition,
+    \item [(2)] has the multiplicative identity, and
+    \item [(3)] the distributive and associative properties in scalar multiplication.
     \end{enumerate}
     (Addition and scalar multiplication must be closed in $V$.)
     \item $\F^S$ denotes the set of functions from $S$ to $\F$. It is a vector space over $\F$ under the sum and scalar multiplication of functions defined in the usual pointwise way.
@@ -54,7 +60,7 @@
     \item A subset $U$ of the whole vector space $V$ that is still a vector space is called a vector subspace. Usually we use the three criteria i) $0_V \in U$ (or $U$ is nonempty), ii) closed under addition in $U$, and iii) closed under scalar multiplication in $U$ to verify. To show the criteria are equivalent to the definition, in one direction we show that $0_V$ is the (unique) identity element of $U$ and in the other direction we only need to check the additive inverse property (satisfied by $(-1)u = -u$).
     \item The sum $U_1 + U_2 +\cdots+ U_m$, where $U_i$'s are subsets of $V$, is the set of all possible sums of the respective elements from each $U_i$.
     \item When the $U_i$'s are subspaces of $V$, then the sum is the smallest vector space containing all $U_i$'s.
-    \item When the $U_i$'s are subspaces of $V$, and every element of the sum $U_1 + U_2 +\cdots+ U_m$ can be written in only one way as $u_1+u_2+\cdots+u_m$, we call the sum a \textit{direct sum}, denoted by $\oplus$ replacing $+$.
+    \item When the $U_i$'s are subspaces of $V$, and every element of the sum $U_1 + U_2 +\cdots+ U_m$ can be written in only one way as $u_1+u_2+\cdots+u_m$, we call the sum a \df{direct sum}, denoted by $\oplus$ replacing $+$.
     \item The equivalent criterion for the sum to be a direct sum is that the only way to express $0$ is to write it as the sum of $0$'s from each $U_i$. One direction is trivial, while the other direction employs the common trick of subtracting two different expressions of the same vector $v \in V$.
     \item If we are only discussing two subspaces $U$ and $W$ of $V$, then $U+W$ is a direct sum iff their intersection is $\{0\}$. The proof of this, in both directions, considers $0 = v + (-v)$. The fact $W$ always contains an element and its inverse will give us the answer.
     \begin{itemize}
@@ -70,11 +76,11 @@
 \textit{Remark}. Note that this section in the book builds on the idea of a ``list'' of vectors, which is no different than using a ``set'' of vectors because vector addition is commutative. (We will use either a list or a set of vectors later depending on whether we have to specify the ordering of these vectors.) Finite-dimensional is defined in terms of a spanning list, and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
 
 \begin{itemize}
-    \item The \textit{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, $\s(\emptyset)$ $\coloneqq \{0\}$.
+    \item The \df{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, $\s(\emptyset)$ $\coloneqq \{0\}$.
     \item Similar to the fact that the sum $U_1 + U_2 +\cdots+ U_m$ is the smallest vector space containing all $U_i$'s, span($S$) is the smallest subspace of $V$ containing all the vectors in $S$. The proof of the two are almost exactly the same.
-    \item A polynomial $p$ in an indeterminate $z$ with coefficients from a field $\F$ is the (not unique) \textbf{expression} $a_0 + a_1 z + \cdots + a_n z^n$ with all the $a_i$'s in $\F$. The \textit{degree} of a polynomial is the largest exponent of $z$ with nonzero coefficient, and if all the coefficients are 0, we call the polynomial the \textit{zero polynomial}. We customarily define the degree of the zero polynomial as $-\infty$ (as in this book), $-1$, or just undefined.
+    \item A polynomial $p$ in an indeterminate $z$ with coefficients from a field $\F$ is the (not unique) \textbf{expression} $a_0 + a_1 z + \cdots + a_n z^n$ with all the $a_i$'s in $\F$. The \df{degree} of a polynomial is the largest exponent of $z$ with nonzero coefficient, and if all the coefficients are 0, we call the polynomial the \df{zero polynomial}. We customarily define the degree of the zero polynomial as $-\infty$ (as in this book), $-1$, or just undefined.
     
-    P.S. The most general and rigorous definition of a polynomial over a ring (sometimes as an infinite formal sum for uniqueness) is not discussed here, because our focus is vector spaces over a field.
+    P.S. The most general and rigorous definition of a polynomial over a ring is not discussed here, because our focus is vector spaces over a field.
     \begin{itemize}
         \item It is oftentimes useful to define a polynomial over a field $\F$ rather as the \textbf{function} $p: \F \rightarrow \F$ with $p(z) = a_0 + a_1 z + \cdots + a_n z^n$. The reason behind is that a polynomial function with coefficients from an infinite field can be written into only one polynomial expression with its unique coefficients. See Chapter 4 of this book or Appendix E, Theorem 10 of \textit{Linear Algebra} by Friedberg, Insel, and Spence. It is the consequence of the fact that a polynomial of degree $n \geq 1$ has at most $n$ distinct zeros. We will proceed with this definition of polynomials.
         \item We denote the set of all polynomials with coefficients in $\F$ by $\mathcal{P}(\F)$. Under the usual coefficient-wise addition and scalar multiplication, it is obvious that $\mathcal{P}(\F)$ is a vector space over $\F$. In addition, the set of all polynomials with degree at most $m$, denoted by $\mathcal{P}_m(\F)$ is a vector subspace of $\mathcal{P}(\F)$.
@@ -93,8 +99,8 @@
     \begin{itemize}
         \item The direct consequence of this theorem is the definition of dimension. But before that we need to introduce the notion of a basis and its existence.
     \end{itemize}
-    \item A \textit{basis} of $V$ is a linearly independent spanning set of $V$. A set is a basis iff all vectors in $V$ can be written as a unique linear combination of the basis vectors. This follows directly from the definition.
-    \item Most of time we are concerned with vector spaces with finite bases. The vector spaces that have a finite spanning set are called \textit{finite-dimensional vector spaces} (FDVS), and we will soon know why they bear this name. First of all, we can show that every finite spanning set of a FDVS $V$ can be reduced to a finite basis. Furthermore, every linearly independent set of a FDVS $V$ can be extended to a basis.
+    \item A \df{basis} of $V$ is a linearly independent spanning set of $V$. A set is a basis iff all vectors in $V$ can be written as a unique linear combination of the basis vectors. This follows directly from the definition.
+    \item Most of time we are concerned with vector spaces with finite bases. The vector spaces that have a finite spanning set are called \df{finite-dimensional vector spaces} (FDVS), and we will soon know why they bear this name. First of all, we can show that every finite spanning set of a FDVS $V$ can be reduced to a finite basis. Furthermore, every linearly independent set of a FDVS $V$ can be extended to a basis.
     \begin{itemize}
         \item To prove the first claim, we construct our basis $B$ from scratch and try to add all the elements of the spanning set $S = \{v_1, v_2, \dots, v_n\}$ one by one into the basis, as long as the element added is not in the span of the existing vectors in $B$. In this way, every time a new vector is added to $B$, $B$ will still be linearly independent, and this $B$ will be linearly independent in the end. Furthermore, span$(B) = $ span$(S) = V$ because all the $v$'s left out are in span($B$).
         \begin{itemize}
@@ -104,7 +110,7 @@
         \item To prove the second claim, similarly construct our basis from the given linearly independent set $L$. We pick a finite basis $B = \{b_1, b_2,\dots,b_n\}$ of $V$ and check whether the next $b$ may be added to $L$ (same to what we did above). In the end, all the $b$'s are in the span of $L$ and $L$ remains linearly independent.
     \end{itemize}
     
-    \item Choose two finite bases of a vector space. The fact that they are both linearly independent and both span $V$ tells us that the two bases should have the same size, which we define as the \textit{dimension} of a vector space. Thus, the vector spaces with finite bases are called \textit{finite-dimensional}.
+    \item Choose two finite bases of a vector space. The fact that they are both linearly independent and both span $V$ tells us that the two bases should have the same size, which we define as the \df{dimension} of a vector space. Thus, the vector spaces with finite bases are called \df{finite-dimensional}.
     \begin{itemize}
         \item The fact that the bases of $V$ has a fixed size implies every spanning set or linearly independent set of this size $\d V$ is a basis itself (because the reduction/extension here is the trivial one).
     \end{itemize}
@@ -133,7 +139,7 @@
         T (\lambda u) = \lambda T(u).
     \end{equation*}
     \item The zero transformation maps every vector of $V$ to $0_W$. The identity transformation $I_V: V \rightarrow V$ maps each element of $V$ to itself in $V$.
-    \item We define the addition and scalar multiplication of linear maps in the vector-wise way: $$(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),$$ following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. In addition to the linear properties, we define the \textit{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. Why the product is essential will become clear later. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties [$(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$] obviously hold as well.
+    \item We define the addition and scalar multiplication of linear maps in the vector-wise way: $$(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),$$ following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. In addition to the linear properties, we define the \df{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. Why the product is essential will become clear later. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties [$(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$] obviously hold as well.
     % \item If $T(x_1,\dots,x_n) = (a_{11}x_1+\cdots+a_{1n}x_n,\dots,a_{m1}x_1+\cdots+a_{mn}x_n)$, then $T$ is obviously a linear map from $\F^n$ to $\F^m$. For a linear map $T \in \mathcal{L}(\F^n,\F^m)$, it must be of this form, and all the $a_{ij}$'s are determined by the mapping of the $n$ canonical basis vectors of $\F^n$.
     \item The uniqueness of the linear map that takes basis vectors $v_1, v_2, \dots, v_n$ to corresponding vectors $w_1, w_2, \dots, w_n$ is the most fundamental theorem in this section. It is our first step toward showing that linear maps and matrices are isomorphic. To prove the theorem, for arbitrary $a_i$'s, let $$T: \sum_{i=1}^n a_i v_i \mapsto \sum_{i=1}^n a_i w_i.$$
     \item Here are a few properties that are useful in linear maps. The proofs are quite routine.
@@ -145,7 +151,7 @@
 
 \subsection{Null Spaces and Ranges}
 \begin{itemize}
-    \item The \textit{nullspace}/\textit{kernel} $\n T$ is the preimage of $0_W$. The \textit{range}/\textit{image} $\r T$ is defined the same as the range of a function. The nullspace and the range are respectively subspaces of $V$ and $W$ (by checking the three criterion). If the nullspace (resp. range) is finite-dimensional, then its dimension is the \textit{nullity} (resp. \textit{rank}) of $T$.
+    \item The \df{nullspace}/\df{kernel} $\n T$ is the preimage of $0_W$. The \df{range}/\df{image} $\r T$ is defined the same as the range of a function. The nullspace and the range are respectively subspaces of $V$ and $W$ (by checking the three criterion). If the nullspace (resp. range) is finite-dimensional, then its dimension is the \df{nullity} (resp. \df{rank}) of $T$.
     \begin{itemize}
         \item Since $\d U = \d W$ for subspace $U$ of $W$ implies $U = W$, $\text{rank }T = \d W$ implies surjection.
         \item An easy theorem to always keep in mind is that the map of the basis vectors of $V$ spans $\r T$. We will use it in the proof of the next theorem.
@@ -192,16 +198,16 @@
 
 \subsection{Invertibility and Isomorphic Vector Spaces}
 \begin{itemize}
-    \item $T \in \LVW$ is \textit{invertible} if there exists $S$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. One can show that the inverse must be linear and thus belongs to $\mathcal{L}(W,V)$. By the associativity of linear maps, the inverse is unique.
+    \item $T \in \LVW$ is \df{invertible} if there exists $S$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. One can show that the inverse must be linear and thus belongs to $\mathcal{L}(W,V)$. By the associativity of linear maps, the inverse is unique.
     \item Invertibility is equivalent to bijectivity between vector spaces. Linear maps are functions, so beyond showing that the inverse is linear, the proof is exactly the same.
-    \item An \textit{isomorphism} is an invertible linear map; if an isomorphism exists between two vector spaces, then the vector spaces are \textit{isomorphic}.
+    \item An \df{isomorphism} is an invertible linear map; if an isomorphism exists between two vector spaces, then the vector spaces are \df{isomorphic}.
     \item Two FDVS over $\F$ are isomorphic iff they have the same dimension. Injection gives us $\text{nullity } = 0$ and surjection gives us $\text{rank } T = \d W$. The rank-nullity theorem tells us $\d V = \d W$. On the other hand to prove isomorphism, we show $T(a_1v_1+\cdots+a_nv_n) = a_1w_1+\cdots+a_nw_n$ is both injective and surjective, which is not hard.
     \begin{itemize}
         \item The theorem above implies $n$-dimensional VS is always isomorphic to $\F^n$.
     \end{itemize}
     \item Now we show the isomorphism between a linear map and its corresponding matrix. When the orders of the bases $\bv$ and $w_1,w_2,\dots,w_m$ are fixed, then $\M$ is a function from $\LVW$ to $\F^{m,n}$. As we have noted earlier $\M$ is linear. Thus, it suffices to show that $\M$ is bijective.
     \begin{itemize}
-        \item For all $A \in \F^{m,n}$, let $$Tv_k = \sum_{j = 1}^m A_{j,k}w_j.$$ Then this is the \textit{unique} (recall the theorem we emphasized in \S3.1) $T$ such that $A = \M(T)$.
+        \item For all $A \in \F^{m,n}$, let $$Tv_k = \sum_{j = 1}^m A_{j,k}w_j.$$ Then this is the \emph{unique} (recall the theorem we emphasized in \S3.1) $T$ such that $A = \M(T)$.
         \item A linear map and its matrix representation are homomorphic not merely in regards to linearity, but also in regards to the preservation of the order of the product $\M(ST) = \M(S)\M(T)$.
     \end{itemize}
     \item By the theorems on isomorphism above, $\d \LVW = mn = (\d V) (\d W)$.
@@ -227,9 +233,9 @@
             \end{tikzcd}
         \end{equation*}
         For a vector $v \in V$, its image $\M(v)$ under the isomorphism $\M$ of $V$ belongs to $\F^{n,1}$. Matrix multiplication with $\M(T)$ gives us $\M(Tv) \in \F^{m,1}$, which we identify with $Tv$ under the isomorphism $\M$ of $W$. This is why a linear map can be described entirely by its matrix representation.
-        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication on the left. Think about the Jacobian matrix representation of the total derivative in the Euclidean space. Left-multiplication by a matrix corresponds to the linear \textit{transformation} of a vector.
+        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication on the left. Think about the Jacobian matrix representation of the total derivative in the Euclidean space. Left-multiplication by a matrix corresponds to the linear \emph{transformation} of a vector.
     \end{itemize}
-    \item A \textit{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
+    \item A \df{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
     \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.) This is true for functions $f:S \to S$ (where $S$ is finite) in general, but for linear maps the proof is likely to be rather simple:
         
     (a)$\implies$(b) we proved earlier.
@@ -241,12 +247,12 @@
 
 \subsection{Products and Quotients of Vector Spaces}
 \begin{itemize}
-    \item The \textit{product} $V_1 \times \dots \times V_n$ of vector spaces $V_1,\dots,V_n$ over $\F$ is the set $$\{(v_1,\dots,v_n) \mid v_1 \in V_1,\dots, v_n \in V_n\}.$$ The addition and scalar multiplication on the product is defined in the usual entry-wise way. It is routine to prove that this product is a vector space over $\F$ as well.
+    \item The \df{product} $V_1 \times \dots \times V_n$ of vector spaces $V_1,\dots,V_n$ over $\F$ is the set $$\{(v_1,\dots,v_n) \mid v_1 \in V_1,\dots, v_n \in V_n\}.$$ The addition and scalar multiplication on the product is defined in the usual entry-wise way. It is routine to prove that this product is a vector space over $\F$ as well.
     \item $\d (V_1\times \dots \times V_n) = \d V_1 + \dots + \d V_n$. Why? Choose a basis for each $V_i$, then put every basis vector of $V_i$ into the $i$-th entry of $(v_1,\dots,v_n)$ and let other entries be 0. These vectors are linearly independent and span the product and thus is a basis of the product.
     \item For subspaces $U_1,\dots,U_n$ of $V$, define the linear map $\Gamma: U_1 \times \dots \times U_n \to U_1 + \dots + U_n$ by $$\Gamma(u_1,\dots,u_n) = u_1+\dots+u_n.$$ (One can easily check that this map is indeed linear.) Then $U_1+\dots+U_n$ is a direct sum iff $\Gamma$ is injective (or invertible, since $\Gamma$ is surjective by its definition.) To prove this, we just need to show $\n T = {0}$ iff the only way to write $0 = u_1+\dots+u_n$ is to let all $u$'s be 0. This is quite clear.
     \item The last two theorems lead to the following one. A sum of subspaces $U_i$'s of $V$ is a direct sum iff dimensions add up. This is because two isomorphic vector spaces must have the same dimension. In both directions we would encounter $$\d (U_1+\dots+U_n) = \d (U_1 \times \dots \times U_n) = \d U_1 + \dots + \d U_n.$$
     Construct the linear map $\Gamma$ above from the product of subspaces makes the proof really clean. Recall that we have proved the special case $n=2$ already.
-    \item An \textit{affine subset} of $V$ is a subset of $V$ of the form $v+U = \{v+u \mid u \in U\}$ for some vector $v \in V$ and some subspace $U$ of $V$. Here the affine subset $v+U$ is said to be \textit{parallel} to $U$.
+    \item An \df{affine subset} of $V$ is a subset of $V$ of the form $v+U = \{v+u \mid u \in U\}$ for some vector $v \in V$ and some subspace $U$ of $V$. Here the affine subset $v+U$ is said to be \df{parallel} to $U$.
     \begin{itemize}
         \item $v+U$ is a subspace of $V$ iff $v \in U$. If $v \in U$, then $v+U = U$, subspace of $V$. If $v \notin U$, then $0 \notin v+U$, and thus $v+U$ cannot be a subspace of $V$.
     \end{itemize}
@@ -264,7 +270,7 @@
     \begin{itemize}
         \item Also, by the previous theorem, for any $v \in U$, $v+U$ equals the 0 vector $(0+)U$ and is thus not a basis vector for $V/U$.
     \end{itemize}
-    \item To find the dimension of $V/U$, we appeal to the trick of constructing a linear map again. (One should check its linearity) The \textit{quotient map} $\pi: V \to V/U$ is given by $$\pi(v) = v+U.$$
+    \item To find the dimension of $V/U$, we appeal to the trick of constructing a linear map again. (One should check its linearity) The \df{quotient map} $\pi: V \to V/U$ is given by $$\pi(v) = v+U.$$
     For FDVS $V$ and its subspace $U$, $\d V/U = \d V - \d U$. $\pi$ is a map onto $V/U$ obviously, and $\n \pi = U$. Therefore the formula follows.
     \begin{itemize}
         \item A basis from $V/U$ combined with a basis from $U$ form a basis of $V$. Suppose $v_1,\dots,v_n$ are the basis vectors of $V/U$ and $u_1,\dots,u_m$ are the basis vectors of $U$. If we write $$a_1v_1+\dots+a_nv_n + b_1u_1+\dots+b_mu_m = 0,$$ then necessarily $(a_1v_1+\dots+a_nv_n) \in U$, which implies that $$0+U = (a_1v_1+\dots+a_nv_n)+U = a_1(v_1+U)+\dots+a_n(v_n+U).$$ Because the $v+U$'s form a basis of $V/U$, the coefficients $a_1,\dots,a_n$ must be 0. Since $u_1,\dots,u_m$ form a basis of $U$, their coefficients $b_1,\dots,b_m$ must also be 0. And because $v_1,\dots,v_n,u_1,\dots,u_m$ is of length $n+m$, by the previous theorem this indeed is a basis of $V$.
@@ -284,9 +290,9 @@
     
 \subsection{Duality}
 \begin{itemize}
-    \item A \textit{linear functional} on $V$ is a linear map belonging to $\mathcal{L}(V,\F)$. The \textit{dual space} of $V$, denoted usually by $V^*$ or $V'$, is the vector space $\mathcal{L}(V,\F)$.
+    \item A \df{linear functional} on $V$ is a linear map belonging to $\mathcal{L}(V,\F)$. The \df{dual space} of $V$, denoted usually by $V^*$ or $V'$, is the vector space $\mathcal{L}(V,\F)$.
     \item We proved earlier that $\d \LVW = (\d V)(\d W)$. Therefore, $\d V' = \d V$ for finite-dimensional $V$.
-    \item The \textit{dual basis} of $v_1,\dots,v_n$, basis of $V$, is a set of vectors $\phi_1,\dots,\phi_n$ in $V'$, where each $\phi_i$ is a linear functional defined by
+    \item The \df{dual basis} of $v_1,\dots,v_n$, basis of $V$, is a set of vectors $\phi_1,\dots,\phi_n$ in $V'$, where each $\phi_i$ is a linear functional defined by
     \begin{equation*}
         \phi_i(v_j) = \delta_{ij} = \left\{
             \begin{array}{rl}
@@ -304,7 +310,7 @@
         \item first, every $\psi \in V'$ can be written as $\sum_{i=1}^n \psi(v_i)\phi_i$. Since $(\sum_{i=1}^n \psi(v_i)\phi_i)(v_j) = \psi(v_j)$, the sum and $\psi$ agrees on all basis vectors and they are equal.
         \item second, every $v \in V$ can be written as $\sum_{i=1}^n \phi_i(v)v_i$. For this claim one needs to prove that for $v = a_1v_1 + \dots +a_nv_n$, every $a_j = \phi_j(v)$. By linearity, $\phi_j(v) = \sum_{i=1}^n a_i \phi_j(v_i) = a_j$.
     \end{itemize}
-    \item The \textit{dual map} $T' \in \mathcal{L}(W',V')$ of $T \in \LVW$ is given by $T'(\phi)=\phi \circ T$ for $\phi \in W'$. We have to be very clear about what this definition means. Here $T'$ maps a function to a function.
+    \item The \df{dual map} $T' \in \mathcal{L}(W',V')$ of $T \in \LVW$ is given by $T'(\phi)=\phi \circ T$ for $\phi \in W'$. We have to be very clear about what this definition means. Here $T'$ maps a function to a function.
     \begin{equation*}
         \begin{tikzcd}
             W \arrow[dd, "\phi"'] &  & V 
@@ -323,7 +329,7 @@
         \end{itemize}
         under the appropriate $S,T,$ and $\lambda$. The first two are routine, and the third one is manipulation of function compositions.
     \end{itemize}
-    \item We define \textit{annihilator} $U^0$ of $U \subseteq V$ as $\{\phi \in V' \mid \phi(U)=0\}$, the subset of all linear functionals on $V$ whose image is 0.
+    \item We define \df{annihilator} $U^0$ of $U \subseteq V$ as $\{\phi \in V' \mid \phi(U)=0\}$, the subset of all linear functionals on $V$ whose image is 0.
     \item There is a good example (3.104) in the book about annihilators. For the dual basis $\phi_1,\dots,\phi_5$ in $(\F^5)'$ that corresponds to $e_1,\dots,e_5$ in $\F^5$, $(\s(e_1,e_2))^0 = \s(\phi_3,\phi_4,\phi_5)$, since $\phi_i$ takes out the $i$-th coordinate.
     \item As expected $U^0$ is a subspace of $V'$. The zero linear functional takes $U \subseteq V$ to $0$. $(\phi+\psi)(U) = 0$ and $\lambda\phi(U) = 0$ are omitted as usual.
     \item For FDVS $V$ and its subspace $U$, $$\d U + \d U^0 = \d V.$$ The book mentions two proofs. The first proof takes the usual ``choose a basis and extend it'' approach. The second proof is more obscure: consider the inclusion map $i \in \mathcal{L}(U,V)$ such that $i(u) = u$ for all $u \in U$, then $i' \in \mathcal{L}(V',U')$, which gives us $$\d \n i' + \d \r i' = \d V' = \d V.$$ Note that $i'(\phi) = \phi \circ i$ for $\phi \in V'$, giving us $\n i' = U^0$. The nullspace of $i'$ are the set of $\phi$'s such that $\phi \circ i = 0$, and therefore $\phi$ should map the entire $U$ to $0$.
@@ -348,7 +354,7 @@
     \item The corollary of the previous claims are the following:
     $$T \text{ is surjective} \iff T' \text{ is injective} \quad \text{and} \quad T \text{ is injective} \iff T' \text{ is surjective}.$$ Proof of this is quite standard, and we show the first one here only: $$T \in \LVW \text{ surjective} \iff \r T = W \iff (\r T)^0 = {0} \iff \n T' = {0} \iff T' \text{ injective}.$$
     
-    \item The \textit{row rank} and \textit{column rank} of matrix $A$ are defined to be the dimension of the span of the rows of $A$ in $\F^{1,n}$ and of the columns of $A$ in $\F^{m,1}$, respectively. As we know from lower-division matrix algebra, they are the same and represent the number of pivots in a reduced row echelon form of a matrix. We now prove this fact with the tools we have.
+    \item The \df{row rank} and \df{column rank} of matrix $A$ are defined to be the dimension of the span of the rows of $A$ in $\F^{1,n}$ and of the columns of $A$ in $\F^{m,1}$, respectively. As we know from lower-division matrix algebra, they are the same and represent the number of pivots in a reduced row echelon form of a matrix. We now prove this fact with the tools we have.
     
     \item $\M(T') = (\M(T))^t$. Consider the dual basis $\psi_j$ ($1 \leq j \leq m$) of $W'$ and $\phi_j$ ($1 \leq k \leq n$) of $V'$. Then $$T'(\psi_j) = \sum_{r=1}^n C_{r,j}\phi_r,$$ which we evaluate at $v_k$: $$(\psi_j \circ T)(v_k) = \sum_{r=1}^n C_{r,j}\phi_r(v_k) = C_{k,j}.$$ On the other hand, we have $$(\psi_j)(Tv_k) = \psi_j(\sum_{r=1}^mA_{r,k}w_r) = \sum_{r=1}^m A_{r,k}\psi_j(w_r) = A_{j,k}.$$
     
@@ -361,13 +367,13 @@
         & = \text{column rank of } \M(T') = \text{column rank of } A^t
         = \text{row rank of } A.
     \end{align*}
-    Therefore, \textit{rank} is a property of a finite matrix.
+    Therefore, \df{rank} is a property of a finite matrix.
 \end{itemize}
 
 
 \newpage
 \section{Polynomials}
-\textit{Remark}. We used facts about polynomials in high school algebra. These facts were intuitively ``understood'' back then, but we never had the chance to rigorously prove them. An abstract algebra course delves deep into some materials on polynomials, which we still take for granted in this book. For example, note that when evaluating a polynomial $p(z)q(z)$ at $z = a$, although we still directly plug $a$ in and compute $p(a)q(a)$ to get the result, this is formally not rigorous. This ``plugging-in'' step requires the machinery of \textit{evaluation homomorphism} to be justified. As another example, one should show that for polynomials with coefficients from a field (more generally from an integral domain), $\deg p + \deg q = \deg pq$ holds, before using it.
+\textit{Remark}. We used facts about polynomials in high school algebra. These facts were intuitively ``understood'' back then, but we never had the chance to rigorously prove them. An abstract algebra course delves deep into some materials on polynomials, which we still take for granted in this book. For example, note that when evaluating a polynomial $p(z)q(z)$ at $z = a$, although we still directly plug $a$ in and compute $p(a)q(a)$ to get the result, this is formally not rigorous. This ``plugging-in'' step requires the machinery of \emph{evaluation homomorphism} to be justified. As another example, one should show that for polynomials with coefficients from a field (more generally from an integral domain), $\deg p + \deg q = \deg pq$ holds, before using it.
 
 \begin{itemize}
 	\item The product $pq \in \PF$ of polynomials $p(z)=\sum_{i=0}^m a_iz^i$ and $q(z)=\sum_{j=0}^m b_jz^j$ in $\PF$ is defined by $$(pq)(z) = p(z)q(z) = \sum_{i=0}^m\sum_{j=0}^n a_i b_j z^{i+j}$$ for all $z \in \F$ (``expanding out and collecting like terms''). We can interchange the Sigma notation and see that $p(z)q(z) = q(z)p(z)$. Two polynomials commute under multiplication.
@@ -422,15 +428,15 @@
 \section{Eigenvalues, Eigenvectors, and Invariant Subspaces}
 \subsection{Invariant Subspaces}
 \begin{itemize}
-    \item For $T \in \LV$, the subspace $U$ of $V$ is \textit{invariant under $T$} if $T(U) \subseteq U$, or alternatively, $T|_U$ is an operator on $U$.
+    \item For $T \in \LV$, the subspace $U$ of $V$ is \df{invariant under $T$} if $T(U) \subseteq U$, or alternatively, $T|_U$ is an operator on $U$.
     \item It can be easily verified that $\{0\}$, $V$, $\n V$, and $\r T$ are invariant subspaces of $V$ under $T$.
     \item Here we focus on invariant subspaces of dimension 1. Any 1-dimensional subspace $U$ has some nonzero vector $u \in V$ as the basis (in fact any nonzero vector in $U$ can be the basis). To check if $T$ is invariant under $U$, we only need to check if the basis vectors are mapped into $U$ (so that the $\r T \subseteq U$). Since $Tu \in U$ iff $Tu = \lambda u$, a subspace with dimension 1 is invariant under $T$ iff a (any) nonzero vector $u$ in the subspace has $Tu = \lambda u$.
-    \item For $T \in \LV$, $\lambda \in \F$ is an \textit{eigenvalue} of $T$ if there exists a nonzero $v \in V$ such that $Tv = \lambda v$. The $v$ here is called the \textit{eigenvector}.
+    \item For $T \in \LV$, $\lambda \in \F$ is an \df{eigenvalue} of $T$ if there exists a nonzero $v \in V$ such that $Tv = \lambda v$. The $v$ here is called the \df{eigenvector}.
     
-    Any nonzero vector in a 1-dimension space is an eigenvector. If $u$ is an eigenvector of $T$, then $\s(u)$ is invariant under $T$.
+    Any nonzero vector in a 1-dimension subspace invariant under $T$ is an eigenvector. If $u$ is an eigenvector of $T$, then $\s(u)$ is invariant under $T$.
     \item We may move $\lambda v$ to the left side: consider the linear operator $\lambda I$ that maps $v$ to $\lambda v$. Therefore, $Tv = \lambda v$ is equivalent to $(T-\lambda I) v = 0$. Since $v \not= 0$, this is equivalent to $T-\lambda I$ is not injective/surjective/invertible (since it is an operator on $V$).
     \begin{itemize}
-        \item As a special case, $T$ is not invertible iff 0 is an eigenvalue of $T$. This will become useful in Chapter 8.
+        \item A special case: $T$ is not invertible iff 0 is an eigenvalue of $T$. This will become useful in Chapter 8.
     \end{itemize}
     \item Eigenvectors corresponding to distinct eigenvalues are linearly independent. The usual proof of this starts with 2 distinct eigenvalues and proceeds with induction, but the book uses the well-ordering principle instead. Suppose the $\bv$ corresponding to eigenvectors $\lambda_1,\dots,\lambda_n$ are linearly dependent, then at $k \leq n$ we have $v_k \in \s(v_1,\dots,v_{k-1})$ with $v_1,\dots,v_{k-1}$ being linearly dependent. Thus, 
     \begin{equation}
@@ -438,7 +444,7 @@
     \end{equation}
     and by applying $T$ to both sides, we have $$\lambda_k v_k = a_1 \lambda_1 v_1 + \dots + a_{k-1} \lambda_{k-1}v_{k-1}.$$ If instead, we multiply (2) by $\lambda_k$ on both sides, then $$\lambda_k v_k = a_1 \lambda_k v_1 + \dots + a_{k-1} \lambda_k v_{k-1}.$$ Subtracting the two equations above give us $$0 = a_1 (\lambda_1 - \lambda_k) v_1 + \dots + a_{k-1} (\lambda_{k-1}-\lambda_k) v_{k-1}.$$ Since $v_1, \dots, v_{k-1}$ are linearly independent, all the coefficients are 0 and thus all the $a_i$'s are the same (because the $\lambda$'s are distinct). However, this implies $v_k = 0$, which contradicts with $v_k$ being an eigenvector. Therefore, the set of eigenvectors are linearly independent.
     \item The direct corollary of this is that the number of eigenvalues of $T \in \LV$ cannot exceed the $\d V$.
-    \item Here we restate the $T|_U \in \mathcal{L}(U)$ as the \textit{restriction operator} of $T$. The \textit{quotient operator} $T/U \in \mathcal{L}(V/U)$ is given by $(T/U)(v+U) = Tv+U$ for any $v \in V$. Of course for the quotient operator we need to verify it is well-defined for different representation of the same quotient space, which is very similar to what we have done before and is thus omitted. These two operators provide nice information about the original $T$.
+    \item Here we restate the $T|_U \in \mathcal{L}(U)$ as the \df{restriction operator} of $T$. The \df{quotient operator} $T/U \in \mathcal{L}(V/U)$ is given by $(T/U)(v+U) = Tv+U$ for any $v \in V$. Of course for the quotient operator we need to verify it is well-defined for different representation of the same quotient space, which is very similar to what we have done before and is thus omitted. These two operators provide nice information about the original $T$.
 \end{itemize}
 
 \subsection{Eigenvectors and Upper-Triangular Matrices}
@@ -453,8 +459,10 @@
         \item If we fix an operator $T$, the evaluation map from $\PF$ to $\LV$ given by $p \mapsto p(T)$ is linear.
     	\item Recall that $p(z)q(z) = q(z)p(z)$ for polynomials. It follows directly that $p(T)q(T) = q(T)p(T)$, because we are only replacing the indeterminate symbol $z$ by the operator symbol $T$. Thus, when computing the polynomial of a linear map, the order of the factors does not matter.
     \end{itemize}
-    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector spaces.) The proof employs the fundamental theorem of algebra and is quite tricky. Choose a nonzero $v \in V$ ($\d V=n$) and consider the list $v, Tv, \dots, T^n v$, which must be linearly dependent. Thus, we have $$0 = a_0 v + a_1 Tv + \dots + a_n T^n v,$$ where the $a_i$'s are not all $0$. In particular, $a_1, \dots, a_n$ cannot all be 0 since $v \not= 0$ will then give us $a_0 = 0$. Thus, we have a nonconstant polynomial $a_0+a_1 z+\dots+a_m z^m$ ($m \leq n$), which can be factorized into $$c(z - \lambda_1)\cdots(z - \lambda_m)$$ over $\C$. For $$0=c(T - \lambda_1 I)\cdots(T - \lambda_m I)v,$$ the nonzero vector $w = (T - \lambda_{j+1} I) \cdots (T - \lambda_m I)v$ will be be taken to 0 by $(T - \lambda_j I)$. $(T - \lambda_j I)$ is thus not injective and $\lambda_j$ is an eigenvalue.
-    \item We construct the matrix of an operator always with respect to only one ordered basis of $V$. The matrix $\M(T,(v_1,\dots,v_n))$ is a square matrix. In the $j$-th column of $\M(T)$, each entry corresponds to each coefficient from $a_1v_1+\dots+a_nv_n = Tv_j$. A square matrix with all entries being 0 below the diagonal is called an \textit{upper-triangular matrix}, which is crucial in the theory of eigenvalues.
+    \item It turns out that every operator on a finite-dimensional and nonzero complex vector space necessarily has an eigenvalue. (This is not necessarily true on real vector spaces. See example 5.8(a) on the book: $T(w,z) = (-z,w)$ for $T \in \mathcal{L}(\R^2)$ over $\F = \R$.) 
+    
+    The proof employs the fundamental theorem of algebra and is quite tricky. Choose a nonzero $v \in V$ ($\d V=n$) and consider the list $v, Tv, \dots, T^n v$, which must be linearly dependent. Thus, we have $$0 = a_0 v + a_1 Tv + \dots + a_n T^n v,$$ where the $a_i$'s are not all $0$. In particular, $a_1, \dots, a_n$ cannot all be 0 since $v \not= 0$ will then give us $a_0 = 0$. Thus, we have a nonconstant polynomial $a_0+a_1 z+\dots+a_m z^m$ ($m \leq n$), which can be factorized into $$c(z - \lambda_1)\cdots(z - \lambda_m)$$ over $\C$. For $$0=c(T - \lambda_1 I)\cdots(T - \lambda_m I)v,$$ the nonzero vector $w = (T - \lambda_{j+1} I) \cdots (T - \lambda_m I)v$ will be be taken to 0 by $(T - \lambda_j I)$. $(T - \lambda_j I)$ is thus not injective and $\lambda_j$ is an eigenvalue.
+    \item We construct the matrix of an operator always with respect to only one ordered basis of $V$. The matrix $\M(T,(v_1,\dots,v_n))$ is a square matrix. In the $j$-th column of $\M(T)$, each entry corresponds to each coefficient from $a_1v_1+\dots+a_nv_n = Tv_j$. A square matrix with all entries being 0 below the diagonal is called an \df{upper-triangular matrix}, which is crucial in the theory of eigenvalues.
     \item How are invariant subspaces and upper-triangular matrices connected? Suppose $T \in \LV$ and $v_1,\dots,v_n$ is a basis of $V$, then the following are equivalent:
     \begin{enumerate}[label=(\alph*)]
         \item $\M(T)$ is upper-triangular;
@@ -496,11 +504,11 @@
 \end{itemize}
 \subsection{Eigenspaces and Diagonal Matrices}
 \begin{itemize}
-    \item A \textit{diagonal matrix} has all its entries off the diagonal 0.
-    \item The \textit{eigenspace} of $T \in \LV$ corresponding to $\lambda \in \F$ is given by $$E(\lambda,T) = \n (T-\lambda I) = \{v \in V \mid Tv = \lambda v\}.$$
+    \item A \df{diagonal matrix} has all its entries off the diagonal 0.
+    \item The \df{eigenspace} of $T \in \LV$ corresponding to $\lambda \in \F$ is given by $$E(\lambda,T) = \n (T-\lambda I) = \{v \in V \mid Tv = \lambda v\}.$$
     The eigenspace is basically the vector subspace of $V$ with all eigenvectors corresponding to $v$, along with the 0 vector.
     \item The sum of eigenspaces is a direct sum. We consider $u_1+\cdots+u_m = 0$, where each eigenvector $u_i$ is from the eigenspace $E(\lambda_i,T)$. Because eigenvectors corresponding to distinct eigenvalues are linearly independent, all the $u_i$'s must be 0. Furthermore, since $$E(\lambda_1,T)+\dots+E(\lambda_m,T)$$ is a direct sum, we have $$\d E(\lambda_1,T) + \cdots + \d E(\lambda_m,T) = \d (E(\lambda_1,T) \oplus \dots \oplus E(\lambda_m,T)) \leq \d V.$$ Recall the theorem in \S3.5 that says a sum is a direct sum iff the dimensions add up.
-    \item An operator $T$ is \textit{diagonalizable} if the the operator has a diagonal matrix with respect to some basis of $T$.
+    \item An operator $T$ is \df{diagonalizable} if the the operator has a diagonal matrix with respect to some basis of $T$.
     \item For $T$ on FDVS $V$ with dimension $n$ and distinct eigenvalues $\lambda_1, \dots, \lambda_m$, diagonalizability of $T$ is equivalent to the following four conditions:
     \begin{enumerate}[label=(\alph*)]
         \item $V$ has a basis consisting of eigenvectors of $T$;
@@ -535,13 +543,13 @@
 \textit{Remark}. In this section $V$ is by default an inner product space.
 \subsection{Inner Products and Norms}
 \begin{itemize}
-    \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$ (the real $n$-dimensional space), the \textit{dot product} $x \cdot y \coloneqq x_1y_1+\dots+x_ny_n$ is a scalar in $\R$. The norm $\|x\|$ on $\R^n$ is usually given by $\sqrt{x_1^2+\dots+x_n^2}$, which is the square root of the dot product of $x$ with itself.
+    \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$ (the real $n$-dimensional space), the \df{dot product} $x \cdot y \coloneqq x_1y_1+\dots+x_ny_n$ is a scalar in $\R$. The norm $\|x\|$ on $\R^n$ is usually given by $\sqrt{x_1^2+\dots+x_n^2}$, which is the square root of the dot product of $x$ with itself.
     \item The usual norm $\|z\| \coloneqq  \sqrt{|z_1|^2+\dots+|z_n|^2}$ on $\C^n$ (the complex $n$-dimensional space) is also a scalar in $\R$.
-    \item Generally on both real and complex $n$-dimensional spaces, we define the \textit{Euclidean inner product} by $$\inp{(w_1,\dots,w_n)}{(z_1,\dots,z_n)} =  w_1\conj{z_1}+\dots+w_n\conj{z_n}.$$ This generalizes the definition of the dot product on $\R^n$. Moreover, we have $$\inp{(z_1,\dots,z_n)}{(z_1,\dots,z_n)} = z_1\conj{z_1}+\dots+z_n\conj{z_n} = |z_1|^2 + \dots + |z_n|^2 = \|z\|^2,$$ so that $\|z\|$ becomes the square root of the inner product of $z$ with itself.
+    \item Generally on both real and complex $n$-dimensional spaces, we define the \df{Euclidean inner product} by $$\inp{(w_1,\dots,w_n)}{(z_1,\dots,z_n)} =  w_1\conj{z_1}+\dots+w_n\conj{z_n}.$$ This generalizes the definition of the dot product on $\R^n$. Moreover, we have $$\inp{(z_1,\dots,z_n)}{(z_1,\dots,z_n)} = z_1\conj{z_1}+\dots+z_n\conj{z_n} = |z_1|^2 + \dots + |z_n|^2 = \|z\|^2,$$ so that $\|z\|$ becomes the square root of the inner product of $z$ with itself.
     
-    We regard $\R^n$ and $\C^n$ by default as the $n$-dimensional \textit{real and complex Euclidean spaces} endowed with the Euclidean inner product. 
+    We regard $\R^n$ and $\C^n$ by default as the $n$-dimensional real and complex Euclidean spaces endowed with the Euclidean inner product. 
     
-    \item Observation on our definition of the Euclidean inner product suggests how we could possibly define a general abstract inner product on arbitrary real or complex vector spaces. The \textit{inner product} is a function $\inp{\cdot}{\cdot}: V \times V \to \F$ ($\R$ or $\C$) with the following properties:
+    \item Observation on our definition of the Euclidean inner product suggests how we could possibly define a general abstract inner product on arbitrary real or complex vector spaces. The \df{inner product} is a function $\inp{\cdot}{\cdot}: V \times V \to \F$ ($\R$ or $\C$) with the following properties:
     \begin{itemize}
         \item Positive definiteness: $\inp{v}{v} \geq 0$ (\textbf{real} and nonnegative), which achieves ``$=$'' iff $v = 0$;
         \item Linearity in the first slot: $\inp{\lambda u+v}{w} = \lambda \inp{u}{w} + \inp{v}{w}$; (This means $\phi_w(v) \coloneqq \inp{v}{w}$ with respect to a fixed $w$ gives us a linear functional on $V$.)
@@ -553,13 +561,13 @@
         \item For fixed $w \in V$, $f: v \mapsto \inp{v}{w}$ is a linear map from $V$ to $\F$ because of linearity in the first slot;
         \item $\inp{0}{v} = 0$ because linear maps take 0 to 0; and $\inp{v}{0} = 0$ by conjugate symmetry.
     \end{itemize}
-    \item The \textit{norm} $\|v\| \coloneqq \sqrt{\inp{v}{v}}.$ It has properties
+    \item The \df{norm} $\|v\| \coloneqq \sqrt{\inp{v}{v}}.$ It has properties
     \begin{itemize}
         \item $\|v\| = 0$ iff $v = 0$, and 
         \item $\|\lambda v\| = |\lambda| \|v\|$.
     \end{itemize}
-    \item Two vectors are \textit{orthogonal} if their inner product is 0. Therefore, 0 is orthogonal to any vector and 0 is the only vector that is orthogonal to itself.
-    \item Introducing these concepts provide us with a list of useful equations and inequalities about \textit{inner product spaces} (vector spaces endowed with an inner product) that we know as facts in the Euclidean spaces.
+    \item Two vectors are \df{orthogonal} if their inner product is 0. Therefore, 0 is orthogonal to any vector and 0 is the only vector that is orthogonal to itself.
+    \item Introducing these concepts provide us with a list of useful equations and inequalities about \df{inner product spaces} (vector spaces endowed with an inner product) that we know as facts in the Euclidean spaces.
     \begin{itemize}
         \item The Pythagorean theorem now holds for orthogonal vectors $u,v \in V$: $$\|u+v\|^2 = \|u\|^2 + \|v\|^2.$$ Expanding the LHS, we have $\|u+v\|^2 = \inp{u+v}{u+v} = \inp{u}{u} + \inp{u}{v} + \inp{v}{u} + \inp{v}{v}$, where the two terms in the middle are 0.
         The converse of this theorem holds in real inner product spaces because then we would have $\inp{u}{v}+\inp{v}{u} = 2\inp{u}{v} = 0$, showing that the two vectors are orthogonal.
@@ -587,7 +595,7 @@
 
 \subsection{Orthonormal Bases}
 \begin{itemize}
-    \item A list (set) of vectors is \textit{orthonormal} if each vector is of norm 1 and is orthogonal to all other vectors in the list. That is to say for an orthonormal list of vectors $e_1,\dots,e_n \in V$,
+    \item A list (set) of vectors is \df{orthonormal} if each vector is of norm 1 and is orthogonal to all other vectors in the list. That is to say for an orthonormal list of vectors $e_1,\dots,e_n \in V$,
     \begin{equation*}
     \inp{e_i}{e_j} = 
         \left\{
@@ -601,7 +609,7 @@
         \item Note that the canonical basis in $\F^n$ is orthonormal.
     \end{itemize}
     \item Given an orthonormal list $e_1,\dots,e_n$, by repeated use of the Pythagorean theorem, we get $$\nm{a_1 e_1 + \cdots + a_n e_n}^2 = |a_1|^2 + \cdots + |a_n|^2$$ for all scalars $a_1, \dots, a_m$.
-    \item It follows from the theorem above that if we set $a_1 e_1 + \cdots + a_n e_n = 0$, then all the $a_i$'s must be 0, showing that an orthonormal list of vectors $e_1,\dots,e_n$ are linearly independent. Therefore, an orthonormal list of length $\d V$ is an \textit{orthonormal basis}, i.e., an orthonormal list (set) that is also a basis.
+    \item It follows from the theorem above that if we set $a_1 e_1 + \cdots + a_n e_n = 0$, then all the $a_i$'s must be 0, showing that an orthonormal list of vectors $e_1,\dots,e_n$ are linearly independent. Therefore, an orthonormal list of length $\d V$ is an \df{orthonormal basis}, i.e., an orthonormal list (set) that is also a basis.
     \item Let $u_1,\dots,u_n$ be a basis of a vector space $U$, we may endow a natural inner product on $U$ (which you can verify) given by $$\inp{a_1u_1+\dots+a_nu_n}{b_1u_1+\dots+b_nu_n}=a_1b_1+\dots+a_nb_n.$$ What is special about this inner product is that $\inp{u_i}{u_i} = 1$ for all $i$, so that the list of $u_i$'s becomes an orthonormal basis of the inner product space $U$.
     \item Now any $v \in V$ can be written as a unique linear combination of the orthonormal basis vectors $e_1,\dots,e_n$. In fact, we have $$v = \inp{v}{e_1}e_1 + \dots + \inp{v}{e_n}e_n.$$
     Consider $v = a_1 e_1 + \dots + a_n e_n$ and take an inner product with $e_j$ on both sides. Then, $\inp{v}{a_j} = a_j$, as desired. Note that $\nm{v}^2 = |\inp{v}{e_1}|^2 + \dots + |\inp{v}{e_n}|^2$.
@@ -649,7 +657,7 @@
 
 \subsection{Orthogonal Complement and Minimization Problems}
 \begin{itemize}
-    \item For $U \subseteq V$ (we assume $U$ is nonempty by default), the \textit{orthogonal complement} of $U$ (denoted by $U^\perp$) is the set of all vectors in $V$ that are orthogonal to every vector in $U$, i.e., $$U^\perp = \{v \in V \mid \forall u \in U, \inp{v}{u}=0\}.$$
+    \item For $U \subseteq V$ (we assume $U$ is nonempty by default), the \df{orthogonal complement} of $U$ (denoted by $U^\perp$) is the set of all vectors in $V$ that are orthogonal to every vector in $U$, i.e., $$U^\perp = \{v \in V \mid \forall u \in U, \inp{v}{u}=0\}.$$
     \begin{itemize}
         \item It is good to see an example in $\R^3$: if $U$ is a line in $\R^3$ through the origin, then all the vectors perpendicular to the line $U$ form the orthogonal complement of $U$, the plane through the origin perpendicular to the line $U$. Similarly, if on the other hand, $U$ is a plane in $\R^3$ through the origin, then its orthogonal complement is the line through the origin perpendicular to the plane $U$.
         \item Given $U \subseteq V$, $U^\perp$ is a subspace of $V$. Check $0 \in U^\perp$ and $U^\perp$ is closed under linear operation.
@@ -670,10 +678,10 @@
     \begin{itemize}
         \item It follows directly that $\d U^\perp = \d V - \d U$.
     \end{itemize}
-    \item Let $U$ again be a finite-dimensional subspace of $V$, then $U=(U^\perp)^\perp$. For the ``$\subseteq$'' direction, any $u \in U$ is orthogonal to any vectors $v \in U^\perp$, while \textit{all} vectors in $(U^\perp)^\perp$ are orthogonal to any $v \in U^\perp$. (Note that we can prove ``$\supseteq$'' this way because we do not know if $U$ contains all the vectors orthogonal to $U^\perp$.)
+    \item Let $U$ again be a finite-dimensional subspace of $V$, then $U=(U^\perp)^\perp$. For the ``$\subseteq$'' direction, any $u \in U$ is orthogonal to any vectors $v \in U^\perp$, while \emph{all} vectors in $(U^\perp)^\perp$ are orthogonal to any $v \in U^\perp$. (Note that we can prove ``$\supseteq$'' this way because we do not know if $U$ contains all the vectors orthogonal to $U^\perp$.)
     
     For the ``$\supseteq$'' direction, suppose $v \in (U^\perp)^\perp \subseteq V$. Then $v$ can be uniquely written as $u+w$, where $u \in U$ and $w \in U^\perp$. We have just proved that $U \subseteq (U^\perp)^\perp$, meaning that $u \in (U^\perp)^\perp$, subspace of $V$. Therefore, $w = v-u \in (U^\perp)^\perp$ and $w \in U^\perp$ simultaneously. Since $U$ is nonempty, $w = 0$ and thus $v = u \in U$.
-    \item The \textit{orthogonal projection} $P_U$ of $V$ to its finite-dimensional subspace $U$ is the function $P_U: V \to U$ defined by $P_U(v) = u$, where $u \in U$ and $w \in U^\perp$ are the pair of \emph{unique} elements such that $v = u+w$. It is easy to verify $P_U \in \LV$ (note that $U \subseteq V$).
+    \item The \df{orthogonal projection} $P_U$ of $V$ to its finite-dimensional subspace $U$ is the function $P_U: V \to U$ defined by $P_U(v) = u$, where $u \in U$ and $w \in U^\perp$ are the pair of \emph{unique} elements such that $v = u+w$. It is easy to verify $P_U \in \LV$ (note that $U \subseteq V$).
     \item Also, for orthonormal basis $e_1,\dots,e_m$, $P_U(v) = \inp{v}{e_1}e_1+\dots+\inp{v}{e_m}e_m$, which we have showed earlier. In general, if we want to find $P_U(v)$, we should first use Gram-Schmidt process to find an orthonormal basis of $U$ and then use the expression above the find $P_U(v)$.
     \item We give a list of properties of $P_U$ below.
     \begin{enumerate}[label=(\alph*)]
@@ -700,7 +708,7 @@
 \textit{Remark}. In this chapter we regard $V$ by default as FDVS over $\F = \R$ or $\C$.
 \subsection{Self-Adjoint and Normal Operators}
 \begin{itemize}
-    \item For $T \in \LVW$, the \textit{adjoint} of $T$ is the function $T^*: W \to V$ such that $$\inp{Tv}{w}_W = \inp{v}{T^*w}_V.$$
+    \item For $T \in \LVW$, the \df{adjoint} of $T$ is the function $T^*: W \to V$ such that $$\inp{Tv}{w}_W = \inp{v}{T^*w}_V.$$
     
     Pay attention to the fact that the inner product on the left is on $W$, while the inner product on the right is on $V$. What we have above is well-defined by the Riesz representation theorem in \S6.2. Fix $w$, then $\inp{Tv}{w}$ becomes a linear functional $\psi_{T,w}(v)$ on $V$ (because $T$ is linear), which uniquely determines a $u \in V$ such that $\inp{v}{u} = \psi_{T,w}(v)$. This unique $u$ is our $T^*w$. Thus, this $T^*$ always exists and is unique given $T$.
     
@@ -733,7 +741,7 @@
     
     The entries in $k$-th column of $\M(T)$ are exactly the coefficients in
     $$\inp{Te_k}{f_1}f_1+\dots+\inp{Te_k}{f_m}f_m = Te_k.$$ Therefore, $\M(T)_{j,k} = \inp{Te_k}{f_j}$. Similarly we can conclude that $\M(T^*)_{k,j} = \inp{T^*f_j}{e_k} = \inp{f_j}{Te_k}$, where $1 \leq j \leq m$ and $1 \leq k \leq n$. It is clear that $\M(T)$ and $\M(T^*)$ are conjugate transposes of one another.
-    \item An operator $T \in \LV$ is \textit{self-adjoint} (or \textit{Hermitian}) if $T=T^*$. That is to say, $T$ is self-adjoint iff $\inp{Tv}{w}=\inp{v}{Tw}$ for all $v,w \in V$.
+    \item An operator $T \in \LV$ is \df{self-adjoint} (or \df{Hermitian}) if $T=T^*$. That is to say, $T$ is self-adjoint iff $\inp{Tv}{w}=\inp{v}{Tw}$ for all $v,w \in V$.
     \begin{itemize}
         \item It follows from definition that the sum of two self-adjoint operators is self-adjoint and the product of a real scalar and a self-adjoint operator is self-adjoint.
         \item As the book points out, over $\C$ we can draw a parallel between the adjoint of an operator and the complex conjugation of a number. In some abstract sense saying that an operator is self-adjoint is similar to saying that a number is equal to its conjugation and is thus real. Self-adjoint operators are closely tied to real numbers, as we will see.
@@ -749,7 +757,7 @@
     Let us look at the equation (this is the general trick for proving something is real)
     $$\inp{Tv}{v}-\conj{\inp{Tv}{v}}=\inp{Tv}{v}-\inp{v}{Tv}=\inp{(T-T^*)v}{v}.$$ If $\inp{Tv}{v} \in \R$ for every $v$, then $T-T^*=0$ by ($\dagger$). If in the other direction $T=T^*$, then $\inp{Tv}{v}=\conj{\inp{Tv}{v}}$ and is thus real for every $v$.
     \item If $T = T^*$ on a (real or complex) inner product space $V$ and $\inp{Tv}{v}=0$ for all $v$, then $T = 0$. By ($\dagger$), now we only have to check this fact on the real inner product space. As one may check, $$\inp{Tu}{w} = \frac{\inp{T(u+w)}{u+w}-\inp{T(u-w)}{u-w}}{4}.$$ We let $w = Tu$ and get $T = 0$.
-    \item An operator $T$ on $V$ is \textit{normal} if $TT^* = T^*T$. Obviously self-adjoint operators $T = T^*$ are normal.
+    \item An operator $T$ on $V$ is \df{normal} if $TT^* = T^*T$. Obviously self-adjoint operators $T = T^*$ are normal.
     \item $T$ is normal iff $\nm{Tv}=\nm{T^*v}$ for all $v \in V$.
     
     To prove this, first note that $TT^* - T^*T$ is self-adjoint because $(TT^*-T^*T)^*=(TT^*)^*-(T^*T)^*=TT^* - T^*T$. Therefore,
@@ -864,11 +872,11 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
 
 \subsection{Positive Operators and Isometries}
 \begin{itemize}
-    \item $T \in \LV$ is \textit{positive} if $T$ is self-adjoint and $\inp{Tv}{v} \geq 0$ for all $v \in V$.
+    \item $T \in \LV$ is \df{positive} if $T$ is self-adjoint and $\inp{Tv}{v} \geq 0$ for all $v \in V$.
     \begin{itemize}
         \item For example, we can verify that $P_U$ is a positive operator on $V$.
     \end{itemize}
-    \item An operator $R$ is a \textit{square root} of $T$ if $R^2 = T$.
+    \item An operator $R$ is a \df{square root} of $T$ if $R^2 = T$.
     \item For $T \in \LV$, the following are equivalent:
     \begin{enumerate}[label=(\alph*)]
         \item $T$ is positive;
@@ -896,7 +904,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
     $$Tv = a_1 \lambda e_1 +\dots+ a_n \lambda e_n.$$ The two expressions above are equal, and since $e_1,\dots,e_n$ is a basis, we have $a_j(\lambda - \lambda_j) = 0$ for all $j$. Thus, 
     $$v = \sum_{\{j: \lambda_j=\lambda\}}a_j e_j, \text{ and then } Rv = \sum_{\{j: \lambda_j=\lambda\}} a_j \sqrt{\lambda} e_j = \sqrt{\lambda}v.$$
     
-    \item An operator $S \in \LV$ is an \textit{isometry} if $\nm{Sv}=\nm{v}$ for all $v \in V$. (an operator that preserves norm)
+    \item An operator $S \in \LV$ is an \df{isometry} if $\nm{Sv}=\nm{v}$ for all $v \in V$. (an operator that preserves norm)
     \item There are many equivalent characterizations of isometry. The following are equivalent for $S \in \LV$:
     \begin{enumerate}[label=(\alph*)]
     \item $S$ is an isometry;
@@ -960,7 +968,7 @@ There is a good analogy of this theorem with the polar decomposition of a comple
     
     Because $v$ can be unique written into as the sum of $u \in \r \sqrt{T^*T}$ and $w \in (\r \sqrt{T^*T})^\perp$, defining $$Sv = S_1 u+ S_2 w$$ gives $S(\sqrt{T^*T}v) = S_1(\sqrt{T^*T}v) = Tv$ for all $v \in V$, so that $T=S\sqrt{T^*T}$. Furthermore, by the Pythagorean theorem and $S_1$ and $S_2$ are  isometries themselves, one can show $\nm{Sv}^2=\nm{v}^2$ for all $v$.
 \end{itemize}
-\item The \textit{singular values} of $T \in \LV$ are the eigenvalues of $\sqrt{T^*T}$, which each eigenvalue repeating $\d E(\lambda, \sqrt{T^*T})$ times.
+\item The \df{singular values} of $T \in \LV$ are the eigenvalues of $\sqrt{T^*T}$, which each eigenvalue repeating $\d E(\lambda, \sqrt{T^*T})$ times.
 
 \begin{itemize}
 \item Naturally the singular values should all be nonnegative because $\sqrt{T^*T}$ is a positive operator (the positive square root of the positive operator $T^*T$).
@@ -975,7 +983,7 @@ $T^*T$ is positive, so by the spectral theorems there is an orthonormal basis $e
 
 The spectral theorems applied to the self-adjoint operator $\sqrt{T^*T}$ gives us an orthonormal basis $e_1,\dots,e_n$ such that $Te_j = s_j v_j$ for all $j$. Since for all $v$, $v = \inp{v}{e_1}e_1 + \dots + \inp{v}{e_n}e_n$, applying $T$ to both side leads to $$\sqrt{T^*T}v = s_1\inp{v}{e_1}e_1 + \dots + s_n\inp{v}{e_n}e_n.$$ Since we have isometry $S \in \LV$ such that $T = S \sqrt{T^*T}$ by the polar decomposition theorem, applying $S$ to both sides of the above equation leads further to $$S\sqrt{T^*T}v = s_1\inp{v}{e_1}Se_1 + \dots + s_n\inp{v}{e_n}Se_n.$$ Because $S$ is an isometry, we know that $f_1 \coloneqq Se_1,\dots,f_n \coloneqq Se_n$ is an orthonormal basis of $V$ as well. Therefore, we could simplify the equation above to $$Tv = s_1 \inp{v}{e_1}f_1 + \dots + s_n \inp{v}{e_n}f_n,$$ as desired.
 \begin{itemize}
-	\item This theorem introduces a new way to decompose an operator/matrix on an inner product space known as the \textit{singular value decomposition} (SVD). Replace $v$ in the equation above by each individual $e_j$, and we have $Te_j = s_jf_j$ for every $j$ between 1 and $n$. Thus we have
+	\item This theorem introduces a new way to decompose an operator/matrix on an inner product space known as the \df{singular value decomposition} (SVD). Replace $v$ in the equation above by each individual $e_j$, and we have $Te_j = s_jf_j$ for every $j$ between 1 and $n$. Thus we have
 	\begin{equation*}
 		\M(T,(e_1,\dots,e_n),(f_1,\dots,f_n)) = \begin{bmatrix}
 		s_1 & & 0 \\
@@ -1005,16 +1013,16 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     $$\{0\} = \n T^0 \subsetneq \n T^1 \subsetneq \cdots \subsetneq \n T^n \subsetneq \n T^{n+1}.$$
     Every proper subset means the dimension of the next one on the right must be one more than the dimension of the previous one on the left. Therefore, at the point $\n T^n$ is at least of dimension $n$, from which we can increase no further.
     
-    From now on we will call $$\{0\} = \n T^0 \subseteq \n T^1 \subseteq \cdots \subseteq \n T^n = \n T^{n+1} = \cdots$$ the \textit{nullspace power chain}.
+    From now on we will call $$\{0\} = \n T^0 \subseteq \n T^1 \subseteq \cdots \subseteq \n T^n = \n T^{n+1} = \cdots$$ the \emph{nullspace power chain}.
     \item Say $T$ is on $V$ with dimension $n$, $V = \n T^n \oplus \r T^n$. (The claim is actually true for all $m$ such that $T^m = T^{m+1}$.)
     The proof divides into two steps. First, we need to show that $\n T^n \cap \r T^n = \{0\}$. Second, we need to show that the direct sum is actually $V$.
     
     Suppose $v \in \n T^n \cap \r T^n$, then $T^n v= 0$ and there exists $v$ such that $T^n u=v$. Therefore, $$0 = T^{2n} v = T^n (T^n u) = T^{2n} u,$$ showing that $u \in \n T^{2n} = \n T^n$. Therefore $v = T^n u = 0$.
     
     Now we have $\d (\n T^n \oplus \r T^n) = \d\n T^n + \d\r T^n = \d V$. Since $\n T^n \oplus \r T^n$ is a subspace of $V$, the direct sum is $V$ itself.
-    \item We now generalizes the concept of eigenvectors so that we will show soon that a complex vector space can be written into a direct sum of generalized eigenspaces. The \textit{generalized eigenvector} of $T$ corresponding to eigenvalue $\lambda$ is a nonzero vector $v \in V$ such that $(T-\lambda I)^j v = 0$ for some $j \in \Z^+$. (Note that when generalizing eigenvectors, no new eigenvalues are introduced because $T - \lambda I$ being injective implies that $(T -\lambda I)^n$ is injective.)
+    \item We now generalizes the concept of eigenvectors so that we will show soon that a complex vector space can be written into a direct sum of generalized eigenspaces. The \df{generalized eigenvector} of $T$ corresponding to eigenvalue $\lambda$ is a nonzero vector $v \in V$ such that $(T-\lambda I)^j v = 0$ for some $j \in \Z^+$. (Note that when generalizing eigenvectors, no new eigenvalues are introduced because $T - \lambda I$ being injective implies that $(T -\lambda I)^n$ is injective.)
     
-    The \textit{generalized eigenspace} of $T$ corresponding to $\lambda$ is the set $$G(\lambda, T) = \{0\} \cup \text{the set of generalized eigenvectors of $T$ corresponding to $\lambda$}.$$
+    The \df{generalized eigenspace} of $T$ corresponding to $\lambda$ is the set $$G(\lambda, T) = \{0\} \cup \text{the set of generalized eigenvectors of $T$ corresponding to $\lambda$}.$$
     Obviously $E(\lambda, T) \subseteq G(\lambda, T)$. (The $E$ is actually a subspace of $G$ because $E$ is closed under the induced operations from $G$ again induced from $V$.) When $\lambda$ is not an eigenvalue, $G(\lambda, T) = \{0\}$.
     \item We now state that $G(\lambda, T) = \n (T - \lambda I)^n$, where $n = \d V$. (In particular, $G(0,T) = \n T^n$) You should already have an idea that the proof uses the nullspace power chain.
     \item A list of generalized eigenvectors corresponding to distinct eigenvalues still needs to be linearly independent. Let $\lambda_1,\dots,\lambda_m$ be the list of eigenvalues and $v_1,\dots,v_m$ be the list of corresponding eigenvectors we are considering. Suppose $0 = a_1v_1 + \dots + a_mv_m$.
@@ -1024,7 +1032,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     0 & = a_1 (T-\lambda_2 I)^n \cdots (T-\lambda_m I)^n (T-\lambda_1 I)^k v \\ & = a_1 (\lambda_1 -\lambda_2) \cdots (\lambda_1 - \lambda_m)^n w.
     \end{align*}
     Since $w$ is nonzero and the $\lambda_1$ is distinct from the other $\lambda$'s, $a_1 = 0$. In the same way, all the coefficients $a_i$ must be zero and thus the eigenvectors are linearly independent.
-	\item A operator $N$ on $V$ is \textit{nilpotent} if $N^k = 0$ for some $k \in \Z^+$. A nilpotent operator cannot be injective/surjective. [Recall the composition of injective (surjective/bijective) functions must be injective (surjective/bijective).]
+	\item A operator $N$ on $V$ is \df{nilpotent} if $N^k = 0$ for some $k \in \Z^+$. A nilpotent operator cannot be injective/surjective. [Recall the composition of injective (surjective/bijective) functions must be injective (surjective/bijective).]
 	\begin{itemize}
 	\item The only eigenvalue of a nilpotent operator is 0. Proof is obvious.
 	\end{itemize}
@@ -1065,11 +1073,11 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
         \item Note that if $T$ is diagonalizable, since $E(\lambda_j,T) \subseteq G(\lambda_j,T)$, comparing the (a) here and $V = E(\lambda_1,T) \oplus \dots \oplus E(\lambda_m,T)$ gives us $E(\lambda_j,T) = G(\lambda_j,T)$ for all $j$, or otherwise the $G$'s would not give a direct sum.
     \end{itemize}
     \item Because all the generalized eigenspaces $G(\lambda_j,T)$ are vector spaces, we can choose a basis from each of $G(\lambda_1,T)$ to $G(\lambda_m,T)$. Put all these bases together and by (a), we have a basis of $V$ consisting of generalized eigenvectors of $T$.
-    \item For an eigenvalue $\lambda$ of $T \in \LV$, its \textit{algebraic multiplicity} is defined as $\d G(\lambda,T) = \d \n (T-\lambda I)^{\dim V}$, and its \textit{geometric multiplicity} is defined as $\d E(\lambda,T) = \d \n (T-\lambda I)$. By default, when the book says ``multiplicity'' it means specifically the algebraic multiplicity.
+    \item For an eigenvalue $\lambda$ of $T \in \LV$, its \df{algebraic multiplicity} is defined as $\d G(\lambda,T) = \d \n (T-\lambda I)^{\dim V}$, and its \df{geometric multiplicity} is defined as $\d E(\lambda,T) = \d \n (T-\lambda I)$. By default, when the book says ``multiplicity'' it means specifically the algebraic multiplicity.
     \begin{itemize}
         \item Since $V = G(\lambda_1,T) \oplus \cdots \oplus G(\lambda_m,T)$ for operator $T$ on a complex vector space $V$, $\d V$ is the sum of multiplicities of all eigenvalues of $T$.
     \end{itemize}
-    \item A \textit{block diagonal matrix}, as its name tells, is a matrix of the form $\begin{bmatrix}
+    \item A \df{block diagonal matrix}, as its name tells, is a matrix of the form $\begin{bmatrix}
 	A_1 & & 0 \\ & \ddots & \\ 0 & & A_m
     \end{bmatrix}$, where the $A_i$'s are square matrices on the diagonal and all other entries outside these $A_j$'s are 0.
     \item We give the block diagonal matrix decomposition theorem. Suppose $T$ is an operator over a complex vector space $V$. For the list of all distinct eigenvalues $\lambda_1, \dots, \lambda_m$ of $T$, each with corresponding multiplicity $d_1,\dots,d_m$. Then there exists a basis of $V$ with respect to which $T$ has a block diagonal matrix of the form $\begin{bmatrix}
@@ -1100,37 +1108,37 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 \subsection{Characteristic and Minimal Polynomials}
 \textit{Remark}. By default in this section, $q$ is the characteristic polynomial, and $p$ is the minimal polynomial.
 \begin{itemize}
-    \item For an operator $T$ over a complex vector space $V$, let $\lambda_1, \dots, \lambda_m$ be all distinct eigenvalues of $T$, each with corresponding multiplicity $d_1,\dots, d_m$. Then the \textit{characteristic polynomial} of $T$ is defined to be \[(z-\lambda_1)^{d_1}\cdots (z-\lambda_m)^{d_m}.\]
+    \item For an operator $T$ over a complex vector space $V$, let $\lambda_1, \dots, \lambda_m$ be all distinct eigenvalues of $T$, each with corresponding multiplicity $d_1,\dots, d_m$. Then the \df{characteristic polynomial} of $T$ is defined to be \[(z-\lambda_1)^{d_1}\cdots (z-\lambda_m)^{d_m}.\]
     \begin{itemize}
         \item The characteristic polynomial must be of degree $\d V$ because $d_1+\dots+d_m = \d V$.
         \item The zeros of the characteristic polynomial are the eigenvalues of $T$.
     \end{itemize}
-    \item Now we prove the important \textbf{Cayley-Hamilton theorem} over complex vector spaces. With the tools of generalized eigenspaces we introduced in the last two sections, the proof becomes straightforward. Let $T$ be an operator on a complex vector space $V$. Let $q$ be the characteristic polynomial of $T$, then $q(T) = 0$.
+    \item Now we prove the important \textbf{Cayley-Hamilton theorem} on complex vector spaces. With the tools of generalized eigenspaces we introduced in the last two sections, the proof becomes straightforward. Let $T$ be an operator on a complex vector space $V$. Let $q$ be the characteristic polynomial of $T$, then $q(T) = 0$.
 
     Let $\lambda_1,\dots,\lambda_m$ are distinct eigenvalues of $T$ and $d_1,\dots,d_m$ be the corresponding dimensions of the generalized eigenspaces $G(\lambda_j,T)$, i.e., the multiplicities of these eigenvalues. We know the restricted operator $(T - \lambda_j I)|_{G(\lambda_j,T)}$ is nilpotent, and thus it raised to the power of $\d G(\lambda_j,T)$ is the zero operator: $(T - \lambda_j I)^{d_j}|_{G(\lambda_j,T)} = 0$.
 
     Since every vector in $V$ is a sum of vectors in the individual generalized eigenspaces, it suffices to prove that each $q(T)|_{G(\lambda_j,T)} = 0$. Consider $q(T) = (T - \lambda_1 I)^{d_1} \cdots (T - \lambda_m I)^{d_m}$, in which the factor on the RHS are commutative. For any chosen $j$ between 1 and $m$, we may move the factor $(T - \lambda_j I)^{d_j}$ to the very right. Since for all $v \in G(\lambda_j,T)$, $(T - \lambda_j I)^{d_j}v = 0$, $q(T)|_G(\lambda_j,T)$ is the zero operator, as desired.
 
-    \item A \textit{monic polynomial} is polynomial with highest-term coefficient being 1.
-    \item For $T \in \LV$, then there exists a unique monic polynomial $p$ of smallest degree such that $p(T)=0$. We call it the \textit{minimal polynomial} of the operator $T$.
+    \item A \df{monic polynomial} is polynomial with highest-term coefficient being 1. (Here this definition applies to both real and complex vector spaces.)
+    \item For $T \in \LV$, then there exists a unique monic polynomial $p$ of smallest degree such that $p(T)=0$. We call it the \df{minimal polynomial} of the operator $T$. Note that the minimal polynomial has real coefficients when $V$ is a real vector space, and has complex coefficients when $V$ is a complex vector space.
     
-    Note $\d \LV = \d V \times \d V = n^2$, if we define $n = \d V$. Thus, the list of powers of $T$ of length $n+1$ \[I, T, T^2,\dots,T^{n^2}\] is linearly dependent. By the well-ordering principle applied to the linear dependence lemma, there exists a least $m$ such that \[I,T,T^2,\dots,T^{m-1}\] is linearly independent, while $T^m$ is in its span. Therefore, we have \[a_0 I + a_1 T + \dots + a_{m-1} T^{m-1} + T^m = 0.\] Accordingly we define $p(z) = a_0 + a_1 z + a_{m-1}z^{m-1} + z^m$, which is a monic polynomial of the smallest possible degree such that $p(T) = 0$.
+    Note $\d \LV = \d V \times \d V = n^2$, if we define $n = \d V$. Thus, the list of powers of $T$ of length $n+1$ \[I, T, T^2,\dots,T^{n^2}\] is linearly dependent. By the well-ordering principle applied to the linear dependence lemma, there exists a least $m$ such that \[I,T,T^2,\dots,T^{m-1}\] is linearly independent, while $T^m$ is in its span. Therefore, we have \[a_0 I + a_1 T + \dots + a_{m-1} T^{m-1} + T^m = 0\] for some $a_0,\dots,a_{m-1} \in \F$. Accordingly we define $p(z) = a_0 + a_1 z +\dots+ a_{m-1}z^{m-1} + z^m \in \PF$, which is a monic polynomial of the smallest possible degree such that $p(T) = 0$.
 
     For the uniqueness part, by the choice of $m$ if we have another minimal polynomial $q$, then $\deg q = m$ as well. Consider $(p-q)(z)$, which is of degree less than $m$ and has $(p-q)(T) = p(T) - q(T) = 0$. It follows that $p = q$ because otherwise $p$ cannot be the minimal polynomial.
     \begin{itemize}
-        \item We remark that the Cayley-Hamilton theorem tells us that the minimal polynomial has to be of degree at most $\d V$, an upper bound stronger than $(\d V)^2 = \d \LV$, over $\C$. This holds over $\R$ as well as we will see in the next chapter.
+        \item We remark that the Cayley-Hamilton theorem tells us that the minimal polynomial has to be of degree at most $\d V$, an upper bound stronger than $(\d V)^2 = \d \LV$, over $\C$. This holds over $\R$ as well, as we will see in the next chapter.
     \end{itemize}
     \item $q(T) = 0$ iff $q$ is a polynomial multiple of the minimal polynomial $p$ of $T$ (i.e., there exists $s \in \PF$ such that $q=ps$).
 
     ``$\impliedby$'' is obvious. For ``$\implies$'', suppose we have $q(z)$ such that $q(T) = 0$, then by the division algorithm with respect to the minimal polynomial $p(z)$, we have $q = ps+r$ for a (unique) pair of $s$ and $r$ with $\deg r < \deg p$. Then \[0 = q(T) = p(T)s(T)+r(T) = r(T).\] If $r$ is not the zero polynomial, then we may divide $r$ by its highest coefficient to get a monic polynomial $\tilde{r}$ such that $\tilde{r}(T) = 0$ still. Yet $\deg \tilde{r} < \deg p$, which leads to contradiction. Therefore, $r = 0$, and we have $q = ps$.
     \begin{itemize}
-        \item It follows directly that for an operator $T$ on a complex vector space, the characteristic polynomial must be a polynomial multiple of the minimal polynomial. (We have not defined the characteristic polynomials in the case $\F = \R$, but the result is similarly true. See the next chapter.) This is an important criterion for us to find the minimal polynomial of an operator.
+        \item It follows directly that for an operator $T$ on a \textbf{complex vector space}, the characteristic polynomial must be a polynomial multiple of the minimal polynomial. (We have not defined the characteristic polynomials in the case $\F = \R$, but the result is similarly true. See the next chapter.) This is an important criterion for us to find the minimal polynomial of an operator.
     \end{itemize}
-    \item The following result is another important criterion for finding the minimal polynomial. For operator $T$ on $V$, the zeros of the minimal polynomial $p$ are \textbf{precisely} the eigenvalues of $T$.
+    \item The following result is another important criterion for finding the minimal polynomial. For an operator $T$ on a vector space $V$, the zeros of the minimal polynomial $p$ are \textbf{precisely} the eigenvalues of $T$.
 
     Suppose $\lambda \in \F$ is a zero of $p$, so that $p(z) = (z-\lambda)q(z)$ for a monic polynomial $q$ (because $p$ is monic). Replace $z$ by $T$, and we have \[0 = p(T) = (T - \lambda I)q(T).\] Since $\deg q < \deg p$, for some $v \in V$ $q(T)v \ne 0$ so that $q$ is not a minimal polynomial. Therefore, $T - \lambda I$ is not injective, which means that $\lambda$ is an eigenvalue of $T$.
 
-    For the other direction, suppose $\lambda \in \F$ is an eigenvalue of $T$ instead, then $\exists v \in V\backslash \{0\}$ such that $Tv = \lambda v$. We have used a number of times already that $T^j = \lambda^j v$ for arbitrary integer exponent $j$. Thus
+    For the other direction, suppose $\lambda \in \F$ is an eigenvalue of $T$ instead, then $\exists v \in V\backslash \{0\}$ such that $Tv = \lambda v$. We have used a number of times already that $T^j v= \lambda^j v$ for arbitrary integer exponent $j$. Thus
     \begin{align*}
         0 = p(T)v & = (a_0 I + a_1 T + \dots + a_{m-1} T^{m-1} + T^m)v \\ & = (a_0 + a_1 \lambda + \dots + a_{m-1} \lambda^{m-1} + \lambda^m)v \\ & = p(\lambda) v.
     \end{align*}
@@ -1141,7 +1149,56 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 
 
 \section{Operators on Real Vector Spaces}
+\textit{Remark}. We continue to assume $V$ is a nonzero FDVS in this chapter, and $T \in \LV$.
 \subsection{Complexification}
+\textit{Remark}. In this section, $u,v$ by default denotes vectors in $V$, and $a,b$ are real numbers to represent an arbitrary complex number $a+bi$.
+\begin{itemize}
+    \item For a real vector space $V$, its \df{complexification}, denote by $V_\C$, is $V \times V$. Customarily we write $(u,v) \in V_\C$ as $u + iv$, although it sometimes makes more sense to \emph{}
+    \begin{enumerate}
+        \item [(1)] Addition is defined entrywise, i.e., \[(u_1+iv_1)+(u_2+iv_2)=(u_1+u_2)+i(v_1+v_2),\] or equivalently, $(u_1,v_1)+(u_2,v_2) = (u_1+u_2,v_1+v_2)$.
+        \item [(2)] \textbf{Complex} scalar multiplication is defined by seeing $u+iv \in V_\C$ as a complex number, i.e., \[(a+bi)(u+iv) = (au-bv)+i(av+bu)\] for $a,b \in \R$, or equivalently, $(a+bi)(u,v) = (au-bv,av+bu)$.
+    \end{enumerate}
+
+    We can show that $V_\C$ is a complex vector space. Clearly it is abelian group under addition. The multiplicative identity is $1+0i$, and because complex number multiplication follows the distributive and associative properties, scalar multiplication defined on $V_\C$ here also follows these properties. Since now $V_\C$ is a vector space, the original real vector space $V$ is naturally embedded into $V_\C$: each $u \in V$ is naturally identified with each $u+0i \in V_\C$.
+    \item For a real vector space $V$, if $v_1,\dots,v_n$ is its basis, then the list is also a basis of the complex vector space $V_\C$. It follows directly that $\d V_\C = \d V$.
+
+    Note that by the definition of scalar multiplication, $(0+1i)(u+i0) = 0+iu$ for any $u \in V$. Therefore, $\s(v_1,\dots,v_n)$ contains all the vectors $v_1,\dots,v_n$ and $iv_1,\dots,iv_n$, so that all $u+iv \in V_\C$ can be expressed.
+    
+    \emph{It might make more sense to think about this in terms of the $(,)$ notation. The $(v_1,0),\dots,(v_n,0)$ spans the first slot, while the $(0,v_1),\dots,(0,v_n)$ spans the second slot in $V \times V$.}
+
+    Regarding the linear independence of $v_1,\dots,v_n$, suppose $a_1v_1+\dots+a_nv_n = 0$ with coefficients from $\C$, then 
+    \[(\Re a_1)v_1+ \dots + (\Re a_n)v_n = 0 \quad \text{and} \quad (\Im a_1)v_1 + \dots + (\Im a_n)v_n = 0.\]
+    Since the list off $v_i$'s are linearly independent on the real vector space $V$, the $\Re$'s and $\Im$'s above are all zero, and thus the $a_i$'s are all zero, finishing the proof.
+    \item $T_\C$, the \df{complexification of an operator} $T$ on a real vector space $V$, is an operator on the complex vector space $V_\C$ given by $T_\C (u+iv) = Tu + i Tv$. In particular, $T_\C u = Tu$ for $u \in V$.
+
+    Now we show that given $T \in \LV$, $T_\C \in \mathcal{L}(V_\C)$: first, \begin{align*}
+        T_\C((u_1+iv_1)+(u_2+iv_2)) & = T_\C((u_1+u_2)+i(v_1+v_2)) \\ & = T(u_1+u_2) + iT(v_1+v_2) \\ & = (Tu_1 + iTv_1) + (Tu_2 + iTv_2) \\ & = T_\C(u_1 + iv_1) + T_\C(u_2 + iv_2);
+    \end{align*}
+    and second, given $a+bi \in \C$ (since $V_\C$ is a \textbf{complex} vector space),
+    \begin{align*}
+        T_\C((a+bi)(u+iv)) & = T_\C(au-bv + i(bu+av)) \\ & = T(au-bv) + iT(bu+av) \\ & = (a+bi)Tu+(ia-b)Tv \\ & = (a+bi)Tu + (a+bi)iTv \\ & = (a+bi) T_\C(u+iv).
+    \end{align*}
+    \item For $T$ on a real vector space $V$ with basis $v_1,\dots,v_n$, $\M(T) = \M(T_\C)$ with respect to the same basis $v_1,\dots,v_n$, basically because $T_\C v_i = Tv_i$ for all $i$ between 1 and $n$.
+    \item We mentioned that a real vector space can have no eigenvalues at all and therefore no invariant subspace of dimension 1. However, we can conclude that an invariant subspace of dimension 1 or 2 always exists in a finite-dimensional real vector space. The proof follows quite mystically from the trick of complexification.
+
+    For an operator $T$ on a real vector space $V$, its complexification $T_\C$ on the complex vector space $V_\C$ must have an eigenvalue $a+bi$. We can simplify $T_\C(u+iv) = (a+bi)(u+iv)$ into \[Tu+iTv = (au-bv)+(av+bu)i,\] from which we get $Tu = au-bv$ and $Tv = av+bu$. Let $U$ be the span of $\{u,v\}$ in $V$, which is clearly invariant under $T$ with dimension $\leq 2$.
+    
+    \item Clearly by repeated application of $T_\C$ to $u+iv$ we have $(T_\C)^n (u+iv) = T^n u + i T^n v$. It directly follows that $p(T_\C) = (p(T))_\C$.
+    \item The minimal polynomial of $T_\C$ is equal to the minimal polynomial of $T$ on a real vector space. We use $p\in \mathcal{P}(\R)$ to denote the minimal polynomial of $T$.
+    
+    First from $p(T) = 0$ we immediately know that $p(T_\C) = 0$.
+    
+    We now show that $p$ is indeed the \emph{minimal} polynomial of $T_\C$. Suppose $q \in \mathcal{P}(\C)$ is a monic polynomial such that $q(T_\C) = 0$. Then for any $u \in V$ (not in $V_\C$), $q(T_\C)u = 0$, i.e., given \[q(z) = (a_0+b_0) + (a_1+b_1)z + \dots + (a_{m-1} + b_{m-1})z^{m-1} + z^m,\] we have 
+    \begin{align*}
+        0 = q(T_\C)u & = (a_0+b_0 i)u + (a_1+b_1 i)Tu + \dots + (a_{m-1} + b_{m-1} i)T^{m-1}u + T^mu \qquad [\text{equal to } q(T)u]\\ & = (a_0 + a_1T + \dots + a_{m-1}T^{m-1} + T^m)u + i(b_0 + b_1T + \dots + b_{m-1}T^{m-1})u
+    \end{align*}
+    Take $r(z) = a_0 + a_1z + \dots + a_{m-1}z^{m-1} + z^m$. Then $r$ is a monic polynomial in $\mathcal{P}(\R)$ with $r(T)u = 0$ for all $u \in V$. Thus $\deg q = m = \deg r \geq \deg p$, showing that $p$ is of the minimum degree and thus the \emph{unique} minimal polynomial of $V_\C$.
+
+    P.S. We give another way of thinking about the proof. Consider $q$ instead as the the minimal polynomial of $T_\C$. If $b_0 + b_1z + \dots + b_{m-1}z^{m-1}$ is not a zero polynomial, then we can divide it by its highest-degree coefficient to get a monic polynomial $s(z)$ such that $s(T)u = 0$ for all $u \in V$. Therefore, $q$ must be of real coefficients [$q(z) \in \mathcal{P}(\R)$], and since we know the minimal polynomial of $T$ on $V$ is $p$, $q$ must be $p$.
+
+    
+    \item The multiplicity of $\lambda$ is equal to the multiplicity of $\conj{\lambda}$
+\end{itemize}
 
 \subsection{Operators on Real Inner Product Spaces}
 
