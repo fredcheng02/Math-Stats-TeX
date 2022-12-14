@@ -1,0 +1,172 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amssymb,tikz-cd,mathtools}
+\usepackage[OT1]{fontenc}
+\usepackage{enumitem}
+\usepackage{fullpage,setspace,microtype,soul}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+\newcommand{\boxaround}[1]{\fbox{\parbox{\textwidth}{#1}}}
+\newcommand{\rmk}{\noindent\textit{Remark.}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\df}[1]{\ul{\textit{#1}}}
+\newcommand{\aut}{\operatorname{Aut}}
+\newcommand{\inn}{\operatorname{Inn}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\gen}[1]{\langle #1 \rangle}
+\newcommand{\Quot}{\operatorname{Quot}}
+\newcommand{\irr}{\operatorname{irr}}
+\renewcommand{\phi}{\varphi}
+
+\onehalfspacing
+\setlength{\parskip}{0em}
+\setlist{listparindent=\parindent,parsep=0pt}
+
+\title{MATH 113 Notes}
+\author{Cheng, Feng}
+
+\makeatletter
+\begin{document}
+\begin{center}
+    {\Large \@title}
+    \\ based on \textit{A First Course in Abstract Algebra}, seventh edition \vspace{0.5em}
+    \\ \@author
+    \vspace{-0.5em}
+\end{center}
+\makeatother
+
+
+\section{Groups and Subgroups}
+
+\section{Permutation, Cosets, and Direct Products}
+\section{Homomorphisms and Factor Groups}
+\section{Rings and Fields}
+
+
+\section{Ideals and Factor Rings}
+\begin{itemize}
+    \item Let $\phi: R \to R'$ be a ring homomorphism, and $N$ be an ideal of $R$. Then $\phi(N)$ is an ideal of $\phi(R)$. If $N'$ is an ideal of either $\phi(R)$ or $R'$, then $\phi^{-1}(N')$ is an ideal of $R$.    
+    \begin{proof}
+        The image of an additive normal subgroup is still an additive normal subgroup. Pick any $a \in \phi(R)$, then $\phi^{-1}(a) \in R$ has $\phi^{-1}(a)N \subseteq N$ and $N\phi^{-1}(a) \subseteq N$. By the homomorphism property, $a \phi(N)$ and $\phi(N)a$ are both subsets of $\phi(N)$, as desired.
+
+        Suppose $N'$ is an ideal of $\phi(R)$ [or $R'$]. Consider $\phi^{-1}(N')$, an additive subgroup of $R$. For any $a \in R$ and $b \in \phi^{-1}(N')$, $\phi(ab)=\phi(a)\phi(b)$ and $\phi(ba)=\phi(b)\phi(a)$. Since $\phi(a) \in \phi(R)$ [or $R'$] and $\phi(b) \in N'$, $\phi(ab)$ and $\phi(ba)$ are both in $N'$, so that $ab$ and $ba$ are both in $\phi^{-1}(N')$, as desired.
+    \end{proof}
+    \item If $R$ is a unital ring, and $N$ is an ideal of $R$ containing a unit $u$, then $N = R$.
+    \begin{proof}
+        $1 = u^{-1} u \in N$ for $u^{-1} \in R$. Then for any $a \in R$, $a \cdot 1 \in N$, so that $R \subseteq N$.
+    \end{proof}
+    \begin{itemize}
+        \item A field contains no proper nontrivial ideals, and thus thus \emph{a factor ring of a field} is not useful.
+    \end{itemize}
+    \item For two ideals $I,J$ of $R$, $I \cap J$ and $I + J$ are also ideals of $R$.
+    \item Let $R$ be a commutative unital ring, then
+    \begin{enumerate}[label=(\alph*)]
+        \item  $M$ is a maximal ideal iff $R/M$ is a field.
+        \item $P$ is a prime ideal iff $R/P$ is an integral domain.
+    \end{enumerate}
+    \begin{proof}
+        (a;$\implies$) We know $R/M$ is a commutative unital ring, so basically we want to show that every nonzero $u+M \in R/M$ is a unit. Let $u+M \neq 0+M$ (i.e., $u \notin M$). Then the ideal $\gen{u} + M$, which properly contains $M$ because $u \notin M$, must just be $R$ because $M$ is maximal. It follows that $1 \in \gen{u} + M$, so that $1 = ux + m$ for some $x \in R$ and $m \in M$. It follows that $(u+M)(x+M) = ux + M = 1 + M$, as desired.
+        
+        (b;$\implies$) We want to show that $R/P$ has no divisors of 0. Suppose $ab + P = (a+P)(b+P) = 0+I$ for $a,b \in R$. then $ab \in P$, which implies that $a \in P$ or $b \in P$. It follows that $a+P$ or $b+P$ must be the identity factor group.
+        
+        (a,b;$\impliedby$) All steps can be reversed.
+    \end{proof}
+    \item For a field $F$, $F[x]$ is a PID.
+    \item For a nonzero $p(x) \in F[x]$, the ideal $\gen{p(x)}$ is maximal iff $p(x)$ is irreducible over $F$.
+\end{itemize}
+
+
+\section{Extension Fields}
+\setcounter{subsection}{28}
+\subsection{Introduction to Extension Fields}
+\begin{itemize}
+    \item (Kronecker's Theorem) For a nonconstant polynomial $f(x) \in F[x]$, there exists an extension field $E$ of $F$ and an $\alpha \in E$ such that $f(\alpha) = 0$.
+    \begin{proof}
+        Nonconstant $f(x)$ can be factorized into irreducible polynomials over $F$, and it suffices to show that for one of these irreducible factors $p(x)$ we have $p(\alpha) = 0$.
+
+        Since $\gen{p(x)}$ is maximal, $F[x]/\gen{p(x)}$ is a field. Consider the map $\psi: F \to F[x]/\gen{p(x)}$ given by \[\psi(a) = a + \gen{p(x)}\] for $a \in F$.
+
+        First we have $a + \gen{p(x)} = b + \gen{p(x)} \implies a - b \in \gen{p(x)} \implies a = b$ because $p(x)$ is not a constant. Therefore, $\psi$ is injective. Furthermore, $\psi(ab) = ab+\gen{p(x)} = (a+\gen{p(x)})(b+\gen{p(x)}) = \psi(a)\psi(b)$. Therefore, $\psi$ is injective ring homomorphism that embeds $F$ into $F[x]/\gen{p(x)}$, which we call the extension field $E$.
+        
+        \emph{Note that $\psi = \pi \circ \iota$, where $\iota$ is the natural inclusion map from $F$ into $F[x]$, and $\pi: F[x] \to F[x]/\gen{p(x)}$ is the canonical homomorphism. $\psi$ is a composition of two homomorphism and is therefore homomorphic as well.}
+
+        It remains to show that some $\alpha \in E$ is a zero of $p(x)$ over $E$. Let $\alpha = x + \gen{p(x)}$. For $p(x) = a_0 + a_1x + \dots + a_n x^n \in F[x]$, the evaluation map $\phi_\alpha: F[x] \to E$ gives 
+        \begin{align*}
+            p(\alpha) = \phi_\alpha(p(x)) & = (a_0 + \gen{p(x)}) + (a_1 + \gen{p(x)})(x + \gen{p(x)}) + \dots + (a_n + \gen{p(x)})(x+\gen{p(x)})^n \\ & = (a_0 + \gen{p(x)}) + (a_1x + \gen{p(x)}) + \dots + (a_nx^n + \gen{p(x)}) \\ & = (a_0 + a_1x + \dots + a_n x^n) + \gen{p(x)} = p(x) + \gen{p(x)} = \gen{p(x)} = 0
+        \end{align*}
+        in $E = F[x]/\gen{p(x)}$. \emph{The coefficients in the first line above are the images of $a_0,a_1,\dots,a_n \in F$ in $E$. Note that the zero is a particular coset from the factor ring (field) of a polynomial ring modulo an irreducible polynomial of the given $f(x)$.}
+    \end{proof}
+    \item An element $\alpha \in E$, where $E$ is an extension field of $F$, is \df{algebraic over $F$} if we can find a nonzero polynomial $f(x) \in F[x]$ such that $f(\alpha) = 0$. Otherwise, $\alpha \in E$ is \df{transcendental over $F$}.
+    
+    An element $\alpha \in \C$ algebraic/transcendental over $\Q$ is called an \df{algebraic number}/\df{transcendental number}, respectively.
+    \item For an extension field $E$ of $F$ and $\alpha \in E$, and let $\phi_\alpha: F[x] \to E$ be the ``evaluation at $\alpha$'' homomorphism. Then $\alpha$ is transcendental over $F$ iff $\phi_\alpha$ is injective (or equivalently, iff $F[x]$ and a subdomain of $E$ are isomorphic).
+
+    Proof follows straight from the definition.
+    \item Let $E$ be an extension field of $F$, and let $\alpha \in E$ be algebraic over $F$. Then there exists an irreducible polynomial $p(x) \in F[x]$ such that $p(\alpha) = 0$. This irreducible polynomial is uniquely determined up to a constant factor in $F$ and is a polynomial of minimal degree $\geq 1$ in $F[x]$ having $\alpha$ as a zero. If $f(\alpha) = 0$ for $f(x) \in F[x]$, with $f(x) \neq 0$, then $p(x) \mid f(x)$.
+    \begin{proof}
+        For the evaluation map $\phi_\alpha: F[x] \to E$, $\ker(\phi_\alpha)$ is an ideal of $F[x]$ and can thus be generated by $p(x) \in F[x]$. $\gen{p(x)}$ have precisely all the polynomials having $\alpha$ as a zero over $E$. This means that for any $f(x) \in F[x]$ having $\alpha$ as a zero over $E$, $p(x) \mid f(x)$, and shows that $p(x)$ is the polynomial of the minimal positive degree having $\alpha$ as a zero over $E$. Any other polynomials of $\deg(p)$ must be $p(x)$ times a nonzero constant factor in $F$.
+
+        To show $p(x)$ is irreducible, suppose $p(x) = r(x)s(x)$, where $r$ and $s$ are of degrees lower than $\deg(p)$. Then $p(\alpha) = r(\alpha)s(\alpha)$, so that $r(x)$ or $s(x)$ has $\alpha$ has a zero. Yet $p(x)$ is the polynomial of the minimal degree having $\alpha$ as a zero over $E$. Therefore, $p(x)$ is irreducible.
+    \end{proof}  
+\end{itemize}
+\boxaround{Because $p(x)$ is unique up to a nonzero constant factor in $F$, we can let $p(x)$ be a \emph{monic polynomial} so that it become truly unique. Under the same setup as the above theorem, we call this unique monic polynomial $p(x)$ the \df{irreducible polynomial for $\alpha$ over $F$}, denoted by $\irr(\alpha,F)$. The degree of $\irr(\alpha,F)$ is denoted by $\deg(\alpha,F)$.}
+\begin{itemize}
+    \item Let $E$ be an arbitrary extension field of $F$, and let $\alpha \in E$. We want to find the smallest extension containing $F$ and $\alpha$, and we need to consider two cases.
+    
+    (Case I.) \emph{Suppose $\alpha$ is algebraic over $F$.} We can then construct the map $\phi_\alpha: F[x] \to E$ given by $\phi_\alpha(a) = a$ for all $a \in F$ and $\phi_\alpha(x) = \alpha$, because $E$ contains both $F$ and $\alpha$. Clearly $\phi_\alpha$ is just the evaluation homomorphism. Since $\gen{\irr(\alpha,F)}$ is now a maximal ideal, $F[x]/\gen{\irr(\alpha,F)}$ is a field that is ring isomorphic with $\phi_\alpha(F[x]) \subseteq E$. \emph{Since a ring that is ring isomorphic with a field is a field itself (because being a field is a \emph{property} of a ring)}, $\phi_\alpha(F[x])$ is a subfield of $E$. Since any arbitrary $E$ containing $F$ and $\alpha$ has $\phi_\alpha(F[x])$ as a subfield, $\phi_\alpha(F[x])$ is the smallest subfield containing $F$ and $\alpha$, which we denote by $F(\alpha)$.
+    
+    (Case II.) \emph{Suppose $\alpha$ is transcendental over $F$.} Then $\phi_\alpha$ gives an isomorphism of $F[x]$ with a subdomain of $E$. $F[\alpha] \coloneqq \phi_\alpha(F[x])$ is thus an integral domain, from which we can create a field of quotients $\Quot(F[\alpha])$, which is the smallest subfield of $E$ that contains $F[\alpha]$ (which again is the smallest integral domain that contains $F$ and $\alpha$). We denote this $\Quot(F[\alpha])$ also by $F(\alpha)$.
+    
+    In both cases, the smallest field $F(\alpha)$ that contains $F$ and $\alpha$ is called the \df{field generated by $\alpha$}. If for an extension field $E$ of $F$ we can find an $\alpha \in E$ such that $E = F(\alpha)$, then $E$ is called a \df{simple extension of $F$}.
+    \item Say $E = F(\alpha)$, where this $\alpha$ is algebraic over $F$ and $\deg(\alpha,F) = n \geq 1$. Then every $\beta \in E = F(\alpha) = \phi_\alpha(F[x])$ can be uniquely expressed as $b_0 + b_1 \alpha + \dots + b_{n-1} \alpha^{n-1}$, where the $b_i$'s are all in $F$.
+    \begin{proof}
+        Every $\beta \in E$ is of the form $\phi_\alpha(f(x)) = f(\alpha)$. Let \[p(x) = \irr(\alpha,F) = a_0+a_1x+\dots+a_{n-1}x^{n-1}+x^n,\] then $p(\alpha) = 0$, so that $\alpha^n = -a_0-a_1 \alpha-\dots -a_{n-1} \alpha^{n-1}$. For all $\alpha^m$ with $m \geq n$, they can be expressed inductively as a  linear combination of $1,\alpha,\dots,\alpha^{n-1}$ over $F$. For example,
+        \begin{align*}
+            \alpha^{n+1} & = \alpha (-a_0-a_1 \alpha-\dots -a_{n-1} \alpha^{n-1}) \\ & = -a_0 \alpha - a_1 \alpha^2 - \dots - a_{n-2} \alpha^{n-1} - a_{n-1} \alpha^n,
+        \end{align*}
+        from which we can expand $\alpha^n$ again into $-a_0-a_1 \alpha-\dots -a_{n-1} \alpha^{n-1}$. Every $\beta = f(\alpha)$ can thus be reduced to $b_0 + b_1 \alpha + \dots + b_{n-1} \alpha^{n-1}$, as desired.
+        
+        The uniqueness of expression of $\beta$ clearly has to do with the minimal degree $n$ of $p(x)$. Suppose \[\beta = b_0 + b_1 \alpha + \dots + b_{n-1} \alpha^{n-1} = b_0' + b_1' \alpha + \dots +b_{n-1}' \alpha^{n-1},\] then \[(b_0 - b_0') + (b_1 - b_1') \alpha + \dots + (b_{n-1} - b_{n-1}')\alpha^{n-1} = 0.\] It is then obvious that $\alpha$ is a zero to the polynomial $(b_0 - b_0') + (b_1 - b_1') x + \dots + (b_{n-1} - b_{n-1}')x^{n-1} \in F[x]$, which is of degree $\leq n-1 < n = \deg(p)$, if this polynomial is nonzero. This leads to contradiction, and thus the polynomial from subtraction must be the zero polynomial, showing that the expression of $\beta \in E$ must be unique.
+    \end{proof}
+\end{itemize}
+\subsection{Vector Spaces}
+\begin{itemize}
+    \item $F[x]$ can not only be viewed as a polynomial ring over $F$ but also as a vector space over $F$. For an extension field $E$ of $F$, $E$ can be viewed as a vector space over $F$.
+    \item Let $E$ be an extension field of $F$ and $\alpha \in E$ be algebraic over $F$. If $\deg(\alpha,F) = n$, then $F(\alpha)$ is a vector space of dimension $n$ over $F$ with $1,\alpha,\dots,\alpha^{n-1}$ as a basis. Moreover, every $\beta \in F(\alpha)$ is algebraic over $F$, with $\deg(\beta,F) \leq \deg(\alpha,F)$.
+    
+    \begin{proof}
+        $F(\alpha)$ is an extension field of $F$ and is thus a vector space over $F$. The first part follows straight from the criterion for a basis of a vector space, that every $\beta \in F(\alpha)$ is a unique linear combination of $1,\alpha,\dots,\alpha^{n-1}$.
+        
+        For the second part, note that for every $\beta$, the list $1,\beta,\dots,\beta^n$ is of size $n+1 > n$ and thus is not linearly independent over $F$. Thus there exists $b_0, b_1, \dots, b_n \in F$, not all zero, such that \[b_0 + b_1 \beta + \dots + b_n \beta^n = 0.\] The nonzero polynomial $g(x) = b_0 + b_1 x+\dots+b_n x^n$ therefore makes $\beta$ algebraic over $F$, and $\deg(\beta,F) \leq \deg(g) \leq n$
+    \end{proof}
+\end{itemize}
+
+\subsection{Algebraic Extensions}
+\begin{itemize}
+    \item An extension field $E$ of $F$ is an \df{algebraic extension} of $F$ if every element of $E$ is algebraic over $F$.
+    \item If an extension field $E$ of $F$ is of finite dimension $n$ as a vector space over $F$, then $E$ is a \df{finite extension of degree $n$ over $F$}. This degree is denoted by $[E:F]$.
+    \item A finite extension field is an algebraic extension of $F$.
+    \begin{proof}
+        This is easy and similar to what did in the previous section. Because $E$, a finite extension field of $F$, has $[E:F] = n$, it follows that for any $\alpha \in E$, the list $1, \alpha, \dots, \alpha^n$ of size $n+1$ is not linearly independent. Thus, there exists a nonzero $g(x) = a_0 + a_1 x+ \dots + a_n x^n \in F[x]$ such that $g(\alpha) = a_0 + a_1 \alpha + \dots +a_n \alpha^n = 0$. This shows that every $\alpha \in E$ is algebraic over $F$.
+    \end{proof}
+    \item Let $E$ be a finite extension of $F$, and $K$ be a finite extension of $E$, then $K$ is a finite extension of $F$, with $[K:F] = [K:E][E:F]$. 
+    \begin{proof}
+        Recall that we proved a similar claim about the indices of subgroups in groups. Similar to that proof we now construct a basis of $K$ over $F$. Let $\alpha_1,\dots,\alpha_n$ be a basis of $E$ over $F$ and $\beta_1,\dots,\beta_m$ be a basis of $K$ over $E$, and we claim the $nm$ products of the elements from the two bases form a basis of $K$ over $F$.
+        
+        (Spanning List) For $\gamma \in K$, $\gamma = b_1 \beta_1 + \dots +b_m \beta_m$, with the $b_i$'s all in $E$. For each $b_i \in E$, we again have $b_i = a_{1i} \alpha_1 + \dots + a_{ni} \alpha_n$, with each $a_{ij} \in F$. Plug each expansion of $b_i$ back into the expansion of $\gamma$, and we see $\gamma = \sum_{i,j} a_{ij} (\alpha_i \beta_j)$.
+        
+        (Linear Independence) Now let $0 = \sum_{i,j} c_{ij} (\alpha_i \beta_j)$, with each $c_{ij} \in F$. Note that $\sum_{i,j} c_{ij} (\alpha_i \beta_j) = \sum_j (\sum_i c_{ij}\alpha_i)\beta_j$, by the linear independence of $\beta_j$'s over $E$ we get that $\sum_i c_{ij}\alpha_i = 0$. Again by the linear independence of $\alpha_i$'s over $F$ we have all $c_{ij}$'s are 0.
+    \end{proof}
+    \begin{itemize}
+        \item By induction we can extend this result to a chain of finite extension fields.
+        \item Recall in last section we showed that for an extension field $E$ of $F$, let an element $\alpha \in E$ algebraic over $F$ and let $\beta \in F(\alpha)$, $\deg(\beta,F) \leq \deg(\alpha,F)$. This ``$\leq$'' can be replaced by ``$\mid$'', the divides symbol.
+        
+        We know $\deg(\alpha,F) = [F(\alpha):F]$ and $\deg(\beta,F) = [F(\beta):F]$. Since $\beta \in F(\alpha)$, the smallest field containing $F$ and $\alpha$, $F(\beta)$ is a subfield of $F(\alpha)$. It follows that $[F(\alpha):F]=[F(\alpha):F(\beta)][F(\beta):F]$, so that $\deg(\beta,F) \mid \deg(\alpha,F)$.
+    \end{itemize}
+    \item 
+\end{itemize}
+
+\end{document}

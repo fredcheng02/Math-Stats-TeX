@@ -2,18 +2,22 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,tikz-cd,mathtools}
 \usepackage[T1]{fontenc}
+\usepackage{fourier}
 \usepackage{enumitem}
-\usepackage{fullpage}
-\usepackage{setspace}
+\usepackage{fullpage,setspace,soul}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+\newcommand{\df}[1]{\ul{\textit{#1}}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}
-\newcommand{\F}{\mathbb{F}}
 \newcommand{\aut}{\operatorname{Aut}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
 \newcommand{\inn}{\operatorname{Inn}}
 \newcommand{\ga}{\langle a \rangle}
+\newcommand{\kar}{\operatorname{char}}
+\newcommand{\irr}{\operatorname{irr}}
 \renewcommand{\phi}{\varphi}
 
 \onehalfspacing
@@ -38,7 +42,7 @@
     \item Unique solution to all linear equations, and thus every element appears exactly once in every row and column of a group table
     \item Unique identity and inverse
     \item $(ab)^{-1}= b^{-1}a^{-1}$
-    \item There are one group of order 1/2/3, up to isomorphism. There are two groups of order 4, up to isomorphism, $\Z_4$ and Klein 4-group $V$. Groups of order less than 6 are all abelian. The smallest nonabelian group is of order 6, and $S_3$ is a common counterexample to many claims.
+    \item There are one group of order 1/2/3, up to isomorphism. There are two groups of order 4, up to isomorphism, $\Z_4$ and Klein 4-group $V$. Groups of order less than 6 are all abelian. The smallest nonabelian group is of order 6, and $S_3$ is a common  counterexample to many claims.
     \item The only idempotent element of a group is the identity.
     \item $\Z_4$ has one nontrivial proper subgroup $\{0,2\}$, while $V$ has three: $\{e,a\}, \{e,b\},\{e,c\}$.
     \item To check if $H \subseteq G$ is a subgroup, we check $H$ is closed, $H$ has an identity, and the inverse exists for every element of $H$. Associativity is inherited from the whole group.
@@ -60,22 +64,22 @@
     \item Permutation $S_n$ on $\{1,2,\dots,n\}$ is isomorphic to all permutations of order $n$, and can thus be taken as the prototype for permutations of order $n$.
     \item $S_3 \simeq D_3$ under renaming
     \item For one-to-one function $\phi: G \to G'$ satisfying the homomorphism property, the image $\phi(G)$ is a subgroup of $G'$ and $\phi(G) \simeq G$. (This is actually true for algebraic structures in general because isomorphism is renaming.) We use this to show Cayley's theorem that every group is isomorphic to a group of permutations.
-    \item Given $\sigma \in S_A$, the equivalence relation $\sim_\sigma$ given by $a \sim b$ ($a,b \in A$) if $b = \sigma^n(a)$ for some $n \in \Z$. This particular equivalence relation on the set $A$ determined by permutations on $A$ partitions the set $A$ into equivalence classes. The equivalence class determined by $\sim_\sigma$ is called the \textit{orbits} of $\sigma$.
-    \item We now restrict to permutation on a finite set $A$, and we may take $S_n$ as the representative. These equivalence classes are exactly the \textit{cycles} of a permutation. Since $A$ is a finite set, it is impossible that no element $a \in A$ will never return to itself. Thus, an equivalence class of $A$ is a circle that starts from an element $a \in A$ and returns to $a$.
-    \item Thus, every permutation on a finite set can always be broken down into a product of disjoint \textit{cycle permutations} (which only switches the ordering of elements on the orbit by 1).
+    \item Given $\sigma \in S_A$, the equivalence relation $\sim_\sigma$ given by $a \sim b$ ($a,b \in A$) if $b = \sigma^n(a)$ for some $n \in \Z$. This particular equivalence relation on the set $A$ determined by permutations on $A$ partitions the set $A$ into equivalence classes. The equivalence class determined by $\sim_\sigma$ is called the \df{orbits} of $\sigma$.
+    \item We now restrict to permutation on a finite set $A$, and we may take $S_n$ as the representative. These equivalence classes are exactly the \df{cycles} of a permutation. Since $A$ is a finite set, it is impossible that no element $a \in A$ will never return to itself. Thus, an equivalence class of $A$ is a circle that starts from an element $a \in A$ and returns to $a$.
+    \item Thus, every permutation on a finite set can always be broken down into a product of disjoint \df{cycle permutations} (which only switches the ordering of elements on the orbit by 1).
     \item Every cycle can be broken down into transpositions: $$(a_1, a_2, \dots, a_n) = (a_1, a_n) (a_1, a_{n-1}) \dots (a_1,a_2).$$ Therefore, any permutation of a finite set with at least elements is a product of transpositions.
-    \item If a permutation can be written into a product of even (odd, resp.) number of transpositions, then it can only be written into a product of even (odd, resp.) number of transpositions. We call them \textit{even permutations} (and \textit{odd permutations}), denoted by $A_n$ (and $B_n$).
-    \item One can construct a bijective map between $A_n$ and $B_n$ (for $n \geq 2$). Therefore, $|A_n| = |B_n| = (n!)/2$. It can be easily verified that $A_n$ is a subgroup of $S_n$, and we call it the \textit{alternating group}.
-    \item For $G$ and $H \leq G$, we can define a relation $\sim_L$ on $G$ by $$a \sim_L b \quad \text{if} \quad a^{-1}b \in H,$$ and another relation $\sim_R$ on $G$ by $$a \sim_L b \quad \text{if} \quad ab^{-1} \in H.$$ These two are equivalence relations, and divide $G$ into \textit{left} and \textit{right cosets}, respectively. Left and right cosets are each of the form $aH$ and $Ha$. If $aH = Ha$ for all $a \in G$, we call $H$ a \textit{normal subgroup} of $G$.
+    \item If a permutation can be written into a product of even (odd, resp.) number of transpositions, then it can only be written into a product of even (odd, resp.) number of transpositions. We call them \df{even permutations} (and \df{odd permutations}), denoted by $A_n$ (and $B_n$).
+    \item One can construct a bijective map between $A_n$ and $B_n$ (for $n \geq 2$). Therefore, $|A_n| = |B_n| = (n!)/2$. It can be easily verified that $A_n$ is a subgroup of $S_n$, and we call it the \df{alternating group}.
+    \item For $G$ and $H \leq G$, we can define a relation $\sim_L$ on $G$ by $$a \sim_L b \quad \text{if} \quad a^{-1}b \in H,$$ and another relation $\sim_R$ on $G$ by $$a \sim_L b \quad \text{if} \quad ab^{-1} \in H.$$ These two are equivalence relations, and divide $G$ into \df{left} and \df{right cosets}, respectively. Left and right cosets are each of the form $aH$ and $Ha$. If $aH = Ha$ for all $a \in G$, we call $H$ a \df{normal subgroup} of $G$.
     \item We focus mainly on left cosets. A coset $aH$ can have multiple representatives as long as the other representative $b$ is in $aH$ (or equivalently, $a^{-1}b \in H$).
     \item Lagrange's Theorem states that the order of a subgroup $H$ of a finite group $G$ is the divisor of the order of the whole group. This is because the cardinalities of the cosets and the order of the subgroup are the same. We prove this by the natural bijective map $\phi(h) = gh$ from $H$ to $gH$.
     \item A prime-order group must be cyclic. If one considers the cyclic subgroup generated by $a \not= e$, then $|\ga| \geq 2$ and thus must be $p$.
-    \item The number of left cosets of $H$ in $G$ is the \textit{index} $(G:H)$ of $H$ in $G$. The product rule $(G:K) = (G:H)(H:K)$ holds for a chain of subgroup, regardless of whether the groups involved are finite or not.
+    \item The number of left cosets of $H$ in $G$ is the \df{index} $(G:H)$ of $H$ in $G$. The product rule $(G:K) = (G:H)(H:K)$ holds for a chain of subgroup, regardless of whether the groups involved are finite or not.
     \item The entry-wise direct product $\prod_{i} G_i$ of groups $G_i$ forms a new group. Rearrangement of factors yields the same group of direct product, up to isomorphism.
     \item $\Z_m \times \Z_n$ is cyclic and thus isomorphic to $\Z_{mn}$ if and only if $\gcd(m,n) = 1$. Obviously this can be extended to direct products of higher dimensions.
     \item For $(a_1, \dots, a_n) \in \prod_{i=1}^n G_i$, the order of this element is the lcm of the orders of each individual $a_i$'s.
-    \item The fundamental theorem of finitely generated abelian groups states that every finitely generated abelian groups $G$ is isomorphic to a direct product of cyclic groups in the form $$\Z_{(p_1)^{r_1}} \times \Z_{(p_2)^{r_2}} \times \cdots \times \Z_{(p_n)^{r_n}} \times \Z \times \Z \times \cdots \times \Z,$$ where the $\Z$'s at the end have a fixed number called the \textit{Betti number} of $G$, and the $p_j$'s at the front do not need to be distinct.
-    \item A group $G$ is \textit{decomposable} if it is isomorphic to a direct product of two nontrivial subgroups. The finite indecomposable abelian groups are exactly the ones with order a power of a prime.
+    \item The fundamental theorem of finitely generated abelian groups states that every finitely generated abelian groups $G$ is isomorphic to a direct product of cyclic groups in the form $$\Z_{(p_1)^{r_1}} \times \Z_{(p_2)^{r_2}} \times \cdots \times \Z_{(p_n)^{r_n}} \times \Z \times \Z \times \cdots \times \Z,$$ where the $\Z$'s at the end have a fixed number called the \df{Betti number} of $G$, and the $p_j$'s at the front do not need to be distinct.
+    \item A group $G$ is \df{decomposable} if it is isomorphic to a direct product of two nontrivial subgroups. The finite indecomposable abelian groups are exactly the ones with order a power of a prime.
     \item If $m$ divides $|G|$, where $G$ is a \textbf{finite abelian group}, then $G$ has a subgroup of order $m$. Consider $$\langle (p_1)^{r_1 - s_1} \rangle \times \langle (p_2)^{r_2 - s_2} \rangle \times \cdots \times \langle (p_n)^{r_n - s_n} \rangle.$$
     \item If $m$ is a square-free integer, then abelian group of order $m$ is cyclic.
 \end{itemize}
@@ -84,20 +88,22 @@
 \begin{itemize}
     \item A surjective group homomorphism $\phi$ from an abelian group $G$ to another group $G'$ tells us $G'$ is abelian. (This is the preservation of algebraic structure.)
     \item It suffices to show from the homomorphism property that $\phi(e_G) = e_{G'}$, $\phi(a^{-1}) = (\phi(a))^{-1}$.
-    \item The image of a subgroup of $G$ is a subgroup of $G'$. The preimage of a subgroup of $G'$ is a subgroup of $G$. It follows directly that the kernel and image of a group homomorphism is the respective subgroups of $G$ and $G'$. Furthermore, $\ker \phi$ is a normal subgroup of $G$.
+    \item The image of a subgroup of $G$ is a subgroup of $G'$. The preimage of a subgroup of $G'$ is a subgroup of $G$. It follows directly that the kernel and image of a group homomorphism is the respective subgroups of $G$ and $G'$. Furthermore, $\ker(\phi)$ is a normal subgroup of $G$.
     \item $\phi$ is one-to-one if and only if its kernel only contains $e$. Thus, to prove isomorphism, one checks the homomorphism property, the kernel, and onto.
     \item There are several equivalent conditions to check that a subgroup is normal. Also, every subgroup of an abelian group is normal.
     \item The coset multiplication operation on $H \leq G$ is well-defined if and only if $H \trianglelefteq G$.
-    \item Given $\phi: G \to H$ and the natural surjective homomorphism $\pi: G \to G/N$ with kernel $N$, $\tilde{\phi}: G/N \to H$ defined by $$\tilde{\phi}(gN) = \phi(g)$$ is well-defined if and only if $N \leq \ker \phi$.
-    \item The full version of the fundamental theorem of group homomorphism states that, given a group homomorphism $\phi: G \to H$, let $N$ be a normal subgroup in $G$ and $\pi: G \to G/N$ be the natural surjective homomorphism. If $N \leq \ker \phi$, then there exists a unique homomorphism $\tilde{\phi}: G/N \to H$ such that $\phi = \tilde{\phi} \circ \pi$.
+    \item Given $\phi: G \to H$ and the natural surjective homomorphism $\pi: G \to G/N$ with kernel $N$, $\tilde{\phi}: G/N \to H$ defined by $$\tilde{\phi}(gN) = \phi(g)$$ is well-defined if and only if $N \leq \ker(\phi)$.
+    \item The full version of the fundamental theorem of group homomorphism states that, given a group homomorphism $\phi: G \to H$, let $N$ be a normal subgroup in $G$ and $\pi: G \to G/N$ be the natural surjective homomorphism. If $N \leq \ker(\phi)$, then there exists a unique homomorphism $\tilde{\phi}: G/N \to H$ such that $\phi = \tilde{\phi} \circ \pi$.
     \begin{itemize}
-        \item In particular, if we let $\ker \pi = N = \ker \phi $, then $\ker \tilde{\phi}$ contains only the identity and is thus injective. Therefore, $\tilde{\phi}: G/N \to \phi(G)$ is an isomorphism.
+        \item In particular, if we let $\ker(\pi) = N = \ker(\phi)$, then $\ker(\tilde{\phi})$ contains only the identity and is thus injective. Therefore, $\tilde{\phi}: G/N \to \phi(G)$ is an isomorphism.
     \end{itemize}
     \item The automorphism group $\aut(G) \coloneqq \{\phi: G \to G \mid \phi \text{ is an isomorphism}\}$. In particular $i_g: G \to G$ given by $i_g(x) = g x g^{-1}$ is an automorphism of $G$, called the inner automorphism of $G$. These $i_g$'s form $\inn(G) \coloneqq \{\phi \in \aut(G) \mid \phi = i_g \text{ for some } g \in G\}$, which turns out to be a normal subgroup of $\aut(G)$.
     \item $\operatorname{Out}(G) \coloneqq \aut(G)/\inn(G)$.
-    \item $\phi: G \to \inn(G)$ is a surjective group homomorphism with kernel $Z(G) \coloneqq \{g \in G \mid g x g^{-1} = x \text{ for all } x \in G\}$, called the \textit{center} of $G$. Hence $G/Z(G) \simeq \inn(G)$.
-    \item A group is \textit{simple} if it has no proper nontrivial normal subgroup.
+    \item $\phi: G \to \inn(G)$ is a surjective group homomorphism with kernel $Z(G) \coloneqq \{g \in G \mid g x g^{-1} = x \text{ for all } x \in G\}$, called the \df{center} of $G$. Hence $G/Z(G) \simeq \inn(G)$.
+    \item A group is \df{simple} if it has no proper nontrivial normal subgroup.
     \item $A_n$ ($n \geq 5$) is simple.
+    \item
+    \item 
 \end{itemize}
 
 \section{Rings and Fields}
@@ -109,29 +115,54 @@
         \item Left and right distributive laws hold.
     \end{enumerate}
     \item $0a = a0 = 0, a(-b)=(-a)b=-(ab), (-a)(-b)=ab$
-    \item Ring homomorphism: homomorphism equations hold with respect to both addition and multiplication; the new homomorphism equation with respect to multiplication cannot conflict with the equation with respect to addition, so we can view 
-    \item We can ignore the homomorphism equation with respect to multiplication, and all the properties we have proved about group homomorphism are inherited.
-    \item 
-    \item A nonzero element $a \in R$ is a \textit{0 divisor} if $ab = 0$ for some nonzero $b \in R$.
-    \item In $\Z_n$, the elements that are not divisors of 0 are precisely those that are coprime with $n$.
+    \item Ring homomorphism: homomorphism equations hold with respect to both addition and multiplication; the new homomorphism equation with respect to multiplication cannot conflict with the equation with respect to addition, so we can ignore the homomorphism equation with respect to multiplication, and all the properties we have proved about group homomorphism are inherited.
+    \item If a ring has a unity, then the unity must be unique. Note that by our definition of unity, the unity of the whole ring does not need to match the unity of the subring. For example, $\Z_2 \times \Z_2$ has unity $(1,1)$, while its subring $\Z_2 \times \{0\}$ has unity $(1,0)$.
+    \item A direct product $R_1 \times \cdots \times R_n$ is commutative/unital iff each individual $R_i$ is commutative/unital.
+    \item Let $R$ be a unital ring with $1 \neq 0$ (i.e., a nontrivial unital ring), then $u \in R$ is a unit if $u$ has a multiplicative inverse (one can easily prove that such multiplicative inverse must be unique). The set of units is denoted by $R^\times$, which forms a group under multiplication. If $R^\times = R^*$, then $R$ is called a \df{division ring}. A \df{field} is a commutative division ring.
+    \item To check $S$ is a subring of ring $R$, we check that $S$ is a subgroup of $R$, and $S$ is closed under multiplication. To check $S$ is a subfield of field $F$, we check that $S$ is an additive subgroup of $F$, and $S^*$ is a multiplicative subgroup of $F^*$.
+    \item If $a,b \in R^*$ has $ab = 0$, then $a,b$ are called \df{0 divisors} of $R$.
+    \item In $\Z_n$, the elements that are not 0 divisors are precisely those that are coprime with $n$.
     \begin{itemize}
         \item In $\Z_p$, all the nonzero elements are not divisors of 0.
+        \item An \df{integral domain} is a commutative ring with unity $1 \neq 0$ and contains no divisor of 0. $Z$ is a canonical example of an integral domain. $\Z_n$ is an integral domain iff $n$ is a prime. The direct product of two nonzero  rings cannot be an integral domain.
     \end{itemize}
+    \item The left and right cancellation laws with respect to multiplication [i.e., for $a \neq 0$, $ab = ac$ (or \ $ba = ca$) $\implies b = c$] hold iff $R$ has no divisor of 0.
+    \item Every field is an integral domain, and every finite integral domain is a field.
+    \begin{itemize}
+        \item Because $\Z_p$ is a finite integral domain, $\Z_p$ is a field.
+    \end{itemize}
+    \item If $\exists n \in \Z^+$, we have $\forall a \in R$, $n \cdot a = 0$, then the least such $n$ is called the \df{characteristic} of $R$, denoted by $\kar(R)$. If no such $n \in \Z^+$ exists, then $\kar(R) \coloneqq 0$.
+    \begin{itemize}
+        \item There could be infinite rings of characteristic 0, but if a ring has characteristic 0, it must infinite (because every element of a finite group is of finite order).
+        \item The characteristic of an integral domain is either 0 or prime.
+        \item For a unital ring $R$, if $n \cdot 1 \neq 0$ for all $n \in \Z^+$, then $\kar(R) = 0$; otherwise if $n \cdot 1 = 0$ for some $n$, then the least such $n$ is $\kar(R)$.
+    \end{itemize}
+    \item Every nonzero element in a finite unital ring is either a unit or a zero divisor.
+    \item All units in a unital ring forms a group under multiplication.
+    \item The two forms of Fermat's theorem, and Euler's theorem. 
+    \item
+    
     \item A polynomial $f(x)$ with coefficients in a ring $R$ is an infinite formal sum $$\sum_{i=0}^\infty a_i x^i = a_0 + a_1 x + \dots + a_n x^n + \dots,$$ where $a_i$ can be nonzero for only finite terms.
     
-    
+
     
     \item The set $R[x]$ is a ring under polynomial addition and multiplication. $R$ being commutative implies $R[x]$ is commutative, while $R$ has unity $1 \not= 0$ implies $R[x]$ has unity 1.
     \item If $D$ is an integral domain, so is $D[x]$. In particular, if we take $F$ to be a field, then $F[x]$ is an integral domain.
-    \item Existence and uniqueness of division algorithm
+    
+    
+    \item Existence and uniqueness of the division algorithm
     \item $a$ is a zero iff $f(x)$ can have a factor $(x-a)$.
     \item By induction/well-ordering principle we can prove that a degree-$n$ polynomials has at most $n$ zeros.
-
-
-    
-    \item 
-    
+    \item If $G$ is a finite subgroup of $\la F^*, \cdot \ra$, then $G$ is cyclic; if $F$ is a finite field, in particular we have $\la F^*, \cdot \ra$ is cyclic.
+    \item Nonconstant $f(x) \in F[x]$ is \df{irreducible over $F$} if $f(x)$ cannot be expressed as a product of two polynomials in $F[x]$ of lower degrees; otherwise it is \df{reducible over $F$}.
+    \item For $f(x) \in \Z[x]$, $f$ is reducible into $rs$ over $\Q$ iff $f$ is reducible into two polynomials of the same degrees over $\Z$.
+    \item For a monic integer-coefficient polynomial $f(x)$ with nonzero constant term, if $f(x)$ has a zero in $\Q$, then it has a zero $m \in \Z$, which divides the constant term.
+    \item Eisenstein Criterion: For prime $p$ and $f(x) = a_n x^n + \dots + a_1 x + a_0 \in \Z[x]$, if $p \nmid a_n$, while $p \mid a_i$ for $0 \leq i \leq n-1$, with $p^2 \nmid a_0$, then $f(x)$ is irreducible over $\Q$.
+    \item The $p$-th cyclotomic polynomial $\Phi_p(x) = \frac{x^p - 1}{x - 1} = x^{p-1} + \dots + x + 1$ is irreducible over $\Q$ for any prime $p$.
+    \item Euclidean property for polynomials: For an irreducible polynomial $p(x) \in F[x]$, if $p(x) \mid r(x)s(x)$, where $r,s \in F[x]$, then $p(x) \mid r(x)$ or $p(x) \mid s(x)$. This result can be extended using induction.
+    \item Every nonconstant polynomial $f(x) \in F[x]$ can be factored in $F[x]$ into a product of irreducible polynomials, unique except for order and unit (nonzero constant) factors in $F$.
 \end{itemize}
+
 \section{Ideals and Factor Rings}
 \begin{itemize}
     \item If $\phi$ is a ring homomorphism from $R$ to $R'$, then
@@ -140,15 +171,40 @@
         \item for $S$ subring of $R$, $\phi(S)$ is a subring of $R$; for $S'$ subring of $R'$, $\phi^{-1}(S')$ is a subring of $R$;
         \item if $R$ has unity 1, then $\phi(1)$ is the unity of the image ring $\phi(R) \subseteq R'$.
     \end{enumerate}
-    \item A ring homomorphism $\phi: R \to R'$ is one-to-one if and only if $\ker \phi = \{0\}$.
-    \item An additive subgroup $N$ of $R$ is an \textit{ideal} if $aN \subseteq N$ and $Na \subseteq N$ for all $a \in R$.
+    \item A ring homomorphism $\phi: R \to R'$ is one-to-one if and only if $\ker(\phi) = \{0\}$.
+    \item An additive subgroup $N$ of $R$ is an \df{ideal} if $aN \subseteq N$ and $Na \subseteq N$ for all $a \in R$. The kernel of a ring is an ideal of the ring.
+
+    Since $R$ is an abelian group, an ideal $N$ is a normal subgroup of $R$. Here $N$ is actually a subring of $R$, but we require stronger conditions that ask $N$ to be closed under left- and right-multiplication by \textbf{all} elements in $R$. These stronger conditions allows us to make coset multiplication well-defined. (For $H$ subring of $R$, multiplication additive cosets of $H$ is well-defined by $(a+H)(b+H)=(ab)+H$ iff $ah,hb \in H$ for all $ab \in R$ and $h \in H$.)
+    \item For $N$, an ideal of a ring $R$, the additive cosets of $N$ form a ring $R/N$ with binary operations 
+    \[(a+N)+(b+N)=(a+b)+N \text{ and } (a+N)(b+N) = (ab)+N.\] $R/N$ is called \df{factor/quotient ring} of $R$. The map $\pi: R \to R/N$ given by $\pi(x) = x + N$ is a surjective ring homomorphism.
+    \item Let $\phi: R \to R'$ be a ring homomorphism with kernel $N$, then the map $\tilde{\phi}: R/N \to \phi(R)$ given by $\tilde{\phi}(x+N) = \phi(x)$ is a ring isomorphism. Furthermore, $\phi = \tilde{\phi} \circ \pi$.
+    \item Let $\phi: R \to R'$ be a ring homomorphism, and $N$ be an ideal of $R$. Then $\phi(N)$ is an ideal of $\phi(R)$. If $N'$ is an ideal of either $\phi(R)$ or $R'$, then $\phi^{-1}(N')$ is an ideal of $R$.
+    \item If $R$ is a unital ring, and $N$ is an ideal of $R$ containing a unit, then $N = R$. The ideal of a field can only be $\{0\}$ or itself.
+    \item For two ideals $I,J$ of $R$, $I \cap J$ and $I + J$ are also ideals of $R$.
+    \item A \df{maximal ideal} of a ring $R$ is an ideal $M \subsetneq R$ such that there is no ideal $N$ such that $M \subsetneq N \subsetneq R$. Usually you want to show that for any $N$ such that $M \subseteq N \subseteq R$, $N$ must be either $M$ or $R$.
+    \item Let $R$ be a commutative unital ring, then $M$ is a maximal ideal of $R$ iff $R/M$ is a field.
+    \begin{itemize}
+        \item A commutative unital ring is a field iff it has no proper nontrivial ideals.
+    \end{itemize}
+    \item An ideal $P$ in a commutative ring $R$ is a \df{prime ideal} if for $a,b \in R$, $ab \in P$ implies either $a$ or $b$ is in $P$.
+    \item Let $R$ be a commutative unital ring, then $P$ is a prime ideal of $R$ iff $R/P$ is an integral domain.
+    \item Every maximal ideal in a commutative unital ring is a prime ideal of that ring. Every prime ideal in a finite commutative ring is a maximal ideal of that ring.
+    \item Given a commutative unital ring $R$ with $a \in R$, the ideal $\{ra \mid r \in R\}$ is called \df{the principal ideal generated by $a$}, and is denoted by $\ga$. An ideal $N$ is a principal ideal if $N = \ga$ for some $a \in R$. An integral domain $D$ is called a \df{principal ideal domain} (PID) if every ideal of $D$ is a principal ideal.
+    \item For a field $F$, $F[x]$ is a PID.
+    \item In a PID, any nontrivial prime ideal is maximal.
+    \item For nonzero $f(x) \in F[x]$, $\la f(x) \ra$ is maximal iff $f(x)$ is irreducible.
+\end{itemize}
+
+\section{Extension Fields}
+\begin{itemize}
+    \item A field $E$ is an \df{extension field} of $F$ is $F$ is a subfield of $E$.
+    \item For a nonconstant polynomial $f(x) \in F[x]$, there exists an extension field $E$ of $F$ and an $\alpha \in E$ such that $f(\alpha) = 0$.
+    \item An element $\alpha$ of an extension field $E$ of $F$ is \df{algebraic over $F$} if $f(\alpha) = 0$ for some polynomial nonzero $f(x) \in F[x]$. If no such nonzero polynomial $f(x)$ exists for $\alpha$, then $\alpha$ is said to be \df{transcendental over $F$}. A number $\alpha \in \C$ algebraic (resp.{} transcendental) over $\Q$ is called an \df{algebraic (resp.{} transcendental) number}.
+    \item For an extension field $E$ of $F$ and $\alpha \in E$, and let $\phi_\alpha: F[x] \to E$ be the ``evaluation at $\alpha$'' homomorphism. Then $\alpha$ is transcendental over $F$ iff $\phi_\alpha$ is injective, or equivalently, iff $F[x]$ and a subdomain of $E$ are isomorphic.
+    \item Let $E$ be an extension field of $F$, and let $\alpha \in E$ be algebraic over $F$. Then there exists an irreducible polynomial $p(x) \in F[x]$ such that $p(\alpha) = 0$. This irreducible polynomial is uniquely determined up to a constant factor in $F$ and is a polynomial of minimal degree $\geq 1$ in $F[x]$ having $\alpha$ as a zero. If $f(\alpha) = 0$ for $f(x) \in F[x]$, with $f(x) \neq 0$, then $p(x) \mid f(x)$.
+    \item We can make the $p(x)$ above monic so that it becomes unique. This unique $p(x)$ is called the \df{irreducible polynomial for $\alpha$ over $F$} and is denoted by $\irr(\alpha;F)$. Its degree is denoted by $\deg(\alpha;F)$.
+    \item We divide field extension into two cases. First, if we assume $\alpha \in E$ is algebraic over $F$, then $\ker(\phi_\alpha)$ 
     
-    Since $R$ is an abelian group, an ideal $N$ is a normal subgroup of $R$. Here $N$ is actually a subring of $R$, but we require stronger conditions that ask $N$ to be closed under left- and right-multiplication by \textbf{all} elements in $R$. These stronger conditions allows us to make coset multiplication well-defined.
-
-
-
     
-    \item A \textit{maximal ideal} of a ring $R$ is an ideal $M \subsetneq R$ such that there is no ideal $N$ such that $M \subsetneq N \subsetneq R$.
-    \item An ideal $N$ in a commutative ring $R$ is a \textit{prime ideal} if for $a,b \in R$, $ab \in N$ implies either $a$ or $b$ is in $N$.
 \end{itemize}
 \end{document}

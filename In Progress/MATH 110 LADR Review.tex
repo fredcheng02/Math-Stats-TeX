@@ -1,15 +1,15 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage[OT1]{fontenc}
 \usepackage{amsmath,amssymb,tikz-cd,mathtools}
 \usepackage{enumitem}
-\usepackage{fullpage,setspace}
+\usepackage{fullpage,setspace,microtype,soul}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
-\newcommand{\df}[1]{\underline{\textit{#1}}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\F}{\mathbb{F}}
+\newcommand{\df}[1]{\ul{\textit{#1}}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\F}{\mathbf{F}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\s}{\operatorname{span}}
@@ -19,6 +19,8 @@
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
 \newcommand{\nm}[1]{\| #1 \|}
+\newcommand{\tr}{\operatorname{trace}}
+\newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\LV}{\mathcal{L}(V)}
 \newcommand{\LVW}{\mathcal{L}(V,W)}
 \newcommand{\M}{\mathcal{M}}
@@ -73,7 +75,7 @@
 \newpage
 \section{Finite-Dimensional Vector Spaces}
 
-\textit{Remark}. Note that this section in the book builds on the idea of a ``list'' of vectors, which is no different than using a ``set'' of vectors because vector addition is commutative. (We will use either a list or a set of vectors later depending on whether we have to specify the ordering of these vectors.) Finite-dimensional is defined in terms of a spanning list, and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
+\textit{Remark.} Note that this section in the book builds on the idea of a ``list'' of vectors, which is no different than using a ``set'' of vectors because vector addition is commutative. (We will use either a list or a set of vectors later depending on whether we have to specify the ordering of these vectors.) Finite-dimensional is defined in terms of a spanning list, and the concept of a basis and the dimension of a vector space is pushed backward. In our exposition, we rearrange the progression of these ideas and reconstruct some proofs.
 
 \begin{itemize}
     \item The \df{span} of a set $S$ of vectors in $V$ is defined to be all possible linear combinations of these vectors. In particular, $\s(\emptyset)$ $\coloneqq \{0\}$.
@@ -91,7 +93,7 @@
         \item In particular, for a linearly independent set $S = \{s_1, s_2, \dots , s_m\} \subsetneq$ a linearly dependent set $T = \{s_1, s_2, \dots , s_m, t_1, t_2, \dots , t_n\}$, one such vector is always in $T \backslash S$. This is because for the nontrivial way of writing $0 = a_1s_1 + \cdots +a_ms_m + b_1 t_1 + \cdots + b_n t_n$, if all $b$'s are 0, then all $a$'s will also be 0. Thus, some $b_i$ must be nonzero, and the corresponding $t_i$ can be removed without changing the span.
         \begin{itemize}
             \item The special case $n=1$ of the contraposition will be useful to us. If one new vector is added to the linearly independent $S$ but does not belong to span($S$), then the resulting set is still linearly independent.
-            \item From this special case we know that for a linear dependent set $\{v_1,\dots,v_n\}$, at some index $k \leq n$ we have $\{v_1,\dots,v_{k-1}\}$ being linearly independent, while $v_k \in \s(\{v_1,\dots,v_{k-1}\})$. (This is the well-ordering case of the linear dependence lemma 2.21 in book that we will use again in Chapter 5 and Chapter 8.)
+            \item From this special case we know that for a linearly dependent set $\{v_1,\dots,v_n\}$, at some index $k \leq n$ we have $\{v_1,\dots,v_{k-1}\}$ being linearly independent, while $v_k \in \s(\{v_1,\dots,v_{k-1}\})$. (This is the well-ordering case of the linear dependence lemma 2.21 in book that we will use again in Chapter 5 and Chapter 8.)
         \end{itemize}
         \item Note that a linearly independent set of vectors cannot have the $0$ vector.
     \end{itemize}
@@ -119,7 +121,7 @@
         \item Note it is WRONG to assume that a finite basis of the whole space can always be reduced to a finite basis of the subspace!
         \item Corollary: for FDVS $V$ and its subspace $U$, if the two spaces have the same dimension, then they are the same space. This is an important result useful in many proofs.
     \end{itemize}
-    \item There are two more things that deserve mentioning. For FDVS $V$ and its subspace $U$, we can always find subspace $W$ such that $V = U \oplus W$. The idea is to find a basis $B_U$ of $U$ and extend it to the basis $B_V$ of $V$. $\s (B_V \backslash B_U)$ is our desired W. We then only have to show $V = U+W$ and $U \cap W = \{0\}$, which is not difficult.
+    \item There are two more things that deserve mentioning. For FDVS $V$ and its subspace $U$, we can always find subspace $W$ such that $V = U \oplus W$. The idea is to find a basis $B_U$ of $U$ and extend it to the basis $B_V$ of $V$. $\s (B_V \backslash B_U)$ is our desired $W$. We then only have to show $V = U+W$ and $U \cap W = \{0\}$, which is not difficult.
     \item The dimension of the sum of two vector spaces $U_1$ and $U_2$ can be expressed as follows: $$\d (U_1 + U_2) = \d U_1 + \d U_2 - \d (U_1 \cap U_2).$$
     \begin{itemize}
         \item Despite the fact that it looks like the inclusion-exclusion formula, $+$ and $\cup$ are quite different, thus the formula cannot be similarly generalized to higher orders. To prove the formula, start from a basis $\{u_1,u_2,\dots,u_m\}$ of $U_1 \cap U_2$ (intersection is a subspace). $U_1$ and $U_2$ then have their respective bases $B_1$ and $B_2$. We can show $B_1 \cup B_2$ is a basis of $U_1 + U_2$. See page 47 of the book for the full proof.
@@ -175,7 +177,7 @@
 
 \subsection{Matrices}
 \begin{itemize}
-    \item Consider the $n$-dimensional $V$ with basis $\bv$ and $m$-dimensional $W$ with basis $w_1,\dots,w_m$. For $T \in \LVW$, we can find for every $v_k$, a list of $A_{i,k}$'s such that $Tv_k = A_{1,k}w_1 +\cdots+ A_{m,k}w_m = \sum_{j=1}^m A_{j,k}w_j$. As a result, we have $n$ lists of scalar $a$'s, each of length $m$, and we can put them into an $m \times n$ matrix $A$, with entries $a_{i,j}$ in the $i$-th row and $j$-th column. $\mathcal{M}(T,(\bv),(\bw))$ uniquely determines the linear map $T \in \LVW$.
+    \item Consider the $n$-dimensional $V$ with basis $\bv$ and $m$-dimensional $W$ with basis $w_1,\dots,w_m$. For $T \in \LVW$, we can find for every $v_k$, a list of $A_{i,k}$'s such that \[Tv_k = A_{1,k}w_1 +\cdots+ A_{m,k}w_m = \sum_{j=1}^m A_{j,k}w_j.\] As a result, we have $n$ lists of scalar $a$'s, each of length $m$, and we can put them into an $m \times n$ matrix $A$, with entries $a_{i,j}$ in the $i$-th row and $j$-th column. $\mathcal{M}(T,(\bv),(\bw))$ uniquely determines the linear map $T \in \LVW$.
     \begin{itemize}
         \item Assume
         \begin{align*}
@@ -197,6 +199,7 @@
 \end{itemize}
 
 \subsection{Invertibility and Isomorphic Vector Spaces}
+\textit{Remark.} The isomorphism between linear maps and matrices is the most central theorem of linear algebra. With the machinery developed in $\S$3.3 and 3.4, all the nice results we will prove about linear maps can be directly \textbf{translated to matrices}.
 \begin{itemize}
     \item $T \in \LVW$ is \df{invertible} if there exists $S$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. One can show that the inverse must be linear and thus belongs to $\mathcal{L}(W,V)$. By the associativity of linear maps, the inverse is unique.
     \item Invertibility is equivalent to bijectivity between vector spaces. Linear maps are functions, so beyond showing that the inverse is linear, the proof is exactly the same.
@@ -373,7 +376,7 @@
 
 \newpage
 \section{Polynomials}
-\textit{Remark}. We used facts about polynomials in high school algebra. These facts were intuitively ``understood'' back then, but we never had the chance to rigorously prove them. An abstract algebra course delves deep into some materials on polynomials, which we still take for granted in this book. For example, note that when evaluating a polynomial $p(z)q(z)$ at $z = a$, although we still directly plug $a$ in and compute $p(a)q(a)$ to get the result, this is formally not rigorous. This ``plugging-in'' step requires the machinery of \emph{evaluation homomorphism} to be justified. As another example, one should show that for polynomials with coefficients from a field (more generally from an integral domain), $\deg p + \deg q = \deg pq$ holds, before using it.
+\textit{Remark.} We used facts about polynomials in high school algebra. These facts were intuitively ``understood'' back then, but we never had the chance to rigorously prove them. An abstract algebra course delves deep into some materials on polynomials, which we still take for granted in this book. For example, note that when evaluating a polynomial $p(z)q(z)$ at $z = a$, although we still directly plug $a$ in and compute $p(a)q(a)$ to get the result, this is formally not rigorous. This ``plugging-in'' step requires the machinery of \emph{evaluation homomorphism} to be justified. As another example, one should show that for polynomials with coefficients from a field (more generally from an integral domain), $\deg p + \deg q = \deg pq$ holds, before using it.
 
 \begin{itemize}
 	\item The product $pq \in \PF$ of polynomials $p(z)=\sum_{i=0}^m a_iz^i$ and $q(z)=\sum_{j=0}^m b_jz^j$ in $\PF$ is defined by $$(pq)(z) = p(z)q(z) = \sum_{i=0}^m\sum_{j=0}^n a_i b_j z^{i+j}$$ for all $z \in \F$ (``expanding out and collecting like terms''). We can interchange the Sigma notation and see that $p(z)q(z) = q(z)p(z)$. Two polynomials commute under multiplication.
@@ -448,7 +451,7 @@
 \end{itemize}
 
 \subsection{Eigenvectors and Upper-Triangular Matrices}
-\textit{Remark}. (In the upcoming fourth edition, this section is rewritten in terms of minimal polynomials.) Most theorems in this section rely heavily on induction. This is because we will be considering bases and matrices of arbitrary finite dimensions.
+\textit{Remark.} (In the upcoming fourth edition, this section is rewritten in terms of minimal polynomials.) Most theorems in this section rely heavily on induction. This is because we will be considering bases and matrices of arbitrary finite dimensions.
 \begin{itemize}
     \item Linear operators allow power operations. Given $T \in \LV$, we define $T^m$ ($m \in \Z^+$) as $T$ composite with itself $m$ times, $T^0$ as the identity operator $I_V$, and $T^{-m}$ as $(T^{-1})^m$, given $T^{-1}$ exists.
     \begin{itemize}
@@ -501,7 +504,11 @@
     \end{bmatrix}.
     \end{equation*}
     One of the $\lambda_i - \lambda$'s is 0 iff $T - \lambda I$ is invertible iff $\lambda$ is an eigenvalue. Therefore, all the entries $\lambda_i$'s on the diagonal are exactly all the eigenvalues.
+    \begin{itemize}
+        \item Note that if $T$ has no eigenvalue at all, then by this claim $T$ has no upper-triangular matrix with respect to any basis of $V$.
+    \end{itemize}
 \end{itemize}
+
 \subsection{Eigenspaces and Diagonal Matrices}
 \begin{itemize}
     \item A \df{diagonal matrix} has all its entries off the diagonal 0.
@@ -540,11 +547,11 @@
 
 \newpage
 \section{Inner Product Spaces}
-\textit{Remark}. In this section $V$ is by default an inner product space.
+\textit{Remark.} In this section $V$ is by default an inner product space.
 \subsection{Inner Products and Norms}
 \begin{itemize}
     \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$ (the real $n$-dimensional space), the \df{dot product} $x \cdot y \coloneqq x_1y_1+\dots+x_ny_n$ is a scalar in $\R$. The norm $\|x\|$ on $\R^n$ is usually given by $\sqrt{x_1^2+\dots+x_n^2}$, which is the square root of the dot product of $x$ with itself.
-    \item The usual norm $\|z\| \coloneqq  \sqrt{|z_1|^2+\dots+|z_n|^2}$ on $\C^n$ (the complex $n$-dimensional space) is also a scalar in $\R$.
+    \item The usual norm $\|z\| \coloneqq  \sqrt{|z_1|^2+\dots+|z_n|^2}$ on $\C^n$ (the complex $n$-dimension space) is also a scalar in $\R$.
     \item Generally on both real and complex $n$-dimensional spaces, we define the \df{Euclidean inner product} by $$\inp{(w_1,\dots,w_n)}{(z_1,\dots,z_n)} =  w_1\conj{z_1}+\dots+w_n\conj{z_n}.$$ This generalizes the definition of the dot product on $\R^n$. Moreover, we have $$\inp{(z_1,\dots,z_n)}{(z_1,\dots,z_n)} = z_1\conj{z_1}+\dots+z_n\conj{z_n} = |z_1|^2 + \dots + |z_n|^2 = \|z\|^2,$$ so that $\|z\|$ becomes the square root of the inner product of $z$ with itself.
     
     We regard $\R^n$ and $\C^n$ by default as the $n$-dimensional real and complex Euclidean spaces endowed with the Euclidean inner product. 
@@ -693,7 +700,7 @@
         \item $P_U$ is an idempotent operator: ${P_U}^2 = P_U$; [by (b)]
         \item $\nm{P_U(v)} \leq \nm{v}$; [since $\nm{u}^2 \leq \nm{u}^2 + \nm{w}^2 = \nm{v}^2$]
     \end{enumerate}
-    \item For finite-dimensional subspace $U$ of an inner product space $V$ and a fixed $v \in V$, the minimum distance between $v$ and all vectors on $U$ is achieved at $u = P_U(v)$, as expected. Formally, we want to show that for all $u \in U$, $$\nm{v - P_U(v)} \leq \nm{v-u},$$ which achieve equality iff $u = P_U(v)$.
+    \item For finite-dimensional subspace $U$ of an inner product space $V$ and a fixed $v \in V$, the minimum distance between $v$ and all vectors on $U$ is achieved at $u = P_U(v)$ (so that $v - u$ is orthogonal to the subspace $U$), as expected. Formally, we want to show that for all $u \in U$, $$\nm{v - P_U(v)} \leq \nm{v-u},$$ which achieves equality iff $u = P_U(v)$.
     
     The proof obviously employs the Pythagorean theorem. We have
     \begin{equation*}
@@ -705,7 +712,7 @@
 
 \newpage
 \section{Operators on Inner Product Spaces}
-\textit{Remark}. In this chapter we regard $V$ by default as FDVS over $\F = \R$ or $\C$.
+\textit{Remark.} In this chapter we regard $V$ by default as FDVS over $\F = \R$ or $\C$.
 \subsection{Self-Adjoint and Normal Operators}
 \begin{itemize}
     \item For $T \in \LVW$, the \df{adjoint} of $T$ is the function $T^*: W \to V$ such that $$\inp{Tv}{w}_W = \inp{v}{T^*w}_V.$$
@@ -740,7 +747,9 @@
     \item With respect to an orthonormal basis $e_1,\dots,e_n$ of $V$ and an orthonormal basis $f_1,\dots,f_m$ of $W$, $\M(T^*,(f_1,\dots,f_m),(e_1,\dots,e_n))$ is just the conjugate transpose of $\M(T,(e_1,\dots,e_n),(f_1,\dots,f_m))$. (If we are considering operators $T \in \LV$ instead, by default we use the same basis on the domain $V$ and on the range of $V$.)
     
     The entries in $k$-th column of $\M(T)$ are exactly the coefficients in
-    $$\inp{Te_k}{f_1}f_1+\dots+\inp{Te_k}{f_m}f_m = Te_k.$$ Therefore, $\M(T)_{j,k} = \inp{Te_k}{f_j}$. Similarly we can conclude that $\M(T^*)_{k,j} = \inp{T^*f_j}{e_k} = \inp{f_j}{Te_k}$, where $1 \leq j \leq m$ and $1 \leq k \leq n$. It is clear that $\M(T)$ and $\M(T^*)$ are conjugate transposes of one another.
+    $$\inp{Te_k}{f_1}f_1+\dots+\inp{Te_k}{f_m}f_m = Te_k.$$ Therefore, $\M(T)_{j,k} = \inp{Te_k}{f_j}$. Similarly we can conclude that $\M(T^*)_{k,j} = \inp{T^*f_j}{e_k} = \inp{f_j}{Te_k}$, where $1 \leq j \leq m$ and $1 \leq k \leq n$. It is clear that $\M(T)$ and $\M(T^*)$ (with switched bases) are conjugate transposes of one another.
+
+    Note that in the usual case when we are considering an operator $T$ with respect to a single basis, then $\M(T)$ and $\M(T^*)$ are simply conjugate transposes of one another (because we do not need to switch bases).
     \item An operator $T \in \LV$ is \df{self-adjoint} (or \df{Hermitian}) if $T=T^*$. That is to say, $T$ is self-adjoint iff $\inp{Tv}{w}=\inp{v}{Tw}$ for all $v,w \in V$.
     \begin{itemize}
         \item It follows from definition that the sum of two self-adjoint operators is self-adjoint and the product of a real scalar and a self-adjoint operator is self-adjoint.
@@ -808,11 +817,11 @@ Now we extend the diagonalizability theorem proved in Chapter 5 from general vec
             0 & & a_{nn}
         \end{bmatrix}.
     \end{equation*}
-    The idea is to show all the entries above the diagonal are 0. From the first column of $\M(T)$ we have $\nm{Te_1}^2=|a_{11}|^2$, while from the first column of $\M(T^*)$ (the conjugate of the first row of $\M(T)$) we have $$\nm{T^*e_1}=|a_{11}|^2+\dots+|a_{1n}|^2.$$ Since $\nm{Te_1}^2 = \nm{T^*e_1}$, $a_{12},\dots,a_{1n}$ are all 0.
+    The idea is to show all the entries above the diagonal are 0. From the first column of $\M(T)$ we have $\nm{Te_1}^2=|a_{11}|^2$, while from the first column of $\M(T^*)$ (the conjugate of the first row of $\M(T)$) we have $$\nm{T^*e_1}^2=|a_{11}|^2+\dots+|a_{1n}|^2.$$ Since $\nm{Te_1}^2 = \nm{T^*e_1}^2$, $a_{12},\dots,a_{1n}$ are all 0.
     
     We can proceed in this way to show that $a_{23},\dots,a_{2n}$ are also all 0 and so on. Therefore, $\M(T)$ is indeed a diagonal matrix, as desired.
 \end{itemize}
-\textit{Remark}. Schur's theorem gives us a shortcut to prove (a)$\implies$(c) by comparing $\M(T)$ and $\M(T^*)$. By contrast, in the spectral theorem for $T$ on real inner product spaces, (a)$\implies$(c) is not easy to prove because in the first place we do not know over $\R$ (unlike over $\C$) whether $T$ has an upper-triangular matrix with respect to some basis of $V$. Neither do we know whether any eigenvalue exists for $T \in \LV$ over $\R$.
+\textit{Remark.} Schur's theorem gives us a shortcut to prove (a)$\implies$(c) by comparing $\M(T)$ and $\M(T^*)$. By contrast, in the spectral theorem for $T$ on real inner product spaces, (a)$\implies$(c) is not easy to prove because in the first place we do not know over $\R$ (unlike over $\C$) whether $T$ has an upper-triangular matrix with respect to some basis of $V$. Neither do we know whether any eigenvalue exists for $T \in \LV$ over $\R$.
 
 Therefore, a stronger condition on $T$ is required for the similar spectral theorem on real inner product spaces, and as you may guess, $T$ is now required to be self-adjoint in (a). We leave (b) and (c) unchanged in the real spectral theorem. We can show if $T$ is self-adjoint, then $T$ must have an eigenvalue, from which we can prove that (a)$\implies$(b).
     \begin{itemize}
@@ -904,7 +913,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
     $$v = \sum_{\{j: \lambda_j=\lambda\}}a_j e_j, \text{ and then } Rv = \sum_{\{j: \lambda_j=\lambda\}} a_j \sqrt{\lambda} e_j = \sqrt{\lambda}v.$$
     
     \item An operator $S \in \LV$ is an \df{isometry} if $\nm{Sv}=\nm{v}$ for all $v \in V$. (an operator that preserves norm)
-    \item There are many equivalent characterizations of isometry. The following are equivalent for $S \in \LV$:
+    \item There are many equivalent characterizations of isometries. The following are equivalent for $S \in \LV$:
     \begin{enumerate}[label=(\alph*)]
     \item $S$ is an isometry;
     \item $\inp{Su}{Sv} = \inp{u}{v}$ for all $u,v \in V$;
@@ -934,6 +943,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
     
     (h)$\implies$(a) is again standard: $\nm{Sv} = \inp{S^*Sv}{v} = \inp{Iv}{v} = \nm{v}^2$.
     \begin{itemize}
+        \item An isometry on a real (resp.\ complex) inner product space is often called an \df{orthogonal} (resp.\ \df{unitary}) \df{operator}.
         \item Every isometry is normal by $(e)$ and $(f)$, and actually we can extend properties of normal operators to describe properties of isometry. The complex case is given below and the real case will be given later.
     \end{itemize}
     \item If there is an orthonormal basis $e_1,\dots,e_n$ of $V$ all being eigenvectors of $S \in \LV$, with corresponding eigenvalues $\lambda_1,\dots,\lambda_n$ all having absolute value 1, then $S$ must be an isometry.
@@ -947,7 +957,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
 
 
 \subsection{Polar Decomposition and Singular Value Decomposition}
-\textit{Remark}. In the fourth edition, this section is written as well. SVD will instead be used to prove the polar decomposition theorem.
+\textit{Remark.} In the fourth edition, this section is written as well. SVD will instead be used to prove the polar decomposition theorem.
 \begin{itemize}
 \item The polar decomposition theorem states that for $T \in \LV$, we can find an isometry $S$ such that $T = S \sqrt{T^*T}$. (breaking $T$ into a composition of $S$ with $\sqrt{T^*T}$)
 
@@ -997,11 +1007,11 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 
 \newpage
 \section{Operators on Complex Vector Spaces}
-\textit{Remark}. We assume $V$ is a nonzero FDVS in this chapter, and $T \in \LV$. We take $n$ as $\d V$ by default in addition.
+\textit{Remark.} We assume $V$ is a nonzero FDVS in this chapter, and $T \in \LV$. (Although some results are possible to be extended to the infinite-dimensional setting, it is not that useful here.) We take $n$ as $\d V$ by default in addition.
 \subsection{Generalized Eigenvectors and Nilpotent Operators}
 \begin{itemize}
     \item $\{0\} = \n T^0 \subseteq \n T^1 \subseteq \n T^2 \cdots \subseteq \n T^k \subseteq \n T^{k+1} \subseteq \cdots$ holds with a quite obvious proof.
-        \item Furthermore, once $\n T^m = \n T^{m+1}$ for some $m \geq 0$, $\n T^m = \n T^{m+1} = \n T^{m+2} = \cdots$ and so on. Correspondingly we need to show that $\n T^{m+k} \supseteq \n T^{m+k+1}$, which is not hard either.
+        \item Furthermore, once $\n T^m = \n T^{m+1}$ for some $m \geq 0$, $\n T^m = \n T^{m+1} = \n T^{m+2} = \cdots$ and so on. To prove this we need to further show that $\n T^{m+k} \supseteq \n T^{m+k+1}$, which is not hard either.
         \begin{itemize}
             \item As a corollary, if $\n T = {0}$, then all powers of $T$ are injective.
             \item When do we hit the first $m$ such that $\n T^m = \n T^{m+1}$? This $m$ always exists, and $m \leq \d V$.
@@ -1013,6 +1023,8 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     Every proper subset means the dimension of the next one on the right must be one more than the dimension of the previous one on the left. Therefore, at the point $\n T^n$ is at least of dimension $n$, from which we can increase no further.
     
     From now on we will call $$\{0\} = \n T^0 \subseteq \n T^1 \subseteq \cdots \subseteq \n T^n = \n T^{n+1} = \cdots$$ the \emph{nullspace power chain}.
+    
+    \item \emph{Note that all the results above hold for the ranges of integer powers of $T$, with ``$\supseteq$'' replacing ``$\subseteq$'' accordingly. See the exercises of this section in the book.}
     \item Say $T$ is on $V$ with dimension $n$, $V = \n T^n \oplus \r T^n$. (The claim is actually true for all $m$ such that $T^m = T^{m+1}$.)
     The proof divides into two steps. First, we need to show that $\n T^n \cap \r T^n = \{0\}$. Second, we need to show that the direct sum is actually $V$.
     
@@ -1101,11 +1113,11 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 
     We know $v \in V$ can always be written as a unique sum of $u_1 + \dots + u_m$ with each $u_j$ in $G(\lambda_j,T)$. Define $R$ such that \[Rv = R_1u_1 + \dots + R_m u_m\] for all $v \in V$, which we can verify is a square root operator of $T$ on $V$, as follows.
 
-    Note that $R_1u_1$ is still in $G(\lambda_1,T)$, $R(R_1u_1) = R_1(R_1u_1) = {R_1}^2u_1$. Taking this as an example, we have \[Rv = {R_1}^2 u_1 + \dots + {R_m}^2 u_m = T(u_1 + \dots +u_m) = Tv,\] as desired.
+    Note that $R_1u_1$ is still in $G(\lambda_1,T)$, $R(R_1u_1) = R_1(R_1u_1) = (R_1)^2u_1$. Taking this as an example, we have \[Rv = (R_1)^2 u_1 + \dots + (R_m)^2 u_m = T(u_1 + \dots +u_m) = Tv,\] as desired.
 \end{itemize}
 
 \subsection{Characteristic and Minimal Polynomials}
-\textit{Remark}. By default in this section, $q$ is the characteristic polynomial, and $p$ is the minimal polynomial.
+\textit{Remark.} By default in this section, $q$ is the characteristic polynomial, and $p$ is the minimal polynomial.
 \begin{itemize}
     \item For an operator $T$ over a complex vector space $V$, let $\lambda_1, \dots, \lambda_m$ be all distinct eigenvalues of $T$, each with corresponding multiplicity $d_1,\dots, d_m$. Then the \df{characteristic polynomial} of $T$ is defined to be \[(z-\lambda_1)^{d_1}\cdots (z-\lambda_m)^{d_m}.\]
     \begin{itemize}
@@ -1132,9 +1144,9 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 
     ``$\impliedby$'' is obvious. For ``$\implies$'', suppose we have $q(z)$ such that $q(T) = 0$, then by the division algorithm with respect to the minimal polynomial $p(z)$, we have $q = ps+r$ for a (unique) pair of $s$ and $r$ with $\deg r < \deg p$. Then \[0 = q(T) = p(T)s(T)+r(T) = r(T).\] If $r$ is not the zero polynomial, then we may divide $r$ by its highest coefficient to get a monic polynomial $\tilde{r}$ such that $\tilde{r}(T) = 0$ still. Yet $\deg \tilde{r} < \deg p$, which leads to contradiction. Therefore, $r = 0$, and we have $q = ps$.
     \begin{itemize}
-        \item It follows directly that for an operator $T$ on a \textbf{complex vector space}, the characteristic polynomial must be a polynomial multiple of the minimal polynomial. (We have not defined the characteristic polynomials in the case $\F = \R$, but the result is similarly true. See the next chapter.) This is an important criterion for us to find the minimal polynomial of an operator.
+        \item It follows directly that for an operator $T$ on a \textbf{complex} vector space, the characteristic polynomial must be a polynomial multiple of the minimal polynomial. (We have not defined the characteristic polynomials in the case $\F = \R$, but the result is similarly true. See the next chapter.) This is an important criterion for us to find the minimal polynomial of an operator.
     \end{itemize}
-    \item The following result is another important criterion for finding the minimal polynomial. For an operator $T$ on a vector space $V$, the zeros of the minimal polynomial $p$ are \textbf{precisely} the eigenvalues of $T$.
+    \item The following result is another important criterion for finding the minimal polynomial. For an operator $T$ on a real/complex vector space $V$, the zeros of the minimal polynomial $p$ (over $\R$/$\C$) are \textbf{precisely} the eigenvalues of $T$.
 
     Suppose $\lambda \in \F$ is a zero of $p$, so that $p(z) = (z-\lambda)q(z)$ for a monic polynomial $q$ (because $p$ is monic). Replace $z$ by $T$, and we have \[0 = p(T) = (T - \lambda I)q(T).\] Since $\deg q < \deg p$, for some $v \in V$ $q(T)v \ne 0$ so that $q$ is not a minimal polynomial. Therefore, $T - \lambda I$ is not injective, which means that $\lambda$ is an eigenvalue of $T$.
 
@@ -1149,9 +1161,9 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 
 
 \section{Operators on Real Vector Spaces}
-\textit{Remark}. We continue to assume $V$ is a nonzero FDVS in this chapter, and $T \in \LV$.
+\textit{Remark.} We continue to assume $V$ is a nonzero FDVS in this chapter, and $T \in \LV$.
 \subsection{Complexification}
-\textit{Remark}. In this section, $u,v$ by default denotes vectors in $V$, and $a,b$ are real numbers to represent an arbitrary complex number $a+bi$. $V$ is a nonzero finite-dimensional real vector space.
+\textit{Remark.} In this section, $u,v$ by default denotes vectors in $V$, and $a,b$ are real numbers to represent an arbitrary complex number $a+bi$. $V$ is a nonzero finite-dimensional real vector space.
 \begin{itemize}
     \item For a real vector space $V$, its \df{complexification}, denote by $V_\C$, is $V \times V$. Customarily we write $(u,v) \in V_\C$ as $u + iv$, although it sometimes makes more sense to \emph{}
     \begin{enumerate}
@@ -1198,7 +1210,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     \end{itemize}
     \item $\lambda \in \R$ is an eigenvalue of $T$ on a real vector space $V$ iff it is an eigenvalue of $T_\C$.
     
-    The (real) eigenvalues of $T$ are the (real) zeros of the minimal polynomial of $T$, which are the real zeros of the minimal polynomial of $T_\C$ and thus the real eigenvalues of $T_\C$. Proof by the definition is also viable.
+    The (real) eigenvalues of $T$ are the (real) zeros of the minimal polynomial of $T$, which are the real zeros of the minimal polynomial of $T_\C$ and thus the real eigenvalues of $T_\C$. Proof straight from the definition is also viable.
     \item For $\lambda \in \C$ and any nonnegative $j$, for $T$ on a real vector space $V$, \[(T_\C - \lambda I)^j (u+iv) = 0 \iff (T_\C - \conj{\lambda} I)^j (u-iv) = 0.\] WLOG we only need to prove ``$\implies$''. Proof is based on induction and some calculation tricks, which you can refer to the book.
     \begin{itemize}
         \item Take $j = 1$, and it follows directly that the eigenvalues of $T_\C$ come in pairs: if $\lambda \in \C$ is one, then $\conj{\lambda}$ is also one.
@@ -1208,7 +1220,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     
     However, the sum of multiplicities of all eigenvalues is $\d V_\C = \d V$, which is odd, there must be a real eigenvalue of $T_\C$, which is an eigenvalue of $T$.
 \end{itemize}
-\textit{Remark}. We defined in \S 8.3 the minimal polynomial altogether for operators on both real and complex vector spaces, because the whether $\F$ is the real or the complex field does not make any difference for the properties and theorems about the minimal polynomial. For example, the coefficients of the minimal polynomial for an operator on real (resp.\ complex) vector space must be real (resp.\ complex). But this was not the case for the characteristic polynomial. For example, we know $\d V$ is equal to the sum of multiplicities of all eigenvalues of an operator $T$ on a complex vector space, but not on a real vector space. However, with the tool of complexification we can now define the characteristic polynomial for operators on real vector spaces, and make sense of the theorems we have proved about characteristic polynomials in the context of real vector spaces.
+\textit{Remark.} We defined in \S 8.3 the minimal polynomial altogether for operators on both real and complex vector spaces, because the whether $\F$ is the real or the complex field does not make any difference for the properties and theorems about the minimal polynomial. For example, the coefficients of the minimal polynomial for an operator on real (resp.\ complex) vector space must be real (resp.\ complex). But this was not the case for the characteristic polynomial. For example, we know $\d V$ is equal to the sum of multiplicities of all eigenvalues of an operator $T$ on a complex vector space, but not on a real vector space. However, with the tool of complexification we can now define the characteristic polynomial for operators on real vector spaces, and make sense of the theorems we have proved about characteristic polynomials in the context of real vector spaces.
 \begin{itemize}
     \item For $T$ on a real vector space $V$, the coefficients of the characteristic polynomial of $T_\C$ are all real.
 
@@ -1219,24 +1231,180 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
         \item it has degree $\d V = \d V_\C$;
         \item its \textbf{real zeros} are precisely the eigenvalues of $T$, because the (real) zeros of $T_\C$ are precisely the (real) eigenvalues of $T_\C$, which are precisely the eigenvalues of $T$.
     \end{enumerate}
-    \item The \textbf{Cayley-Hamilton theorem} now holds on real vector spaces: for $T$ on real/complex vector space $V$ and the characteristic polynomial $q$ of $T$, $q(T) = 0$.
+    \item The \textbf{Cayley-Hamilton theorem} now holds on real vector spaces: for $T$ on either a real/complex vector space $V$ and the characteristic polynomial $q$ of $T$, $q(T) = 0$.
     
     Since we have $q(T_\C) = 0$, by $q(T_\C) = (q(T))_\C$, we get $q(T) = 0$.
-    \item Now we can conclude in general for $T$ either on a real/complex vector space $V$, let $p$ be the minimal polynomial and $q$ be the characteristic polynomial of $T$, then
+    \item Also, we can conclude in general for $T$ either on a real/complex vector space $V$, let $p$ be the minimal polynomial and $q$ be the characteristic polynomial of $T$, then
     \begin{enumerate}[label=(\alph*)]
         \item $\deg p \leq \d V$; (since $\deg q = \d V$)
         \item $q$ is a polynomial multiple of $p$. (since $q(T) = 0$ by Cayley-Hamilton)
     \end{enumerate}
 \end{itemize}
 
-
 \subsection{Operators on Real Inner Product Spaces}
+\textit{Remark.} The real spectral theorem that we proved in $\S$7.2 offers a complete description of self-adjoint (but not normal) operators on real vector spaces. And in $\S$7.3, we gave a completed description of isometries only on complex (but not real) vector spaces. The following section will extend these results with the tools we now have.
+\begin{itemize}
+    \item For $T$ on a real inner product space $V$ with dimension 2, the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item $T$ is normal but not self-adjoint;
+        \item The matrix of $T$ with respect to any orthonormal basis of $V$ is of the form $\begin{bmatrix}
+            a & -b \\ b & a
+        \end{bmatrix}$ with $b \neq 0$.
+        \item The matrix of $T$ with respect to some orthonormal basis of $V$ is of the form $\begin{bmatrix}
+            a & -b \\ b & a
+        \end{bmatrix}$ with $b > 0$.
+    \end{enumerate}
+    
+    (a)$\implies$(b): Suppose $T$ is normal but not self-adjoint, then let $e_1,e_2$ be an orthonormal basis of $V$, with respect to which $\M(T,(e_1,e_2)) = \begin{bmatrix}
+        a & c \\ b & d
+    \end{bmatrix}$, and its transpose $\begin{bmatrix}
+        a & b \\ c & d
+    \end{bmatrix} = \M(T^*,(e_1,e_2))$. Thus $Te_1 = a e_1 + b e_2$ and $T^*e_1 = ae_1 + ce_2$, from which we have \[\nm{Te_1} = a^2 + b^2 \quad \text{and} \quad \nm{T^*e_1} = a^2 + c^2.\] Since $T$ is normal, the two norms above should be equal, and $b = c$ or $-c$. If $b = c$ then $\M(T) = \M(T^*)$, so that $T$ is self-adjoint. Thus $\M(T,(e_1,e_2)) = \begin{bmatrix}
+        a & -b \\ b & d
+    \end{bmatrix}$.
+
+    Since $T$ is normal, $\M(T)\M(T^*) = \M(T^*)\M(T)$:
+    \begin{equation}\begin{bmatrix}
+        a & -b \\ b & d
+    \end{bmatrix} \begin{bmatrix}
+        a & b \\ -b & d
+    \end{bmatrix} = \begin{bmatrix}
+         a & b \\ -b & d
+    \end{bmatrix}\begin{bmatrix}
+        a & -b \\ b & d
+    \end{bmatrix}. \tag{$\ast$}
+    \end{equation}
+    Then we have $ab-bd=-ab+bd$. Note that if $b=0$ then $T$ is self-adjoint, so $b \neq 0$. Thus $a-d=-a+d$, which gives $a = d$.
+
+    (b) $\implies$ (c) is trivial. Suppose $\M(T) = \begin{bmatrix}
+        a & -b \\ b & a
+    \end{bmatrix}$ with respect to an orthonormal basis $e_1,e_2$. Since $b \neq 0$, one of $b$ and $-b$ is greater than 0. If $b > 0$, the proof is finished; if not, then then consider $\M(T,(e_1,-e_2)) =
+        \begin{bmatrix}
+        a & b \\ -b & a
+    \end{bmatrix}$. Since $-b > 0$, this completes the proof.
+
+    (c) $\implies$ (a): Since $b \neq 0$, the matrix is not equal to its transpose and hence $T$ is not self-adjoint. Because ($\ast$) is satisfied by $d=a$, the matrices of $T$ and $T^*$ commute. Thus $T$ is normal.
+    \item Suppose $T$ is a normal operator on an inner product space $V$ (real or complex), and $U$ is a subspace of $V$ that is invariant under $T$, then
+    \begin{enumerate}[label=(\alph*)]
+        \item $U^\perp$ is invariant under $T$.
+        
+        Let $e_1,\dots,e_m$ be an orthonormal basis of $U$, from which we can extend to a basis of $V$: $e_1,\dots,e_m,f_1,\dots,f_n$. Since $V = U \oplus U^\perp$, by a claim we mentioned in Chapter 2, $U^\perp$ has $f_1,\dots,f_n$ as a basis.
+
+        Because $U$ is invariant under $T$, we should have \[\M(T,(e_1,\dots,e_m,f_1,\dots,f_n)) = \begin{bmatrix}
+            A & B \\ 0 & C
+        \end{bmatrix},\] where $A$ is a $m \times m$ matrix. Because the $e_i$'s are orthonormal, \[\sum_{i = 1}^m \nm{Te_j}^2 = \text{ sum of the squares of the absolute values of all entries of }A.\] Similar to what we have done in our last theorem, if we look at the matrix of $T^*$, \[\sum_{i = 1}^m \nm{T^*e_j}^2 = \text{ sum of the squares of the absolute values of all entries of }A \text{ and } B.\] Equating the two formulas above (by $T$ is normal) tells us that $B$ is a zero matrix. This shows that $U^\perp$ is invariant under $T$ (because all $Tf_j$'s are in the span of the basis vectors of $U^\perp$).
+        
+        \item $U$ is invariant under $T^*$.
+
+        This is easy. Since \[\M(T,(e_1,\dots,e_m,f_1,\dots,f_n)) = \begin{bmatrix}
+            A & 0 \\ 0 & C
+        \end{bmatrix},\] we have \[\M(T^*,(e_1,\dots,e_m,f_1,\dots,f_n)) = \begin{bmatrix}
+            \conj{A^t} & 0 \\ 0 & \conj{C^t}
+        \end{bmatrix},\] (where $\conj{\cdot^t}$ is our notation for the conjugate transpose of a matrix). Thus $U$ is invariant under $T^*$.
+        
+        \item $(T|_U)^* = T^*|_U$.
+
+        Set $S = (T|_U) \in \mathcal{L}(U)$, and we want to show $S^* v = T^* v$ for all $v \in U$. Fix $u \in U$, and for all $v \in U$ we have $\inp{u}{S^* v} = \inp{Su}{v} = \inp{Tu}{v} = \inp{u}{T^* v}$ (here we consider $\inp{\cdot}{\cdot}$ as an inner product on $V$). By (b), $T^* v \in U$, and so we can restrict this inner product to the subspace $U$. It follows that $S^* = T^*$. [More formally, $\inp{u}{(S^*-T^*)v} = 0$, where $u$ is an arbitrary vector in $U$, and $S^* v, T^* v$ are both in $U$ as well. Let $u = (S^*-T^*)v$, and we have $(S^*-T^*)v = 0$ for all $v \in U$.]
+        
+        \item $T|_U \in \mathcal{L}(U)$ and $T|_{U^\perp} \in \mathcal{L}(U^\perp)$ are both normal.
+
+        $(T|_U)^*(T|_U) = (T^*|_U)(T|_U) = (T|_U)(T^*|_U) = (T|_U)(T|_U)^*$ [essentially this holds because restriction does not change the properties of maps]. Because $U^\perp$ is also invariant under $T$, by the same token we can prove that $T|_{U^\perp}$ is normal as well.
+    \end{enumerate}
+\end{itemize}
+Since a normal operator restricted to an invariant subspace is still normal, we can use our description of normal but not self-adjoint operators of dimension 2 to describe normal operators on real inner product spaces of arbitrary dimensions by induction, from which we can completely describe isometries on real inner product spaces.
+\begin{itemize}
+    \item For $T$ on a real inner product space $V$, $T$ is normal iff there is an orthonormal basis of $V$ with respect to which $T$ has a block diagonal matrix such that each block is $1 \times 1$ or $2 \times 2$ of the form $\begin{bmatrix}
+        a & -b \\ b & a
+    \end{bmatrix}$, with $b > 0$.
+    
+    We first mention an easy lemma: for block diagonal matrices $A$ and $B$ with the same block sizes on their diagonals, $AB$ is still block diagonal with each block of $AB$ being the product of the corresponding block in $A$ times the corresponding block in $B$.
+    
+    ($\impliedby$) Each $1 \times 1$ block commutes with its transpose (itself), and the $2 \times 2$ block of the given form must also commute with its transpose [showed earlier in this chapter; see ($\ast$)]. By the preceding lemma, the block diagonal matrix of $T$ should commute with its transpose, showing that $T$ commutes with $T^*$. This completes the proof.
+    
+    ($\implies$) We use induction. The case $\d V = 1$ is trivial. When $\d V = 2$, if $T$ is self-adjoint, then by the real spectral theorem we should find two $1 \times 1$ blocks on the diagonal and two 0s off the diagonal; if $T$ is not self-adjoint, then the first theorem in the section applies.
+    
+    Assume $\d V > 2$. 
+
+    
+\end{itemize}
 
 
 \section{Trace and Determinant}
-\subsection{Trace}
+\textit{Remark.} $V$ stills remains a nonzero FDVS in this last chapter.
 
-\subsection{Determinant}
+\setcounter{secnumdepth}{1}
+
+\subsection{Change of Basis}
+\begin{itemize}
+    \item Our focus finally comes to matrices themselves. We use $I_n$ to denote the $n \times n$ identity matrix, and $A^{-1}$ to denote the inverse matrix of a square matrix $A$.
+
+    You may appeal to the fact that there is one-to-one correspondence between every square matrix and an operator with respect to a fixed basis to show that, or simply prove directly, that $AI = IA = A$ for a square matrix $A$, and that there is a unique inverse $B$ (such that $AB = BA = I$) for an invertible square matrix $A$.
+\end{itemize}
+\textit{Remark.} The change of basis formula is one of the most important result in linear algebra, and we now consider the matrix of an operator with respect to two different bases (instead of only one basis). The reason is clear, because we are now changing the basis of our operator/matrix. Recall the notation $\M(T,(u_1,\dots,u_n),(v_1,\dots,v_n))$ is the matrix of writing each $Tu_j$ as a linear combination of $v_1,\dots,v_n$ in the $j$-th column.
+\begin{itemize}
+    \item Suppose $u_1,\dots,u_n$, $v_1,\dots,v_n$, and $w_1,\dots,w_n$ are all bases of $V$. For $S,T \in \LV$, we have
+    \[\M(ST,(u_1,\dots,u_n),(w_1,\dots,w_n)) = \M(S,(v_1,\dots,v_n),(w_1,\dots,w_n))\M(T,(u_1,\dots,u_n),(v_1,\dots,v_n)).\] We proved this result for linear maps in Chapter 3, and we restate it here.
+    \item For two bases $u_1,\dots,u_n$ and $v_1,\dots,v_n$ of $V$, the two matrices $\M(I,(u_1,\dots,u_n),(v_1,\dots,v_n))$ and $\M(I,(v_1,\dots,v_n),(u_1,\dots,u_n))$ are inverses of one another. (Note that the $I$ here is the identity operator on $V$.)
+
+    This follows from the last claim and \[I_n = \M(II,(u_1,\dots,u_1),(u_1,\dots,u_1)) = \M (II,(v_1,\dots,v_1),(v_1,\dots,v_1)).\]
+    \item Now we can prove the \textbf{change of basis formula}. For $T \in \LV$, where $V$ has two bases $u_1,\dots,u_n$ and $v_1,\dots,v_n$. Let $A = \M(I,(u_1,\dots,u_n),(v_1,\dots,v_n))$. Then \[\M(T,(u_1,\dots,u_n)) = A^{-1}\M(T,(v_1,\dots,v_n))A.\]
+
+    By the previous two claims, $A^{-1}\M(T,(v_1,\dots,v_n)) = \M(T,(v_1,\dots,v_n),(u_1,\dots,u_n))$, which when multiplied by $A$ on the right gives $\M(T,(u_1,\dots,u_n))$, as desired.
+    \end{itemize}
+    \textit{Remark.} A number of times in this book we have discussed finding a basis of an operator with respect to which there is a ``nice-looking'' matrix (e.g., a diagonal, a block diagonal, or a Jordan matrix). Given a matrix $P = \M(T,(u_1,\dots,u_n))$, if we have shown that we can always find a kind of ``nice-looking'' matrix $Q$ of the operator $T$ with respect to a basis $(v_1,\dots,v_n)$, then we can always decompose $P$ into $A^{-1}QA$, where $A = \M(I,(u_1,\dots,u_n),(v_1,\dots,v_n))$.
+
+    $P$ and $Q$ are oftentimes called \df{similar} matrices when $P = A^{-1} Q A$. They are similar in the sense that $Q = (A^{-1})^{-1} P (A^{-1})$ as well.
+
+    Now we look back at the diagonalization computation from our first course in linear algebra. Consider the linear operator $T \in \mathcal{L}(\F^n)$ of multiplying a $n\times n$ matrix $P$ on the left. Then $P = \M(T,(e_1,\dots,e_n))$, and $A^{-1} = \M(I,(v_1,\dots,v_n),(e_1,\dots,e_n))$. We know $(v_1,\dots,v_n)$ is a basis of eigenvectors of $\F^n$, and thus the $j$-th column of $A^{-1}$ is exactly the $j$-th eigenvector $v_j \in \F^n$.
+    
+    Recall when diagonalizing a matrix $P$, we used to find all the eigenvalues $\lambda_1,\dots,\lambda_n$ and their corresponding eigenvectors $v_1,\dots,v_n$, and then adjoin all the eigenvectors to get the $A^{-1} = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix}$ and its inverse $A$, that $Q = \begin{bmatrix}
+    \lambda_1 & & 0 \\
+    & \ddots & \\
+    0 & & \lambda_n
+    \end{bmatrix}$ needs to multiply on the left and right respectively. These computation steps are finally justified.
+\subsection{Trace and Determinant of an Operator}
+\begin{itemize}
+    \item The \df{trace of an operator} $T$ on a complex (resp.\ real) vector space is the sum of eigenvalues of $T$ (resp.\ $T_\C$), with each eigenvalue repeated according to its multiplicity. The \df{determinant} of $T$ on a complex (resp.\ real) vector space is the product of the eigenvalues of $T$ (resp.\ $T_\C$), with each eigenvalue repeated according to its multiplicity.
+    \item Let $\d V = n$, and $\lambda_1,\dots,\lambda_n$ be all the eigenvalues of $T$/$T_\C$ (counting repeats according to multiplicities), then the characteristic polynomial of $T$ should be \[(z-\lambda_1)\cdots(z-\lambda_n).\] By polynomial expansion (or simply Vieta's formulas), $\tr T = \lambda_1 +\dots+\lambda_n$ is the negative coefficient of $z^{n-1}$ in the characteristic polynomial of $T$, and $\det T = \lambda_1 \cdots \lambda_n$ is $(-1)^n$ times the constant term of the characteristic polynomial of $T$. The characteristic polynomial of $T$ now explicitly should be \[z^n - (\tr T) z^{n-1} + \dots + (-1)^n (\det T).\]
+    \item 
+    \item An operator on $V$ is invertible iff its determinant is nonzero.
+    
+    Note that $T$ on a complex vector space is invertible iff $T$ does not have 0 as an eigenvalue, which happens iff the constant term of the characteristic polynomial if nonzero, i.e., $\det T \neq 0$. If $T$ is instead on a real vector space, then we need one more step: $T$ does not have 0 as an eigenvalue iff $T_\C$ does not have 0 as an eigenvalue.
+    \item We now relate the idea of the determinant to the characteristic polynomial. If we alternatively introduced the definition of the determinant \emph{of a matrix} first, from which we define the determinant of an operator (which we will know how this can be done as we proceed), then we would \emph{define} the characteristic polynomial in the following way: 
+    \begin{center}
+        For $T$ on $V$, the characteristic polynomial of $T$ equals $\det(zI - T)$.
+    \end{center}
+    
+    Suppose $V$ is a complex vector space. Let $\lambda \in \C$, and for now we see $z$ as a fixed complex indeterminate. Then $\lambda$ is an eigenvalue of $T$ iff $z-\lambda$ is an eigenvalue of $zI - T$, as can be seen from \[-(T - \lambda I) = (zI-T) - (z-\lambda)I.\] Raise both sides to the power $n = \d V$ and take nullspaces. Then the multiplicities of $\lambda$ in $T$ should match the multiplicities of $z-\lambda$ in $zI - T$. Let $\lambda_1,\dots,\lambda_n$ be all eigenvalues of $T$ (counting repeats according to multiplicities), then $z - \lambda_1, \dots,z - \lambda_n$ are all the eigenvalues of $zI - T$ (counting repeats according to multiplicities). Therefore, for the complex indeterminate $z$, \[\det(zI - T) = (z - \lambda_1)\cdots(z-\lambda_n),\] where the RHS is exactly the characteristic polynomial of $T$.
+    
+    If $V$ is a real vector space instead, then by definition  the characteristic polynomial of $T$ is the characteristic polynomial of $T_\C$, and $\det(zI - T)$ is the product of eigenvalues of $(zI - T)_\C = zI_\C - T_\C$ (because when $z$ is a complex number, $zI - T$ is a polynomial of $T$). Then we can use the claim above in the complex case.
+    
+    \item
+    
+\end{itemize}
+\subsection{Trace of a Matrix}
+\begin{itemize}
+    \item The trace of the transpose is the same as the trace of the matrix itself.
+\end{itemize}
+
+\subsection{Determinant of a Matrix}
+\begin{itemize}
+    \item We use $(m_1,m_2,m_3,\dots,m_n)$ as a shorthand for the permutation $\begin{pmatrix} 1 & 2 & \cdots & n \\ m_1 & m_2 & \cdots & m_n \end{pmatrix}$. Note this is not the cycle notation.
+    
+    
+    
+    
+    \item The Leibniz formula for the definition of determinants: for the $n \times n$ square matrix \[A = \begin{bmatrix}
+        A_{1,1} & \cdots & A_{1,n} \\ \vdots & & \vdots \\ A_{n,1} & \cdots & A_{n,n}
+    \end{bmatrix},\] $\det A$, the \df{determinant of the matrix} $A$, is given by \[\sum_{(m_1,\dots,m_n) \in S_n} \sgn (m_1,\dots,m_n) A_{m_1,1} \cdots A_{m_n,n}.\]
+    \item The determinant of a matrix is equal to that of its transpose.
+    \item Interchanging two columns/rows of a matrix changes the sign of the determinant.
+    \item Matrices with two equal columns/row have 0 determinant.
+    \item 
+    
+\end{itemize}
+    
 
 
+\setcounter{secnumdepth}{3}
 \end{document}
