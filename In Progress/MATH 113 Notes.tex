@@ -3,10 +3,11 @@
 \usepackage{amsmath,amsthm,amssymb,tikz-cd,mathtools}
 \usepackage[OT1]{fontenc}
 \usepackage{enumitem}
-\usepackage{fullpage,setspace,microtype,soul}
+\usepackage{fullpage,setspace,microtype,soul,framed}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
-\newcommand{\boxaround}[1]{\fbox{\parbox{\textwidth}{#1}}}
-\newcommand{\rmk}{\noindent\textit{Remark.}}
+\newcommand{\rmk}{\noindent\textit{Remark. }}
+\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#2}}
+\newcommand{\where}{\,|\,}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\Q}{\mathbf{Q}}
@@ -19,7 +20,14 @@
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\Quot}{\operatorname{Quot}}
 \newcommand{\irr}{\operatorname{irr}}
+\newcommand{\clos}[1]{\overline{#1}}
+\newcommand{\GF}{\operatorname{GF}} % Galois Field
 \renewcommand{\phi}{\varphi}
+
+% table with math entries; use \text{} for actual text in table
+\usepackage{amstext} % for \text macro
+\usepackage{array} % for \newcolumntype macro
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "l" column type
 
 \onehalfspacing
 \setlength{\parskip}{0em}
@@ -38,15 +46,118 @@
 \end{center}
 \makeatother
 
+\renewcommand*\contentsname{Selected Sections}
+\tableofcontents
+\newpage
 
 \section{Groups and Subgroups}
+\setcounter{subsection}{1}
+\subsection{Binary Operations}
+\begin{itemize}
+    \item A \df{binary operation} $\ast$ on a set $S$ is a function mapping $S \times S$ to $S$. We denote $\ast((a,b))$ by $a \ast b$.
+    \item For $H \subseteq S$, $H$ is said to be \df{closed} under $\ast$ if for all $a,b \in H$, $a \ast b \in H$. The binary operation $\ast$ on $H$ (may be denoted by $\ast|_H$) is called the \df{induced operation of $\ast$ on $H$}.
+    \item $\ast$ on $S$ is \df{commutative} if for all $a,b \in H$, $a \ast b = b \ast a$. It is \df{associative} if for all $a,b,c \in H$, $(a \ast b) \ast c = a \ast (b \ast c)$.
+    
+    If $\ast$ is associative, then we can compute the $\ast$ of any two adjacent terms first in $a_1 \ast a_2 \ast \dots \ast a_n$, as the order of $a_1,a_2,\dots,a_n$ is not changed. If a binary operation is both commutative and associative, then we can compute $a_1 \ast a_2 \ast \dots \ast a_n$ by compute the $\ast$ of all the $a_i$'s in any order.
+    \begin{itemize}
+        \item Note that the composition of functions (with the domains and ranges all being the same $S$) is associative.
+    \end{itemize}
+    \item A binary operation on a finite set can be demonstrated by a binary operation table. For example, let $S = \{a,b,c\}$, and then we can demonstrate the binary operation $\ast$ on $S$ as
+    \begin{center}
+        \begin{tabular}{C|C|C|C}
+        \ast & a & b & c \\ \hline
+        a & a \ast a & a \ast b & a \ast c \\ \hline
+        b & b \ast a & b \ast b & b \ast c \\ \hline
+        c & c \ast a & c \ast b & c \ast c 
+    \end{tabular}.
+    \end{center}
+\end{itemize}
+
+\subsection{Isomorphic Binary Structures}
+\begin{itemize}
+    \item A binary algebraic structure $\la S,\ast \ra$ is a set $S$ endowed with a binary operation $\ast$.
+    \item Given two binary structures $\la S,\ast \ra$ and $\la S',\ast' \ra$, if there is a function $\phi: S \to S'$ such that for $x,y \in S$, we have $\phi(x \ast y) = \phi(x) \ast' \phi(y)$, then we say that \df{$S$ is homomorphic to $S'$} (i.e., $S$ and $S'$ are structurally alike, as shown by the $\phi$ function). Here the $\phi$ function is the \df{homomorphism of $S$ with $S'$}.
+
+    It is clear that under this homomorphism $\phi$, if $\ast$ is commutative/associative, then $\ast'$ should be commutative/associative as well, because $\ast$ on $S$ and $\ast'$ on $S'$ have the same purpose.
+    
+    If this $\phi$ is also bijective, then \df{$S$ is isomorphic to $S'$}, which we denote by $S \simeq S'$. Here this $\phi$ function is the \df{isomorphism of $S$ with $S'$}. In this case $S$ and $S'$ are not only structurally alike but are \emph{algebraically identical} in the sense that there are one-to-one correspondences between all elements in $S$ and all elements in $S'$. $S$ and $S'$ are the same except for the names of elements: for $x \in S$, $\phi(x)$ is its corresponding name in $S'$.
+
+    Under the isomorphism $\phi$, algebraic properties on $S$ should also be algebraic properties on $S'$, because only the names of elements are different. What we mean by ``algebraic properties'' will become clear later.
+    \item We say $e \in S$ is an \df{identity element} of $\la S,\ast \ra$ if $e \ast s = s \ast e = s$ for all $s \in S$.
+    
+    This $e$ is unique by the standard proof: if $e,e' \in S$ are both identity elements of $S$, then \[e = e \ast e' = e'.\]
+    \item Under the homomorphism $\phi$ between $\la S,\ast \ra$ and $\la S',\ast' \ra$, if $e$ is the identity of $S$, then $\phi(e)$ is the identity of $S'$.
+
+    The proof of this is very easy. By $e \ast s = s \ast e = s$ for all $s \in S$ we have \[\phi(e) \ast' \phi(s) = \phi(e \ast s) = \phi (s \ast e) = \phi(s) \ast' \phi(e) = \phi(s),\] as desired.
+    \item Clearly for an isomorphism $\phi$ of $S$ with $S'$ desired above, $\phi^{-1}$ should be an isomorphism of $S'$ with $S$.
+    
+    Because $\phi$ is bijective, $\phi^{-1}$ exists and is bijective. Moreover, for any $x' = \phi(x)$ and $y' = \phi(y)$ in $S'$, \[\phi^{-1}(x' \ast' y') = \phi^{-1}(\phi(x) \ast' \phi(y)) = \phi^{-1}(\phi(x \ast y)) = x \ast y = \phi^{-1}(x') \ast' \phi^{-1}(y').\]
+    \item Similarly we can also show that the composition of homomorphisms (resp.\ isomorphisms) is still a homomorphism (resp.\ an isomorphism, because the composition of bijective functions is bijective). The proof follows straight from the definition.
+\end{itemize}
+
+\subsection{Groups}
+\begin{itemize}
+    \item A \df{group} is a binary algebraic structure $\la G, \ast \ra$ [meaning that $\ast$ is closed under $G$] such that
+    \begin{enumerate}[label=(\alph*)]
+        \item $\ast$ is associative;
+        \item there is an identity $e$ for $\ast$;
+        \item for every $a \in G$, there is an \df{inverse} $a' \in G$ such that $a \ast a' = a' \ast a = e$.
+    \end{enumerate}
+    If $\ast$ is also commutative, then we call $G$ an \df{abelian group}. The \df{order} of a group is $|G|$.
+    \begin{itemize}
+        \item If for an $\la S,\ast \ra$ only the (a) above holds, then $S$ is called a \df{semigroup}. If (b) holds in addition, then $S$ is called a \df{monoid}.
+    \end{itemize}
+\end{itemize}
+\begin{framed}
+    By convention we will the multiplicative notation in group theory, and the multiplication symbol $\cdot$ (the symbol itself is mostly omitted) is used to represent the associative binary operation of the group. For $n \in \Z^+$, $a^n$ is $a$ multiplied by $n$ times. We let $a^0$ be the identity $e$. $a^{-1}$ is used to represent the inverse of the element $a$, and hence $a^{-n}$ should be $a^{-1}$ multiplied by $n$ times. It is quite clear that for $m,n \in \Z$, $a^{m+n} = a^ma^n$ holds, by associativity.
+\end{framed}
+\begin{itemize}
+    \item For elements in a group $G$, $ab = ac$ implies $b = c$, and $ac = bc$ implies $a = b$. These are called the \df{left and right cancellation laws}. It is easy to show that the cancellation laws hold by multiplying $a^{-1}$ on the left and $c^{-1}$ on the right, respectively.
+    \item Linear equations have unique solutions in a group, i.e, for any $a,b \in G$, $ax=b$ has a unique solution for $x \in G$ , and $ya = b$ has a unique solution for $y \in G$.
+    \item A group has exactly one idempotent element, which is $e$ the identity.
+
+    Let $a$ be an idempotent element of $G$, then $aa = a$, which by the cancellation law implies that $a = e$.
+\end{itemize}
+
+\subsection{Subgroups}
+
+\subsection{Cyclic Groups}
+
+\subsection{Generating Sets and Cayley Digraphs}
+
+
+
+
+
 
 \section{Permutation, Cosets, and Direct Products}
+\subsection{Groups of Permutations}
+\subsection{Orbits, Cycles, and the Alternating Groups}
+\subsection{Cosets and the Theorem of Lagrange}
+\subsection{Direct Products and Finitely Generated Abelian Groups}
+
+
 \section{Homomorphisms and Factor Groups}
+\setcounter{subsection}{12}
+\subsection{Homomorphisms}
+\subsection{Factor Groups}
+\subsection{Factor-Group Computations and Simple Groups}
+
+
 \section{Rings and Fields}
+\setcounter{subsection}{17}
+\subsection{Rings and Fields}
+\subsection{Integral Domains}
+\subsection{Fermat's and Euler's Theorems}
+\subsection{The Field of Quotients of an Integral Domain}
+\subsection{Rings of Polynomials}
+\subsection{Factorization of Polynomials over a Field}
+
 
 
 \section{Ideals and Factor Rings}
+\setcounter{subsection}{25}
+\subsection{Homomorphisms and Factor Rings}
 \begin{itemize}
     \item Let $\phi: R \to R'$ be a ring homomorphism, and $N$ be an ideal of $R$. Then $\phi(N)$ is an ideal of $\phi(R)$. If $N'$ is an ideal of either $\phi(R)$ or $R'$, then $\phi^{-1}(N')$ is an ideal of $R$.    
     \begin{proof}
@@ -54,6 +165,10 @@
 
         Suppose $N'$ is an ideal of $\phi(R)$ [or $R'$]. Consider $\phi^{-1}(N')$, an additive subgroup of $R$. For any $a \in R$ and $b \in \phi^{-1}(N')$, $\phi(ab)=\phi(a)\phi(b)$ and $\phi(ba)=\phi(b)\phi(a)$. Since $\phi(a) \in \phi(R)$ [or $R'$] and $\phi(b) \in N'$, $\phi(ab)$ and $\phi(ba)$ are both in $N'$, so that $ab$ and $ba$ are both in $\phi^{-1}(N')$, as desired.
     \end{proof}
+\end{itemize}
+
+\subsection{Prime and Maximal Ideals}
+\begin{itemize}
     \item If $R$ is a unital ring, and $N$ is an ideal of $R$ containing a unit $u$, then $N = R$.
     \begin{proof}
         $1 = u^{-1} u \in N$ for $u^{-1} \in R$. Then for any $a \in R$, $a \cdot 1 \in N$, so that $R \subseteq N$.
@@ -97,11 +212,18 @@
         \begin{align*}
             p(\alpha) = \phi_\alpha(p(x)) & = (a_0 + \gen{p(x)}) + (a_1 + \gen{p(x)})(x + \gen{p(x)}) + \dots + (a_n + \gen{p(x)})(x+\gen{p(x)})^n \\ & = (a_0 + \gen{p(x)}) + (a_1x + \gen{p(x)}) + \dots + (a_nx^n + \gen{p(x)}) \\ & = (a_0 + a_1x + \dots + a_n x^n) + \gen{p(x)} = p(x) + \gen{p(x)} = \gen{p(x)} = 0
         \end{align*}
-        in $E = F[x]/\gen{p(x)}$. \emph{The coefficients in the first line above are the images of $a_0,a_1,\dots,a_n \in F$ in $E$. Note that the zero is a particular coset from the factor ring (field) of a polynomial ring modulo an irreducible polynomial of the given $f(x)$.}
+        in $E = F[x]/\gen{p(x)}$. \emph{The coefficients in the first line above are the images of $a_0,a_1,\dots,a_n \in F$ in $E$. Note that the zero is a particular coset from the factor ring $E$ of a polynomial ring modulo an irreducible polynomial of the given $f(x)$.}
     \end{proof}
+    \begin{itemize}
+        \item Here is a very important example. We know $f(x) = x^2 + 1 \in \R[x]$ has no zero in $\R$ and is thus irreducible over $\R$. It follows that $\R[x]/\la x^2 + 1 \ra$ is a field. Every $r \in \R$ is identified with the coset $r + \la x^2 + 1 \ra$ in $\R[x]/\la x^2+1 \ra$, and so $\R$ is embedded into $E \coloneqq \R[x]/\la x^2+1 \ra$. By the construction in the theorem above, $x + \la x^2+1 \ra$ is a zero to $f(x) = x^2 + 1$ over the extension field $E$ of $\R$. We will show in this section that we can identify $E$ with the complex number field $\C$, and $x + \la x^2+1 \ra$ with $i$.
+    \end{itemize}
+    \end{itemize}
+    \begin{framed}Recall the number of zeros of a polynomial $f(x)$ over a field $F$ is at most $\deg(f)$, because there are at most $\deg(f)$ linear factors that $f(x)$ can factor into. By the theorem above one can always construct an extension field $K$ of $F$ such that over $K$, $f(x)$ has $\deg(f)$ zero counting repeats, which is the maximum number of zeros $f(x)$ can possibly have.
+    \end{framed}
+    \begin{itemize}
     \item An element $\alpha \in E$, where $E$ is an extension field of $F$, is \df{algebraic over $F$} if we can find a nonzero polynomial $f(x) \in F[x]$ such that $f(\alpha) = 0$. Otherwise, $\alpha \in E$ is \df{transcendental over $F$}.
     
-    An element $\alpha \in \C$ algebraic/transcendental over $\Q$ is called an \df{algebraic number}/\df{transcendental number}, respectively.
+    An element $\alpha \in \C$ algebraic/transcendental over $\Q$ is called an \df{algebraic number}/\df{transcendental number}, respectively. $\pi$ and $e$ are famous transcendental numbers, but showing they are transcendental is very complicated.
     \item For an extension field $E$ of $F$ and $\alpha \in E$, and let $\phi_\alpha: F[x] \to E$ be the ``evaluation at $\alpha$'' homomorphism. Then $\alpha$ is transcendental over $F$ iff $\phi_\alpha$ is injective (or equivalently, iff $F[x]$ and a subdomain of $E$ are isomorphic).
 
     Proof follows straight from the definition.
@@ -112,15 +234,20 @@
         To show $p(x)$ is irreducible, suppose $p(x) = r(x)s(x)$, where $r$ and $s$ are of degrees lower than $\deg(p)$. Then $p(\alpha) = r(\alpha)s(\alpha)$, so that $r(x)$ or $s(x)$ has $\alpha$ has a zero. Yet $p(x)$ is the polynomial of the minimal degree having $\alpha$ as a zero over $E$. Therefore, $p(x)$ is irreducible.
     \end{proof}  
 \end{itemize}
-\boxaround{Because $p(x)$ is unique up to a nonzero constant factor in $F$, we can let $p(x)$ be a \emph{monic polynomial} so that it become truly unique. Under the same setup as the above theorem, we call this unique monic polynomial $p(x)$ the \df{irreducible polynomial for $\alpha$ over $F$}, denoted by $\irr(\alpha,F)$. The degree of $\irr(\alpha,F)$ is denoted by $\deg(\alpha,F)$.}
+\begin{framed}
+    Because $p(x)$ is unique up to a nonzero constant factor in $F$, we can let $p(x)$ be a \emph{monic polynomial} so that it become truly unique. Under the same setup as the above theorem, we call this unique monic polynomial $p(x)$ the \df{irreducible polynomial for $\alpha$ over $F$}, denoted by $\irr(\alpha,F)$. The degree of $\irr(\alpha,F)$ is denoted by $\deg(\alpha,F)$.
+\end{framed}
 \begin{itemize}
     \item Let $E$ be an arbitrary extension field of $F$, and let $\alpha \in E$. We want to find the smallest extension containing $F$ and $\alpha$, and we need to consider two cases.
     
-    (Case I.) \emph{Suppose $\alpha$ is algebraic over $F$.} We can then construct the map $\phi_\alpha: F[x] \to E$ given by $\phi_\alpha(a) = a$ for all $a \in F$ and $\phi_\alpha(x) = \alpha$, because $E$ contains both $F$ and $\alpha$. Clearly $\phi_\alpha$ is just the evaluation homomorphism. Since $\gen{\irr(\alpha,F)}$ is now a maximal ideal, $F[x]/\gen{\irr(\alpha,F)}$ is a field that is ring isomorphic with $\phi_\alpha(F[x]) \subseteq E$. \emph{Since a ring that is ring isomorphic with a field is a field itself (because being a field is a \emph{property} of a ring)}, $\phi_\alpha(F[x])$ is a subfield of $E$. Since any arbitrary $E$ containing $F$ and $\alpha$ has $\phi_\alpha(F[x])$ as a subfield, $\phi_\alpha(F[x])$ is the smallest subfield containing $F$ and $\alpha$, which we denote by $F(\alpha)$.
+    (Case I.) \emph{Suppose $\alpha$ is algebraic over $F$.} We can then construct the map $\phi_\alpha: F[x] \to E$ given by $\phi_\alpha(a) = a$ for all $a \in F$ and $\phi_\alpha(x) = \alpha$, because $E$ contains both $F$ and $\alpha$. This $\phi_\alpha$ is just the evaluation homomorphism. Since $\gen{\irr(\alpha,F)}$ is now a maximal ideal, $F[x]/\gen{\irr(\alpha,F)}$ is a field that is ring isomorphic to $\phi_\alpha(F[x]) \subseteq E$. \emph{Since a ring that is ring isomorphic to a field is a field itself (because being a field is a \emph{property} of a ring)}, $\phi_\alpha(F[x])$ is a subfield of $E$. Since any arbitrary $E$ containing $F$ and $\alpha$ has $\phi_\alpha(F[x])$ as a subfield, $\phi_\alpha(F[x]) \simeq F[x]/\la \irr(a,F) \ra$ is the smallest subfield containing $F$ and $\alpha$, which we denote by $F(\alpha)$.
     
     (Case II.) \emph{Suppose $\alpha$ is transcendental over $F$.} Then $\phi_\alpha$ gives an isomorphism of $F[x]$ with a subdomain of $E$. $F[\alpha] \coloneqq \phi_\alpha(F[x])$ is thus an integral domain, from which we can create a field of quotients $\Quot(F[\alpha])$, which is the smallest subfield of $E$ that contains $F[\alpha]$ (which again is the smallest integral domain that contains $F$ and $\alpha$). We denote this $\Quot(F[\alpha])$ also by $F(\alpha)$.
     
-    In both cases, the smallest field $F(\alpha)$ that contains $F$ and $\alpha$ is called the \df{field generated by $\alpha$}. If for an extension field $E$ of $F$ we can find an $\alpha \in E$ such that $E = F(\alpha)$, then $E$ is called a \df{simple extension of $F$}.
+    In both cases, the smallest field $F(\alpha)$ that contains the field $F$ and the element $\alpha \in E$ is called the \df{field generated over $F$ by $\alpha$}. If for an extension field $E$ of $F$ we can find an $\alpha \in E$ such that $E = F(\alpha)$, then $E$ is called a \df{simple extension of $F$}.
+    \begin{itemize}
+        \item Since $\pi$ is transcendental over $\Q$, the field $\Q(\pi)$ is isomorphic to \df{the field $\Q(x)$ of rational functions over $\Q$ in the indeterminate $x$}. Consider \[\Q(\pi) = \Quot(\phi_\pi(\Q[x])) = \left\{\frac{f(\pi)}{g(\pi)} \,\middle|\, f(x),g(x) \in \Q[x];\, g(x) \neq 0 \right\}.\] Here every $\frac{f(\pi)}{g(\pi)}$ has a one-to-one correspondence with $\frac{f(x)}{g(x)} \in \Q(x)$. From a structural viewpoint, in general, an element that is transcendental over a field $F$ behaves as though it were an indeterminate over $F$.
+    \end{itemize}
     \item Say $E = F(\alpha)$, where this $\alpha$ is algebraic over $F$ and $\deg(\alpha,F) = n \geq 1$. Then every $\beta \in E = F(\alpha) = \phi_\alpha(F[x])$ can be uniquely expressed as $b_0 + b_1 \alpha + \dots + b_{n-1} \alpha^{n-1}$, where the $b_i$'s are all in $F$.
     \begin{proof}
         Every $\beta \in E$ is of the form $\phi_\alpha(f(x)) = f(\alpha)$. Let \[p(x) = \irr(\alpha,F) = a_0+a_1x+\dots+a_{n-1}x^{n-1}+x^n,\] then $p(\alpha) = 0$, so that $\alpha^n = -a_0-a_1 \alpha-\dots -a_{n-1} \alpha^{n-1}$. For all $\alpha^m$ with $m \geq n$, they can be expressed inductively as a  linear combination of $1,\alpha,\dots,\alpha^{n-1}$ over $F$. For example,
@@ -131,6 +258,9 @@
         
         The uniqueness of expression of $\beta$ clearly has to do with the minimal degree $n$ of $p(x)$. Suppose \[\beta = b_0 + b_1 \alpha + \dots + b_{n-1} \alpha^{n-1} = b_0' + b_1' \alpha + \dots +b_{n-1}' \alpha^{n-1},\] then \[(b_0 - b_0') + (b_1 - b_1') \alpha + \dots + (b_{n-1} - b_{n-1}')\alpha^{n-1} = 0.\] It is then obvious that $\alpha$ is a zero to the polynomial $(b_0 - b_0') + (b_1 - b_1') x + \dots + (b_{n-1} - b_{n-1}')x^{n-1} \in F[x]$, which is of degree $\leq n-1 < n = \deg(p)$, if this polynomial is nonzero. This leads to contradiction, and thus the polynomial from subtraction must be the zero polynomial, showing that the expression of $\beta \in E$ must be unique.
     \end{proof}
+    \item As mentioned earlier in the section, $\R[x]/\la x^2+1 \ra$ can be identified with $\C$. Basically we want to show that the two are isomorphic. For $\alpha = x + \la x^2+1 \ra$ that is a zero in $\R[x]/\la x^2+1 \ra$ to the irreducible polynomial $x^2+1$ in $\R[x]$, we can write $\R[x]/\la x^2+1 \ra$ by $\R(\alpha)$. All elements of this smallest field containing $\R$ and $\alpha$ can be expressed in the form ``$a+b\alpha$'' with $a,b \in \R$. Since $\alpha^2 + 1 = 0$, we see $\alpha \in \R(\alpha)$ plays the role of $i \in \C$, and every $a+b\alpha \in \R(\alpha)$ can be identified with $a+bi \in \C$ \emph{through a change of names}. Thus $\R(\alpha) \simeq \C$, and we have constructed $\C$ algebraically from $\R$.
+    
+    This tells us that we may \emph{define} the complex number field $\C$ as $\R[x]/\la x^2 + 1 \ra$.
 \end{itemize}
 \subsection{Vector Spaces}
 \begin{itemize}
@@ -142,17 +272,24 @@
         
         For the second part, note that for every $\beta$, the list $1,\beta,\dots,\beta^n$ is of size $n+1 > n$ and thus is not linearly independent over $F$. Thus there exists $b_0, b_1, \dots, b_n \in F$, not all zero, such that \[b_0 + b_1 \beta + \dots + b_n \beta^n = 0.\] The nonzero polynomial $g(x) = b_0 + b_1 x+\dots+b_n x^n$ therefore makes $\beta$ algebraic over $F$, and $\deg(\beta,F) \leq \deg(g) \leq n$
     \end{proof}
+    \begin{itemize}
+        \item Notice that $F$ (i.e., every element of $F$) is algebraic over $F$. Since for an $\alpha \in F$, $\irr(\alpha,F) = x - \alpha$, we have $\deg(\alpha,F) = 1$. $F$ is thus a vector space of dimension $1$ over the field $F$ with the singleton list $1$ as a basis.
+    \end{itemize}
 \end{itemize}
 
 \subsection{Algebraic Extensions}
 \begin{itemize}
     \item An extension field $E$ of $F$ is an \df{algebraic extension} of $F$ if every element of $E$ is algebraic over $F$.
     \item If an extension field $E$ of $F$ is of finite dimension $n$ as a vector space over $F$, then $E$ is a \df{finite extension of degree $n$ over $F$}. This degree is denoted by $[E:F]$.
+    \begin{itemize}
+         \item In particular, $[E:F] = 1$ iff $E = F$. This is because a singleton list of 1 [a basis of the vector space $F$ over the field $F$] can always be extended to a basis of $E$ over $F$.
+        \item For $\alpha \in E$ algebraic over $F$, the simple extension $F(\alpha)$ is a \textbf{finite extension} of $\deg(\alpha,F)$ over $F$. Also, we know that $F(\alpha)$ is algebraic over $F$ from \lk{6}{30}. The next theorem is the generalization of this, and the idea of the proof resembles.
+    \end{itemize}
     \item A finite extension field is an algebraic extension of $F$.
     \begin{proof}
         This is easy and similar to what did in the previous section. Because $E$, a finite extension field of $F$, has $[E:F] = n$, it follows that for any $\alpha \in E$, the list $1, \alpha, \dots, \alpha^n$ of size $n+1$ is not linearly independent. Thus, there exists a nonzero $g(x) = a_0 + a_1 x+ \dots + a_n x^n \in F[x]$ such that $g(\alpha) = a_0 + a_1 \alpha + \dots +a_n \alpha^n = 0$. This shows that every $\alpha \in E$ is algebraic over $F$.
     \end{proof}
-    \item Let $E$ be a finite extension of $F$, and $K$ be a finite extension of $E$, then $K$ is a finite extension of $F$, with $[K:F] = [K:E][E:F]$. 
+    \item Let $E$ be a finite extension of $F$, and $K$ be a finite extension of $E$, then $K$ is a finite extension of $F$ with $[K:F] = [K:E][E:F]$. 
     \begin{proof}
         Recall that we proved a similar claim about the indices of subgroups in groups. Similar to that proof we now construct a basis of $K$ over $F$. Let $\alpha_1,\dots,\alpha_n$ be a basis of $E$ over $F$ and $\beta_1,\dots,\beta_m$ be a basis of $K$ over $E$, and we claim the $nm$ products of the elements from the two bases form a basis of $K$ over $F$.
         
@@ -161,12 +298,113 @@
         (Linear Independence) Now let $0 = \sum_{i,j} c_{ij} (\alpha_i \beta_j)$, with each $c_{ij} \in F$. Note that $\sum_{i,j} c_{ij} (\alpha_i \beta_j) = \sum_j (\sum_i c_{ij}\alpha_i)\beta_j$, by the linear independence of $\beta_j$'s over $E$ we get that $\sum_i c_{ij}\alpha_i = 0$. Again by the linear independence of $\alpha_i$'s over $F$ we have all $c_{ij}$'s are 0.
     \end{proof}
     \begin{itemize}
-        \item By induction we can extend this result to a chain of finite extension fields.
+        \item By induction we can extend this result to a tower of finite extension fields. For a tower of finite extensions $F_1,\dots,F_r$, with $F_{i+1}$ being the finite extension of $F_i$ ($1 \leq i \leq n-1$), then $F_r$ is a finite extension of $F_1$ with \[[F_r : F_1] = [F_r : F_{r-1}][F_{r-1} : F_{r-2}] \cdots [F_2 : F_1].\]
         \item Recall in last section we showed that for an extension field $E$ of $F$, let an element $\alpha \in E$ algebraic over $F$ and let $\beta \in F(\alpha)$, $\deg(\beta,F) \leq \deg(\alpha,F)$. This ``$\leq$'' can be replaced by ``$\mid$'', the divides symbol.
         
         We know $\deg(\alpha,F) = [F(\alpha):F]$ and $\deg(\beta,F) = [F(\beta):F]$. Since $\beta \in F(\alpha)$, the smallest field containing $F$ and $\alpha$, $F(\beta)$ is a subfield of $F(\alpha)$. It follows that $[F(\alpha):F]=[F(\alpha):F(\beta)][F(\beta):F]$, so that $\deg(\beta,F) \mid \deg(\alpha,F)$.
     \end{itemize}
-    \item 
+    \item Let $E$ be an extension field of $F$. For $\alpha_1,\alpha_2 \in E$ (not necessarily algebraic over $F$), $(F(\alpha_1))(\alpha_2) = (F(\alpha_2))(\alpha_1)$ because they are both the smallest subfield of $E$ containing the field $F$ and $\alpha_1$ and $\alpha_2$. We denote this extension field of $F$ by $F(\alpha_1,\alpha_2)$.
+    
+    For a finite number of elements $\alpha_1,\dots,\alpha_n \in E$, it is now clear that $F(\alpha_1,\dots,\alpha_n)$, the smallest extension field of $F$ containing all the $\alpha$'s, can be achieved by \emph{adjoining} the $\alpha$'s to $F$ in any order. It is the intersection of all subfields of $E$ containing $F$ and all the $\alpha$'s.
+\end{itemize}
+\rmk There are two important examples at this point in the book. Example 31.9 ask us the dimension of $\Q(\sqrt{2},\sqrt{3})$ over $\Q$, and example 31.10 ask us to show that $\Q(\sqrt{2},\sqrt[3]{2}) = \Q(\sqrt[6]{2})$. These two examples illustrate the core of the finite extensions dimension theorem. Note in particular that problems of this type usually involve square roots for simplicity. For example, $(\Q(\sqrt[3]{2}))(\sqrt{2})$ must be of dimension $\leq 2$ over $\Q(\sqrt[3]{2}) \supseteq \Q$, and if $(\Q(\sqrt[3]{2}))(\sqrt{2}) \neq \Q(\sqrt[3]{2})$ [i.e., $\sqrt{2} \notin \Q(\sqrt[3]{2})$], then $[(\Q(\sqrt[3]{2}))(\sqrt{2}) : \Q(\sqrt[3]{2})]$ must be 2.
+\begin{itemize}
+    \item $E$ is a finite extension of $F$ iff $E$ is an algebraic extension of $F$ and there exist a finite number of elements $\alpha_1,\dots,\alpha_n \in E$ such that $E = F(\alpha_1,\dots,\alpha_n)$.
+    \begin{proof}
+        ($\implies$) Suppose $E$ is a finite extension of $F$. If $[E:F] = 1$, then $E = F$. If $E \neq F$, let $\alpha_1 \in E\backslash F$, then $[F(\alpha_1):F] > 1$. If $E = F(\alpha_1)$, then we are done; if not, then again pick $\alpha_2 \in E\backslash F(\alpha_1)$ and again check if $E = F(\alpha_1,\alpha_2)$. In this fashion the procedure will end in a finite number of steps at $E = F(\alpha_1,\dots,\alpha_n)$, i.e., when there is no further $\alpha_{n+1} \in E\backslash F$, because $[E:F]$, a product of degrees in a tower of proper extension fields \[F,F(\alpha_1),F(\alpha_1,\alpha_2),\dots,\] is a finite number.
+        
+        ($\impliedby$) Suppose $E = F(\alpha_1,\dots,\alpha_n)$. Since $E$ is an algebraic extension of $F$, each $\alpha_i \in E$ is algebraic over $F$. Thus each $\alpha_i$ is algebraic over any extension field of $F$. Therefore $F(\alpha_1)$ is a finite extension of $F$, and $F(\alpha_1,\dots,\alpha_{j-1},\alpha_j) = (F(\alpha_1,\dots,\alpha_{j-1}))(\alpha_j)$ is a finite extension of $F(\alpha_1,\dots,\alpha_{j-1})$ for $2 \leq j \leq n$. Since \[F,F(\alpha_1),\dots,F(\alpha_1,\dots,\alpha_n) = E\] is now a tower of finite extensions, $E$ is a finite extension of $F$.
+    \end{proof}
+        \begin{itemize}
+        \item If $\alpha_1,\dots,\alpha_n$ are algebraic over $F$, then by the same reasoning as above $F(\alpha_1,\dots,\alpha_n)$ is a finite (and thus algebraic) extension of $F$ (for any $n$).
+        
+        Note that when $\alpha$ and $\beta$ are algebraic over $F$, $F(\alpha,\beta)$ is an algebraic extension of $F$. It follows that $\alpha + \beta, \alpha - \beta, \alpha \cdot \beta,$ and $\alpha/\beta$ (if $\beta \neq 0$) in the field $F(\alpha,\beta)$ are all algebraic over $F$. This result leads to the next theorem.
+    \end{itemize}
+    \item Let $E$ be an extension field of $F$. Then \[\clos{F}_E \coloneqq \{\alpha \in E \where \alpha \text{ is algebraic over } F\}\] is called the \df{algebraic closure of $F$ in $E$}, which is a subfield of $E$ and also an algebraic extension of $F$.
+    \begin{proof}
+        Since $F$ is algebraic over $F$, $F \subseteq \clos{F}_E$. Since for any $\alpha,\beta \in E$, $F(\alpha,\beta)$ is algebraic over $F$. Thus $F(\alpha,\beta) \subseteq \clos{F}_E$, and $\alpha - \beta$, $\alpha/\beta$ (if $\beta \neq 0$) are both in $\clos{F}_E$. Meanwhile $\clos{F}_E$ clearly has $0,1 \in F$, and so $\clos{F}_E$ is a subfield of $E$. It follows that the field $\clos{F}_E$ is an algebraic extension of $E$.
+    \end{proof}
+    \begin{itemize}
+        \item The set of all algebraic numbers forms a field, since the set of all algebraic numbers is $\clos{\Q}_\C$.
+    \end{itemize}
+    \item A field $F$ is \df{algebraically closed} if every nonconstant polynomial in $F[x]$ has a zero in $F$.
+    \begin{itemize}
+        \item Remember that $F$ can be the algebraic closure of $F$ in an extension field $E$ without $F$ being algebraically closed. For example, $\Q$ is the algebraic closure of $\Q$ in $\Q(x)$ [recall from \lk{6}{29} that this is the field of $\Q(x)$ of rational functions over $\Q$ in the indeterminate $x$], while $\Q$ is not algebraically closed because $x^2 + 1 \in \Q[x]$ has no zero in $\Q$.
+
+        P.S. We know $\Q$ is algebraic over $\Q$. To prove that $\Q$ is exactly the algebraic closure of $\Q$ in $\Q(x)$, one has to show $\Q$ contains all the elements in $\Q(x)$ that are algebraic over $\Q$. Showing this requires further knowledge on unique factorization domains.
+    \end{itemize}
+    \item A field $F$ is algebraically closed iff every nonconstant polynomial $f(x) \in F[x]$ factors in $F[x]$ into linear factors.
+    \begin{proof}
+        ($\implies$) Let $F$ be algebraically closed, and consider an arbitrary nonconstant $f(x) \in F[x]$. Then by definition $f(x)$ has a zero $\alpha_1 \in F$, which tells us that $f(x) = (x-\alpha_1) g_1(x)$ for some nonzero $g_1(x) \in F[x]$. If $g_1(x)$ is a constant, then $f(x)$ has been factored into linear factors; if not, then $g_1(x) = (x - \alpha_2) g_2(x)$. We may continue our procedure on $g_2(x)$ and so on in the same fashion, and ultimately $g_n(x)$ will be a constant for some $n$. This shows that $f(x)$ can be factored into linear factors in $F[x]$.
+
+        ($\impliedby$) Suppose a nonconstant $f(x) \in F[x]$ has a linear factor $ax-b$ ($a \neq 0$), then $b/a$ is a zero of this $f(x)$. By definition, $F$ is then algebraically closed.
+    \end{proof}
+    \begin{itemize}
+        \item An algebraically closed field $F$ has no proper algebraic extensions.
+        \begin{proof}
+            Consider an algebraic extension $E$ of $F$. Then for any $\alpha \in E$, there is a polynomial $f(x) \in F[x]$ such that $f(\alpha) = 0$. Since $F$ is algebraically closed, by the theorem above this $f(x)$ factors into linear factors in $F[x]$, i.e., \textbf{{every possible zero of $f(x)$}} [over any field] \textbf{is in $F$}. Hence this $\alpha \in F$, which means that $E = F$.
+        \end{proof}
+    \end{itemize}
+    \item We may characterize the fundamental theorem of algebra in the following way: the field of complex numbers $\C$ is an algebraically closed field. The proof of the theorem is left to a complex analysis class.
+    \item If we assume Zorn's lemma (the more frequently used version of the Axiom of Choice), then we can state that every field $F$ has an \df{algebraic closure}, i.e., an algebraic extension $\clos{F}$ that is algebraically closed.
+    
+    Furthermore under Zorn's lemma, the algebraic closure $\clos{F}$ of a field $F$ is \emph{unique up to isomorphism}. We will not go into details of these results.
+\end{itemize}   
+\begin{framed}
+    The theory of complex functions tells us that $\C = \R(i)$ is an algebraic closure of $\R$. Assuming Zorn's lemma ensures the existence of the algebraic closure of any field. 
+
+    Naively to construct an algebraic closure $\clos{F}$ of an arbitrary field $F$, we proceed as follows. If a nonconstant polynomial $f(x) \in F[x]$ has no zero in $F$, then adjoin an $\alpha \notin F$ such that $f(\alpha) = 0$ to the field $F$. If $F(\alpha)$ is still not algebraically closed, then we continue this process. The problem with this naive construction is that we do not know when the process will terminate, or if the process will terminate at all. This is because it is hard to show that a given field is algebraically closed, while it is often easier to show that a field is not algebraically closed. 
+    
+    We will soon show that $\clos{\Q}_\C$, the field of all algebraic numbers, is an algebraically closed field. Since $\clos{\Q}_\C$ is an algebraic extension of $\Q$, $\clos{\Q}_\C$ is an algebraic closure of $\Q$. Thus $\clos{\Q}$ is isomorphic to the field of integers. We will soon show as well that $\clos{\Q} \simeq \clos{\Q}_\C$ cannot be obtained by adjoining a finite number of algebraic numbers to $\Q$. This gives an example that the construction process described above will never terminate.
+\end{framed}
+\begin{itemize}
+    \item Before proving the results mentioned in the boxed text above, we introduce two lemmas:
+    \begin{itemize}
+        \item For a tower of fields $F \subseteq E \subseteq K$, $K$ is algebraic over $F$ iff $K$ is algebraic over $E$ and $E$ is algebraic over $F$.
+        \begin{proof}
+            ($\implies$) $K$ is algebraic over $F$ means that for every $\alpha \in K$ there is a polynomial $f(x) \in F[x] \subseteq E[x]$ such that $f(\alpha) = 0$. Thus $K$ is algebraic over $E$. $E$ is algebraic over $F$ because $E \subseteq K$.
+
+            ($\impliedby$) Suppose $K$ is algebraic over $E$ and $E$ is algebraic over $F$. Then consider any $\alpha \in K$. Because $K$ is algebraic over $E$, there exists $f(x) \coloneqq a_0 + a_1x + \dots + a_n x^n \in E[x]$, where $a_n \neq 0$, such that $f(\alpha) = 0$. [You might just let this $f(x)$ be $\irr(\alpha,E)$, so that $\deg(\alpha,E) = n$.] Since $E$ is algebraic over $F$, $F(a_0,a_1,\dots,a_n)$ is a finite extension of $F$. Note that $F(a_0,a_1,\dots,a_n)$ is a subfield of $E$, and $\alpha$ has some finite degree ($\leq n$) over $E$. Hence, $\alpha$ has some finite degree $r$ over $F(a_0,a_1,\dots,a_n)$. Since $[F(a_0,a_1,\dots,a_n):F] = s$ for some $s \in \Z^+$, $[F(a_0,a_1,\dots,a_n,\alpha):F] = rs$ is finite. Since finite extensions are algebraic extensions, $\alpha$ is algebraic over $F$.
+        \end{proof}
+        \emph{This is a good example that tells us it is often preferable to work with the degrees of finite extensions (which are numbers) than to work with algebraic extensions.}
+        \item Let $E$ be an extension field of $F$, then every $\alpha \in E\backslash \clos{F}_E$ is transcendental over $\clos{F}_E$. Clearly $\alpha \in E$ that is not in $\clos{F}_E$ is not algebraic and thus transcendental over $F$. Essentially we may prove the contraposition that if $\alpha \in E$ is algebraic over $\clos{F}_E$, then $\alpha$ is algebraic over $F$ [because being algebraic is easier to work with].
+        
+        Since $\alpha \in E$ is algebraic over $F$ implies that $\alpha \in E$ is algebraic over $\clos{F}_E \supseteq F$, proving the statement above tells us that 
+        \begin{center}
+            $\alpha \in E$ is algebraic over $F$ iff $\alpha \in E$ is algebraic over $\clos{F}_E$, or equivalently, $\clos{F}_E = \clos{\clos{F}_E}_E$.
+        \end{center}
+        \begin{proof}
+            Suppose $\alpha \in E$ is algebraic over $\clos{F}_E$, then by the previous lemma $\clos{F}_E(\alpha)$ is algebraic over $\clos{F}_E$, and of course $\clos{F}_E$ is algebraic over $F$. By the previous lemma it follows that $\clos{F}_E(\alpha)$ is algebraic over $F$, meaning that $\alpha$ is algebraic over $F$.
+        \end{proof}
+    \end{itemize}
+    \item Let $E$ be an algebraically closed extension field of $F$. Show that the algebraic closure $\clos{F}_E$ of $F$ in $E$ is algebraically closed.
+    \begin{proof}
+        Let $f(x) \in \clos{F}_E[x] \subseteq E[x]$ be nonconstant. We want to show that $f(x)$ has a zero in $\clos{F}_E$.
+        
+        We know $f(x)$ has a zero in $E$ by the definition of an algebraically closed field. Let $\alpha \in E$ such that $f(\alpha) = 0$, then $\alpha$ is algebraic over $F$ (i.e., $\alpha \in \clos{F}_E$) by the preceding lemma, as desired.
+    \end{proof}
+    The proof of the theorem above is quite impressive. First we consider $f(x)$ in $E[x]$ and use the assumption that $E$ is algebraically closed, which gives us its zero $\alpha$ in $E$. Then we consider $f(x)$ in $\clos{F}_E[x]$, which enables us to use the preceding lemma.
+    \begin{itemize}
+        \item Let $F$ be $\Q$ and $E$ be $\C$, then $\clos{\Q}_\C \subsetneq \C$ is an algebraically closed field, which we mentioned above.
+    \end{itemize}
+    \item $\clos{\Q}_\C$ of $\Q$ in $\C$ is not a finite extension of $\Q$.
+    \begin{proof}
+        For all $n \in \Z^+$, $x^n-2$ is irreducible by the Eisenstein criterion. This means that $\Q$ has finite extensions contained in $\C$ of any arbitrary degrees. If $\clos{\Q}_\C$ [the largest algebraic extension of $\Q$ in $\C$] were a finite extension of $\Q$ of degree $r$, there would be no algebraic extensions of $\Q$ in $\C$ of degree $>r$, which leads to contradiction. Therefore $\clos{\Q}_\C$ is not a finite extension of $\Q$.
+    \end{proof}
 \end{itemize}
 
+\subsection{Geometric Constructions}
+This section is a good conclusion to the first six chapters of the book. The impossibility of certain geometric constructions, including the trisection of an arbitrary angle, is show here. Please read the book for the detailed exposition.
+
+\subsection{Finite Fields}
+\begin{itemize}
+    \item Let $E$ be a finite extension of degree $n$ over a finite field $F$. If $|F| = q$, then $|E| = q^n$.
+    \begin{proof}
+        For a basis $\alpha_1,\dots,\alpha_n$ of $E$ over $F$, every element of $E$ can be uniquely expressed as \[b_1\alpha_1 + \dots + b_n\alpha_n\], where the $b_i$'s are in $F$. Each $b_i$ have $q$ choices from $F$, so there are in total $q^n$ elements in $E$.
+    \end{proof}
+    \begin{itemize}
+        \item From \lk{5}{27} on prime fields we know that every finite field $E$ with prime characteristic $p$ is a finite extension of a prime field isomorphic $\Z_p$, by the theorem above $|E| = p^n$ for some $n \in \Z^+$.
+    \end{itemize}
+    \item Let $E$ be a field of $p^n$ elements contained in an algebraic closure $\clos{\Z}_p$ of $\Z_p$. Then the elements of $E$ are precisely the zeros in $\clos{\Z}_p$ of the polynomial $x^{p^n}-x \in \Z_p[x]$.
+\end{itemize}
 \end{document}
