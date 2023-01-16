@@ -1,6 +1,6 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[OT1]{fontenc}
+\usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,tikz-cd,mathtools}
 \usepackage{enumitem}
 \usepackage{fullpage,setspace,microtype,soul}
@@ -8,7 +8,7 @@
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
 \newcommand{\where}{\,|\,}
-\newcommand{\df}[1]{\ul{\textit{#1}}}
+\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\C}{\mathbf{C}}
 \newcommand{\Z}{\mathbf{Z}}
@@ -22,8 +22,10 @@
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
 \newcommand{\nm}[1]{\|#1\|}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\tr}{\operatorname{trace}}
 \newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\dx}{\,dx}
 \newcommand{\LV}{\mathcal{L}(V)}
 \newcommand{\LVW}{\mathcal{L}(V,W)}
 \newcommand{\M}{\mathcal{M}}
@@ -126,7 +128,7 @@
     \begin{itemize}
         \item The fact that the bases of $V$ has a fixed size implies every spanning list or linearly independent list of this size $\d V$ is a basis itself (because the reduction/extension here is the trivial one).
     \end{itemize}
-    \item The subspace dimension $\d U$ is always $\leq$ the whole space dimension $\d V$. To accomplish this we have to resort to the classic procedure: we add vectors from $U$ that are not in the span of the existing ones in $L$. Thus $L$ always remains linearly independent, and it should always be smaller in size than $B$, a spanning list of $U$. Our procedure will eventually terminate and no more vectors can be added to $L$, i.e., all the vectors in $V$ is in $\s(L)$. $L$ is our desired basis, and $|L| = \d U \leq \d V = |B|$.
+    \item The subspace dimension $\d U$ is always $\leq$ the whole space dimension $\d V$. To accomplish this we have to resort to the classic procedure: we add vectors from $U$ that are not in the span of the existing ones in $L$. Thus $L$ always remains linearly independent, and it should always be smaller in size than $B$, a spanning list of $U$. Our procedure will eventually terminate and no more vectors can be added to $L$, i.e., all the vectors in $V$ is in $\s(L)$. $L$ is our desired basis, and $\abs{L} = \d U \leq \d V = \abs{B}$.
     \begin{itemize}
         \item Note it is WRONG to assume that a finite basis of the whole space can always be reduced to a finite basis of the subspace!
         \item Corollary: for FDVS $V$ and its subspace $U$, if the two spaces have the same dimension, then they are the same space. This is an important result useful in many proofs.
@@ -169,13 +171,13 @@
     \end{itemize}
     \item We are now endowed with all the tools to prove the \textbf{rank-nullity theorem}: for a FDVS $V$ and $T$ from $V$ to $W$, $\r T$ is finite-dimensional with $$\d V = \d \n T + \d \r T.$$
     \begin{itemize}
-        \item As always, we need to construct a basis to work with first. Let ${u_1, u_2, \dots, u_n}$ be a basis of $\n T$, and thus can be extended to ${u_1,\dots,u_m,v_1,\dots,v_n}$ a basis of $V$. We prove $T(\{v_1, v_2, \dots, v_n\})$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $Tv_1, \dots,Tv_n$ spans $\r T$ (by the ``easy'' theorem above). To show the elements are linearly independent, consider that $$a_1 T(v_1)+\cdots+a_n T(v_n) = 0$$ implies $a_1v_1+\dots+a_nv_n \in \n T$. Yet we also have $b_1u_1+\dots+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
+        \item As always, we need to construct a basis to work with first. Let $u_1, u_2, \dots, u_n$ be a basis of $\n T$, and thus can be extended to $u_1,\dots,u_m,v_1,\dots,v_n$ a basis of $V$. We prove $T(v_1, v_2, \dots, v_n)$ is a basis for $\r T$. The fact that the $u$'s are in the nullspace shows that $Tv_1, \dots,Tv_n$ spans $\r T$ (by the ``easy'' theorem above). To show the elements are linearly independent, consider that $$a_1 T(v_1)+\cdots+a_n T(v_n) = 0$$ implies $a_1v_1+\dots+a_nv_n \in \n T$. Yet we also have $b_1u_1+\dots+b_nu_n \in \n T$, so we can set the two linear combinations equal. Because the $u$'s and $v$'s are altogether linearly independent, the coefficients $a$'s (and $b$'s) are all 0.
     \end{itemize}
     \item The rank-nullity theorem gives rise to a number of equivalent characterizations regarding injection and surjection. First of all, there is a criterion that says $T$ is injective iff $\n T = {0}$ (proof follows straight from the definition of nullspace). The results below follow.
     \begin{itemize}
         \item A map to a smaller dimensional space cannot be injective because $\d (\n T) > 0$.
         \item A map to a large dimensional space cannot be surjective because $\d (\r T) \leq \d V < \d W$.
-        \item $V$ and $W$ are FDVS of equal dimension, then $$T \text{ is injective } \Longleftrightarrow T \text{ is surjective } \Longleftrightarrow \d \r T = \d V.$$
+        \item $V$ and $W$ are FDVS of equal dimension, then $$T \text{ is injective} \Longleftrightarrow T \text{ is surjective} \Longleftrightarrow \d \r T = \d V.$$
     \end{itemize}
     \item Solving systems of linear equations is a direct application of this.
     \begin{itemize}
@@ -212,10 +214,10 @@
 \begin{itemize}
     \item $T \in \LVW$ is \df{invertible} if there exists $S$ such that $ST = I_V$ and $TS = I_W$. We denote this inverse $S$ by $T^{-1}$. One can show that the inverse must be linear and thus belongs to $\mathcal{L}(W,V)$. By the associativity of linear maps, the inverse is unique.
     \item Invertibility is equivalent to bijectivity between vector spaces. Linear maps are functions, so beyond showing that the inverse is linear, the proof is exactly the same.
-    \item An \df{isomorphism} is an invertible linear map; if an isomorphism exists between two vector spaces, then the vector spaces are \df{isomorphic}.
-    \item Two FDVS over $\F$ are isomorphic iff they have the same dimension. Injection gives us $\text{nullity } = 0$ and surjection gives us $\d \r T = \d W$. The rank-nullity theorem tells us $\d V = \d W$. On the other hand to prove isomorphism, we show $T(a_1v_1+\cdots+a_nv_n) = a_1w_1+\cdots+a_nw_n$ is both injective and surjective, which is not hard.
+    \item A (linear) \df{isomorphism} is an invertible linear map; if an isomorphism exists between two vector spaces, then the vector spaces are (linearly) \df{isomorphic}.
+    \item Two FDVS over $\F$ are isomorphic iff they have the same dimension. Injection gives us $\d \n = 0$ and surjection gives us $\d \r T = \d W$. The rank-nullity theorem tells us $\d V = \d W$. On the other hand to prove isomorphism, we show $T(a_1v_1+\cdots+a_nv_n) = a_1w_1+\cdots+a_nw_n$ is both injective and surjective, which is not hard.
     \begin{itemize}
-        \item The theorem above implies $n$-dimensional VS is always isomorphic to $\F^n$.
+        \item The theorem above implies vector spaces of dimension $n$ are always isomorphic to $\F^n$.
     \end{itemize}
     \item Now we show the isomorphism between a linear map and its corresponding matrix. Given ordered bases $\bv$ of $V$ and $w_1,w_2,\dots,w_m$ of $W$, then $\M$ is a function from $\LVW$ to $\F^{m,n}$. As we have noted earlier $\M$ is linear. Thus, it suffices to show that $\M$ is bijective.
     \begin{itemize}
@@ -245,16 +247,16 @@
             \end{tikzcd}
         \end{equation*}
         For a vector $v \in V$, its image $\M(v)$ under the isomorphism $\M$ of $V$ belongs to $\F^{n,1}$. Matrix multiplication with $\M(T)$ gives us $\M(Tv) \in \F^{m,1}$, which we identify with $Tv$ under the isomorphism $\M$ of $W$. This is why a linear map can be described entirely by its matrix representation.
-        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then the linear map is equivalent to matrix multiplication on the left. Think about the Jacobian matrix representation of the total derivative in the Euclidean space. Left-multiplication by a matrix corresponds to the linear \emph{transformation} of a vector.
+        \item If $V = \F^n$ and $W = \F^m$ and we are using the canonical bases, then every linear map is equivalent to a unique matrix multiplication on the left. \emph{Every matrix-left-multiplication is a linear map, and every linear map is a matrix-left-multiplication.} Think about the Jacobian matrix representation of the total derivative in the Euclidean space. Left-multiplication by a matrix corresponds to the linear \emph{transformation} of a vector.
     \end{itemize}
     \item A \df{linear operator} is a linear map from a VS to itself. The notation $\LV$ stands for $\mathcal{L}(V,V)$.
-    \item Suppose $V$ is FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.) This is true for functions $f:S \to S$ (where $S$ is finite) in general, but for linear maps the proof is likely to be rather simple:
+    \item Suppose $V$ is a FDVS and $T \in \LV$, then (a) $T$ is invertible iff (b) $T$ is injective iff (c) $T$ is surjective. (This is not true for infinite-dimensional vector space.) This is true for functions $f:S \to S$ (where $S$ is finite) in general, but for linear maps the proof is likely to be rather simple:
         
     (a)$\implies$(b) we proved earlier.
         
     (b)$\implies$(c) by checking the rank-nullity theorem. $T$ being injective means $\d \n T = 0$, which implies $\d \r T = \d V$.
         
-    (c)$\implies$(a) by showing $T$ is injective, as $\operatorname{nullity} T = \d V - \operatorname{rank} T$, which is 0.
+    (c)$\implies$(a) by showing $T$ is injective, as $\d \n T = \d V - \d \r T$, which is 0.
 \end{itemize}
 
 \subsection{Products and Quotients of Vector Spaces}
@@ -366,13 +368,15 @@
         We may formulate our question this way: for $T \in \LVW$ and $\phi \in V'$ with $\phi(\n T) = 0$, can we always find a $\psi \in W'$ such that $\phi = \psi \circ T$? This turns out to be true if we assume the axiom of choice from set theory, which has important corollaries in the theory of infinite-dimensional vector spaces. We will not get into details here, but it is interesting to know about this.
     \end{itemize}
     \item The corollary of the previous claims are the following:
-    $$T \text{ is surjective} \iff T' \text{ is injective} \quad \text{and} \quad T \text{ is injective} \iff T' \text{ is surjective}.$$ Proof of this is quite standard, and we show the first one here only: $$T \in \LVW \text{ surjective} \iff \r T = W \iff (\r T)^0 = {0} \iff \n T' = {0} \iff T' \text{ injective}.$$
-    
+    $$T \text{ is surjective} \iff T' \text{ is injective} \quad \text{and} \quad T \text{ is injective} \iff T' \text{ is surjective}.$$ Proof of this is quite standard, and we show the first one here only: 
+    \begin{align*}
+        T \in \LVW \text{ surjective} & \iff \r T = W \\ & \iff (\r T)^0 = {0} \iff \n T' = {0} \iff T' \text{ injective}.
+    \end{align*}
     \item The \df{row rank} and \df{column rank} of matrix $A$ are defined to be the dimension of the span of the rows of $A$ in $\F^{1,n}$ and of the columns of $A$ in $\F^{m,1}$, respectively. As we know from lower-division matrix algebra, they are the same and represent the number of pivots in a reduced row echelon form of a matrix. We now prove this fact with the tools we have.
     
-    \item $\M(T') = (\M(T))^t$. Consider the dual basis $\psi_j$ ($1 \leq j \leq m$) of $W'$ and $\phi_j$ ($1 \leq k \leq n$) of $V'$. Then $$T'(\psi_j) = \sum_{r=1}^n C_{r,j}\phi_r,$$ which we evaluate at $v_k$: $$(\psi_j \circ T)(v_k) = \sum_{r=1}^n C_{r,j}\phi_r(v_k) = C_{k,j}.$$ On the other hand, we have $$(\psi_j)(Tv_k) = \psi_j(\sum_{r=1}^mA_{r,k}w_r) = \sum_{r=1}^m A_{r,k}\psi_j(w_r) = A_{j,k}.$$
+    \item $\M(T') = (\M(T))^t$. Consider the dual basis $\psi_j$ ($1 \leq j \leq m$) of $W'$ and $\phi_j$ ($1 \leq k \leq n$) of $V'$. Then $$T'(\psi_j) = \sum_{r=1}^n C_{r,j}\phi_r,$$ which we evaluate at $v_k$: $$(\psi_j \circ T)(v_k) = \sum_{r=1}^n C_{r,j}\phi_r(v_k) = C_{k,j}.$$ On the other hand, we have $$(\psi_j)(Tv_k) = \psi_j\left(\sum_{r=1}^mA_{r,k}w_r\right) = \sum_{r=1}^m A_{r,k}\psi_j(w_r) = A_{j,k}.$$
     
-    \item First, $\d \r T = \text{column rank of } \M(T)$. From bases $\bv$ and $w_1,\dots,w_m$ of $V$ and $W$, we have $\s(\{Tv_1,\dots,Tv_n\})$ is isomorphic to $\s(\{\M(Tv_1),\dots,\M(Tv_n)\})$ under the isomorphism $\M$. Thus, the two VS have the same dimensions, with $\d \s(\{\M(Tv_1),\dots,\M(Tv_n)\}) = $ column rank of $\M(T)$. Recall that $\s(\{Tv_1,\dots,Tv_n\}) = \r T$, thus $\d \r T = $ column rank of $\M(T)$, as desired.
+    \item First, $\d \r T = \text{column rank of } \M(T)$. From bases $\bv$ and $w_1,\dots,w_m$ of $V$ and $W$, we have $\s(Tv_1,\dots,Tv_n)$ is isomorphic to $\s(\M(Tv_1),\dots,\M(Tv_n))$ under the isomorphism $\M$. Thus, the two VS have the same dimensions, with \[\d \s(\M(Tv_1),\dots,\M(Tv_n)) = \text{column rank of } \M(T).\] Recall that $\s(Tv_1,\dots,Tv_n) = \r T$, thus $\d \r T = $ column rank of $\M(T)$, as desired.
     
     \item For $A \in \F^{m,n}$, define $T \in \LVW$ as the left-multiplication by $A$ map (i.e., $Tx = Ax$). Then $A = \M(T)$ with respect to the canonical bases. It follows that
     \begin{align*}
@@ -405,7 +409,7 @@
     Define $h = f-g$, and then we have $\forall z\in\F, h(z) = 0$. Suppose $h$ is a nonzero polynomial of degree $n$, then by the $h$ has at most $n$ zeros by the theorem above, yet $\F$ is an infinite field. Contradiction! Thus $h = f-g$ is the zero polynomial, and $f = g$ as a result.
     
     \begin{itemize}
-        \item In the case of $\F = \C$ or $\R$, the book gives another proof of the contraposition that if one coefficient out of $$h(z) = a_0+a_1z+\dots+a_mz^m$$ is not zero, then $h(z) \not= 0$ for some $z \in \F$. Assume $m \not= 0$ and pick $$z = \frac{|a_0| + \dots + |a_{m-1}|}{|a_m|}+1 \geq 1.$$ Thus, $z^j \leq z^{m-1}$ for all $j \leq m-1$. By triangle inequality and $|a_m|z > |a_0|+ \dots + |a_{m-1}|$, $$|a_0+a_1z+\dots+a_{m-1}z^{m-1}| \leq (|a_0|+\dots+|a_{m-1}|)z^{m-1}< |a_m z^m|.$$ Therefore $a_0+a_1z+\dots+a_{m-1}z^{m-1} \not= -a_m z^m$.
+        \item In the case of $\F = \C$ or $\R$, the book gives another proof of the contraposition that if one coefficient out of $$h(z) = a_0+a_1z+\dots+a_mz^m$$ is not zero, then $h(z) \not= 0$ for some $z \in \F$. Assume $m \not= 0$ and pick $$z = \frac{\abs{a_0} + \dots + \abs{a_{m-1}}}{\abs{a_m}}+1 \geq 1.$$ Thus, $z^j \leq z^{m-1}$ for all $j \leq m-1$. By triangle inequality and $\abs{a_m}z > \abs{a_0} + \dots + \abs{a_{m-1}}$, \[\abs{a_0+a_1z+\dots+a_{m-1}z^{m-1}} \leq (\abs{a_0}+\dots+\abs{a_{m-1}})z^{m-1} < \abs{a_m z^m}.\] Therefore $a_0+a_1z+\dots+a_{m-1}z^{m-1} \not= -a_m z^m$.
     \end{itemize}
     
     \item The proof of the fundamental theorem of algebra is left to a complex analysis class. Every nonconstant polynomial on $\C$ has a zero, which directly implies that a polynomial $p$ of degree $m$ has $m$ nondistinct roots, which we sketch below.
@@ -427,11 +431,11 @@
         p(x)=c(x-\lambda_1)\cdots(x-\lambda_m)(x^2+b_1x+c_1)\cdots(x^2+b_Mx+c_M),
     \end{equation} where the $c$ at the front, the $\lambda$'s, and the $b$'s and $c$'s at the end are all reals and each quadratic factors have negative discriminant.
     \begin{itemize}
-        \item (1) would be obviously true if all zeros are reals by the unique factorization theorem. Suppose $p$ has one pair of nonreal complex zeros $\lambda$ and $\conj{\lambda}$, then $$p(x) = (x-\lambda)(x-\conj{\lambda})q(x) = (x^2-2(\Re{\lambda})x+|\lambda|^2)q(x).$$ What we want to show is that such $(x - \lambda)$ appear exactly the same number of times $(x - \conj{\lambda})$ in the factorization.
+        \item (1) would be obviously true if all zeros are reals by the unique factorization theorem. Suppose $p$ has one pair of nonreal complex zeros $\lambda$ and $\conj{\lambda}$, then $$p(x) = (x-\lambda)(x-\conj{\lambda})q(x) = (x^2-2(\Re{\lambda})x+\abs{\lambda}^2)q(x).$$ What we want to show is that such $(x - \lambda)$ appear exactly the same number of times $(x - \conj{\lambda})$ in the factorization.
         
         Our idea is to use induction on the degree of $p$. We assume real nonconstant polynomials of degree less than $\deg p$ can be factorized according to (1). If we prove that $q$ (of degree $\deg p-2$) has real coefficients, then $p$ can be factorized according to (1).
         
-        Now for all $x \in \R$, $$q(x) = \frac{p(x)}{x^2-2(\Re{\lambda})x+|\lambda|^2}.$$ Therefore, for all $x \in \R$, $q(x) \in \R$. If we write $q(x) = a_0+a_1x+\dots+a_{n-2}x^{n-2}$ ($n = \deg p$ and the $a$'s are complex-valued), then taking the imaginary parts on both sides gives us $$0 = (\Im a_0)+(\Im a_1)x+\dots+(\Im a_{n-2})x^{n-2}$$ for all $x \in \R$. Hence the imaginary-part coefficients must all be $0$, telling us $q$ is of real coefficients.
+        Now for all $x \in \R$, $$q(x) = \frac{p(x)}{x^2-2(\Re{\lambda})x+\abs{\lambda}^2}.$$ Therefore, for all $x \in \R$, $q(x) \in \R$. If we write $q(x) = a_0+a_1x+\dots+a_{n-2}x^{n-2}$ ($n = \deg p$ and the $a$'s are complex-valued), then taking the imaginary parts on both sides gives us $$0 = (\Im a_0)+(\Im a_1)x+\dots+(\Im a_{n-2})x^{n-2}$$ for all $x \in \R$. Hence the imaginary-part coefficients must all be $0$, telling us $q$ is of real coefficients.
         
         Now we have a factorization of $p$ given by $(1)$, and we want to show its uniqueness. For the quadratic factors with negative discriminants at the end, each can be uniquely factorized into $(x-\lambda_j)(x-\conj{\lambda_j})$. Therefore, if we have two different factorizations of $p$ of the form in (1), then we would have two different standard factorizations ($\star$) of $p$ over $\C$ (as one of factors over $\R$ being different implies that one of the factors over $\C$ is different). This contradicts the unique factorization theorem.
     \end{itemize}
@@ -452,7 +456,9 @@
     \begin{itemize}
         \item A special case: $T$ is not invertible iff 0 is an eigenvalue of $T$. This will become useful in Chapter 8.
     \end{itemize}
-    \item Eigenvectors corresponding to distinct eigenvalues are linearly independent. The usual proof of this starts with 2 distinct eigenvalues and proceeds with induction, but the book uses the well-ordering principle instead. Suppose the $\bv$ corresponding to eigenvectors $\lambda_1,\dots,\lambda_n$ are linearly dependent, then at $k \leq n$ we have $v_k \in \s(v_1,\dots,v_{k-1})$ with $v_1,\dots,v_{k-1}$ being linearly dependent. Thus, 
+    \item Eigenvectors corresponding to distinct eigenvalues are linearly independent. The usual proof of this starts with 2 distinct eigenvalues and proceeds with induction, but the book uses the well-ordering principle instead.
+    
+    Suppose the $\bv$ corresponding to eigenvectors $\lambda_1,\dots,\lambda_n$ are linearly dependent, then at $k \leq n$ we have $v_k \in \s(v_1,\dots,v_{k-1})$ with $v_1,\dots,v_{k-1}$ being linearly dependent. Thus, 
     \begin{equation}
         v_k = a_1 v_1 + \dots + a_{k-1}v_{k-1},
     \end{equation}
@@ -562,8 +568,8 @@
 \subsection{Inner Products and Norms}
 \begin{itemize}
     \item For $x=(x_1,\dots,x_n) \text{ and } y=(y_1,\dots,y_n) \in \R^n$ (the real $n$-dimensional space), the \df{dot product} $x \cdot y \coloneqq x_1y_1+\dots+x_ny_n$ is a scalar in $\R$. The norm $\|x\|$ on $\R^n$ is usually given by $\sqrt{x_1^2+\dots+x_n^2}$, which is the square root of the dot product of $x$ with itself.
-    \item The usual norm $\|z\| \coloneqq  \sqrt{|z_1|^2+\dots+|z_n|^2}$ on $\C^n$ (the complex $n$-dimension space) is also a scalar in $\R$.
-    \item Generally on both real and complex $n$-dimensional spaces, we define the \df{Euclidean inner product} by $$\inp{(w_1,\dots,w_n)}{(z_1,\dots,z_n)} =  w_1\conj{z_1}+\dots+w_n\conj{z_n}.$$ This generalizes the definition of the dot product on $\R^n$. Moreover, we have $$\inp{(z_1,\dots,z_n)}{(z_1,\dots,z_n)} = z_1\conj{z_1}+\dots+z_n\conj{z_n} = |z_1|^2 + \dots + |z_n|^2 = \|z\|^2,$$ so that $\|z\|$ becomes the square root of the inner product of $z$ with itself.
+    \item The usual norm $\|z\| \coloneqq  \sqrt{\abs{z_1}^2+\dots+\abs{z_n}^2}$ on $\C^n$ (the complex $n$-dimension space) is also a scalar in $\R$.
+    \item Generally on both real and complex $n$-dimensional spaces, we define the \df{Euclidean inner product} by $$\inp{(w_1,\dots,w_n)}{(z_1,\dots,z_n)} =  w_1\conj{z_1}+\dots+w_n\conj{z_n}.$$ This generalizes the definition of the dot product on $\R^n$. Moreover, we have $$\inp{(z_1,\dots,z_n)}{(z_1,\dots,z_n)} = z_1\conj{z_1}+\dots+z_n\conj{z_n} = \abs{z_1}^2 + \dots + \abs{z_n}^2 = \|z\|^2,$$ so that $\|z\|$ becomes the square root of the inner product of $z$ with itself.
     
     We regard $\R^n$ and $\C^n$ by default as the $n$-dimensional real and complex Euclidean spaces endowed with the Euclidean inner product. 
     
@@ -592,21 +598,21 @@
         \item The method of orthogonal decomposition is extended to inner product spaces. Suppose $u,v \in V$ with $v$ being nonzero, we wish write $u$ as the sum of scalar multiple of $v$ and another vector $w$ that is orthogonal to $v$.
         
         Basically we want to choose a scalar $c \in \F$ such that $$0 = \inp{u-cv}{v} = \inp{u}{v} - c\|v\|^2.$$ Let $c = \frac{\inp{u}{v}}{\|v\|^2}$ and we have $w = u - cv$ and we have our orthogonal decomposition $$\inp{w}{v} = 0 \quad \text{and} \quad u = cv+w.$$
-        \item The well-known Cauchy-Schwarz inequality states that $|\inp{u}{v}| \leq \|u\|\|v\|$, which reaches equality iff one of $u,v$ is a scalar multiple of the other. This can be proved using the orthogonal decomposition theorem we have above, but we choose to use the more standard method. When $v = 0$, the result is immediate. By the equality condition given, for $v \not= 0$ we may consider $$0 \leq \|u - cv\|^2 = \inp{u}{u} - \conj{c}\inp{u}{v} - c\inp{v}{u} + c\conj{c}\inp{v}{v}.$$ Set $c = \nm{\inp{u}{v}/\inp{v}{v}}$, then the RHS of the ``$=$'' becomes $ \nm{u}^2 - \frac{|\inp{u}{v}|^2}{\nm{v}^2}$, as desired. The equality is achieved if and only if $u = cv$ or $v = 0$.
+        \item The well-known Cauchy-Schwarz inequality states that $\abs{\inp{u}{v}} \leq \|u\|\|v\|$, which reaches equality iff one of $u,v$ is a scalar multiple of the other. This can be proved using the orthogonal decomposition theorem we have above, but we choose to use the more standard method. When $v = 0$, the result is immediate. By the equality condition given, for $v \not= 0$ we may consider $$0 \leq \|u - cv\|^2 = \inp{u}{u} - \conj{c}\inp{u}{v} - c\inp{v}{u} + c\conj{c}\inp{v}{v}.$$ Set $c = \nm{\inp{u}{v}/\inp{v}{v}}$, then the RHS of the ``$=$'' becomes $ \nm{u}^2 - \frac{\abs{\inp{u}{v}}^2}{\nm{v}^2}$, as desired. The equality is achieved if and only if $u = cv$ or $v = 0$.
         
         Two special cases should be kept in mind.
         \begin{itemize}
-            \item On real numbers, we have $|x_1y_1+\dots+x_ny_n|^2 \leq (x_1+\dots+x_n)^2(y_1+\dots+y_n)^2$.
-            \item One can define an inner product on function spaces such as the vector space $V$ of continuous functions from $[a,b]$ to $\F$. One can define the inner product on $V$ as such: $$\inp{f}{g} = \int_a^b f(x)\conj{g(x)} dx.$$ This is an important inner product that will be useful in later courses. If $\F = \R$, then we simply have $$\inp{f}{g} = \int_a^b f(x)g(x) dx.$$ By the Cauchy-Schwarz inequality, we then have (over $\R$) $$\left|\int_a^b f(x)g(x)dx\right|^2 \leq \left(\int_a^b (f(x))^2 dx \right) \left(\int_a^b (g(x))^2 dx \right).$$
+            \item On real numbers, we have $\abs{x_1y_1+\dots+x_ny_n}^2 \leq (x_1+\dots+x_n)^2(y_1+\dots+y_n)^2$.
+            \item One can define an inner product on function spaces such as the vector space $V$ of continuous functions from $[a,b]$ to $\F$. One can define the inner product on $V$ as such: $$\inp{f}{g} = \int_a^b f(x)\conj{g(x)} \dx.$$ This is an important inner product that will be useful in later courses. If $\F = \R$, then we simply have $$\inp{f}{g} = \int_a^b f(x)g(x) \dx.$$ By the Cauchy-Schwarz inequality, we then have (over $\R$) \[\left\lvert\int_a^b f(x)g(x) \dx\right\rvert ^2 \leq \left(\int_a^b (f(x))^2 \dx \right) \left(\int_a^b (g(x))^2 \dx \right).\]
         \end{itemize}
         \item The triangle inequality states that $\|u+v\| \leq \|u\|+\|v\|$, which reaches equality iff one of $u,v$ is a nonnegative real multiple of the other.
         To prove, expanding the LHS gives us
         \begin{align*}
-            \inp{u}{u}+\inp{v}{v}+\inp{u}{v}+\conj{\inp{u}{v}} & = \nm{u}^2+\nm{v}^2+2 \Re{\inp{u}{v}} \\ & \leq \nm{u}^2+\nm{v}^2+2|\inp{u}{v}| \\ & \leq \nm{u}^2+\nm{v}^2+2\nm{u}\nm{v} = (\nm{u}+\nm{v})^2.
+            \inp{u}{u}+\inp{v}{v}+\inp{u}{v}+\conj{\inp{u}{v}} & = \nm{u}^2+\nm{v}^2+2 \Re{\inp{u}{v}} \\ & \leq \nm{u}^2+\nm{v}^2+2\abs{\inp{u}{v}} \\ & \leq \nm{u}^2+\nm{v}^2+2\nm{u}\nm{v} = (\nm{u}+\nm{v})^2.
         \end{align*}
-        Taking the square root gives us the result. To have equality in the third row of our derivation, we need $|\inp{u}{v}| = \nm{u}\nm{v}$, which implies the equality in the second row because the norm is a real number. Therefore, the triangle inequality achieves equality iff $|\inp{u}{v}| = \nm{u}\nm{v}$.
+        Taking the square root gives us the result. To have equality in the third row of our derivation, we need $\abs{\inp{u}{v}} = \nm{u}\nm{v}$, which implies the equality in the second row because the norm is a real number. Therefore, the triangle inequality achieves equality iff $\abs{\inp{u}{v}} = \nm{u}\nm{v}$.
         
-        Note that $|\inp{u}{v}| = \nm{u}\nm{v}$ implies $u=cv$ or $v=0$ by the Cauchy-Schwarz inequality. Also, it is easy to show $u=cv$ or $v=0$ implies $|\inp{u}{v}| = \nm{u}\nm{v}$. Thus, the triangle inequality achieves equality iff one of $u,v$ is a scalar multiple of the other.
+        Note that $\abs{\inp{u}{v}} = \nm{u}\nm{v}$ implies $u=cv$ or $v=0$ by the Cauchy-Schwarz inequality. Also, it is easy to show $u=cv$ or $v=0$ implies $\abs{\inp{u}{v}} = \nm{u}\nm{v}$. Thus, the triangle inequality achieves equality iff one of $u,v$ is a scalar multiple of the other.
         \item The parallelogram equality says that $\|u+v\|^2+\|u-v\|^2 = 2(\|u\|^2+ \|v\|^2)$. To prove, expand the LHS and after some cancellations, we get the RHS.
     \end{itemize}
 \end{itemize}
@@ -626,17 +632,17 @@
     \begin{itemize}
         \item Note that the canonical basis in $\F^n$ is orthonormal.
     \end{itemize}
-    \item Given an orthonormal list $e_1,\dots,e_n$, by repeated use of the Pythagorean theorem, we get $$\nm{a_1 e_1 + \cdots + a_n e_n}^2 = |a_1|^2 + \cdots + |a_n|^2$$ for all scalars $a_1, \dots, a_m$.
+    \item Given an orthonormal list $e_1,\dots,e_n$, by repeated use of the Pythagorean theorem, we get $$\nm{a_1 e_1 + \cdots + a_n e_n}^2 = \abs{a_1}^2 + \cdots +\abs{a_n}^2$$ for all scalars $a_1, \dots, a_m$.
     \item It follows from the theorem above that if we set $a_1 e_1 + \cdots + a_n e_n = 0$, then all the $a_i$'s must be 0, showing that an orthonormal list of vectors $e_1,\dots,e_n$ are linearly independent. Therefore, an orthonormal list of length $\d V$ is an \df{orthonormal basis}, i.e., an orthonormal list (set) that is also a basis.
     \item Let $u_1,\dots,u_n$ be a basis of a vector space $U$, we may endow a natural inner product on $U$ (which you can verify) given by $$\inp{a_1u_1+\dots+a_nu_n}{b_1u_1+\dots+b_nu_n}=a_1b_1+\dots+a_nb_n.$$ What is special about this inner product is that $\inp{u_i}{u_i} = 1$ for all $i$, so that the list of $u_i$'s becomes an orthonormal basis of the inner product space $U$.
     \item Now any $v \in V$ can be written as a unique linear combination of the orthonormal basis vectors $e_1,\dots,e_n$. In fact, we have $$v = \inp{v}{e_1}e_1 + \dots + \inp{v}{e_n}e_n.$$
-    Consider $v = a_1 e_1 + \dots + a_n e_n$ and take an inner product with $e_j$ on both sides. Then, $\inp{v}{a_j} = a_j$, as desired. Note that $\nm{v}^2 = |\inp{v}{e_1}|^2 + \dots + |\inp{v}{e_n}|^2$.
+    Consider $v = a_1 e_1 + \dots + a_n e_n$ and take an inner product with $e_j$ on both sides. Then, $\inp{v}{a_j} = a_j$, as desired. Note that $\nm{v}^2 = \abs{\inp{v}{e_1}}^2 + \dots + \abs{\inp{v}{e_n}}^2$.
     \begin{itemize}
         \item There is an important corollary to the theorem above. For an orthonormal basis of $V$ $e_1,\dots,e_n$, every $$Te_k = \inp{Te_k}{e_1}e_1 + \dots + \inp{Te_k}{e_n}e_n.$$ Therefore, we have $\M(T)_{j,k} = \inp{Te_k}{e_j}$ for the matrix representation of $T$ with respect to $e_1,\dots,e_n$.
     \end{itemize}
     \item The Gram-Schmidt process can now be proved. For a linearly independent list $v_1,\dots,v_n$ in $V$, define $e_1 = \frac{v_1}{\nm{v_1}}$, and then for $2 \leq j \leq n$, define $e_j$ inductively by $$e_j = \frac{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}{\nm{v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}}}.$$ Then for any $j \leq m$, $e_1, \dots, e_j$ is still orthonormal and has the same span as $v_1,\dots,v_j$. 
     
-    We use induction for this proof. $j = 1$ obviously holds. Suppose for $1 < j \leq m$ we already have $$\s(v_1,\dots,v_{j-1}) = \s(e_1,\dots,e_{j-1}).$$ By linear independence of the list of $v$'s, $v_j \notin \s(v_1,\dots,v_{j-1})$ and thus $v_j \notin \s(e_1,\dots,e_{j-1})$. Therefore, $v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}$ is nonzero, and we can indeed divide it by its norm to get a new vector $e_j$ with norm 1.
+    We use induction for this proof. $j = 1$ obviously holds. Suppose for $1 < j \leq m$ we already have \[\s(v_1,\dots,v_{j-1}) = \s(e_1,\dots,e_{j-1}).\] By the linear independence of the list of $v$'s, $v_j \notin \s(v_1,\dots,v_{j-1})$ and thus \[v_j \notin \s(e_1,\dots,e_{j-1}).\] Therefore, $v_j - \inp{v_j}{e_1}e_1 - \dots - \inp{v_j}{e_{j-1}}e_{j-1}$ is nonzero, and we can indeed divide it by its norm to get a new vector $e_j$ with norm 1.
     
     For $1 \leq k < j$, we can show that the new vector $e_j$ is orthogonal to the existing $e_k$'s, as
     \begin{align*}
@@ -755,7 +761,7 @@
         \item $\r T^* = (\n T)^\perp$. [take the orthogonal complement of both sides in (d)]
     \end{enumerate}
     For (a), $w \in \n T^* \iff T^*(w) = 0 \iff \inp{v}{T^*(w)} = 0$ for all $v \in V \iff \inp{Tv}{w} = 0$ for all $v \in V \iff w \in (\r T)^\perp$.
-    \item With respect to an orthonormal basis $e_1,\dots,e_n$ of $V$ and an orthonormal basis $f_1,\dots,f_m$ of $W$, $\M(T^*,(f_1,\dots,f_m),(e_1,\dots,e_n))$ is just the conjugate transpose of $\M(T,(e_1,\dots,e_n),(f_1,\dots,f_m))$. (If we are considering operators $T \in \LV$ instead, by default we use the same basis on the domain $V$ and on the range of $V$.)
+    \item With respect to an orthonormal basis $e_1,\dots,e_n$ of $V$ and an orthonormal basis $f_1,\dots,f_m$ of $W$, $\M(T^*,(f_1,\dots,f_m),(e_1,\dots,e_n))$ is the conjugate transpose of $\M(T,(e_1,\dots,e_n),(f_1,\dots,f_m))$. (If we are considering operators $T \in \LV$ instead, by default we use the same basis on the domain $V$ and on the range of $V$.)
     
     The entries in $k$-th column of $\M(T)$ are exactly the coefficients in
     $$\inp{Te_k}{f_1}f_1+\dots+\inp{Te_k}{f_m}f_m = Te_k.$$ Therefore, $\M(T)_{j,k} = \inp{Te_k}{f_j}$. Similarly we can conclude that $\M(T^*)_{k,j} = \inp{T^*f_j}{e_k} = \inp{f_j}{Te_k}$, where $1 \leq j \leq m$ and $1 \leq k \leq n$. It is clear that $\M(T)$ and $\M(T^*)$ (with switched bases) are conjugate transposes of one another.
@@ -828,13 +834,13 @@ Now we extend the diagonalizability theorem proved in Chapter 5 from general vec
             0 & & a_{nn}
         \end{bmatrix}.
     \end{equation*}
-    The idea is to show all the entries above the diagonal are 0. From the first column of $\M(T)$ we have $\nm{Te_1}^2=|a_{11}|^2$, while from the first column of $\M(T^*)$ (the conjugate of the first row of $\M(T)$) we have $$\nm{T^*e_1}^2=|a_{11}|^2+\dots+|a_{1n}|^2.$$ Since $\nm{Te_1}^2 = \nm{T^*e_1}^2$, $a_{12},\dots,a_{1n}$ are all 0.
+    The idea is to show all the entries above the diagonal are 0. From the first column of $\M(T)$ we have $\nm{Te_1}^2=\abs{a_{11}}^2$, while from the first column of $\M(T^*)$ (the conjugate of the first row of $\M(T)$) we have $$\nm{T^*e_1}^2=\abs{a_{11}}^2+\dots+\abs{a_{1n}}^2.$$ Since $\nm{Te_1}^2 = \nm{T^*e_1}^2$, $a_{12},\dots,a_{1n}$ are all 0.
     
     We can proceed in this way to show that $a_{23},\dots,a_{2n}$ are also all 0 and so on. Therefore, $\M(T)$ is indeed a diagonal matrix, as desired.
 \end{itemize}
 \textit{Remark.} Schur's theorem gives us a shortcut to prove (a)$\implies$(c) by comparing $\M(T)$ and $\M(T^*)$. By contrast, in the spectral theorem for $T$ on real inner product spaces, (a)$\implies$(c) is not easy to prove because in the first place we do not know over $\R$ (unlike over $\C$) whether $T$ has an upper-triangular matrix with respect to some basis of $V$. Neither do we know whether any eigenvalue exists for $T \in \LV$ over $\R$.
 
-Therefore, a stronger condition on $T$ is required for the similar spectral theorem on real inner product spaces, and as you may guess, $T$ is now required to be self-adjoint in (a). We leave (b) and (c) unchanged in the real spectral theorem. We can show if $T$ is self-adjoint, then $T$ must have an eigenvalue, from which we can prove that (a)$\implies$(b).
+Therefore, a stronger condition on $T$ is required for the similar spectral theorem on real inner product spaces, and as you may guess, $T$ is now required to be self-adjoint in (a). We leave (b) and (c) unchanged in the real spectral theorem. We can show that if $T$ is self-adjoint, then $T$ must have an eigenvalue, from which we can prove that (a)$\implies$(b).
     \begin{itemize}
     \item Self-adjoint operators has at least an eigenvalue. Recall how we proved operators on complex vector spaces always have an eigenvalue in \lk{5}{2}. The approach is exactly the same, but we use the polynomial factorization theorem over $\R$ instead of $\C$.
     \begin{itemize}
@@ -843,11 +849,12 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
             \inp{(T^2+bT+CI)v}{v} & = \inp{T^2v}{v}+b\inp{Tv}{v}+c\inp{v}{v} \\
             & = \inp{Tv}{Tv}+b\inp{Tv}{v}+c\inp{v}{v} \\
             & \geq \nm{Tv}^2+\nm{v}^2 -b\nm{Tv}\nm{v} \quad \text{by Cauchy-Schwarz}\\
-            & = \left(\nm{Tv}-\frac{|b|\nm{v}}{2}\right)^2 + \left(c - \frac{b^2}{4})\right)\nm{v}^2 > 0,
+            & = \left(\nm{Tv}-\frac{\abs{b}\nm{v}}{2}\right)^2 + \left(c - \frac{b^2}{4})\right)\nm{v}^2 > 0,
         \end{align*}
         showing that $(T^2+bT+CI)v \not= 0$ for all nonzero vector $v$ and is thus injective.
     \end{itemize}
-    Once we show $T^2+bT+CI$ is injective, for any $v \in V$,
+    
+    Once we have shown $T^2+bT+CI$ is injective, for any $v \in V$,
     \begin{align*}
         0 & = a_0+a_1Tv+\dots+a_nT^nv \\
         & = (a_0+a_1T+a_nT^n) v \\
@@ -927,7 +934,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
     \item There are many equivalent characterizations of isometries. The following are equivalent for $S \in \LV$:
     \begin{enumerate}[label=(\alph*)]
     \item $S$ is an isometry;
-    \item $\inp{Su}{Sv} = \inp{u}{v}$ for all $u,v \in V$;
+    \item $\inp{Su}{Sv} = \inp{u}{v}$ for all $u,v \in V$; (\emph{This says that norm-preserving is equivalent to inner-product-preserving.})
     \item $Se_1,\dots,Se_n$ is orthonormal for every orthonormal list of vectors $e_1,\dots,e_n$ in $V$;
     \item there exists an orthonormal basis $e_1,\dots,e_n$ of $V$ such that $Se_1,\dots,Se_n$ is orthonormal;
     \item $S^*S = I$;
@@ -959,10 +966,10 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
     \end{itemize}
     \item If there is an orthonormal basis $e_1,\dots,e_n$ of $V$ all being eigenvectors of $S \in \LV$, with corresponding eigenvalues $\lambda_1,\dots,\lambda_n$ all having absolute value 1, then $S$ must be an isometry.
     
-    First, $Sv = \inp{v}{e_1}Se_1 + \dots + \inp{v}{e_n}Se_n = \lambda_1\inp{v}{e_1}e_1 + \dots + \lambda_n\inp{v}{e_n}$. Since the $\lambda$'s all have absolute value 1, $\nm{Sv} = |\inp{v}{e_1}|^2 + \dots + |\inp{v}{e_n}|^2 = \nm{v}^2$.
+    First, $Sv = \inp{v}{e_1}Se_1 + \dots + \inp{v}{e_n}Se_n = \lambda_1\inp{v}{e_1}e_1 + \dots + \lambda_n\inp{v}{e_n}$. Since the $\lambda$'s all have absolute value 1, $\nm{Sv} = \abs{\inp{v}{e_1}}^2 + \dots + \abs{\inp{v}{e_n}}^2 = \nm{v}^2$.
     \item If we let $V$ be a \textbf{complex} inner product space, then the above example $S$ is the only type of isometry allowed.
     
-    For an isometry $S \in \LV$ over $\C$, since $S$ is normal, by the complex spectral theorem we know that there is an orthonormal basis $e_1,\dots,e_n$ consisting of eigenvectors of $S$. For every $j$ between 1 and $n$, the eigenvalue $\lambda_j$ corresponding to $e_j$ has $$|\lambda_j|=\nm{\lambda_je_j}=\nm{Se_j}=\nm{e_j}=1.$$
+    For an isometry $S \in \LV$ over $\C$, since $S$ is normal, by the complex spectral theorem we know that there is an orthonormal basis $e_1,\dots,e_n$ consisting of eigenvectors of $S$. For every $j$ between 1 and $n$, the eigenvalue $\lambda_j$ corresponding to $e_j$ has \[\abs{\lambda_j}=\nm{\lambda_je_j}=\nm{Se_j}=\nm{e_j}=1.\]
     Therefore, under $\C$, $S$ is an isometry is equivalent to saying that there is an orthonormal basis of $V$ consisting of eigenvectors of $S$ with corresponding eigenvalues all of absolute value 1.
 \end{itemize}
 
@@ -974,7 +981,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
 
 Note that $T^*T$ by its form is already a positive operator, so we know it has a positive square root.
 
-There is a good analogy of this theorem with the polar decomposition of a complex number. For nonzero $z \in \C$, we have $z = \left(\frac{z}{|z|}\right)\sqrt{\conj{z}z}$, where the first factor is a point on the unit circle and the second factor resembles $T^*T$. To prove the theorem, we need several steps:
+There is a good analogy of this theorem with the polar decomposition of a complex number. For nonzero $z \in \C$, we have $z = \left(\frac{z}{\abs{z}}\right)\sqrt{\conj{z}z}$, where the first factor is a point on the unit circle and the second factor resembles $T^*T$. To prove the theorem, we need several steps:
 \begin{itemize}
     \item \textit{Step I}. Define the function $S_1: \r \sqrt{T^*T} \to \r T$ by $S_1(\sqrt{T^*T}v)=Tv$.
     
@@ -1033,7 +1040,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     $$\{0\} = \n T^0 \subsetneq \n T^1 \subsetneq \cdots \subsetneq \n T^n \subsetneq \n T^{n+1}.$$
     Every proper subset means the dimension of the next one on the right must be one more than the dimension of the previous one on the left. Therefore, at the point $\n T^n$ is at least of dimension $n$, from which we can increase no further.
     
-    From now on we will call $$\{0\} = \n T^0 \subseteq \n T^1 \subseteq \cdots \subseteq \n T^n = \n T^{n+1} = \cdots$$ the \emph{nullspace power chain}.
+    From now on we will call \[\{0\} = \n T^0 \subseteq \n T^1 \subseteq \cdots \subseteq \n T^n = \n T^{n+1} = \cdots\] the \emph{nullspace power chain}, in which \[\n T^0 \subsetneq \cdots \subsetneq \n T^k = \cdots = \n T^n\] for some $k$ between $0$ and $n$.
     
     \item \emph{Note that all the results above hold for the ranges of integer powers of $T$, with ``$\supseteq$'' replacing ``$\subseteq$'' accordingly. See the exercises of this section in the book.}
     \item Say $T$ is on $V$ with dimension $n$, $V = \n T^n \oplus \r T^n$. (The claim is actually true for all $m$ such that $T^m = T^{m+1}$.)
@@ -1054,8 +1061,11 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     0 & = a_1 (T-\lambda_2 I)^n \cdots (T-\lambda_m I)^n (T-\lambda_1 I)^k v \\ & = a_1 (\lambda_1 -\lambda_2) \cdots (\lambda_1 - \lambda_m)^n w.
     \end{align*}
     Since $w$ is nonzero and the $\lambda_1$ is distinct from the other $\lambda$'s, $a_1 = 0$. In the same way, all the coefficients $a_i$ must be zero and thus the eigenvectors are linearly independent.
-	\item A operator $N$ on $V$ is \df{nilpotent} if $N^k = 0$ for some $k \in \Z^+$. A nilpotent operator cannot be injective/surjective. [Recall the composition of injective (surjective/bijective) functions must be injective (surjective/bijective).]
+	\item A operator $N$ on a nonzero FDVS $V$ is \df{nilpotent} if $N^k = 0$ for some $k \in \Z^+$.
 	\begin{itemize}
+        \item A nilpotent operator cannot be injective/surjective.
+        
+        Similar to functions on finite sets, the composition of injective (surjective/bijective) linear maps must be injective (surjective/bijective) on a finite dimensional vector space. If $N$ is injective, i.e., $\n N = \{0\}$, then $\n N^k = \{0\} \neq V$.
 	\item The only eigenvalue of a nilpotent operator is 0. Proof is obvious.
 	\end{itemize}
 	\item Given nilpotent operator $N$ on $V$, $N^{\d V} = 0$, again by the nullspace power chain. (The reverse direction is obviously true as well.)
@@ -1169,6 +1179,47 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 \end{itemize}
 
 \subsection{Jordan Form}
+\begin{itemize}
+    \item Let $N \in \LV$ be nilpotent. Then there exist vectors $v_1,\dots,v_n \in V$ and nonnegative integers $m_1,\dots,m_n$ such that
+    \begin{enumerate}[label=(\alph*)]
+        \item $N^{m_1}v_1,\dots,Nv_1,v_1, \\ N^{m_2}v_2,\dots,Nv_2,v_2, \\ \cdots \\ N^{m_n}v_n,\dots,Nv_n,v_n$ is a basis of $V$;
+        \item $N^{m_1+1}v_1 = \cdots = N^{m_n+1}v_n = 0$.
+    \end{enumerate}
+
+    Induction on $\d V$: if $\d V = 1$, the only nilpotent operator is the 0 operator. We may take $v_1$ to be any nonzero vector in $V$ and $m_1 = 0$.
+
+    Assume $\d V > 1$ and the claim holds on all vector spaces of smaller dimensions. Since $N$ is nilpotent, $N$ is not surjective and thus $\r N$ is proper subspace of $V$ with dimension smaller than $V$. We may then use the induction hypothesis on $N|_{\r N} \in \mathcal{L}(\r N)$. [In the trivial case $\r N = \{0\}$, $N$ is just 0 operator, and we may choose $v_1,\dots,v_n$ to be any basis of $V$ and let $m_1,\dots,m_n=0$.]
+    
+    By the induction hypothesis we have $v_1,\dots,v_n \in \r N$ and nonnegative integers $m_1,\dots,m_n$ such that \begin{align}
+    \begin{split}
+        N^{m_1}v_1,&\dots,Nv_1,v_1, \\ N^{m_2}v_2,&\dots,Nv_2,v_2, \\ &\cdots \\ N^{m_n}v_n,&\dots,Nv_n,v_n
+    \end{split}
+    \end{align} is a basis of $\r N$, and \begin{equation}
+        N^{m_1+1}v_1 = \cdots = N^{m_n+1}v_n = 0.
+    \end{equation} By $v_j \in \r N$ we know there exists $u_j \in V$ such that $v_j = Nu_j$. It follows that $N^{k+1}u_j = N^k v_j$ for each $j$ and each nonnegative $k$.
+
+    Now we prove that \begin{align}
+    \begin{split}
+        N^{m_1+1}u_1,&\dots,Nu_1,u_1, \\ &\cdots \\ N^{m_n+1}u_n,&\dots,Nu_n,u_n
+    \end{split} \end{align} is linearly independent in $V$. Consider a linear combination of the vectors in the list above and apply $N$ to it. By (5) and $N^{k+1}u_j = N^k v_j$ it is easy to see that the result is a linear combination of (4), with coefficients unchanged. Yet since (4) is a basis of $\r N$, all the coefficients must be 0. Thus the list is linearly independent, and we can extend it to a a basis \begin{align*}
+        N^{m_1+1}u_1,&\dots,Nu_1,u_1, \\ &\cdots \\ N^{m_n+1}u_n,&\dots,Nu_n,u_n \\ w_1,&\dots,w_p
+    \end{align*} of $V$.
+
+    Note that $Nw_j \in \r N =$ the span of (4), and each vector in (4) is $N$ applied to a vector in (6). Therefore, there is a vector $x_j$ in the span of (6) such that $Nx_j = Nw_j$.
+
+    Now let $u_{n+j} = w_j - x_j$, which follows that $Nu_{n+j} = 0$. 
+    
+    
+    \item For $T \in \LV$, a basis of $V$ is called a \df{Jordan basis for $T$} if with respect to this basis $\M(T)$ is a block diagonal matrix \[\begin{bmatrix}
+        A_1 & & 0 \\ & \ddots & \\ 0 & & A_p
+    \end{bmatrix},\] where each block $A_j$ is an upper-triangular matrix of the form \[A_j = \begin{bmatrix}
+        \lambda_j & 1 & & 0 \\
+        & \ddots & \ddots & \\
+        & & \ddots & 1 \\
+        0 & & & \lambda_j
+    \end{bmatrix}\]
+    \item Existence of Jordan Basis: for an operator $T$ on a complex vector space $V$, there is a basis of $V$ that is a Jordan basis for $T$.
+\end{itemize}
 
 
 \newpage
@@ -1188,7 +1239,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 
     Note that by the definition of scalar multiplication, $(0+1i)(u+i0) = 0+iu$ for any $u \in V$. Therefore, $\s(v_1,\dots,v_n)$ contains all the vectors $v_1,\dots,v_n$ and $iv_1,\dots,iv_n$, so that all $u+iv \in V_\C$ can be expressed.
     
-    \emph{It might make more sense to think about this in terms of the $(\cdot,\cdot)$ notation. The $(v_1,0),\dots,(v_n,0)$ spans the first slot, while the $(0,v_1),\dots,(0,v_n)$ spans the second slot in $V \times V$.}
+    \emph{It might make more sense to think about this in terms of the $(\cdot,\cdot)$ notation. The list of vectors $(v_1,0),\dots,(v_n,0)$ spans the first slot, while the list $(0,v_1),\dots,(0,v_n)$ spans the second slot in $V \times V$.}
 
     Regarding the linear independence of $v_1,\dots,v_n$, suppose $a_1v_1+\dots+a_nv_n = 0$ with coefficients from $\C$, then 
     \[(\Re a_1)v_1+ \dots + (\Re a_n)v_n = 0 \quad \text{and} \quad (\Im a_1)v_1 + \dots + (\Im a_n)v_n = 0.\]
@@ -1236,7 +1287,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
 \begin{itemize}
     \item For $T$ on a real vector space $V$, the coefficients of the characteristic polynomial of $T_\C$ are all real.
 
-    We know the multiplicities of nonreal eigenvalues of $T_\C$ in a conjugate pair are the same. Thus we can the characteristic polynomial of $T_\C$ should include the following: \[(z-\lambda)^m(z-\conj{\lambda})^m = (z^2 - 2(\Re \lambda)z + |\lambda|^2),\] which is of real coefficients. The characteristic polynomial of $T_\C$ should therefore be of the product of expressions above with expressions $(z-t)^d$, where $t$ is a real eigenvalue of $T_\C$ and $d$ is its multiplicity. The coefficients of the characteristic polynomial of $T_\C$ should therefore be all real,
+    We know the multiplicities of nonreal eigenvalues of $T_\C$ in a conjugate pair are the same. Thus we can the characteristic polynomial of $T_\C$ should include the following: \[(z-\lambda)^m(z-\conj{\lambda})^m = (z^2 - 2(\Re \lambda)z + \abs{\lambda}^2),\] which is of real coefficients. The characteristic polynomial of $T_\C$ should therefore be of the product of expressions above with expressions $(z-t)^d$, where $t$ is a real eigenvalue of $T_\C$ and $d$ is its multiplicity. The coefficients of the characteristic polynomial of $T_\C$ should therefore be all real,
     \item and we define the characteristic polynomial of $T_\C$ to be the \df{characteristic polynomial} of $T$ on a \textbf{real} vector space $V$. Properties to be noted include:
     \begin{enumerate}[label=(\alph*)]
         \item the coefficients of it are all real by definition;
@@ -1296,7 +1347,7 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     \end{bmatrix}$. Since $-b > 0$, this completes the proof.
 
     (c) $\implies$ (a): Since $b \neq 0$, the matrix is not equal to its transpose and hence $T$ is not self-adjoint. Because ($\ast$) is satisfied by $d=a$, the matrices of $T$ and $T^*$ commute. Thus $T$ is normal.
-    \item We now prove a lemma that will be useful in describing all normal operators on real inner product spaces. Suppose $T$ is a normal operator on an inner product space $V$ (real or complex), and $U$ is a subspace of $V$ that is invariant under $T$, then
+    \item We now prove a lemma that will be useful in describing all normal operators on real inner product spaces. (Recall in \lk{7}{2} we had to show a similar result in order to prove the real spectral theorem.) Suppose $T$ is a normal operator on an inner product space $V$ (real or complex), and $U$ is a subspace of $V$ that is invariant under $T$, then
     \begin{enumerate}[label=(\alph*)]
         \item $U^\perp$ is invariant under $T$.
         
@@ -1335,18 +1386,18 @@ Since a normal operator restricted to an invariant subspace is still normal, we 
     
     ($\implies$) We use induction. The case $\d V = 1$ is trivial. When $\d V = 2$, if $T$ is self-adjoint, then by the real spectral theorem we should find two $1 \times 1$ blocks on the diagonal and two 0s off the diagonal; if $T$ is not self-adjoint, then the first theorem in the section applies.
     
-    Assume $\d V > 2$, and that the result holds on real inner product spaces of smaller dimensions. Let $U$ be a dimension 1 subspace of $V$ invariant under $T$, if a dimension 1 subspace exists (equivalently we can say if $T$ has an eigenvector in $V$, then let $U$ be the span of this eigenvector); if not, let $U$ be a dimension 2 subspace of $V$ invariant under $T$, and in this case $T|_U$ cannot be a self-adjoint operator (because a self-adjoint operator must have an eigenvalue, which was proved in Chapter 7).
+    Assume $\d V > 2$, and that the result holds on real inner product spaces of smaller dimensions. In \lk{9}{1} we showed that every operator must have invariant subspaces of dimension 1 or 2. Let $U$ be a dimension 1 subspace of $V$ invariant under $T$, if a dimension 1 subspace exists (equivalently we can say if $T$ has an eigenvector in $V$, then let $U$ be the span of this eigenvector); if not, let $U$ be a dimension 2 subspace of $V$ invariant under $T$, and in this case $T|_U$ cannot be a self-adjoint operator (because a self-adjoint operator must have an eigenvalue, which was proved in Chapter 7). \emph{This construction maximizes the number of invariant subspaces of dimension 1.}
     
     If $\d U = 1$, then consider a vector in $U$ of norm 1. This vector forms an orthonormal basis of $U$, with respect to which $T|_U$ has a $1\times1$ matrix. If $\d U = 2$, then the matrix of $T|_U$ with respect to some orthonormal basis of $V$ is of the form $\begin{bmatrix}
     a & -b \\ b & a
     \end{bmatrix}$ with $b>0$ (because $T|_U$ is a normal but not self-adjoint operator).
     
     Now since $\d U^\perp < \d V$, and $T|_{U^\perp}$ is normal on $U^\perp$ by the preceding lemma, the inductive hypothesis tells us that the desired orthonormal basis of $U^\perp$ exists. Adjoining the orthonormal basis of $U$ we created to this orthonormal basis of $U^\perp$ gives us an orthonormal basis of the whole $V$, with respect to which $\M(T)$ is still of the form desired.
-    \item Now we can describe every isometry on a real inner product space. Let $S$ be an operator on a real inner product space $V$, then $S$ is an isometry iff there is an orthonormal basis of $V$ with respect to which $S$ has a block diagonal matrix such that each block on the diagonal is a $1\times1$ matrix containing 1 or -1, or is a $2\times2$ rotation matrix of the form $\begin{bmatrix}
+    \item Now we can describe every isometry on a real inner product space. Let $S$ be an operator on a real inner product space $V$, then $S$ is an isometry iff there is an orthonormal basis of $V$ with respect to which $S$ has a block diagonal matrix such that each block on the diagonal is a $1\times1$ matrix containing 1 or $-1$, or is a $2\times2$ rotation matrix of the form $\begin{bmatrix}
     \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta)
     \end{bmatrix}$, where $\theta \in (0,\pi)$.
 
-    If we assume that $S$ is an isometry, then $S$ is normal tells us that there is an orthonormal basis of $S$ with respect to which $\M(S)$ has the special block diagonal form. If $\lambda \in \R$ is an entry in the $1\times1$ blocks on the diagonal of $\M(S)$, then $Se_j = \lambda e_j$ for some $e_j$ of norm 1. Because $S$ is an isometry, $|\lambda| = 1$.
+    If we assume that $S$ is an isometry, then $S$ is normal tells us that there is an orthonormal basis of $S$ with respect to which $\M(S)$ has the special block diagonal form. If $\lambda \in \R$ is an entry in the $1\times1$ blocks on the diagonal of $\M(S)$, then $Se_j = \lambda e_j$ for some $e_j$ of norm 1. Because $S$ is an isometry, $\abs{\lambda} = 1$.
 
     Now we consider $2\times2$ blocks of the form $\begin{bmatrix}
     a & -b \\ b & a
@@ -1356,7 +1407,7 @@ Since a normal operator restricted to an invariant subspace is still normal, we 
     \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta)
     \end{bmatrix}$ by a single $\theta \in (0,\pi)$.
 
-    Conversely, we suppose that there is a orthonormal basis of $V$ with respect to which $\M(S)$ is of the special block diagonal form as stated in the theorem. For clarity we refer to the basis as $e_1,\dots,e_n$. From the block diagonal form, we know $V$ can be expressed as $U_1 \oplus \cdots \oplus U_m$, where each $U_j$ is of dimension 1 or 2, and $S$ is invariant under each $U_j$. It follows that for every $v \in V$, $v = u_1 + \dots + u_m$, where each $u_j \in U_j$. Note that all the $u_j$'s must be pairwise orthogonal, because the basis vector(s) of one $U$ is orthogonal to the basis vector(s) of another $U$. Note also that for every vector $v_j \in U_j$, if $\d U_j = 1$, then we have $Sv_j = v_j$ or $Sv_j = -v_j$. If $\d U_j = 2$, then given \[\M(S|_{U_j}) = \begin{bmatrix}
+    Conversely, we suppose that there is an orthonormal basis of $V$ with respect to which $\M(S)$ is of the special block diagonal form as stated in the theorem. For clarity we refer to the basis as $e_1,\dots,e_n$. From the block diagonal form, we know $V$ can be expressed as $U_1 \oplus \cdots \oplus U_m$, where each $U_j$ is of dimension 1 or 2, and $S$ is invariant under each $U_j$. It follows that for every $v \in V$, $v = u_1 + \dots + u_m$, where each $u_j \in U_j$. Note that all the $u_j$'s must be pairwise orthogonal, because the basis vector(s) of one $U$ is orthogonal to the basis vector(s) of another $U$. Note also that for every vector $v_j \in U_j$, if $\d U_j = 1$, then we have $Sv_j = v_j$ or $Sv_j = -v_j$. If $\d U_j = 2$, then given \[\M(S|_{U_j}) = \begin{bmatrix}
         \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta)
     \end{bmatrix}\] for some $\theta$ with respect to the orthonormal basis vectors $e_k$ and $e_{k+1}$ of $U$, by matrix computation we see that \[S(ae_k + be_{k+1}) = [a \cos(\theta) - b\sin(\theta)]e_k + [a \sin(\theta) + b\cos(\theta)]e_{k+1}.\] This implies that \[\nm{S(ae_k + be_{k+1})}^2 = [a \cos(\theta) - b\sin(\theta)] + [a \sin(\theta) + b\cos(\theta)]^2 = a^2 + b^2 = \nm{ae_k + be_{k+1}}^2\] for every vector $ae_k + be_{k+1} \in U_j$. Our work above in general shows that $S|_{U_j} \in \mathcal{L}(U)$ is an isometry. Therefore, for any $v \in V$
     \begin{align*}
@@ -1379,8 +1430,11 @@ Since a normal operator restricted to an invariant subspace is still normal, we 
 \end{itemize}
 \textit{Remark.} The change of basis formula is one of the most important result in linear algebra, and we now consider the matrix of an operator with respect to two different bases (instead of only one basis). The reason is clear, because we are now changing the basis of our operator/matrix. Recall the notation $\M(T,(u_1,\dots,u_n),(v_1,\dots,v_n))$ is the matrix of writing each $Tu_j$ as a linear combination of $v_1,\dots,v_n$ in the $j$-th column.
 \begin{itemize}
-    \item Suppose $u_1,\dots,u_n$, $v_1,\dots,v_n$, and $w_1,\dots,w_n$ are all bases of $V$. For $S,T \in \LV$, we have
-    \[\M(ST,(u_1,\dots,u_n),(w_1,\dots,w_n)) = \M(S,(v_1,\dots,v_n),(w_1,\dots,w_n))\M(T,(u_1,\dots,u_n),(v_1,\dots,v_n)).\] We proved this result for linear maps in Chapter 3, and we restate it here.
+    \item Suppose $u_1,\dots,u_n$, $v_1,\dots,v_n$, and $w_1,\dots,w_n$ are all bases of $V$. For $S,T \in \LV$, we have 
+    \begin{align*}
+        & \M(ST,(u_1,\dots,u_n),(w_1,\dots,w_n)) \\ = \: & \M(S,(v_1,\dots,v_n),(w_1,\dots,w_n))\M(T,(u_1,\dots,u_n),(v_1,\dots,v_n)).
+    \end{align*}
+    We proved this result for linear maps in Chapter 3, and we restate it here.
     \item For two bases $u_1,\dots,u_n$ and $v_1,\dots,v_n$ of $V$, the two matrices $\M(I,(u_1,\dots,u_n),(v_1,\dots,v_n))$ and $\M(I,(v_1,\dots,v_n),(u_1,\dots,u_n))$ are inverses of one another. (Note that the $I$ here is the identity operator on $V$.)
 
     This follows from the last claim and \[I_n = \M(II,(u_1,\dots,u_1),(u_1,\dots,u_1)) = \M (II,(v_1,\dots,v_1),(v_1,\dots,v_1)).\]
@@ -1421,17 +1475,17 @@ Since a normal operator restricted to an invariant subspace is still normal, we 
     \item The \df{trace of a square matrix} $A$, which we denote by $\tr A$, is defined as the sum of the diagonal entries of $A$. We will show that the trace of an operator $T \in \LV$ is exactly the trace of $\M(T)$ with respect to any basis of $V$.
     \item The trace of the transpose of a matrix is the same as the trace of the matrix itself.
     \item $\tr(AB) = \tr(BA)$ for matrices $A$ and $B$ of the same size. Proof is easy.
-    \item Similar matrices have the same trace by the claim above. Let $P = A^{-1}QA$, then \[\det P = \det(A^{-1}QA) = \det(QA^{-1}A) = \det Q\]
+    \item Similar matrices have the same trace by the claim above. Let $P = A^{-1}QA$, then \[\tr P = \tr(A^{-1}QA) = \tr(QA^{-1}A) = \tr Q.\]
     \begin{itemize}
         \item In particular, for two bases $u_1,\dots,u_n$ and $v_1,\dots,v_n$ of $V$, \[\tr \M(T,(u_1,\dots,u_n)) = \tr \M(T,(v_1,\dots,v_n)).\]
     \end{itemize}
-    \item By the theorem above, the trace of the matrix of an operator is irrespective of the basis chosen. \emph{We will soon see that the determinant of the matrix of an operator is irrespective of the basis chosen as well.} From the block diagonal decomposition of $T$ on a complex vector space, we may conclude that $\tr \M(T)$ should be the sum of eigenvalues of $T$ (repeated according to their multiplicities), which is exactly $\tr T$.
+    \item By the theorem above, the trace of the matrix of an operator is irrespective of the basis chosen. \emph{We will soon see that the determinant of the matrix of an operator is irrespective of the basis chosen as well.} From the block diagonal decomposition of $T$ on a complex vector space (from \lk{8}{2}), we may conclude that $\tr \M(T)$ should be the sum of eigenvalues of $T$ (repeated according to their multiplicities), which is exactly $\tr T$.
     
     If $T$ is on a real vector space, then consider $T_\C$. Remember earlier we said that $\M(T) = \M(T_\C)$, so that $\tr \M(T) = \tr \M(T_\C)$. By definition $\tr T$ now is the sum of eigenvalues of $T_\C$ (repeated according to their multiplicities), which is exactly $\tr \M(T_\C)$ by the last paragraph. The two cases combined finish the proof.
     \begin{itemize}
         \item When computing the trace (and also the determinant, as we will see later) of an operator, we may just look at any of its matrix without computing the eigenvalues and their multiplicities.
     \end{itemize}
-    \item $\tr(S+T) = \tr S + \tr T$ for $S,T \in \LV$. This holds obviously if we look at $\M(S)$ and $\M(T)$ with respect to the same basis of $V$.
+    \item Trace is additive: $\tr(S+T) = \tr S + \tr T$ for $S,T \in \LV$. This holds obviously if we look at $\M(S)$ and $\M(T)$ with respect to the same basis of $V$.
     \begin{itemize}
         \item Note that meanwhile for any $\lambda \in \F$, $\tr(\lambda T) = \lambda \tr(T)$ because $\M(\lambda T) = \lambda \M(T)$ with respect to the same basis of $V$.
         
@@ -1477,14 +1531,121 @@ Since a normal operator restricted to an invariant subspace is still normal, we 
     \end{itemize}
     \item The Leibniz formula for the definition of determinants: for the $n \times n$ square matrix \[A = \begin{bmatrix}
         A_{1,1} & \cdots & A_{1,n} \\ \vdots & & \vdots \\ A_{n,1} & \cdots & A_{n,n}
-    \end{bmatrix},\] $\det A$, the \df{determinant of the square matrix} $A$, is given by \[\sum_{(m_1,\dots,m_n) \in S_n} \sgn (m_1,\dots,m_n) A_{m_1,1} \cdots A_{m_n,n}.\]
-    \item The determinant of a matrix is equal to that of its transpose.
-    \item Interchanging two columns/rows of a matrix changes the sign of the determinant.
-    \item Matrices with two equal columns/row have 0 determinant.
+    \end{bmatrix},\] $\det A$, the \df{determinant of the square matrix} $A$, is given by \[\sum_{(m_1,\dots,m_n) \in S_n} \sgn (m_1,\dots,m_n) A_{m_1,1} \cdots A_{m_n,n},\] where $S_n$ is the symmetric group of permutations on $n$ letters.
+    \begin{itemize}
+        \item It is equivalent to define $\det A$ as \begin{equation}
+            \sum_{(k_1,\dots,k_n) \in S_n} \sgn (k_1,\dots,k_n) A_{1,k_1} \cdots A_{n,k_n}.
+        \end{equation}
+
+        For fixed $m_1,\dots,m_n$, let $\sigma = (m_1,\dots,m_n)$. Then \[A_{m_1,1}\cdots A_{m_n,n} = A_{1,\sigma^{-1}(1)}\cdots A_{n,\sigma^{-1}(n)}.\] Remember that $\sgn(\sigma^{-1}) = \sgn(\sigma)$: since the identity permutation $\iota = \sigma^{-1}\sigma$ is even, $\sigma^{-1}$ and $\sigma$ must have the same parity, and thus the two have the same sign. Therefore, we have shown that \[\sgn(\sigma) A_{m_1,1}\cdots A_{m_n,n} = \sgn(\sigma^{-1}) A_{1,\sigma^{-1}(1)}\cdots A_{n,\sigma^{-1}(n)}.\] Clearly summing $\sigma$ over $S_n$ and summing $\sigma^{-1}$ over $S_n$ are the same, and thus we have our alternative definition (7).
+    \end{itemize}
     \item The determinant of an upper-triangular matrix equals the product of all the diagonal entries.
+
+    This is pretty obvious. Except for $A_{1,1}\cdots A_{n,n}$ with $\sgn(\iota) = 1$, all the other products in the sum vanish because one of the $A_{j,m_j}$ in each product is always below the diagonal.
+    \item The determinant of a matrix is equal to that of its transpose.
+
+    For fixed $m_1,\dots,m_n$, again let $\sigma = (m_1,\dots,m_n)$. Note that \[A_{1,m_1} \cdots A_{n,m_n} = A_{\sigma^{-1}(1),1} \cdots A_{\sigma^{-1}(n),n},\] and so essentially we need to show that $\sgn(\sigma^{-1}) = \sgn(\sigma)$, which we already know.
+    \item Interchanging two columns/rows of a matrix changes the sign of the determinant.
+
+    This is easy. Consider the product $A_{m_1,1} \cdots A_{m_n,n}$. For matrix $B$ obtained from $A$ by switching two columns, the sign in $B$ associated with the same product $A_{m_1,1} \cdots A_{m_n,n}$ is $-1$ multiplied by the original $\sgn(m_1,\dots,m_n)$ in $A$.
+
+    Interchanging two rows of $A$ can be seen as interchanging two columns of $A^t$. By the fact that the determinant of a matrix is equal to that of its transpose, we see that interchanging two rows of a matrix as well changes the sign of the determinant as well.
+    \begin{itemize}
+        \item Matrices with two equal columns/rows have 0 determinant. (Consider switching the two equal columns.)
+    \end{itemize}
+    \item For square matrix $A = \begin{bmatrix}
+        A_{\cdot,m_1} & \cdots & A_{\cdot,m_n}
+    \end{bmatrix}$ and permutation $(m_1,\dots,m_n)$, \[\det \begin{bmatrix}
+        A_{\cdot,1} & \cdots & A_{\cdot,n}
+    \end{bmatrix} = \sgn(m_1,\dots,m_n) \det A.\]
+
+    When $(m_1,\dots,m_n)$ is an even (resp.\ odd) permutation, $\begin{bmatrix}
+        A_{\cdot,1} & \cdots & A_{\cdot,n}
+    \end{bmatrix}$ is obtained from $A$ by switching columns an even (resp.\ odd) number of times, exactly when $\sgn(m_1,\dots,m_n) = 1$ (resp.\ $-1$).
+    \item Let $k,n \in \Z^+$ with $1 \leq k \leq n$. Fix the $n \times 1$ columns $A_{\cdot,1},\dots,A_{\cdot,n}$ except for $A_{\cdot,k}$. The function $f: A_{\cdot,k} \mapsto \det \begin{bmatrix}
+        A_{\cdot,1} & \cdots & A_{\cdot,n}
+    \end{bmatrix}$ is a linear map from $\F^n$ to $\F$.
+    
+    Recall from \lk{3}{4} that linear maps from $\F^n$ to $\F^m$ can be uniquely represented by a matrix-left-multiplication. Since $m=1$ here, basically we want to show that $\det \begin{bmatrix}
+        A_{\cdot,1} & \cdots & A_{\cdot,n}
+    \end{bmatrix}$ is a linear combination of the entries of $A_{\cdot,k}$. This is clearly true by the Leibniz formula.
+    \item For square matrices $A,B$ of the same size, $\det(AB) = \det(A)\det(B) = \det (BA)$.
+
+    \begin{align*}
+        \det(AB) & = \det \begin{bmatrix}
+            AB_{\cdot,1} & \cdots & AB_{\cdot,n}
+            \end{bmatrix} \\
+            & = \det \begin{bmatrix}
+                A(\sum_{m_1 = 1}^n B_{m_1,1}e_{m_1}) & \cdots & A(\sum_{m_n = 1}^n B_{m_n,n}e_{m_n})
+            \end{bmatrix} \\
+            & = \det \begin{bmatrix}
+                \sum_{m_1 = 1}^n B_{m_1,1} Ae_{m_1} & \cdots & \sum_{m_n = 1}^n B_{m_n,n} Ae_{m_n}
+            \end{bmatrix} \\
+            & \quad \, \text{(because the $B_{m_i,i}$'s are constants)} \\
+            & = \sum_{m_1 = 1}^n \cdots \sum_{m_n = 1}^n B_{m_1,1} \cdots B_{m_n,n} \det \begin{bmatrix}
+                Ae_{m_1} & \cdots & Ae_{m_n}
+            \end{bmatrix} \\
+            & \quad \, \text{(by repeated applications of the linearity of det as a function of one column)}
+    \end{align*}
+    Since the determinant of a a matrix with two equal columns is 0, the sum above is equivalent to  \[\sum_{(m_1,\dots,m_n) \in S_n} B_{m_1,1} \cdots B_{m_n,n} \det \begin{bmatrix}
+        Ae_{m_1} & \cdots & Ae_{m_n}
+    \end{bmatrix}.\]
+    Therefore, \begin{align*}
+        \det(AB) & = \sum_{(m_1,\dots,m_n) \in S_n} B_{m_1,1} \cdots B_{m_n,n}(\sgn(m_1,\dots,m_n)) \det(A) \\ & = \det(A) \sum_{(m_1,\dots,m_n) \in S_n} \sgn(m_1,\dots,m_n) B_{m_1,1} \cdots B_{m_n,n},
+    \end{align*}
+    which shows that $\det(AB) = \det(A)\det(B) = \det(B)\det(A) = \det(BA)$.
+    \item By $\det(AB) = \det(BA)$, similar matrices have the same determinant, just like the trace.
+    \begin{itemize}
+        \item In particular, the determinant of the matrix of an operator $T$ is irrespective of the basis chosen, which we can simply write as $\det \M(T)$.
+         \item It is also the case that the determinant of an operator is exactly the determinant of its matrix.
+    \end{itemize}
+    The proofs of these results are the same as the proofs of the same results about the trace.
+    \item While trace is additive, determinant is multiplicative: $\det(ST) = \det(S)\det(T) = \det(TS)$ for $S,T \in \LV$. Just like the similar result about trace, the result here holds obviously if we fix a basis of $V$ and work with $\M(S)$ and $\M(T)$.
+\end{itemize}
+
+\subsection{Geometric Interpretation of the Determinant}
+\begin{itemize}
+    \item For an isometry $S$ on an inner product space $V$, $\abs{\det S} = 1$.
+    
+    In the case where $\F = \C$, recall from \lk{7}{3} that all eigenvalues of $S$ has absolute value 1. Their product (counting multiplicities), which is $\det S$, must have absolute value 1 as well.
+    
+    In the case where $\F = \R$, the book offers two proofs:
+    \begin{itemize}
+        \item The first proof uses the result that for real inner product space $V$, it can be routinely verified from definition that \[\inp{u+iv}{x+iy} = \inp{u}{x} + \inp{v}{y} + (\inp{v}{x} - \inp{u}{y})i\] for $u,v,x,y \in V$ defines a complex inner product on $V_\C$.
+        
+        Consider $S_\C(u+iv) = Su +iSv$ and $S_\C(x+iy) = Sx + iSy$. To show that $S_\C$ is inner-product-preserving, we look at  $\inp{S_\C(u+iv)}{S_\C(x+iy)}$:
+        \begin{align*}
+            \inp{Su +iSv}{Sx + iSy} & = \inp{Su}{Sx} + \inp{Sv}{Sy} + (\inp{Sv}{Sx} - \inp{Su}{Sy})i \\ & = \inp{u}{x} + \inp{v}{y} + (\inp{v}{x} - \inp{u}{y})i \\ & \quad \, \text{[exactly because $S$ is inner-product-preserving]} \\ & = \inp{u+iv}{x+iy}.
+        \end{align*}
+        This shows that $S_\C$ is an isometry on $V_\C$, and so by the case $\F = \R$, $\abs{\det S_\C} = 1$. Since $\det S$ is $\det S_\C$ for $S$ on a real inner product, the proof is completed.
+        
+        In summary, we have chosen an inner product for the complexification $V_\C$ such that $S_\C$ is an isometry on it. This \emph{enables} us to use the complex case we have already established.
+        \item The second proof uses the result that the determinant of a block diagonal matrix is equal to the product of the determinants of each block. The proof of this is some complicated calculations involving the Leibniz formula. In \lk{9}{2} we described every isometries on a real inner product space by a block diagonal matrix of a specific form (when the right basis is chosen). The diagonal blocks must be $\begin{bmatrix}
+        1
+        \end{bmatrix}$, $\begin{bmatrix}
+        -1
+        \end{bmatrix}$, or the $2\times 2$ rotational matrix, which has determinant 1. Therefore $\abs{\det S} = \abs{\det \M(S)} = 1$.
+        \item The sign of the $\det T$ for an invertible operator $T$ on a real inner product space $V$ can be geometrically comprehended. (An invertible operator $T$ must not have 0 as an eigenvalue, and thus $\det T$ must be either positive or negative.)
+        
+        By the polar decomposition theorem, $T = S \sqrt{T^*T}$ for an isometry $S \in \LV$. It follows that $\det(T) = \det(S) \det(\sqrt{T^*T})$.
+        
+        First recall that $\sqrt{T^*T}$ is the unique positive square root of $T^*T$, and then must have all its eigenvalues nonnegative. By the real spectral theorem, because $\sqrt{T^*T}$ is self-adjoint, with respect to an orthonormal basis of $V$ the matrix $\M(\sqrt{T^*T})$ becomes diagonal and has all eigenvalues repeated according to their multiplicities. Therefore $\det \sqrt{T^*T}$ is the product of these eigenvalues of $\sqrt{T^*T}$ (repeated accordingly), which is nonnegative. Since $\det T \neq 0$, $\det \sqrt{T^*T} > 0$, which means that the sign of $\det T$ is exactly the sign of $\det S$.
+        
+        In the second proof of $\abs{\det S} = 1$ above, we see that whether $\det S = 1$ or $-1$ depends on whether the number of $\begin{bmatrix}
+        -1
+        \end{bmatrix}$ blocks on the diagonal is even or odd. Recall the construction of the block diagonal matrix in \lk{9}{2} maximizes the number of invariant subspaces of dimension 1, and thus the dimension of $E(-1,S) = \{v \in V \where Sv = -v\}$ is exactly the number of $\begin{bmatrix}
+        -1
+        \end{bmatrix}$ blocks on the diagonal. We may conclude that whether $\det T$ is positive or negative depends on whether $\d E(-1,S)$, i.e., the subspace of $V$ on which vectors reverse directions through $S$, has even or odd dimension.
+        
+        % We know $T = S \sqrt{T^*T}$, where $\sqrt{T^*T}$ has nonnegative eigenvalues and thus cannot reverse the direction of vectors. Also, any $v \in V$ can be written as a linear combination of the orthonormal basis vectors of $V$ (with respect to which $\M(S)$ has the nice block diagonal form). We may then say \emph{whether the number of times vector $v$ reverses its direction is even or odd decides whether $\det T$ is positive or negative}. By reversing direction we mean reversing the sign of a component vector of $v$. It may be more illuminating to think about the statement in $\R^n$ in terms of matrices.
+    \end{itemize}
+    The book continues with a pseudo-proof of the change of variables theorem. The pseudo-proof clearly illustrates where the determinant in the formula comes from. Some measure theory is required to make the proof actually rigorous.
+    
+    
+    
+    
     
 \end{itemize}
-    
 
 
 \setcounter{secnumdepth}{3}

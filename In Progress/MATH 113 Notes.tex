@@ -1,24 +1,28 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amsthm,amssymb,tikz-cd,mathtools}
-\usepackage[OT1]{fontenc}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[T1]{fontenc}
+% \usepackage{newpxtext,newpxmath}
+% \usepackage{newtxtext,newtxmath}
+\usepackage{tikz-cd,mathtools}
 \usepackage{enumitem}
 \usepackage{fullpage,setspace,microtype,soul,framed}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
-\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#2}}
+\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#2}} % link to subsection
 \newcommand{\where}{\,|\,}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\Q}{\mathbf{Q}}
 \newcommand{\C}{\mathbf{C}}
-\newcommand{\df}[1]{\ul{\textit{#1}}}
+\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}}
 \newcommand{\aut}{\operatorname{Aut}}
 \newcommand{\inn}{\operatorname{Inn}}
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
 \newcommand{\gen}[1]{\langle #1 \rangle}
-\newcommand{\Quot}{\operatorname{Quot}}
+\newcommand{\kar}{\operatorname{char}}
+\newcommand{\Quot}{\operatorname{Quot}} % Field of Quotients
 \newcommand{\irr}{\operatorname{irr}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\GF}{\operatorname{GF}} % Galois Field
@@ -69,7 +73,7 @@
         a & a \ast a & a \ast b & a \ast c \\ \hline
         b & b \ast a & b \ast b & b \ast c \\ \hline
         c & c \ast a & c \ast b & c \ast c 
-    \end{tabular}.
+        \end{tabular}.
     \end{center}
 \end{itemize}
 
@@ -107,21 +111,114 @@
     \begin{itemize}
         \item If for an $\la S,\ast \ra$ only the (a) above holds, then $S$ is called a \df{semigroup}. If (b) holds in addition, then $S$ is called a \df{monoid}.
     \end{itemize}
+     \item For elements in a group $G$, $ab = ac$ implies $b = c$, and $ac = bc$ implies $a = b$. These are called the \df{left and right cancellation laws}. It is easy to show that the cancellation laws hold by multiplying $a'$ on the left and $c'$ on the right, respectively.
+    \item Linear equations have unique solutions in a group, i.e, for any $a,b \in G$, $ax=b$ has a unique solution for $x \in G$ , and $ya = b$ has a unique solution for $y \in G$.
+    \begin{itemize}
+        \item By this theorem, in a finite group $G$ every element must appear exactly once in each row and each column.
+    \end{itemize}
+    \item In a group $\la G,\ast \ra$, the identity $e$ is unique, which we already know. The inverse of every element $a \in G$ is also unique.
+    \begin{itemize}
+        \item $(a \ast b)' = b' \ast a'$.
+    \end{itemize}
 \end{itemize}
+The proof of these elementary results above about groups is quite routine by correctly applying the cancellation laws.
 \begin{framed}
-    By convention we will the multiplicative notation in group theory, and the multiplication symbol $\cdot$ (the symbol itself is mostly omitted) is used to represent the associative binary operation of the group. For $n \in \Z^+$, $a^n$ is $a$ multiplied by $n$ times. We let $a^0$ be the identity $e$. $a^{-1}$ is used to represent the inverse of the element $a$, and hence $a^{-n}$ should be $a^{-1}$ multiplied by $n$ times. It is quite clear that for $m,n \in \Z$, $a^{m+n} = a^ma^n$ holds, by associativity.
+    By convention we use the multiplicative notation in group theory, and the multiplication symbol $\cdot$ (the symbol itself is mostly omitted) is used to represent the associative binary operation of the group. For $n \in \Z^+$, $a^n$ is $a$ multiplied by $n$ times. We let $a^0$ be the identity $e$. $a^{-1}$ is used to represent the inverse of the element $a$, and hence $a^{-n}$ should be $a^{-1}$ multiplied by $n$ times. It is quite clear that for $m,n \in \Z$, $a^{m+n} = a^ma^n$ holds, by associativity.
 \end{framed}
 \begin{itemize}
-    \item For elements in a group $G$, $ab = ac$ implies $b = c$, and $ac = bc$ implies $a = b$. These are called the \df{left and right cancellation laws}. It is easy to show that the cancellation laws hold by multiplying $a^{-1}$ on the left and $c^{-1}$ on the right, respectively.
-    \item Linear equations have unique solutions in a group, i.e, for any $a,b \in G$, $ax=b$ has a unique solution for $x \in G$ , and $ya = b$ has a unique solution for $y \in G$.
     \item A group has exactly one idempotent element, which is $e$ the identity.
 
-    Let $a$ be an idempotent element of $G$, then $aa = a$, which by the cancellation law implies that $a = e$.
+    Let $a$ be an idempotent element of $G$, then $aa = a$, which by the cancellation law implies that $a = e$. This important trait of a group will appear again in the next bullet point.
+    \item Groups can be defined by only one side (either left or right). It is equivalent to define a group as a binary algebraic structure $\la G, \cdot \ra$ such that
+    \begin{enumerate}[label=(\alph*)]
+        \item $\cdot$ is associative;
+        \item there is a right identity $e$ in $G$, i.e., for all $a \in G$, $ae = a$;
+        \item for every $a \in G$, there is an right inverse $a' \in G$ such that $aa' = e$.
+    \end{enumerate}
+    \begin{proof}
+        We only have to show that this definition implies the two-sided definition.
+
+        First note that this definition shows that $e$ the right identity is the only idempotent element in $G$. This is because for an idempotent $a$ in $G$, \[a = ae = a(aa^{-1}) = (aa)a^{-1} = aa^{-1} = e.\]
+
+        Now we show that the left inverse of $a$ is exactly $a'$ the right inverse.Since \[(a'a)(a'a) = a'(aa')a = a'a,\] $a'a = e$, as desired.
+
+        Finally we show that the left identity is exactly $e$ the right identity. For every $a \in G$, \[ea = (aa')a = a(a'a) = ae = a,\] which tells us that $e$ is the right identity.
+    \end{proof}
+    \item The group of order 1 is the trivial group with only the identity. By listing the group table, $\la \Z_2,+_2 \ra$ and $\la \Z_3,+_3 \ra$ are the only groups of order 2 and 3, up to isomorphism. (Here $+_n$ is the addition modulo $n$ binary operation. We will usually abbreviate these group by the set $\Z_n$.) There are two groups of order 4 up to isomorphism: one is $\Z_4$ and the other is $V$ the Klein-4 group, and both are abelian. See their group tables below. \[\Z_4: \quad \begin{tabular}{C|C|C|C|C}
+        +_4 & 0 & 1 & 2 & 3 \\ \hline
+        0 & 0 & 1 & 2 & 3 \\ \hline
+        1 & 1 & 2 & 3 & 0 \\ \hline
+        2 & 2 & 3 & 0 & 1 \\ \hline
+        3 & 3 & 0 & 1 & 2
+        \end{tabular} \qquad V: \begin{tabular}{C|C|C|C|C}
+        \ast & e & a & b & c \\ \hline
+        e & e & a & b & c \\ \hline
+        a & a & e & c & b \\ \hline
+        b & b & c & e & a \\ \hline
+        c & c & b & a & e 
+        \end{tabular}\]
+    (\emph{Side fact: the least order of a group that is nonabelian is 6.})
 \end{itemize}
 
 \subsection{Subgroups}
+\begin{itemize}
+    \item If subset $H$ of the group $\la G,\ast \ra$ is closed under $\ast$, and $H$ under the induced operation $\ast|_H$ is itself a group, then $H$ is called a \df{subgroup of $G$}. In this case if $H \neq G$, then $H$ is called a \df{proper subgroup of $G$}. The substructures of other algebraic structures are defined in the similar way.
+
+    We use $H \leq G$ to denote that $H$ is a subgroup of $G$, and we use $H < G$ to denote that $H$ is a proper subgroup of $G$. Note that $\{e\}$ and $G$ are always subgroups of $G$.
+    \item Subgroup Diagrams of $\Z_4$ and $V$:
+    \[\begin{tikzcd}
+\Z_4 \arrow[d, no head] \\
+{\{0,2\}} \arrow[d, no head] \\
+\{0\}                          
+\end{tikzcd} \qquad \begin{tikzcd}
+&  & V \arrow[d, no head] \arrow[lld, no head] \arrow[rrd, no head] &  &\\
+{\{e,a\}} \arrow[rrd, no head] &  & {\{e,b\}} \arrow[d, no head] &  & {\{e,c\}} \arrow[lld, no head] \\ &  & \{e\} &  &
+\end{tikzcd}\]
+    \item The subgroup criterion I: $H \subseteq G$ is a subgroup of $\la G,\cdot \ra$ iff the following three conditions are met:
+    \begin{enumerate}[label=(\roman*)]
+        \item $H$ is closed under $\cdot$;
+        \item $e_H = e_G$;
+        \item for every $a \in H$, $a^{-1} \in H$ as well.
+    \end{enumerate}
+    \begin{proof}
+        ($\implies$) (i) follows from the definition. For $a \in H \subseteq G$ we have the unique solution $x = e_G$ to $ax = a$ when viewed in $G$, and the unique solution $x = e_H$ to the same equation when viewed in $H \subseteq G$. This shows that $e_H = e_G$.
+
+        By the same argument, For any $a \in H \subseteq G$, the equation $ax = e$ when viewed in $H$ gives the unique solution $a^{-1}$ in group $G$. Thus $a^{-1} \in H$.
+
+        ($\impliedby$) Remember associativity is inherited.
+    \end{proof}
+    \item The subgroup criterion II: $H \subseteq G$ is a subgroup of $\la G,\cdot \ra$ iff the following two conditions are met:
+    \begin{enumerate}[label=(\alph*)]
+        \item $e_H = e_G$;
+        \item For any $a,b \in H$, $ab^{-1} \in H$.
+    \end{enumerate}
+    \begin{proof}
+        ($\implies$) (a) was proved in the last bullet point. For $a,b \in H$, by condition (iii) from the last bullet point $b^{-1} \in H$, and so $ab^{-1} \in H$.
+
+        ($\impliedby$) Now $e = e_G = e_H$. By $(b)$, for $b \in H$, we have $b^{-1} = eb^{-1} \in H$.
+        
+        It suffices to check that condition (i) from the last bullet point is true. For $a,b \in H$, we now know $b^{-1} \in H$, and thus by (b) $ab = a(b^{-1})^{-1} \in H$.
+    \end{proof}
+\end{itemize}
+\begin{framed}
+    It is quite obvious that for $a \in H \leq G$, all the integer powers $a^n$, $a^{-n}$, and $a^0 = e$ must all belong to the group $H$. Because the set $\{a^n \where n \in \Z\}$ is itself a group, we conclude that this is exactly the smallest subgroup of $G$ containing $a$. The group is called the \df{cyclic subgroup of $G$ generated by $a$}, which we denote by $\la a \ra$. A group is \df{cyclic} if there \emph{happens to be} an element $a \in G$ such that $G = \la a \ra$, and in this case $a$ is called a \df{generator for $G$}. (This idea of ``happening to be'' will appear later in field theory.)
+\end{framed}
+\rmk A subset $H \subseteq S$ is called the \emph{smallest} subset with property $p$ if $H$ has property $p$ and all $K \subseteq S$ with property $p$ must contain $H$. A subset $H \subseteq S$ is the \emph{minimal} subset with property $p$ if $H$ has property $p$ and all proper subsets $K \subsetneq H$ do not have property $p$. It is equivalent to say that for all $K \subseteq H$, if $K$ have property $p$, then $K = H$.
+
+Note that there may only be one smallest subset (or there would be contradiction), but there may be multiple minimal subsets (e.g., the three nontrivial minimal subgroups of $V$).
+
+The corresponding adjectives ``largest'' and ``maximal'' have the exact opposite meanings.
 
 \subsection{Cyclic Groups}
+\begin{itemize}
+    \item Every cyclic group is abelian.
+    \item A subgroup of a cyclic group is cyclic.
+    \begin{itemize}
+        \item Because $\la \Z,+ \ra$ is a cyclic group with generator $1$ or $-1$, its subgroups are precisely $n\Z$ under addition for all $n \in \Z$.
+    \end{itemize}
+    \item Bezóut's identity tells us that for integers $x,y$, there always exists integers $a,b$ such that \[ax+by = \gcd(x,y).\] Since $\gcd(x,y) \mid (ax+by)$ [excluding the trivial case that $x$ or $y = 0$], and $H = \{ax+by \where a,b \in \Z\}$ is a subgroup of $\Z$ and is thus cyclic, $\gcd(x,y)$ is the only positive generator of $H$.
+    \item Let $G$ be a cyclic group. If $|G| = n$, then $G \simeq \la \Z_n,+_n \ra$; if $|G| = \infty$, then $G \simeq \la \Z,+ \ra$. \emph{This theorem classifies all cyclic groups up to isomorphism.}
+\end{itemize}
 
 \subsection{Generating Sets and Cayley Digraphs}
 
@@ -148,6 +245,36 @@
 \setcounter{subsection}{17}
 \subsection{Rings and Fields}
 \subsection{Integral Domains}
+\begin{itemize}
+    \item If for some $a \in R^*$, there is no $b \in R^*$ such that $ab = 0$, then $a$ is called a \df{left zero divisor}. A symmetric definition is given to the \df{right zero divisor}. If $a,b \in R^*$ has $ab=0$, then $a$ and $b$ are called \df{zero divisors} of $R$. Equivalently, a zero divisor is either a left zero divisor or a right zero divisor.
+    \item The left and right cancellation laws hold in a ring $R$ iff $R$ has no zero divisors. More specifically, the left (resp.\ right) cancellation laws hold in $R$ iff $R$ has no left (resp.\ right) zero divisors. [By left (resp.\ right) cancellation law we mean $ab = ac$, where $a \neq 0$, implies $b=c$.]
+    \begin{proof}
+        ($\implies$) Let $R$ be a ring in which the left cancellation laws hold. Consider $a \neq 0$ such that $ab=0$. Then $ab = 0 = a0$, which implies $b=0$. Thus there are not left zero divisors.
+
+        ($\impliedby$) Let $R$ be a ring with no left zero divisors. Suppose $ab=ac$, where $a \neq 0$. Then $a(b-c)=0$, and because $a$ is not a left zero divisor, $b=c$, as desired. So the left cancellation law holds.
+
+        Combine the left and right cases together and we see that \emph{the cancellation laws hold in $R$ iff $R$ has no zero divisors}.
+    \end{proof}
+\end{itemize}
+\begin{framed}
+From the ($\implies$) above we know that for $a \in R$ that is not a left zero divisor, the left-multiplication-by-$a$ map $\lambda_a: R \to R$ given by $\lambda_a(x) = ax$ is injective because $ax = az$ implies that $x = z$. In particular, if $R$ is finite, then $R$ is injective means that $R$ is surjective. Thus for every $y \in R^*$, there is a unique $x \in R^*$ such that $\lambda_a(x)=ax=y$ [because $0x=0$]. A symmetric claim holds for right zero divisors. \textbf{This is a very important trick.}
+\end{framed}
+\begin{itemize}
+    \item Let $R$ be a finite nontrivial unital ring, then every $a \in R^*$ is \textbf{either a unit or a zero divisor}. (We want to show: not being a zero divisor $\implies$ being a unit, and the two are mutually exclusive.)
+    \begin{itemize}
+        \item Now we know $1 \in R$, by our boxed comment above that if $a \neq 0$ is not a left zero divisor, then for $1$ there is a unique $x$ such that $ax=1$ (i.e., a unique right multiplicative inverse of $a$). The symmetric claim holds for right zero divisors. By these facts we can show that left and right zero divisors coincide:
+        \begin{quote}
+            Let $a$ be a right zero divisor, then there is some $y \neq 0$ such that $ya=0$. Suppose it is not a left zero divisor, then there is some $x \neq 0$ such that $ax = 1$. It follows that \[0=0x=(ya)x=y(ax)=y,\] which leads to contradiction. \emph{Thus in a finite unital ring, a left zero divisor must be a right zero divisor, and symmetrically a right zero divisor must be a left zero divisor.} \textbf{Therefore the left and right zero divisors coincide as the set of zero divisors.}
+        \end{quote}
+        This is the preliminary result we need for the proof of the theorem.
+    \end{itemize}
+    \begin{proof}
+        Suppose $a \neq 0$ is not a zero divisor, then the preliminary result above tells us that there is both a right and a left multiplicative inverse of $a$. This is the (unique) multiplicative inverse of $a$, which proves that $a$ is a unit.
+
+        Now we show that being a unit and being a zero divisor is mutually exclusive. Suppose $a \neq 0$ has inverse $a^{-1} \in R$ and $b \neq 0$ such that $ab=0$. Then $0 = a^{-1}0 = a^{-1}(ab) = 1b = b$, which again leads to contradiction.
+    \end{proof}
+\end{itemize}
+
 \subsection{Fermat's and Euler's Theorems}
 \subsection{The Field of Quotients of an Integral Domain}
 \subsection{Rings of Polynomials}
@@ -187,7 +314,7 @@
         
         (b;$\implies$) We want to show that $R/P$ has no divisors of 0. Suppose $ab + P = (a+P)(b+P) = 0+I$ for $a,b \in R$. then $ab \in P$, which implies that $a \in P$ or $b \in P$. It follows that $a+P$ or $b+P$ must be the identity factor group.
         
-        (a,b;$\impliedby$) All steps can be reversed.
+        (a, b;$\impliedby$) All steps can be reversed.
     \end{proof}
     \item For a field $F$, $F[x]$ is a PID.
     \item For a nonzero $p(x) \in F[x]$, the ideal $\gen{p(x)}$ is maximal iff $p(x)$ is irreducible over $F$.
@@ -210,24 +337,27 @@
 
         It remains to show that some $\alpha \in E$ is a zero of $p(x)$ over $E$. Let $\alpha = x + \gen{p(x)}$. For $p(x) = a_0 + a_1x + \dots + a_n x^n \in F[x]$, the evaluation map $\phi_\alpha: F[x] \to E$ gives 
         \begin{align*}
-            p(\alpha) = \phi_\alpha(p(x)) & = (a_0 + \gen{p(x)}) + (a_1 + \gen{p(x)})(x + \gen{p(x)}) + \dots + (a_n + \gen{p(x)})(x+\gen{p(x)})^n \\ & = (a_0 + \gen{p(x)}) + (a_1x + \gen{p(x)}) + \dots + (a_nx^n + \gen{p(x)}) \\ & = (a_0 + a_1x + \dots + a_n x^n) + \gen{p(x)} = p(x) + \gen{p(x)} = \gen{p(x)} = 0
+            p(\alpha) = \phi_\alpha(p(x)) & = (a_0 + \gen{p(x)}) + (a_1 + \gen{p(x)})(x + \gen{p(x)}) + \cdots \\ & \qquad \qquad \qquad \quad + (a_n + \gen{p(x)})(x+\gen{p(x)})^n \\ & = (a_0 + \gen{p(x)}) + (a_1x + \gen{p(x)}) + \dots + (a_nx^n + \gen{p(x)}) \\ & = (a_0 + a_1x + \dots + a_n x^n) + \gen{p(x)} = p(x) + \gen{p(x)} = \gen{p(x)} = 0
         \end{align*}
         in $E = F[x]/\gen{p(x)}$. \emph{The coefficients in the first line above are the images of $a_0,a_1,\dots,a_n \in F$ in $E$. Note that the zero is a particular coset from the factor ring $E$ of a polynomial ring modulo an irreducible polynomial of the given $f(x)$.}
     \end{proof}
     \begin{itemize}
         \item Here is a very important example. We know $f(x) = x^2 + 1 \in \R[x]$ has no zero in $\R$ and is thus irreducible over $\R$. It follows that $\R[x]/\la x^2 + 1 \ra$ is a field. Every $r \in \R$ is identified with the coset $r + \la x^2 + 1 \ra$ in $\R[x]/\la x^2+1 \ra$, and so $\R$ is embedded into $E \coloneqq \R[x]/\la x^2+1 \ra$. By the construction in the theorem above, $x + \la x^2+1 \ra$ is a zero to $f(x) = x^2 + 1$ over the extension field $E$ of $\R$. We will show in this section that we can identify $E$ with the complex number field $\C$, and $x + \la x^2+1 \ra$ with $i$.
     \end{itemize}
-    \end{itemize}
-    \begin{framed}Recall the number of zeros of a polynomial $f(x)$ over a field $F$ is at most $\deg(f)$, because there are at most $\deg(f)$ linear factors that $f(x)$ can factor into. By the theorem above one can always construct an extension field $K$ of $F$ such that over $K$, $f(x)$ has $\deg(f)$ zero counting repeats, which is the maximum number of zeros $f(x)$ can possibly have.
+\end{itemize}
+    \begin{framed}
+    Recall the number of zeros of one polynomial $f(x)$ over a field $F$ is at most $\deg(f)$, because there are at most $\deg(f)$ linear factors that $f(x)$ can factor into. It is clear that by repeatedly applying this Kronecker's theorem one can always \emph{construct} an extension field $E$ of $F$ such that in $E$, $f(x)$ has $\deg(f)$ zeros counting repeats (a.k.a.\ multiplicities), which is the maximum number of zeros $f(x)$ can possibly have. This is called the \df{splitting field of $f(x)$ over $F$}, which is the smallest extension field of $F$ that factors this $f(x)$ into linear factors. See \lk{6}{33}.
+    
+    P.S.\ We will see later in \lk{6}{31} that \emph{any} $f(x) \in F[x]$ has $\deg(f)$ zeros (counting repeats) in an algebraically closed extension field $K$ (in particular the algebraic closure $\clos{F}$) of $F$. The existence of this $K$ is ensured if we assume Zorn's lemma.
     \end{framed}
-    \begin{itemize}
+\begin{itemize}
     \item An element $\alpha \in E$, where $E$ is an extension field of $F$, is \df{algebraic over $F$} if we can find a nonzero polynomial $f(x) \in F[x]$ such that $f(\alpha) = 0$. Otherwise, $\alpha \in E$ is \df{transcendental over $F$}.
     
-    An element $\alpha \in \C$ algebraic/transcendental over $\Q$ is called an \df{algebraic number}/\df{transcendental number}, respectively. $\pi$ and $e$ are famous transcendental numbers, but showing they are transcendental is very complicated.
+    An element $\alpha \in \C$ algebraic (or transcendental) over $\Q$ is called an \df{algebraic number} (or a \df{transcendental number}). $\pi$ and $e$ are famous transcendental numbers, but showing they are transcendental is very complicated.
     \item For an extension field $E$ of $F$ and $\alpha \in E$, and let $\phi_\alpha: F[x] \to E$ be the ``evaluation at $\alpha$'' homomorphism. Then $\alpha$ is transcendental over $F$ iff $\phi_\alpha$ is injective (or equivalently, iff $F[x]$ and a subdomain of $E$ are isomorphic).
 
     Proof follows straight from the definition.
-    \item Let $E$ be an extension field of $F$, and let $\alpha \in E$ be algebraic over $F$. Then there exists an irreducible polynomial $p(x) \in F[x]$ such that $p(\alpha) = 0$. This irreducible polynomial is uniquely determined up to a constant factor in $F$ and is a polynomial of minimal degree $\geq 1$ in $F[x]$ having $\alpha$ as a zero. If $f(\alpha) = 0$ for $f(x) \in F[x]$, with $f(x) \neq 0$, then $p(x) \mid f(x)$.
+    \item Let $E$ be an extension field of $F$, and let $\alpha \in E$ be algebraic over $F$. Then there exists an irreducible polynomial $p(x)$ over $F$ such that $p(\alpha) = 0$. This irreducible polynomial is uniquely determined up to a constant factor in $F$ and is a polynomial of minimal degree $\geq 1$ in $F[x]$ having $\alpha$ as a zero. If $f(\alpha) = 0$ for $f(x) \in F[x]$, with $f(x) \neq 0$, then $p(x) \mid f(x)$.
     \begin{proof}
         For the evaluation map $\phi_\alpha: F[x] \to E$, $\ker(\phi_\alpha)$ is an ideal of $F[x]$ and can thus be generated by $p(x) \in F[x]$. $\gen{p(x)}$ have precisely all the polynomials having $\alpha$ as a zero over $E$. This means that for any $f(x) \in F[x]$ having $\alpha$ as a zero over $E$, $p(x) \mid f(x)$, and shows that $p(x)$ is the polynomial of the minimal positive degree having $\alpha$ as a zero over $E$. Any other polynomials of $\deg(p)$ must be $p(x)$ times a nonzero constant factor in $F$.
 
@@ -235,17 +365,20 @@
     \end{proof}  
 \end{itemize}
 \begin{framed}
-    Because $p(x)$ is unique up to a nonzero constant factor in $F$, we can let $p(x)$ be a \emph{monic polynomial} so that it become truly unique. Under the same setup as the above theorem, we call this unique monic polynomial $p(x)$ the \df{irreducible polynomial for $\alpha$ over $F$}, denoted by $\irr(\alpha,F)$. The degree of $\irr(\alpha,F)$ is denoted by $\deg(\alpha,F)$.
+    Because $p(x)$ is unique up to a nonzero constant factor in $F$, we can let $p(x)$ be a \emph{monic polynomial} so that it become truly unique. Under the same setup as the above theorem, we call this unique monic polynomial $p(x)$ the \df{irreducible polynomial for $\alpha$ over $F$} (a.k.a.\ the \df{minimal polynomial}), denoted by $\irr(\alpha,F)$. The degree of $\irr(\alpha,F)$ is denoted by $\deg(\alpha,F)$.
 \end{framed}
 \begin{itemize}
-    \item Let $E$ be an arbitrary extension field of $F$, and let $\alpha \in E$. We want to find the smallest extension containing $F$ and $\alpha$, and we need to consider two cases.
+    \item \textbf{Let $E$ be an arbitrary extension field of $F$}, and let $\alpha \in E$. We want to find the smallest extension containing $F$ and $\alpha$, which we denote by $F(\alpha)$.
     
-    (Case I.) \emph{Suppose $\alpha$ is algebraic over $F$.} We can then construct the map $\phi_\alpha: F[x] \to E$ given by $\phi_\alpha(a) = a$ for all $a \in F$ and $\phi_\alpha(x) = \alpha$, because $E$ contains both $F$ and $\alpha$. This $\phi_\alpha$ is just the evaluation homomorphism. Since $\gen{\irr(\alpha,F)}$ is now a maximal ideal, $F[x]/\gen{\irr(\alpha,F)}$ is a field that is ring isomorphic to $\phi_\alpha(F[x]) \subseteq E$. \emph{Since a ring that is ring isomorphic to a field is a field itself (because being a field is a \emph{property} of a ring)}, $\phi_\alpha(F[x])$ is a subfield of $E$. Since any arbitrary $E$ containing $F$ and $\alpha$ has $\phi_\alpha(F[x])$ as a subfield, $\phi_\alpha(F[x]) \simeq F[x]/\la \irr(a,F) \ra$ is the smallest subfield containing $F$ and $\alpha$, which we denote by $F(\alpha)$.
+    (Case I.) \emph{When $\alpha$ is algebraic over $F$.} We can then construct the map $\phi_\alpha: F[x] \to E$ given by $\phi_\alpha(a) = a$ for all $a \in F$ and $\phi_\alpha(x) = \alpha$, because $E$ contains both $F$ and $\alpha$. This $\phi_\alpha$ is just the evaluation homomorphism. Since $\gen{\irr(\alpha,F)}$ is now a maximal ideal, $F[x]/\gen{\irr(\alpha,F)}$ is a field that is ring isomorphic to $\phi_\alpha(F[x]) \subseteq E$. \emph{Since a ring that is ring isomorphic to a field is a field itself (because being a field is a \emph{property} of a ring)}, $\phi_\alpha(F[x])$ is a subfield of $E$. Since any arbitrary $E$ containing $F$ and $\alpha$ has $\phi_\alpha(F[x])$ as a subfield, $\phi_\alpha(F[x]) \simeq F[x]/\la \irr(\alpha,F) \ra$ is the smallest subfield containing $F$ and $\alpha$. Isomorphically is the $F(\alpha)$ desired.
     
-    (Case II.) \emph{Suppose $\alpha$ is transcendental over $F$.} Then $\phi_\alpha$ gives an isomorphism of $F[x]$ with a subdomain of $E$. $F[\alpha] \coloneqq \phi_\alpha(F[x])$ is thus an integral domain, from which we can create a field of quotients $\Quot(F[\alpha])$, which is the smallest subfield of $E$ that contains $F[\alpha]$ (which again is the smallest integral domain that contains $F$ and $\alpha$). We denote this $\Quot(F[\alpha])$ also by $F(\alpha)$.
+    (Case II.) \emph{When $\alpha$ is transcendental over $F$.} Then $\phi_\alpha$ gives an isomorphism of $F[x]$ with a subdomain of $E$. $F[\alpha] \coloneqq \phi_\alpha(F[x])$ is thus an integral domain, from which we can create a field of quotients $\Quot(F[\alpha])$, which is the smallest subfield of $E$ that contains $F[\alpha]$ (which again is the smallest integral domain that contains $F$ and $\alpha$). Here $\Quot(F[\alpha])$ is isomorphically the $F(\alpha)$ desired.
     
     In both cases, the smallest field $F(\alpha)$ that contains the field $F$ and the element $\alpha \in E$ is called the \df{field generated over $F$ by $\alpha$}. If for an extension field $E$ of $F$ we can find an $\alpha \in E$ such that $E = F(\alpha)$, then $E$ is called a \df{simple extension of $F$}.
     \begin{itemize}
+        \item Pay attention to the difference between the case I here and the Kronecker's theorem we proved at the beginning. Kronecker's theorem tells us \textbf{how to create a specific extension field} $F[x]/\la p(x) \ra$ that contains a new zero $x + \la p(x) \ra$ of an irreducible factor $p(x)$ of $f(x)$. On the other hand, the case I above tells us that given an element $\alpha$ from \textbf{a given extension field} $E$ of $F$ such that $f(\alpha) = 0$ for some $f(x) \in F[x]$, we can create the smallest field $F[x]/\la \irr(\alpha,F) \ra$ containing $F$ and $\alpha$.
+        
+        The two results are the opposites of one another. Yet once we have created the new zero $\alpha = x + \la p(x) \ra$ in $F[x]/\la p(x) \ra$ by Kronecker's theorem, the extension field $F[x]/\la p(x) \ra$ of $F$ is exactly $F(\alpha)$ by case I. % At this stage we still do not know whether $x + \la p(x) \ra \in F[x]/\la p(x) \ra$ (from Kronecker's theorem) and $\alpha \in F[x]/\la \irr(\alpha,F) \ra$ (from case I)
         \item Since $\pi$ is transcendental over $\Q$, the field $\Q(\pi)$ is isomorphic to \df{the field $\Q(x)$ of rational functions over $\Q$ in the indeterminate $x$}. Consider \[\Q(\pi) = \Quot(\phi_\pi(\Q[x])) = \left\{\frac{f(\pi)}{g(\pi)} \,\middle|\, f(x),g(x) \in \Q[x];\, g(x) \neq 0 \right\}.\] Here every $\frac{f(\pi)}{g(\pi)}$ has a one-to-one correspondence with $\frac{f(x)}{g(x)} \in \Q(x)$. From a structural viewpoint, in general, an element that is transcendental over a field $F$ behaves as though it were an indeterminate over $F$.
     \end{itemize}
     \item Say $E = F(\alpha)$, where this $\alpha$ is algebraic over $F$ and $\deg(\alpha,F) = n \geq 1$. Then every $\beta \in E = F(\alpha) = \phi_\alpha(F[x])$ can be uniquely expressed as $b_0 + b_1 \alpha + \dots + b_{n-1} \alpha^{n-1}$, where the $b_i$'s are all in $F$.
@@ -295,7 +428,7 @@
         
         (Spanning List) For $\gamma \in K$, $\gamma = b_1 \beta_1 + \dots +b_m \beta_m$, with the $b_i$'s all in $E$. For each $b_i \in E$, we again have $b_i = a_{1i} \alpha_1 + \dots + a_{ni} \alpha_n$, with each $a_{ij} \in F$. Plug each expansion of $b_i$ back into the expansion of $\gamma$, and we see $\gamma = \sum_{i,j} a_{ij} (\alpha_i \beta_j)$.
         
-        (Linear Independence) Now let $0 = \sum_{i,j} c_{ij} (\alpha_i \beta_j)$, with each $c_{ij} \in F$. Note that $\sum_{i,j} c_{ij} (\alpha_i \beta_j) = \sum_j (\sum_i c_{ij}\alpha_i)\beta_j$, by the linear independence of $\beta_j$'s over $E$ we get that $\sum_i c_{ij}\alpha_i = 0$. Again by the linear independence of $\alpha_i$'s over $F$ we have all $c_{ij}$'s are 0.
+        (Linear Independence) Now let $0 = \sum_{i,j} c_{ij} (\alpha_i \beta_j)$, with each $c_{ij} \in F$. Note that \[\sum_{i,j} c_{ij} (\alpha_i \beta_j) = \sum_j \left(\sum_i c_{ij}\alpha_i\right)\beta_j,\] by the linear independence of $\beta_j$'s over $E$ we get that $\sum_i c_{ij}\alpha_i = 0$. Again by the linear independence of $\alpha_i$'s over $F$ we have all $c_{ij}$'s are 0.
     \end{proof}
     \begin{itemize}
         \item By induction we can extend this result to a tower of finite extension fields. For a tower of finite extensions $F_1,\dots,F_r$, with $F_{i+1}$ being the finite extension of $F_i$ ($1 \leq i \leq n-1$), then $F_r$ is a finite extension of $F_1$ with \[[F_r : F_1] = [F_r : F_{r-1}][F_{r-1} : F_{r-2}] \cdots [F_2 : F_1].\]
@@ -342,16 +475,21 @@
     \begin{itemize}
         \item An algebraically closed field $F$ has no proper algebraic extensions.
         \begin{proof}
-            Consider an algebraic extension $E$ of $F$. Then for any $\alpha \in E$, there is a polynomial $f(x) \in F[x]$ such that $f(\alpha) = 0$. Since $F$ is algebraically closed, by the theorem above this $f(x)$ factors into linear factors in $F[x]$, i.e., \textbf{{every possible zero of $f(x)$}} [over any field] \textbf{is in $F$}. Hence this $\alpha \in F$, which means that $E = F$.
+            Consider an algebraic extension $E$ of $F$. Then for any $\alpha \in E$, there is a polynomial $f(x) \in F[x]$ such that $f(\alpha) = 0$. Since $F$ is algebraically closed, by the theorem above this $f(x)$ factors into linear factors in $F[x]$, i.e., $f(x)$ has the maximum number of zeros is in $F$. Hence this $\alpha \in F$, which means that $E = F$.
         \end{proof}
     \end{itemize}
+\end{itemize}
+\begin{framed}
+    Note that ``every nonconstant polynomial $f(x) \in F[x]$ factors in $F[x]$ into linear factors'' means that $f(x)$ \textbf{has $\deg(f)$ zeros in $F$} (counting multiplicities). In an algebraically closed extension field $E$ of $F$ (most importantly $\clos{F}$, the algebraic closure of $F$, that we will introduce right below), \textbf{$f(x) \in F[x] \subseteq E[x]$ has the maximum possible number of zeros in $E$}.
+\end{framed}
+\begin{itemize}
     \item We may characterize the fundamental theorem of algebra in the following way: the field of complex numbers $\C$ is an algebraically closed field. The proof of the theorem is left to a complex analysis class.
     \item If we assume Zorn's lemma (the more frequently used version of the Axiom of Choice), then we can state that every field $F$ has an \df{algebraic closure}, i.e., an algebraic extension $\clos{F}$ that is algebraically closed.
     
     Furthermore under Zorn's lemma, the algebraic closure $\clos{F}$ of a field $F$ is \emph{unique up to isomorphism}. We will not go into details of these results.
 \end{itemize}   
 \begin{framed}
-    The theory of complex functions tells us that $\C = \R(i)$ is an algebraic closure of $\R$. Assuming Zorn's lemma ensures the existence of the algebraic closure of any field. 
+    Complex function theory tells us that $\C = \R(i)$ is an algebraic closure of $\R$. Assuming Zorn's lemma ensures the existence of the algebraic closure of any field. 
 
     Naively to construct an algebraic closure $\clos{F}$ of an arbitrary field $F$, we proceed as follows. If a nonconstant polynomial $f(x) \in F[x]$ has no zero in $F$, then adjoin an $\alpha \notin F$ such that $f(\alpha) = 0$ to the field $F$. If $F(\alpha)$ is still not algebraically closed, then we continue this process. The problem with this naive construction is that we do not know when the process will terminate, or if the process will terminate at all. This is because it is hard to show that a given field is algebraically closed, while it is often easier to show that a field is not algebraically closed. 
     
@@ -397,14 +535,112 @@
 This section is a good conclusion to the first six chapters of the book. The impossibility of certain geometric constructions, including the trisection of an arbitrary angle, is show here. Please read the book for the detailed exposition.
 
 \subsection{Finite Fields}
+\rmk The main goal of the section is to show that there is a unique (up to isomorphism) finite field of order $p^r$ for every prime $p$ and positive $r$. Furthermore, these finite fields are all the finite fields.
+
+It is natural to introduce splitting fields first before getting into finite fields. We use \S13.3 from \textit{Abstract Algebra} by Dummit and Foote as our reference for the notes.
 \begin{itemize}
     \item Let $E$ be a finite extension of degree $n$ over a finite field $F$. If $|F| = q$, then $|E| = q^n$.
     \begin{proof}
-        For a basis $\alpha_1,\dots,\alpha_n$ of $E$ over $F$, every element of $E$ can be uniquely expressed as \[b_1\alpha_1 + \dots + b_n\alpha_n\], where the $b_i$'s are in $F$. Each $b_i$ have $q$ choices from $F$, so there are in total $q^n$ elements in $E$.
+        For a basis $\alpha_1,\dots,\alpha_n$ of $E$ over $F$, every element of $E$ can be uniquely expressed as \[b_1\alpha_1 + \dots + b_n\alpha_n,\] where the $b_i$'s are in $F$. Each $b_i$ have $q$ choices from $F$, so there are in total $q^n$ elements in $E$.
     \end{proof}
     \begin{itemize}
-        \item From \lk{5}{27} on prime fields we know that every finite field $E$ with prime characteristic $p$ is a finite extension of a prime field isomorphic $\Z_p$, by the theorem above $|E| = p^n$ for some $n \in \Z^+$.
+        \item From \lk{5}{27} on prime fields we know that every finite field $E$ must be of some prime characteristic $p$, and it is a finite extension of a prime field isomorphic to $\Z_p$. By the theorem above $|E| = p^n$ for some $n \in \Z^+$. \textbf{This shows that all finite fields must be of prime-power order.}
     \end{itemize}
-    \item Let $E$ be a field of $p^n$ elements contained in an algebraic closure $\clos{\Z}_p$ of $\Z_p$. Then the elements of $E$ are precisely the zeros in $\clos{\Z}_p$ of the polynomial $x^{p^n}-x \in \Z_p[x]$.
+    \item The extension field $E$ of $F$ is called a \df{splitting field of the polynomial $f(x) \in F[x]$} if it is the \emph{smallest} extension field of $F$ such that $f(x)$ factors completely into linear factors (or \df{splits completely}) over $E$. This means $f(x)$ cannot factor completely into linear factors for any proper subfield of the splitting field $E$.
+    \item For any field $F$, given $f(x) \in F[x]$, then there exists a finite extension field $E$ of $F$ that is a splitting field of $f(x)$.
+    \begin{proof}
+        We have mentioned this result previously in \lk{6}{29}. Rigorously we should use induction on the degree of $f(x)$. If $\deg(f) = 1$, then take $E = F$.
+        
+        Suppose a finite splitting field exists for all polynomials over $F$ of some positive degree $k$. Consider $f(x) \in F[x]$ of degree $k+1$. If $f(x)$ splits completely over $F$ already, then take $E = F$; if not (i.e, there is an irreducible factor $p(x)$ over $F$ of degree $\geq 2$), then by Kronecker's theorem we have the extension field $F[x]/\la p(x) \ra$ containing a zero $\alpha$ to $p(x)$. In this extension field $F(\alpha) \simeq F[x]/\la p(x) \ra$, $f(x)$ has a linear factor $x - \alpha$. It follows that the degree of $\frac{f(x)}{x-\alpha}$ is $k$, which splits completely over a finite extension field $E$ of $F(\alpha)$ by the induction hypothesis. Thus $f(x)$ splits completely over $E$, as desired. $E$ is clearly a finite extension field of $F$.
+    \end{proof}
+    \begin{itemize}
+        \item A splitting field of a polynomial of degree $n$ over $F$ is of degree at most $n!$ over $F$. This follows naturally from the multiplicativity of the degrees of extensions. 
+    \end{itemize}
+    
+    \item The splitting field of $f(x)$ over $F$ is unique up to isomorphism.
+    
+    We prove a stronger result. Let $\phi: F \to F'$ be an isomorphism between fields, and $f(x) \in F[x]$. $f'(x) \in F'[x]$ is obtained by applying $\phi$ to the coefficients of $f(x)$ in $F$. Let $E$ be a splitting field of $f(x)$ over $F$, and let $E'$ be a splitting field of $f'(x)$ over $F'$, respectively. Then the isomorphism $\phi: F \to F'$ can be extended to $\sigma: E \to E'$, i.e., $\sigma|_F = \phi$.
+    \begin{proof}
+        
+    \end{proof}
+    \begin{itemize}
+        \item Take $F' = F$, and let $\phi$ be an the identity map. Then $E$ and $E'$ are two isomorphic splitting fields of the same polynomial $f(x)$ over $F$. As a result, it is now justified to say \emph{the} splitting field of a polynomial over a field if we do not care about the images under isomorphism.
+        \item Here is the \textbf{WRONG} approach to the proof: The smallest extension field $E$ of $F$ such that $f(x)$ splits completely over $E$ is the smallest extension field that contains $F$ and all possible zeros of $f(x)$ [over an extension field of $F$]. Say $\deg(f) = n$, and let $\alpha_1,\dots,\alpha_n$ be all possible zeros of $f(x)$ counting multiplicities, then $E$ should exactly be $F(\alpha_1,\dots,\alpha_n)$ [obtained by adjoining all of $\alpha_1,\dots,\alpha_n$ to $F$ in any order], which is unique up to isomorphism.
+        
+        The ``proof'' has some serious conceptual flaws, which we in fact emphasized back in \lk{6}{29}. It is true \textbf{only in a fixed extension field $K$} of $F$ containing $\alpha_1,\dots,\alpha_n$ that $F(\alpha_1,\dots,\alpha_n)$ is unique up to isomorphism. [We may let this $K$ be $F(\alpha_1,\dots,\alpha_n)$ we created.] However, if we adjoin the zeros of $F$ (by inductively creating factor rings of new fields modulo the ideal generated by irreducible factors) in a different order, we still do not know whether we may find a splitting field that is structurally different from $E$. Therefore the paragraph above is not a proof. \emph{The zeros of a polynomial $f(x)$ over $F$ are not determined by $F$, but by an extension field of $F$ that happens to contain all these zeros.} Only when we know the zeros of $f(x)$ we want are \emph{exactly} $\alpha_1,\dots,\alpha_n$ can we say that the splitting field containing these zeros is $F(\alpha_1,\dots,\alpha_n)$.
+    \end{itemize}
+    \item Let $E$ be a field of $p^n$ elements. Then $E$ must be in some splitting field $K$ of $x^{p^n}-x \in \Z_p[x]$.
+
+    Furthermore, for field $E$ of $p^n$ elements contained in a splitting field $K$ of $x^{p^n}-x$ over $\Z_p$, the elements of $E$ are precisely the zeros of the polynomial $x^{p^n}-x \in \Z_p[x]$ in this splitting field $K$. (\emph{The two results will be very important at the end of the section!})
+    
+    % algebraic closure $\clos{\Z}_p$ of $\Z_p$. Then the elements of $E$ are precisely the zeros in $\clos{\Z}_p$ of the polynomial $x^{p^n}-x \in \Z_p[x]$. [Here $\clos{\Z}_p$ (and later $\clos{F}$) may be replaced by the splitting field of $x^{p^n}-x$ over $\clos{\Z}_p$ (and later $F$), whose existence \textbf{does not require Zorn's lemma}.]
+    \begin{proof}
+        We know $\la E^*,\cdot \ra$ is a group of order $p^n - 1$. For any $\alpha \in E^*$, the order of $\alpha$ divides $p^n-1$. Therefore, $\alpha^{p^n-1} = 1$, which implies that $\alpha^{p^n} = \alpha$. Every element of $E$ is now a zero to $x^{p^n} - x$ in some splitting field $K$ of $x^{p^n} - x$ (created by adjoining all the elements of $E$ to $\Z_p$). Since $x^{p^n} - x$ can have at most $p^n$ distinct zeros in $K$, all the elements of $E$ must be exactly all the zeros in $K$ of $x^{p^n} - x$.
+    \end{proof}
+    \item An element $\alpha$ of a field is an \df{$n$-th root of unity} if $\alpha^n = 1$. It is a \df{primitive $n$-th root of unity} if $\alpha^n = 1$ and $\alpha^m \neq 1$ for $0 < m < n$.
+    
+    From the proof of the theorem above, we see that all the nonzero elements of $E$ are $(p^n-1)$-th roots of unity.
+    \item Recall in \lk{4}{23} we showed that for a finite field $F$, $\la F^*,\cdot \ra$ is a cyclic group. We have the following corollary.
+    \begin{itemize}
+        \item A finite extension $E$ of a finite field $F$ is a simple extension of $F$.
+        \begin{proof} We know $0_E = 0_F$. Let $\alpha$ be a generator of the cyclic group $E^*$, then clearly $F(\alpha) = E$.
+        \end{proof}
+    \end{itemize}
+    \item If field $F$ is of prime characteristic $p$, then $x^{p^n} - x$ has $p^n$ distinct zeros in its splitting field over $F$ (more precisely any of its splitting fields, up to isomorphism). [P.S.\ If a a polynomial over $F$ has all its root being distinct, then the polynomial is \df{separable over $F$}.]
+    \begin{proof}
+        We know $x^{p^n}-x$ has $p^n$ zeros, counting repeats, in its splitting field $K$. We want to show there are no repeats.
+        
+        Since $x^{p^n}-x = x (x^{p^n-1} - 1)$, every nonzero root to $x^{p^n}-x$ is a root to $x^{p^n-1} - 1$. Say $\alpha \in K^*$ is a root to $x^{p^n-1} - 1$. Then by long division \[\frac{x^{p^n-1} - 1}{x-\alpha} = x^{p^n - 2}+\alpha x^{p^n - 3} + \alpha^2 x^{p^n - 4}+ \dots + \alpha^{p^n - 3}x + \alpha^{p^n - 2}.\] Call this polynomial $g(x)$, then \[g(\alpha) = (p^n-1)\alpha^{p^n - 2} = (p^n-1)\frac{1}{\alpha} = -\frac{1}{\alpha} \neq 0\] (by $\alpha^{p^n-1} - 1 = 0$ and $\kar(F)=p$). This shows that every zero $\alpha$ has multiplicity 1.
+    \end{proof}
+    \item To prove the existence of $\GF(p^n)$ for every prime positive power $p^n$, we need a lemma:
+    
+    If field $F$ is of prime characteristic $p$, then \[(\alpha + \beta)^{p^n} = \alpha^{p^n} + \beta^{p^n}\] for all $\alpha,\beta \in F$ and $n \in \Z^+$.
+    \begin{proof}
+        By the binomial theorem on commutative rings,
+        \begin{align*}
+            (\alpha + \beta)^p & = \alpha^p + (p \cdot 1) \alpha^{p-1}\beta + (p\frac{p-1}{2} \cdot 1)\alpha^{p-2}\beta^2 + \dots + (p \cdot 1) \alpha\beta^{p-1} + \beta^p \\ & = \alpha^p + \beta^p.
+        \end{align*}
+        All middle terms vanish by $p$ being a prime and $\kar(F) = p$. We can proceed to higher prime powers by induction. Suppose $(\alpha + \beta)^{p^k} = \alpha^{p^k} + \beta^{p^k}$ for some $k \in \Z^+$, then \[(\alpha + \beta)^{p^{k+1}} = \left[(\alpha + \beta)^{p^k}\right]^p = \left[\alpha^{p^k} + \beta^{p^k}\right]^p = \alpha^{p^{k+1}} + \beta^{p^{k+1}}.\]
+    \end{proof}
+    \item Now comes the main theorem. A finite field $\GF(p^n)$ of $p^n$ elements exists for every prime positive power $p^n$. 
+    \begin{itemize}
+        \item Let $K$ be a splitting field of $x^{p^n} - x$ over $\Z_p$. Let $E$ be the set of zeros of $x^{p^n} - x$ in $K$. We want to show that $E$ is a field of $p^n$ elements. First notice that for every element $\gamma$ in $\Z_p^*$, $\gamma^{p-1} = 1$. Since $(p-1) \mid (p^n - 1)$, $\gamma^{p^n-1} = 1$, which implies $\gamma^{p^n} = \gamma$. This shows that $\Z_p \subseteq E \subseteq K$.
+        \begin{proof}
+            Let $\alpha,\beta \in E$. We already know that $0,1 \in E$.
+        \begin{enumerate}[label=(\roman*)]
+            \item Closed under Addition: \emph{Remember that the extension field should still be of the same characteristic as the original field because both fields have the common unity 1.} Thus $\kar(K) = \kar(\Z_p) = p$.
+            
+            By the preceding lemma, $(\alpha+\beta)^{p^n} = \alpha^{p^n} + \beta^{p^n} = \alpha + \beta$. Thus $\alpha+\beta \in E$.
+            \item Additive Identity: $0 \in E$.
+            \item Additive Inverses: $\alpha^{p^n} = \alpha$ implies that $(-\alpha)^{p^n} = (-1)^{p^n}\alpha$. If $p = 2$, then in $\Z_2$ we have $-1 = 1$. Thus $(-\alpha)^{p^n} = \alpha = -\alpha$. If $p$ is an odd prime, then $(-\alpha)^{p^n} = (-1)\alpha = -\alpha$. In both cases we have $-\alpha \in E$.
+            \item Abelian Group: because $K$ is a field.
+            \item Closed Under Multiplication: Since $(\alpha\beta)^{p^n} = \alpha^{p^n}\beta^{p^n} = \alpha \beta$, $\alpha\beta \in E$.
+            \item Unity: $1 \in E$.
+            \item Multiplicative Inverses: For $\alpha \neq 0$, $\alpha^{p^n} = \alpha$ implies that $(\alpha^{-1})^{p^n} = \alpha^{-1}$. Thus $\alpha^{-1} \in E$.
+            \item Distributive Properties: because $K$ is a field.
+        \end{enumerate}
+        By checking the criteria we now know $\Z_p \subseteq E \subseteq K$ is a tower of fields.
+        
+        In $\Z_p$ of prime characteristic $p$, $x^{p^n}$ has $p^n$ distinct zeros in its splitting field $K$ over $\Z_p$. Thus the elements of $E$ are all distinct, which tells that $E$ is a finite field of $p^n$ elements.
+        \end{proof}
+        Furthermore, because $E$ consists entirely of the zeros of $x^{p^n}-x$ (which includes $\Z_p$), $E$ must exactly be the splitting field $K$. The splitting field of $x^{p^n} - x$ has $p^n$ elements.
+        
+        \item We now continue to show that finite fields with $p^n$ elements are unique up to isomorphism. 
+        
+        (Proof 1, from Dummit and Foote) Let $L$ be any finite field of prime characteristic $p$. At the beginning of this section we first showed $|L| = p^n$ for some $n \in \Z^+$, which implies that $L$ must be in some splitting field $K$ of $x^{p^n}-x \in \Z_p[x]$. Since by the last paragraph that $|K| = p^n$, $L=K$. Since all splitting fields $K$ of $x^{p^n}-x$ over $\Z_p$ are unique up to isomorphism, all finite fields of characteristic $p$ are unique up to isomorphism with the splitting field of $x^{p^n}-x$ over $\Z_p$. \qed
+
+        (Proof 2, from Fraleigh, without splitting field) We want to show that for $E$ and $E'$ of order $p^n$, $E \simeq E'$.
+        
+        Since $E$ is a finite extension of $\Z_p$ with order $p^n$, it is a simple extension of degree $n$ over $\Z_p$. Thus for some $\alpha 
+        \in E$ we have $f(x) \coloneqq \irr(\alpha,\Z_p) \in \Z_p[x]$ of degree $n$ such that $E \simeq \Z_p[x]/\la f(x) \ra$. Since the elements of $E$ are zeros of $x^{p^n}-x$ in some splitting field $K$ of it over $\Z_p$, $f(x) = \irr(\alpha,\Z_p)$ must divide $x^{p^n} - x$.
+        
+        Because $E'$ also consists of zeros of $x^{p^n}-x$ in some splitting field $K'$ of it over $\Z_p$, $E'$ must contain the zeros of $f(x)$ over $K'$ because $f(x) \mid (x^{p^n}-x)$. Let $\alpha' \in E'$ be such a zero of the irreducible $f(x)$. It follows that $f(x) = \irr(\alpha',\Z_p)$, which implies that $E \simeq \Z_p[x]/\la f(x) \ra \simeq \Z_p(\alpha') \subseteq E'$. Yet $E$ and $E'$ are of the same order $p^n$, so $E \simeq E'$, as desired.
+    \end{itemize}
+    \item A final corollary to the existence and uniqueness of finite fields: If $F$ is any finite field, then for every $n \in \Z^+$ there is an irreducible polynomial in $F[x]$ of degree $n$.
+        \begin{proof}
+            Let $F$ have $q = p^r$ elements, where $\kar(F)$ is the prime $p$. From proving the existence of finite fields we now know that there is a field $E$ in the splitting field $K$ of $x^{p^{rn}}-x$ over $\Z_p$ that consists of the zeros of $x^{p^{rn}}-x$ in $K$. The idea is to show $E$ is a (finite) extension field of the finite field $F$.
+
+            Again, every element of $F$ is a zero of $x^{p^r}-x$ in $K$. Notice $x^{rs} = x^r x^{r(s-1)}$. Applying this equation repeatedly to the exponents and using the fact that $\alpha^{p^r} = \alpha$ for every $\alpha \in F$ we have \[\alpha^{p^{rn}} = \alpha^{p^{r(n-1)}} = \dots = \alpha^{p^r} = \alpha.\] This implies that $\alpha \in E$, and thus $F \subseteq E$. Therefore $E$ is a finite extension field of the finite field $F$, which tells us two things. First, by $|F| = p^r$ and $|E| = p^{rn}$ we have $[E:F] = n$; second, $E$ is a simple extension of $F$, and thus $E = F(\beta)$ for some $\beta \in E$. It follows that $n = [E:F] = \deg(\beta,F)$, i.e., $\irr(\beta,F) \in F[x]$ is the irreducible polynomial of degree $n$ desired.
+        \end{proof}
 \end{itemize}
 \end{document}
