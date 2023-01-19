@@ -1201,15 +1201,18 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
     Now we prove that \begin{align}
     \begin{split}
         N^{m_1+1}u_1,&\dots,Nu_1,u_1, \\ &\cdots \\ N^{m_n+1}u_n,&\dots,Nu_n,u_n
-    \end{split} \end{align} is linearly independent in $V$. Consider a linear combination of the vectors in the list above and apply $N$ to it. By (5) and $N^{k+1}u_j = N^k v_j$ it is easy to see that the result is a linear combination of (4), with coefficients unchanged. Yet since (4) is a basis of $\r N$, all the coefficients must be 0. Thus the list is linearly independent, and we can extend it to a a basis \begin{align*}
+    \end{split} \end{align} is linearly independent in $V$. Consider a linear combination of the vectors in the list above and apply $N$ to it. By $N^{k+1}u_j = N^k v_j$ it is easy to see that the result is a linear combination of (4) and $N^{m_1+1}v_1,\dots,N^{m_n+1}v_n$, with coefficients left unchanged. Therefore by (5) the linear combination of terms in (4) and of $N^{m_1}v_1,\dots,N^{m_n}v_n$ must both be 0. Since (4) is a basis of $\r N$, all these coefficients must be 0. Thus the list is linearly independent, and we can extend it to a a basis \begin{align}
+    \begin{split}
         N^{m_1+1}u_1,&\dots,Nu_1,u_1, \\ &\cdots \\ N^{m_n+1}u_n,&\dots,Nu_n,u_n \\ w_1,&\dots,w_p
-    \end{align*} of $V$.
+    \end{split}
+    \end{align} of $V$.
 
-    Note that $Nw_j \in \r N =$ the span of (4), and each vector in (4) is $N$ applied to a vector in (6). Therefore, there is a vector $x_j$ in the span of (6) such that $Nx_j = Nw_j$.
+    Note that $Nw_j \in \r N =$ the span of (4), and each vector in (4) is $N$ applied to a vector in (6). Therefore, there is a vector $x_j$ in the span of (6) such that $Nx_j = Nw_j$ for every $j$.
 
-    Now let $u_{n+j} = w_j - x_j$, which follows that $Nu_{n+j} = 0$. 
-    
-    
+    Now let $u_{n+j} = w_j - x_j$, which follows that $Nu_{n+j} = 0$. Meanwhile \begin{align*}
+        N^{m_1+1}u_1,&\dots,Nu_1,u_1, \\ &\cdots \\ N^{m_n+1}u_n,&\dots,Nu_n,u_n, \\ u_{n+1},&\dots,u_{n+p}
+    \end{align*}
+    spans $V$ because each $x_j$ and $u_{n+j}$ is contained in its span, meaning that each $w_j$ is in its span. Since the length of the list is same as (7), it is the desired basis for $V$, which finishes the induction.
     \item For $T \in \LV$, a basis of $V$ is called a \df{Jordan basis for $T$} if with respect to this basis $\M(T)$ is a block diagonal matrix \[\begin{bmatrix}
         A_1 & & 0 \\ & \ddots & \\ 0 & & A_p
     \end{bmatrix},\] where each block $A_j$ is an upper-triangular matrix of the form \[A_j = \begin{bmatrix}
@@ -1217,8 +1220,24 @@ a diagonal matrix representation of $T$ with respect to \emph{two} different bas
         & \ddots & \ddots & \\
         & & \ddots & 1 \\
         0 & & & \lambda_j
-    \end{bmatrix}\]
+    \end{bmatrix}.\]
+
+    From the end of \lk{5}{2} we know that all the $\lambda_j$'s are precisely the eigenvalues of $T$ because $\M(T)$ is upper-triangular. The $\lambda_j$'s do not have to be distinct.
     \item Existence of Jordan Basis: for an operator $T$ on a complex vector space $V$, there is a basis of $V$ that is a Jordan basis for $T$.
+
+    Consider a nilpotent operator $N$ and $v_1,\dots,v_n \in V$ as given by the previous theorem. What is the special about the result we just proved is that for each $j$, $N$ sends the first vector in the list $N^{m_j}v_j,\dots,Nv_j,v_j$ to 0 and the rest to the previous vector. In terms of matrix, the previous theorem gives a basis of $V$ with respect to which $\M(N)$ is block diagonal, with each diagonal blocks of the form \[\begin{bmatrix}
+        0 & 1 & & 0 \\
+        & \ddots & \ddots & \\
+        & & \ddots & 1 \\
+        0 & & & 0
+    \end{bmatrix}.\] Thus Jordan bases exist for nilpotent operators.
+    
+    In general for $T \in \LV$, we know \[V = G(\lambda_1,T) \oplus \cdots \oplus G(\lambda_m,T),\] where the $\lambda_j$'s are distinct eigenvalues of $T$. In \lk{8}{2} we proved that each $(T-\lambda_j I)|_{G(\lambda_j,T)}$ is nilpotent. With respect to the basis described in the last paragraph we have \[\M(T|_{G(\lambda_j,T)}) = \begin{bmatrix}
+        \lambda_j & 1 & & 0 \\
+        & \ddots & \ddots & \\
+        & & \ddots & 1 \\
+        0 & & & \lambda_j
+    \end{bmatrix}.\] Therefore, adjoining the described bases of each nilpotent $(T-\lambda_j I)|_{G(\lambda_j,T)}$ gives us the Jordan basis for $T$, with respect to which $\M(T)$ has the \df{Jordan canonical form}.
 \end{itemize}
 
 
@@ -1537,7 +1556,7 @@ Since a normal operator restricted to an invariant subspace is still normal, we 
             \sum_{(k_1,\dots,k_n) \in S_n} \sgn (k_1,\dots,k_n) A_{1,k_1} \cdots A_{n,k_n}.
         \end{equation}
 
-        For fixed $m_1,\dots,m_n$, let $\sigma = (m_1,\dots,m_n)$. Then \[A_{m_1,1}\cdots A_{m_n,n} = A_{1,\sigma^{-1}(1)}\cdots A_{n,\sigma^{-1}(n)}.\] Remember that $\sgn(\sigma^{-1}) = \sgn(\sigma)$: since the identity permutation $\iota = \sigma^{-1}\sigma$ is even, $\sigma^{-1}$ and $\sigma$ must have the same parity, and thus the two have the same sign. Therefore, we have shown that \[\sgn(\sigma) A_{m_1,1}\cdots A_{m_n,n} = \sgn(\sigma^{-1}) A_{1,\sigma^{-1}(1)}\cdots A_{n,\sigma^{-1}(n)}.\] Clearly summing $\sigma$ over $S_n$ and summing $\sigma^{-1}$ over $S_n$ are the same, and thus we have our alternative definition (7).
+        For fixed $m_1,\dots,m_n$, let $\sigma = (m_1,\dots,m_n)$. Then \[A_{m_1,1}\cdots A_{m_n,n} = A_{1,\sigma^{-1}(1)}\cdots A_{n,\sigma^{-1}(n)}.\] Remember that $\sgn(\sigma^{-1}) = \sgn(\sigma)$: since the identity permutation $\iota = \sigma^{-1}\sigma$ is even, $\sigma^{-1}$ and $\sigma$ must have the same parity, and thus the two have the same sign. Therefore, we have shown that \[\sgn(\sigma) A_{m_1,1}\cdots A_{m_n,n} = \sgn(\sigma^{-1}) A_{1,\sigma^{-1}(1)}\cdots A_{n,\sigma^{-1}(n)}.\] Clearly summing $\sigma$ over $S_n$ and summing $\sigma^{-1}$ over $S_n$ are the same, and thus we have our alternative definition (8).
     \end{itemize}
     \item The determinant of an upper-triangular matrix equals the product of all the diagonal entries.
 
