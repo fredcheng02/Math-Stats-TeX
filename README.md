@@ -1,2 +1,2 @@
 # Math-Stats-TeX
-Tex files for math and stats notes
+TeX files for math and stats notes
