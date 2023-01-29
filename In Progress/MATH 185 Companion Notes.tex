@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{tikz-cd,mathtools}
+\usepackage{enumitem}
+\usepackage{fullpage,setspace,microtype,soul,framed}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
+\newcommand{\rmk}{\noindent\textit{Remark. }}
+\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}} % definition
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+% \usepackage{bbm} use \mathbbm for blackboard bold
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+% \newcommand{\F}{\mathbf{F}} bold field
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\where}{\,|\,}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\clos}[1]{\overline{#1}}
+\newcommand{\inp}[2]{\langle #1, #2 \rangle}
+\newcommand{\nm}[1]{\|#1\|}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
+\newcommand{\dx}{\diff x}
+\renewcommand{\phi}{\varphi}
+
+\title{MATH 185 Companion}
+\author{Cheng, Feng}
+
+\onehalfspacing
+\setlength{\parskip}{0em}
+\setlist{listparindent=\parindent,parsep=0pt}
+
+\begin{document}
+
+\makeatletter
+\begin{center}
+    {\Large \@title}
+    \\ to Priestley's \textit{Introduction to Complex Analysis}, second edition
+    \vspace{0.5em}
+    \\ \@author
+    \vspace{-0.5em}
+\end{center}
+\makeatother
+
+\section{The complex plane}
+\begin{itemize}
+    \item Products, quotients, and powers look the best in the polar form. Use the polar form in calculations.
+    \item $\abs{z}^2 = z\conj{z}$ is an important formula. Also, $\Re z\conj{w} = \Re \conj{z} w$, so that $\abs{z+w}^2 = \abs{z}^2 + \abs{w}^2 + 2 \Re z\conj{w}$. (This is used to prove the triangular inequality for complex numbers.)
+\end{itemize}
+
+\section{Geometry in the complex plane}
+\begin{itemize}
+    \item There are multiple ways of expressing an arbitrary line in $\C$:
+    \begin{enumerate}[label=\alph*)]
+        \item $\abs{z - \alpha} = \abs{z - \beta}$ for $\alpha \neq \beta$.
+        
+        This is geometrically obvious.
+        \item $\Re az = c$ for $a \neq 0$ and $c \in \R$. (You may replace $\Re$ by $\Im$.)
+        
+        Let $a = u + iv \neq 0$ and $z = x + iy$. Then $ux - vy = c \in \R$ with $u$ and $v$ not simultaneously 0. This is exactly the expression for a line in $\C$.
+        
+        This fact may be also understood geometrically in terms of polar coordinates. The line represented (by the set of $z$'s) revolves counterclockwise by $\arg a$ about the point $z_1$ on the line with $\Re z_1$ and becomes the vertical line at $c$.
+        \item $\conj{B}z + B \conj{z} + C = 0$ for $B \neq 0$.
+        
+        This is the same as $ \Re B\conj{z} = -C/2$.
+    \end{enumerate}
+    \item The set $\mathcal{M}$ of Möbius transformations from $\widehat{\C}$ to $\widehat{\C}$ forms a group under function composition. This group is isomorphic to the projective general linear group (PGL) and the projective special linear group (PSL) under matrix multiplication.
+\end{itemize}
+
+\section{Topology and analysis in the complex plane}
+\begin{itemize}
+    \item The definition of connectedness on page 37 is wrong. A subspace $S$ of $\C$ is \df{disconnected} if it can be expressed as the disjoint union of two  sets \textit{open in $S$}.
+\end{itemize}
+
+\end{document}
