@@ -1,0 +1,43 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{fullpage,setspace,microtype,soul,framed}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
+\newcommand{\rmk}{\noindent\textit{Remark. }}
+\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}} % definition
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\where}{\,|\,}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\inp}[2]{\langle #1, #2 \rangle}
+\newcommand{\nm}[1]{\|#1\|}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
+\newcommand{\dx}{\diff x}
+\renewcommand{\phi}{\varphi}
+
+\title{Title}
+\author{Cheng, Feng}
+
+\onehalfspacing
+\setlength{\parskip}{0em}
+\setlist{listparindent=\parindent,parsep=0pt}
+
+\begin{document}
+
+\makeatletter
+\begin{center}
+    {\Large \@title}
+    \\\textit{Subtitle}
+    \vspace{0.5em}
+    \\ \@author
+    \vspace{-0.5em}
+\end{center}
+\makeatother
+
+\end{document}
