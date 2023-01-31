@@ -20,6 +20,7 @@
 \newcommand{\inn}{\operatorname{Inn}}
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\kar}{\operatorname{char}}
 \newcommand{\Quot}{\operatorname{Quot}} % Field of Quotients
@@ -107,7 +108,7 @@
         \item there is an identity $e$ for $\ast$;
         \item for every $a \in G$, there is an \df{inverse} $a' \in G$ such that $a \ast a' = a' \ast a = e$.
     \end{enumerate}
-    If $\ast$ is also commutative, then we call $G$ an \df{abelian group}. The \df{order} of a group is $|G|$.
+    If $\ast$ is also commutative, then we call $G$ an \df{abelian group}. The \df{order} of a group is $\abs{G}$.
     \begin{itemize}
         \item If for an $\la S,\ast \ra$ only the (a) above holds, then $S$ is called a \df{semigroup}. If (b) holds in addition, then $S$ is called a \df{monoid}.
     \end{itemize}
@@ -217,7 +218,7 @@ The corresponding adjectives ``largest'' and ``maximal'' have the exact opposite
         \item Because $\la \Z,+ \ra$ is a cyclic group with generator $1$ or $-1$, its subgroups are precisely $n\Z$ under addition for all $n \in \Z$.
     \end{itemize}
     \item Bezóut's identity tells us that for integers $x,y$, there always exists integers $a,b$ such that \[ax+by = \gcd(x,y).\] Since $\gcd(x,y) \mid (ax+by)$ [excluding the trivial case that $x$ or $y = 0$], and $H = \{ax+by \where a,b \in \Z\}$ is a subgroup of $\Z$ and is thus cyclic, $\gcd(x,y)$ is the only positive generator of $H$.
-    \item Let $G$ be a cyclic group. If $|G| = n$, then $G \simeq \la \Z_n,+_n \ra$; if $|G| = \infty$, then $G \simeq \la \Z,+ \ra$. \emph{This theorem classifies all cyclic groups up to isomorphism.}
+    \item Let $G$ be a cyclic group. If $\abs{G} = n$, then $G \simeq \la \Z_n,+_n \ra$; if $\abs{G} = \infty$, then $G \simeq \la \Z,+ \ra$. \emph{This theorem classifies all cyclic groups up to isomorphism.}
 \end{itemize}
 
 \subsection{Generating Sets and Cayley Digraphs}
@@ -539,12 +540,12 @@ This section is a good conclusion to the first six chapters of the book. The imp
 
 It is natural to introduce splitting fields first before getting into finite fields. We use \S13.3 from \textit{Abstract Algebra} by Dummit and Foote as our reference for the notes.
 \begin{itemize}
-    \item Let $E$ be a finite extension of degree $n$ over a finite field $F$. If $|F| = q$, then $|E| = q^n$.
+    \item Let $E$ be a finite extension of degree $n$ over a finite field $F$. If $\abs{F} = q$, then $\abs{E} = q^n$.
     \begin{proof}
         For a basis $\alpha_1,\dots,\alpha_n$ of $E$ over $F$, every element of $E$ can be uniquely expressed as \[b_1\alpha_1 + \dots + b_n\alpha_n,\] where the $b_i$'s are in $F$. Each $b_i$ have $q$ choices from $F$, so there are in total $q^n$ elements in $E$.
     \end{proof}
     \begin{itemize}
-        \item From \lk{5}{27} on prime fields we know that every finite field $E$ must be of some prime characteristic $p$, and it is a finite extension of a prime field isomorphic to $\Z_p$. By the theorem above $|E| = p^n$ for some $n \in \Z^+$. \textbf{This shows that all finite fields must be of prime-power order.}
+        \item From \lk{5}{27} on prime fields we know that every finite field $E$ must be of some prime characteristic $p$, and it is a finite extension of a prime field isomorphic to $\Z_p$. By the theorem above $\abs{E} = p^n$ for some $n \in \Z^+$. \textbf{This shows that all finite fields must be of prime-power order.}
     \end{itemize}
     \item The extension field $E$ of $F$ is called a \df{splitting field of the polynomial $f(x) \in F[x]$} if it is the \emph{smallest} extension field of $F$ such that $f(x)$ factors completely into linear factors (or \df{splits completely}) over $E$. This means $f(x)$ cannot factor completely into linear factors for any proper subfield of the splitting field $E$.
     \item For any field $F$, given $f(x) \in F[x]$, then there exists a finite extension field $E$ of $F$ that is a splitting field of $f(x)$.
@@ -627,7 +628,7 @@ It is natural to introduce splitting fields first before getting into finite fie
         
         \item We now continue to show that finite fields with $p^n$ elements are unique up to isomorphism. 
         
-        (Proof 1, from Dummit and Foote) Let $L$ be any finite field of prime characteristic $p$. At the beginning of this section we first showed $|L| = p^n$ for some $n \in \Z^+$, which implies that $L$ must be in some splitting field $K$ of $x^{p^n}-x \in \Z_p[x]$. Since by the last paragraph that $|K| = p^n$, $L=K$. Since all splitting fields $K$ of $x^{p^n}-x$ over $\Z_p$ are unique up to isomorphism, all finite fields of characteristic $p$ are unique up to isomorphism with the splitting field of $x^{p^n}-x$ over $\Z_p$. \qed
+        (Proof 1, from Dummit and Foote) Let $L$ be any finite field of prime characteristic $p$. At the beginning of this section we first showed $\abs{L} = p^n$ for some $n \in \Z^+$, which implies that $L$ must be in some splitting field $K$ of $x^{p^n}-x \in \Z_p[x]$. Since by the last paragraph that $\abs{K} = p^n$, $L=K$. Since all splitting fields $K$ of $x^{p^n}-x$ over $\Z_p$ are unique up to isomorphism, all finite fields of characteristic $p$ are unique up to isomorphism with the splitting field of $x^{p^n}-x$ over $\Z_p$. \qed
 
         (Proof 2, from Fraleigh, without splitting field) We want to show that for $E$ and $E'$ of order $p^n$, $E \simeq E'$.
         
@@ -640,7 +641,7 @@ It is natural to introduce splitting fields first before getting into finite fie
         \begin{proof}
             Let $F$ have $q = p^r$ elements, where $\kar(F)$ is the prime $p$. From proving the existence of finite fields we now know that there is a field $E$ in the splitting field $K$ of $x^{p^{rn}}-x$ over $\Z_p$ that consists of the zeros of $x^{p^{rn}}-x$ in $K$. The idea is to show $E$ is a (finite) extension field of the finite field $F$.
 
-            Again, every element of $F$ is a zero of $x^{p^r}-x$ in $K$. Notice $x^{rs} = x^r x^{r(s-1)}$. Applying this equation repeatedly to the exponents and using the fact that $\alpha^{p^r} = \alpha$ for every $\alpha \in F$ we have \[\alpha^{p^{rn}} = \alpha^{p^{r(n-1)}} = \dots = \alpha^{p^r} = \alpha.\] This implies that $\alpha \in E$, and thus $F \subseteq E$. Therefore $E$ is a finite extension field of the finite field $F$, which tells us two things. First, by $|F| = p^r$ and $|E| = p^{rn}$ we have $[E:F] = n$; second, $E$ is a simple extension of $F$, and thus $E = F(\beta)$ for some $\beta \in E$. It follows that $n = [E:F] = \deg(\beta,F)$, i.e., $\irr(\beta,F) \in F[x]$ is the irreducible polynomial of degree $n$ desired.
+            Again, every element of $F$ is a zero of $x^{p^r}-x$ in $K$. Notice $x^{rs} = x^r x^{r(s-1)}$. Applying this equation repeatedly to the exponents and using the fact that $\alpha^{p^r} = \alpha$ for every $\alpha \in F$ we have \[\alpha^{p^{rn}} = \alpha^{p^{r(n-1)}} = \dots = \alpha^{p^r} = \alpha.\] This implies that $\alpha \in E$, and thus $F \subseteq E$. Therefore $E$ is a finite extension field of the finite field $F$, which tells us two things. First, by $\abs{F} = p^r$ and $\abs{E} = p^{rn}$ we have $[E:F] = n$; second, $E$ is a simple extension of $F$, and thus $E = F(\beta)$ for some $\beta \in E$. It follows that $n = [E:F] = \deg(\beta,F)$, i.e., $\irr(\beta,F) \in F[x]$ is the irreducible polynomial of degree $n$ desired.
         \end{proof}
 \end{itemize}
 \end{document}
