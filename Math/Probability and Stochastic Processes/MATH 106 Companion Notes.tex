@@ -1,0 +1,118 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{fullpage,setspace,microtype,soul,framed}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
+\newcommand{\rmk}{\noindent\textit{Remark. }}
+\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+% \usepackage{bbm} use \mathbbm for blackboard bold
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\B}{\mathcal{B}} % Borel
+\newcommand{\F}{\mathcal{F}} % Sigma Field
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\where}{\,|\,}
+\newcommand{\clos}[1]{\overline{#1}}
+\newcommand{\inp}[2]{\langle #1, #2 \rangle}
+\newcommand{\nm}[1]{\|#1\|}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
+\newcommand{\dx}{\diff x}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\usepackage{xcolor}
+\newcommand{\tpurp}[1]{\textcolor{purple}{#1}}
+
+\usepackage{tikzit}
+\input{FtoBsty.tikzstyles}
+
+\title{MATH 106 Companion}
+\author{Cheng, Feng}
+
+\onehalfspacing
+\setlength{\parskip}{0em}
+\setlist{listparindent=\parindent,parsep=0pt}
+
+\begin{document}
+
+\makeatletter
+\begin{center}
+    {\Large \@title}
+    \\ to Walsh's \\ \textit{Knowing the Odds \\ An Introduction to Probability}
+    \vspace{0.5em}
+    \\ \@author
+    \vspace{-0.5em}
+\end{center}
+\makeatother
+
+\section{Probability Space}
+\begin{itemize}
+    \item For a set $X$ and a $\sigma$-algebra $\A$ containing some subsets of $X$, a \df{measure} on $(X,\A)$ is a function $\mu: \A \to [0, \tpurp{\infty]}$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item $\mu(\emptyset)=0$;
+        \item for a list of disjoint sets $A_i$ from $\A$, $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
+    \end{enumerate}
+    If at least one set $C$ from $\A$ has finite measure, then we can show (i) by (ii): \[\mu(C) = \mu(C \cup \emptyset) = \mu(C) + \mu(\emptyset) \implies \mu(\emptyset) = 0.\]
+    
+    A \df{probability measure} on $(\Omega, \F)$ is a function $P: \F \to [0,\tpurp{1]}$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item $P(\Omega) = 1$;
+        \item for a list of disjoint events $A_i$ from $\F$, $P(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty P(A_i)$.
+    \end{enumerate}
+    In addition to being a measure on $(\Omega, \F)$, a probability measure specifies the measure of $\Omega$ as 1. Because $P$ is finite, we can prove $P(\emptyset) = 0$ by (ii).
+    
+    Without specifying, we will be working in the probability space $(\Omega, \F, P)$ from now on.
+\end{itemize}
+
+\section{Random Variables}
+\begin{itemize}
+    \item A \df{random variable} is a function $X: \Omega \to \R$ such that for all $x \in \R$, $\{\omega : X(\omega) \leq x\} \in \F$. For intuitive understanding we write $\{\omega : X(\omega) \leq x\}$ mostly as $\{X \leq x\}$, and see $X$ as an actual random ``variable''.
+    
+    This is equivalent to saying that $X$ is a $\F$-measurable function. We know that the sets $(-\infty, x]$ for all $x \in \R$ generates $\B$. It suffices to check that $X^{-1}(-\infty, x]$ is $\F$-measurable by the fact that taking the preimage preserves set operations. This is true by our original definition.
+    
+    Proposition 2.8 in the book essentially says the same thing, that $X$ is a $\F$-measurable function that carries subsets of $\Omega$ from $\F$ to the Borel subsets of $\R$. Intuitively, this says that \emph{a random variable $X$ on a Borel set $A$ must be an event} (without specifying $\F$).
+    \begin{itemize}
+        \item Exercise 2.1(b). Prove that the sum of two random variables from the same probability space is a random variable.
+        \begin{proof}
+        First we show that \emph{for any arbitrary $x$}, \begin{equation}
+            \{\omega : X(\omega) + Y(\omega) > x\} = \cup_{\tpurp{r \in \Q}}\{\omega : X(\omega) > r, Y(\omega) > x - r\}.
+        \end{equation}
+        Clearly the RHS of the expression we proved is a countable union over $r$ of $\{\omega : X(\omega) > r, Y(\omega) > x - r\}$, which is the intersection of $\{\omega : X(\omega) > r\}$ and $\{\omega : Y(\omega) > x - r\}$. These two are the complements of $\{\omega : X(\omega) \leq r\}$ and $\{\omega : Y(\omega) \leq x - r\}$ respectively. Because $X, Y$ are random variables, the two sets are in $\F$, and by the axioms of a $\sigma$-field we see that $\{\omega : X(\omega) + Y(\omega) \leq x\} = \{\omega : X(\omega) + Y(\omega) > x\}^c \in \F$ for all $x \in \R$. This proves that $X+Y$ is a random variable.
+        \end{proof}
+        Pay attention that the role of (1) in the proof. Taking the complement of $\{\omega : X(\omega) + Y(\omega) \leq x\}$ makes sense here because it allows to get a general expression of the set as a countable union over a parameter.
+        \item Exercise 2.1(d).
+    \end{itemize}
+    \item The \df{distribution function of a random variable $X$} is the function $F_X: \R \to [0,1]$ given by \[F_X(x) = P(\omega : X(\omega) \leq x) = P(X^{-1}(-\infty, x]).\] It is important to note that the distribution function at $x$ is the probability measure on the event $\{\omega : X(\omega) \leq x\}$ [or $\{X \leq x\}$, using the shorthand notation]. We need to specify that this set $\{\omega : X(\omega) \leq x\}$ is from $\F$ so that the probability measure on it makes sense. The definition of $F_X$ justifies the vague definition of a random variable.
+    \item Clearly if $A \in \F$, then $I_A$ is a random variable. We now show that if $I_A$ is a random variable, then $A \in \F$.
+    
+    Consider $\{\omega : I_A(\omega) \leq x\} = 
+    \begin{cases}
+        \emptyset & \text{if } x < 0, \\
+        A^c & \text{if } 0 \leq x < 1, \\
+        \Omega & \text{if } x \geq 1.
+    \end{cases}$ By the definition of a random variable $A^c \in \F$, meaning that $A \in \F$.
+    \item The \df{distribution} of a random variable is the function $\mu: \B \to [0,1]$ given by \[\mu(A) = P(X \in A) = P(X^{-1}(A)).\]
+    The definition makes sense because we know that a random variable on a Borel set always has probability on it.
+
+    What is important about this definition is that through $X$, $\mu$ becomes a new probability measure on $(\R, \B)$: $\mu(A)$ evaluate the probability that the random variable $X$ falls in $A$.
+
+    We now verify that $\mu$ is a probability measure. First, $\mu$ is nonnegative because $P$ is nonnegative. Second, countable additivity follows straight from the preservation of set operations under preimage: for disjoint Borel sets $A_1,A_2,\dots,$ \[\mu(\cup_i A_i) = P(X^{-1}(\cup_i A_i)) = P(\cup_i X^{-1}(A_i)).\] Because preimages of disjoint sets are disjoint, by $P$ being a measure we have \[\textstyle P(\cup_i X^{-1}(A_i)) = \sum_i P(X^{-1}(A_i)) = \sum_i \mu(A_i).\] Furthermore, $\mu(\R) = P(X^{-1}(\R)) = P(\Omega) = 1$. This completes the proof.
+    
+    The following figure illustrates the connection between the probability space $(\Omega,\F,P)$ and the induced probability space $(\R,\B,\mu)$.
+    \ctikzfig{FtoBfig}
+    Note that this is a special setting of the \df{pushforward measure}. A new measure is obtained by pushing forward the original measure on one measure space to another space via the preimage of a measurable function.
+\end{itemize}
+\end{document}

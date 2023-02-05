@@ -17,6 +17,7 @@
 \newcommand{\Q}{\mathbf{Q}}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\C}{\mathbf{C}}
+\newcommand{\eC}{\widetilde{\C}}
 % \newcommand{\F}{\mathbf{F}} bold field
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
@@ -72,12 +73,17 @@
         
         This is the same as $ \Re B\conj{z} = -C/2$.
     \end{enumerate}
-    \item The set $\mathcal{M}$ of Möbius transformations from $\widetilde{\C}$ to $\widetilde{\C}$ forms a group under function composition. This group is isomorphic to the projective general linear group (PGL) and the projective special linear group (PSL) under matrix multiplication.
+    \item The set $\mathcal{M}$ of Möbius transformations from $\eC$ to $\widetilde{\C}$ forms a group under function composition. This group is isomorphic to the projective general linear group (PGL) and the projective special linear group (PSL) under matrix multiplication.
 \end{itemize}
 
 \section{Topology and analysis in the complex plane}
 \begin{itemize}
+    \item For topological reasons we define the $D(\infty, r)$ on $\eC$ as $\{z \in \C : \abs{z} > r\} \cup \{\infty\}$, and a set $S$ on $\eC$ as open if there is a disc around every point of $S$ contained in $S$. It is clear that $\C$ and all open subsets of $\C$ are open in the new space $\eC$ still.
     \item The definition of connectedness on page 37 is wrong. A subspace $S$ of $\C$ is \df{disconnected} if it can be expressed as the disjoint union of two  sets \textit{open in $S$}.
 \end{itemize}
+
+\section{Paths}
+
+\section{Holomorphic functions}
 
 \end{document}

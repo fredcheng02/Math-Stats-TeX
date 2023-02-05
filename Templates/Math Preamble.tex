@@ -4,7 +4,8 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{tikz-cd,mathtools}
 \usepackage{enumitem}
-\usepackage{fullpage,setspace,microtype,soul,framed}
+\usepackage{fullpage,setspace}
+\usepackage{microtype,soul,framed,xcolor}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
@@ -30,6 +31,7 @@
 \newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
 \newcommand{\dx}{\diff x}
 \renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
 
 % \usepackage{graphicx}
 % \graphicspath{ {image/} }
@@ -46,7 +48,7 @@
 \makeatletter
 \begin{center}
     {\Large \@title}
-    \\\textit{Subtitle}
+    \\ \textit{Subtitle}
     \vspace{0.5em}
     \\ \@author
     \vspace{-0.5em}
