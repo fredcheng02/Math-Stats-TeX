@@ -4,40 +4,60 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
-\usepackage{fullpage,setspace,microtype,soul,framed}
+\usepackage{fullpage,setspace}
+\usepackage{microtype,soul}
+\usepackage{framed,xcolor}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
-\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}} % definition
+\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\where}{\,|\,}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
-\newcommand{\nm}[1]{\|#1\|}
+\newcommand{\nm}[1]{\lVert#1\rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
 \newcommand{\dx}{\diff x}
+\usepackage{bm,upgreek}
 \renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
 
-\title{Title}
-\author{Cheng, Feng}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\bbeta}{\bm{\upbeta}}
+\newcommand{\SE}{\operatorname{SE}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+
+\usepackage{xcolor}
+\newcommand{\il}[1]{\ensuremath{\mathtt{\textcolor{brown}{#1}}}} % inline code
 
 \onehalfspacing
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
-\begin{document}
-
 \makeatletter
-\begin{center}
-    {\Large \@title}
-    \\\textit{Subtitle}
-    \vspace{0.5em}
-    \\ \@author
-    \vspace{-0.5em}
-\end{center}
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
+\newcommand{\makemytitle}{
+    \begin{center}
+        {\Large \@title}
+        \@subtitle
+        \vspace{0.5em}
+        \\ \@author
+        \vspace{-0.5em}
+    \end{center}
+}
 \makeatother
+
+\title{Title}
+\subtitle{Subtitle}
+\author{Cheng, Feng}
+
+\begin{document}
+\makemytitle
 
 \end{document}

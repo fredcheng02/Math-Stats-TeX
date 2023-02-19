@@ -18,7 +18,7 @@
 \renewcommand{\d}{\dim}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
-\newcommand{\nm}[1]{\| #1 \|}
+\newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\LV}{\mathcal{L}(V)}
 \newcommand{\LVW}{\mathcal{L}(V,W)}
 \newcommand{\M}{\mathcal{M}}
@@ -26,6 +26,17 @@
 \newcommand{\bv}{v_1,\dots,v_n}
 \newcommand{\bw}{w_1,\dots,w_n}
 \renewcommand{\phi}{\varphi}
+
+\makeatletter
+\newcommand{\makemytitle}{
+    \begin{center}
+        {\Large \@title}
+        \vspace{0.5em}
+        \\ \@author
+        \vspace{0.5em}
+    \end{center}
+}
+\makeatother
 
 \title{MATH 110 Supplement on Matrix Theory}
 \author{Cheng, Feng}
@@ -35,15 +46,8 @@
 \setlist{listparindent=\parindent,parsep=0pt}
 
 \begin{document}
+\makemytitle
 
-\makeatletter
-\begin{center}
-    {\Large \@title}
-    \vspace{1em}
-    \\ \@author
-    \vspace{0.5em}
-\end{center}
-\makeatother
 \begin{itemize}
     \item You should know that a real matrix $A$ with $A^{-1} = A^t$ is called an \df{orthogonal matrix}, and a complex matrix $A$ with $A^{-1} = A^*$ is called a \df{unitary matrix}, by the equivalence between square matrices and operators, and between $S^{-1} = S^*$ and $S$ being an isometry.
 \end{itemize}

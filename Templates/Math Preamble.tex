@@ -2,57 +2,70 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{tikz-cd,mathtools}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+% \usepackage{tikzit}
 \usepackage{enumitem}
 \usepackage{fullpage,setspace}
-\usepackage{microtype,soul,framed,xcolor}
+\usepackage{microtype,soul}
+\usepackage{framed,xcolor}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
-\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}} % definition
+\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
-% \usepackage{bbm} use \mathbbm for blackboard bold
+% \usepackage{bbm}; use \mathbbm for blackboard bold
 \newcommand{\N}{\mathbf{N}}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\Q}{\mathbf{Q}}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\C}{\mathbf{C}}
-% \newcommand{\F}{\mathbf{F}} bold field
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\where}{\,|\,}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
-\newcommand{\nm}[1]{\|#1\|}
+\newcommand{\nm}[1]{\lVert#1\rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
-\newcommand{\dx}{\diff x}
+% \newcommand{\dx}{\diff x}
+% \newcommand{\dt}{\diff t}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
 
 % \usepackage{graphicx}
 % \graphicspath{ {image/} }
 
-\title{Title}
-\author{Cheng, Feng}
+% \newcommand{\tpurp}[1]{\textcolor{purple}{#1}}
+% \newcommand{bpurp}[1]{\colorbox{purple}{#1}}
 
 \onehalfspacing
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
-\begin{document}
-
 \makeatletter
-\begin{center}
-    {\Large \@title}
-    \\ \textit{Subtitle}
-    \vspace{0.5em}
-    \\ \@author
-    \vspace{-0.5em}
-\end{center}
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
+\newcommand{\makemytitle}{
+    \begin{center}
+        {\Large \@title}
+        \@subtitle
+        \vspace{0.5em}
+        \\ \@author
+        \vspace{-0.5em}
+    \end{center}
+}
 \makeatother
+
+\title{Title}
+\subtitle{Subtitle}
+\author{Cheng, Feng}
+
+\begin{document}
+\makemytitle
+
 
 \end{document}

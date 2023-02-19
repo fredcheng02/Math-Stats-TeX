@@ -1,0 +1,28 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{thmtools}
+
+\declaretheoremstyle[headfont=\bfseries]{plain}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\declaretheoremstyle[headfont=\scshape]{definition}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\declaretheoremstyle[headfont=\itshape]{remark}
+\theoremstyle{remark}
+\newtheorem{rmk}[thm]{Remark}
+
+\begin{document}
+    \begin{defn}
+        How is that like
+    \end{defn}
+    \begin{thm}
+        this
+    \end{thm}
+    \begin{rmk}
+        what
+    \end{rmk}
+\end{document}

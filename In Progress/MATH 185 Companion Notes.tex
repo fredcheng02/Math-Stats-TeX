@@ -11,16 +11,15 @@
 \newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}} % definition
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
-% \usepackage{bbm} use \mathbbm for blackboard bold
 \newcommand{\N}{\mathbf{N}}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\Q}{\mathbf{Q}}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\C}{\mathbf{C}}
 \newcommand{\eC}{\widetilde{\C}}
-% \newcommand{\F}{\mathbf{F}} bold field
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\Bd}{\operatorname{Bd}}
 \newcommand{\where}{\,|\,}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\clos}[1]{\overline{#1}}
@@ -30,26 +29,34 @@
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
 \newcommand{\dx}{\diff x}
+\newcommand{\dt}{\diff t}
 \renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\makeatletter
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
+\newcommand{\makemytitle}{
+    \begin{center}
+        {\Large \@title}
+        \@subtitle
+        \vspace{0.5em}
+        \\ \@author
+        \vspace{-0.5em}
+    \end{center}
+}
+\makeatother
 
 \title{MATH 185 Companion}
 \author{Cheng, Feng}
+\subtitle{to Priestley's \textit{Introduction to Complex Analysis}, second edition}
 
 \onehalfspacing
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
 \begin{document}
-
-\makeatletter
-\begin{center}
-    {\Large \@title}
-    \\ to Priestley's \textit{Introduction to Complex Analysis}, second edition
-    \vspace{0.5em}
-    \\ \@author
-    \vspace{-0.5em}
-\end{center}
-\makeatother
+\makemytitle
 
 \section{The complex plane}
 \begin{itemize}
@@ -78,12 +85,20 @@
 
 \section{Topology and analysis in the complex plane}
 \begin{itemize}
-    \item For topological reasons we define the $D(\infty, r)$ on $\eC$ as $\{z \in \C : \abs{z} > r\} \cup \{\infty\}$, and a set $S$ on $\eC$ as open if there is a disc around every point of $S$ contained in $S$. It is clear that $\C$ and all open subsets of $\C$ are open in the new space $\eC$ still.
+    \item For topological reasons we define the $D(\infty; r)$ on $\eC$ as $\{z \in \C : \abs{z} > r\} \cup \{\infty\}$, and a set $S$ on $\eC$ as open if there is a disc around every point of $S$ contained in $S$. It is clear that $\C$ and all open subsets of $\C$ are open in the new space $\eC$ still.
     \item The definition of connectedness on page 37 is wrong. A subspace $S$ of $\C$ is \df{disconnected} if it can be expressed as the disjoint union of two  sets \textit{open in $S$}.
+    % \item Let's prove that the union of two open balls is convex if and only if one is contained in the other.
+    
+    % Consider the two balls $B(a;r_1)$ and $B(b;r_2)$. For $y$ in the former and $z$ in the latter, if $[y,z] \subseteq B(a;r_1) \cup B(b;r_2)$, then equivalently every $x = ty + (1-t)z$, where $t \in [0,1]$, should satisfy \[\nm{x-a} < r_1 \quad \text{or} \quad \nm{x-b} < r_2.\] Looking at the first equation, we see that $\nm{ty + (1-t)z - a} = \nm{t(y-a) + (1-t)(z-a)} < r_1$
 \end{itemize}
 
 \section{Paths}
+\begin{itemize}
+    \item The book defines the boundary of $S$ [$\Bd S$] as $\clos{S} \cap \clos{S^c}$. The \df{boundary of $S$} is better defined as $(\operatorname{Int} S \cup \operatorname{Ext} S)^c$ or $\clos{S}-\operatorname{Int} S$. The definitions are clearly equivalent because the complement of $\operatorname{Int} S$ [resp.\ $\operatorname{Ext} S$], the largest open set contained in $S$ [resp.\ $S^c$], must be the smallest closed set containing $S^c$ [resp.\ $S$], i.e, $\clos{S^c}$ [resp.\ $\clos{S}$].
+\end{itemize}
 
 \section{Holomorphic functions}
+
+\section{Complex series and power series}
 
 \end{document}

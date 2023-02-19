@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{mathpazo}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
@@ -10,7 +11,6 @@
 \newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}} % definition
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
-% \usepackage{bbm} use \mathbbm for blackboard bold
 \newcommand{\N}{\mathbf{N}}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\Q}{\mathbf{Q}}
@@ -24,29 +24,34 @@
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
 \newcommand{\dx}{\diff x}
-\renewcommand{\phi}{\varphi}
 
 \usepackage{graphicx}
 \graphicspath{ {image/} }
 
+\makeatletter
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
+\newcommand{\makemytitle}{
+    \begin{center}
+        {\Large \@title}
+        \@subtitle
+        \vspace{0.5em}
+        \\ \@author
+        \vspace{-0.5em}
+    \end{center}
+}
+\makeatother
+
 \title{Notes on Elementary Stochastic Processes}
 \author{Cheng, Feng}
+\subtitle{based on MAT 135B}
 
 \onehalfspacing
 \setlength{\parskip}{0.25em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
 \begin{document}
-
-\makeatletter
-\begin{center}
-    {\Large \@title} \\ based on MAT 135B
-    \vspace{0.5em}
-    \\ \@author
-    \vspace{-0.5em}
-\end{center}
-\makeatother
-
+\makemytitle
 
 % ------------------------------------------------------------
 % MadHat notebook page 1: DTMC
@@ -241,18 +246,18 @@ If we simply take all the edge weights to be 1, it follows that $\pi _{i}=\frac{
 
 \section{Branching Processes}
 
-The branching process is a stochastic process that emulates the spread of a family name. There is only a single individual at time 0, represented by $X_{0}=1$. Every individual $W_{j}$ in any generation has an i.d.d. \textit{offspring distribution}, given by the p.m.f.
+The branching process is a stochastic process that emulates the spread of a family name. There is only a single individual at time 0, represented by $X_{0}=1$. Every individual $W_{j}$ in any generation has an i.i.d.\ \textit{offspring distribution}, given by the p.m.f.
 \[
 p_{i}\coloneqq P(\text{number of offspring}=i),i=0,1,2,\dots .
 \]
 The offspring from the individual $W$ will appear in the next generation. The trivial case 
 $p_{i}=1$ for some $i$ is mostly ignored.
 
-It should be noted that a branching process is discrete and non-negative integer-valued. This suggests that we should use the method of probability generating function to investigate the properties of branching processes. Every $W_{j}$ in generation $n- 1$ is i.d.d.\ with p.g.f.\ $G(s)$, thus we may apply the p.g.f.\ random sum formula to get
+It should be noted that a branching process is discrete and non-negative integer-valued. This suggests that we should use the method of probability generating function to investigate the properties of branching processes. Every $W_{j}$ in generation $n- 1$ is i.i.d.\ with p.g.f.\ $G(s)$, and thus we may apply the p.g.f.\ random sum formula to get
 \[
 G_{n}(s)=G_{n-1}(G(s)),
 \]
-where the subscript tells the generation the pgf is about. Since $G_{0}(s)=s$, $G_{n}$ becomes the $n$-th iterate of $G$ for all non-negative integers $n$.
+where the subscript tells the generation the p.g.f.\ is about. Since $G_{0}(s)=s$, $G_{n}$ becomes the $n$-th iterate of $G$ for all non-negative integers $n$.
 
 It follows that $E(X_{n})=G_{n}'(1)=G_{n- 1}'(G(1))G'(1)=G_{n- 1}'(1)E(W)=E(X_{n- 1})\mu $, which gives us the formula $E(X_{n})=\mu ^{n}$, if we denote $E(W)$ by $\mu $.
 
@@ -354,7 +359,7 @@ since the interval $(s_{n},s_{n}+t]$ is of length $t$. (Here $n\geq 1$ and $s_{n
 
 In general, we can show that the Poisson process is a continuous-time Markov chain, and conditioning on any stopping time $T<\infty $ (e.g. the $n$-th arrival time $S_{n}=\sum_{i=1}^{n}T_{i}$ above), $N(T+t)- N(T)$ is a new Poisson process with the same rate $\lambda$, independent of $N$ prior to time $T$. The interarrival result above also follows “directly” from this strong Markov property because all $t_{i}$’s are arbitrary, as we have mentioned above.
 
-It is now clear that $E(S_{n})=\sum_{i=1}^{n}E(T_{i})=n/\lambda $. Furthermore, since $S_{n}$ is the sum of $n$ i.i.d. Exponential$(\lambda)$ random variables, it follows the \textit{Gamma distribution} with density
+It is now clear that $E(S_{n})=\sum_{i=1}^{n}E(T_{i})=n/\lambda $. Furthermore, since $S_{n}$ is the sum of $n$ i.i.d.\ Exponential$(\lambda)$ random variables, it follows the \textit{Gamma distribution} with density
 \[
 f_{S_{n}}(t)=\lambda e^{- \lambda t}\frac{(\lambda t)^{n- 1}}{(n-1)!}.
 \]

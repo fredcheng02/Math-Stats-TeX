@@ -2,8 +2,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage[T1]{fontenc}
-% \usepackage{newpxtext,newpxmath}
-% \usepackage{newtxtext,newtxmath}
 \usepackage{tikz-cd,mathtools}
 \usepackage{enumitem}
 \usepackage{fullpage,setspace,microtype,soul,framed}
@@ -38,18 +36,26 @@
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
+\makeatletter
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
+\newcommand{\makemytitle}{
+    \begin{center}
+        {\Large \@title}
+        \@subtitle
+        \vspace{0.5em}
+        \\ \@author
+        \vspace{-0.5em}
+    \end{center}
+}
+\makeatother
+
 \title{MATH 113 Notes}
 \author{Cheng, Feng}
+\subtitle{based on \textit{A First Course in Abstract Algebra}, seventh edition}
 
-\makeatletter
 \begin{document}
-\begin{center}
-    {\Large \@title}
-    \\ based on \textit{A First Course in Abstract Algebra}, seventh edition \vspace{0.5em}
-    \\ \@author
-    \vspace{-0.5em}
-\end{center}
-\makeatother
+\makemytitle
 
 \renewcommand*\contentsname{Selected Sections}
 \tableofcontents

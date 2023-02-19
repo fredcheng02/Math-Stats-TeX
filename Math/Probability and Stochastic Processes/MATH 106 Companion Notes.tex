@@ -1,8 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath}
-\usepackage{amssymb,amsthm}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
 \usepackage{fullpage,setspace,microtype,soul,framed}
@@ -25,7 +24,7 @@
 \newcommand{\where}{\,|\,}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
-\newcommand{\nm}[1]{\|#1\|}
+\newcommand{\nm}[1]{\lVert#1\rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
@@ -39,24 +38,30 @@
 \usepackage{tikzit}
 \input{FtoBsty.tikzstyles}
 
+\makeatletter
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
+\newcommand{\makemytitle}{
+    \begin{center}
+        {\Large \@title}
+        \@subtitle
+        \vspace{0.5em}
+        \\ \@author
+        \vspace{-0.5em}
+    \end{center}
+}
+\makeatother
+
 \title{MATH 106 Companion}
 \author{Cheng, Feng}
+\subtitle{to Walsh's \\ \textit{Knowing the Odds \\ An Introduction to Probability}}
 
 \onehalfspacing
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
 \begin{document}
-
-\makeatletter
-\begin{center}
-    {\Large \@title}
-    \\ to Walsh's \\ \textit{Knowing the Odds \\ An Introduction to Probability}
-    \vspace{0.5em}
-    \\ \@author
-    \vspace{-0.5em}
-\end{center}
-\makeatother
+\makemytitle
 
 \section{Probability Space}
 \begin{itemize}
@@ -111,7 +116,7 @@
 
     We now verify that $\mu$ is a probability measure. First, $\mu$ is nonnegative because $P$ is nonnegative. Second, countable additivity follows straight from the preservation of set operations under preimage: for disjoint Borel sets $A_1,A_2,\dots,$ \[\mu(\cup_i A_i) = P(X^{-1}(\cup_i A_i)) = P(\cup_i X^{-1}(A_i)).\] Because preimages of disjoint sets are disjoint, by $P$ being a measure we have \[\textstyle P(\cup_i X^{-1}(A_i)) = \sum_i P(X^{-1}(A_i)) = \sum_i \mu(A_i).\] Furthermore, $\mu(\R) = P(X^{-1}(\R)) = P(\Omega) = 1$. This completes the proof.
     
-    The following figure illustrates the connection between the probability space $(\Omega,\F,P)$ and the induced probability space $(\R,\B,\mu)$.
+    The following figure illustrates the connection between the probability space $(\Omega,\F,P)$ and the induced probability space $(\R,\B,\mu)$.`
     \ctikzfig{FtoBfig}
     Note that this is a special setting of the \df{pushforward measure}. A new measure is obtained by pushing forward the original measure on one measure space to another space via the preimage of a measurable function.
 \end{itemize}

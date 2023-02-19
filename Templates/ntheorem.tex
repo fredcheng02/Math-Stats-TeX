@@ -1,0 +1,53 @@
+\documentclass[11 pt, a4paper, oneside, openany, notitlepage]{article}
+\usepackage{amsfonts ,amssymb}
+\usepackage{mathtools}
+\usepackage[amsmath, thmmarks]{ntheorem}
+\usepackage[inner=15mm,outer=15mm,bottom=1.5cm]{geometry}
+\usepackage{setspace}
+\doublespacing
+
+% \theoremstyle{plain}
+% \theoremheaderfont{\normalfont\itshape}
+% \theorembodyfont{\normalfont}
+% \theoremseparator{.}
+% \theoremsymbol{\ensuremath{\triangle}}
+% \newtheorem{remark}{Remark}
+% \theoremsymbol{\ensuremath{\star}}
+% \newtheorem{definition}{Definition}
+% \theoremsymbol{\ensuremath{\bullet}}
+% \theoremseparator{\upshape:}
+% \newtheorem{assumption}{Assumption}
+
+\theoremstyle{plain}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\normalfont}
+\theoremseparator{.}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{definition}
+\theoremheaderfont{\normalfont\sffamily}
+\theorembodyfont{\normalfont}
+\theoremseparator{.}
+\newtheorem{remark}{Remark}
+\theoremstyle{remark}
+\theoremheaderfont{\normalfont\itshape}
+\theorembodyfont{\normalfont}
+\theoremseparator{.}
+\newtheorem{definition}{Definition}
+
+
+\begin{document}
+
+\begin{definition}
+  blah2
+\end{definition}
+
+\begin{remark}
+  blah2
+\end{remark}
+
+\begin{assumption}
+  For all $ x, y, z \in \mathbf R$, one has
+  \[ (x + y) + z= x +( y + z) \]
+\end{assumption}
+
+\end{document} 

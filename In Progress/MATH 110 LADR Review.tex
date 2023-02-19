@@ -8,7 +8,7 @@
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
 \newcommand{\where}{\,|\,}
-\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}}
+\newcommand{\df}[1]{\textit{\textsf{#1}}}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\C}{\mathbf{C}}
 \newcommand{\Z}{\mathbf{Z}}
@@ -21,7 +21,7 @@
 \renewcommand{\d}{\dim}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
-\newcommand{\nm}[1]{\|#1\|}
+\newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\tr}{\operatorname{trace}}
 \newcommand{\sgn}{\operatorname{sgn}}
@@ -34,24 +34,30 @@
 \newcommand{\bw}{w_1,\dots,w_n}
 \renewcommand{\phi}{\varphi}
 
+\makeatletter
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
+\newcommand{\makemytitle}{
+    \begin{center}
+        {\Large \@title}
+        \@subtitle
+        \vspace{0.5em}
+        \\ \@author
+        \vspace{-0.5em}
+    \end{center}
+}
+\makeatother
+
 \title{MATH 110 Notes}
 \author{Cheng, Feng}
+\subtitle{based on \textit{Linear Algebra Done Right}, third edition}
 
 \onehalfspacing
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
 \begin{document}
-
-\makeatletter
-\begin{center}
-    {\Large \@title}
-    \\based on \textit{Linear Algebra Done Right}, third edition
-    \vspace{0.5em}
-    \\ \@author
-    \vspace{-0.5em}
-\end{center}
-\makeatother
+\makemytitle
 
 \tableofcontents
 \newpage
