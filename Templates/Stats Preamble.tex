@@ -4,36 +4,40 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
-\usepackage{fullpage,setspace}
-\usepackage{microtype,soul}
+\usepackage{fullpage}
+\usepackage{setspace,microtype,soul}
 \usepackage{framed,xcolor}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
-\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
-\newcommand{\rmk}{\noindent\textit{Remark. }}
-\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
+
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\where}{\,|\,}
-\newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
-\newcommand{\nm}[1]{\lVert#1\rVert}
+\newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
 \newcommand{\dx}{\diff x}
-\usepackage{bm,upgreek}
+
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
+\usepackage{bm,upgreek}
+\newcommand{\bbeta}{\bm{\upbeta}}
 
 \renewcommand{\hat}[1]{\widehat{#1}}
-\newcommand{\bbeta}{\bm{\upbeta}}
+\renewcommand{\tilde}[1]{\widetilde{#1}}
+\newcommand{\mn}[1]{\overline{#1}}
 \newcommand{\SE}{\operatorname{SE}}
 \newcommand{\Var}{\operatorname{Var}}
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\argmax}{\operatorname*{arg\,max}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
 
-\usepackage{xcolor}
-\newcommand{\il}[1]{\ensuremath{\mathtt{\textcolor{brown}{#1}}}} % inline code
+\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
+\newcommand{\rmk}{\noindent\textit{Remark. }}
+\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
+\newcommand{\codevar}[1]{\ensuremath{\mathtt{\textcolor{brown}{#1}}}} % variable in code
 
 \onehalfspacing
 \setlength{\parskip}{0em}
@@ -59,5 +63,6 @@
 
 \begin{document}
 \makemytitle
+
 
 \end{document}
