@@ -1,14 +1,11 @@
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{mathpazo}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
-\usepackage{fullpage,setspace,microtype,soul,framed}
+\usepackage{setspace,microtype}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
-\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
-\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}} % definition
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
 \newcommand{\N}{\mathbf{N}}
@@ -16,17 +13,14 @@
 \newcommand{\Q}{\mathbf{Q}}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\where}{\,|\,}
-\newcommand{\conj}[1]{\overline{#1}}
-\newcommand{\clos}[1]{\overline{#1}}
-\newcommand{\inp}[2]{\langle #1, #2 \rangle}
-\newcommand{\nm}[1]{\|#1\|}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
-\newcommand{\sgn}{\operatorname{sgn}}
-\newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
-\newcommand{\dx}{\diff x}
 
 \usepackage{graphicx}
 \graphicspath{ {image/} }
+
+\usepackage{mathpazo}
+\usepackage[scaled=1.008]{inconsolata}
+\usepackage[scaled=0.842]{berasans}
 
 \makeatletter
 \let\@subtitle\@empty % default value
@@ -113,7 +107,7 @@ if $i$ is recurrent, and
 \]
 if $i$ is transient.
 
-\noindent Remarks. $V_{i}+1$ here actually follows Geometric$(1- f_{i})$ for $f_{i}\neq 1$. Furthermore, we can use $P(V_{i}\geq k)=f_{i}^{k}$ for any $k\in \Z^+$ (which we get from the calculation above) to show that $P(V_{i}=\infty )=1$ for any recurrent $i$, and $P(V_{i}<\infty )=1$ for any transient $i$.
+\noindent \fbox{\textit{Remark.}} $V_{i}+1$ here actually follows Geometric$(1- f_{i})$ for $f_{i}\neq 1$. Furthermore, we can use $P(V_{i}\geq k)=f_{i}^{k}$ for any $k\in \Z^+$ (which we get from the calculation above) to show that $P(V_{i}=\infty )=1$ for any recurrent $i$, and $P(V_{i}<\infty )=1$ for any transient $i$.
 
 In summary, recurrence/transience can be characterized in terms of the first-passage time $T_{i}$, the sum of transition probabilities $\sum_{n}p_{ii}^{n}$, or the number of returns 
 \[
@@ -127,7 +121,7 @@ When $i$ is transient, namely $P(T_{i}=\infty )>0$, $E(T_{i})$ diverges to $\inf
 
 As it turns out, both recurrence and positive recurrence are class properties, i.e., all states in a communicating class should be simultaneously (not) recurrent and simultaneously (not) positive recurrent. To show recurrence/transience as a class property, one uses the Chapman-Kolmogorov equations and $\sum_{n}p_{ii}^{n}=\infty $ and $<\infty $. The most direct way of showing positive recurrence as a class property involves invariant distribution, which we will mention later.
 
-The \textit{period} $d_{i}$ of a state $i$ is given by the $gcd$ of all possible steps needed to return to $i$. Formally, we write $d_{i}=\gcd\{n:p_{ii}^{n}>0\}$. The state $i$ is \textit{aperiodic} if $d_{i}=1$, and is \textit{periodic} if $d_{i}>1$. Using the Chapman-Kolmogorov equations, it is not hard to show that period is also a class property.
+The \textit{period} $d_{i}$ of a state $i$ is given by the gcd of all possible steps needed to return to $i$. Formally, we write $d_{i}=\gcd\{n:p_{ii}^{n}>0\}$. The state $i$ is \textit{aperiodic} if $d_{i}=1$, and is \textit{periodic} if $d_{i}>1$. Using the Chapman-Kolmogorov equations, it is not hard to show that period is also a class property.
 
 Here we provide a summary of some elementary facts useful in judging the properties of states and classes in a Markov chain:
 
@@ -213,11 +207,11 @@ The fact that the backward sequence is also Markov rephrases reversibility to sa
 
 Let $\mathbf{X}$ be an \textbf{irreducible} Markov chain with $X_{0}$ having the invariant distribution $\pi $. If its time-reversal $\mathbf{Y}$ has the same transition matrix $P$ as $\mathbf{X}$ does, or simply \[
 \pi _{i}p_{ij}=\pi _{j}p_{ji} \text{ for all } i,j\in S,\]
-then we call $\mathbf{X}$ \textit{reversible}. (The equations above are known as \textit{the detailed balance equations}.)
+then we call $\mathbf{X}$ \textit{reversible}. (The equations above are known as the \textit{detailed balance equations}.)
 
-Remark. Reversibility is by assumption restricted to irreducible positive recurrent Markov chains. This is because we only want to determine the reversibility of a chain based on \textit{only} one invariant distribution. Also, the detailed balance equations allows only one solution.
+\noindent \fbox{\textit{Remark.}} Reversibility is by assumption restricted to irreducible positive recurrent Markov chains. This is because we only want to determine the reversibility of a chain based on \textit{only} one invariant distribution. Also, the detailed balance equations allows only one solution.
 
-Next, we show that in an irreducible chain, if a distribution $\lambda $ satisfies the detailed balance equations $\lambda _{i}p_{ij}=\lambda _{j}p_{ji}$, then $\lambda $ is the unique invariant distribution:
+Next, we show that in an irreducible chain, if a distribution $\lambda$ satisfies the detailed balance equations $\lambda _{i}p_{ij}=\lambda _{j}p_{ji}$, then $\lambda $ is the unique invariant distribution:
 \[
 \sum_{i\in S}\lambda _{i}p_{ij}=\sum_{i\in S}\lambda _{j}p_{ji}=\lambda _{j}\sum_{i\in S}p_{ji}=\lambda _{j} \implies \lambda P=\lambda .
 \]
@@ -243,7 +237,7 @@ If we simply take all the edge weights to be 1, it follows that $\pi _{i}=\frac{
 % MadHat notebook page 2: Branching Processes
 % ------------------------------------------------------------
 
-
+\newpage
 \section{Branching Processes}
 
 The branching process is a stochastic process that emulates the spread of a family name. There is only a single individual at time 0, represented by $X_{0}=1$. Every individual $W_{j}$ in any generation has an i.i.d.\ \textit{offspring distribution}, given by the p.m.f.
@@ -272,7 +266,7 @@ This extinction probability $e$ is actually the smallest non-negative solution t
 e_{n}=G(e_{n- 1}) \text{ for all } n\in \N .
 \]
 Take $n\rightarrow \infty $ on both sides, we have $e=\lim _{n\rightarrow \infty }G(e_{n})$. $G(x)$ is uniformly convergent on 
-$[0,1]$ and is thus continuous on $[0,1]$. Therefore, since all $e_{n}\in [0,1]$, by the sequential criterion for continuity, $e=\lim _{n\rightarrow \infty }G(e_{n})=G(e)$.
+$[0,1]$ and is thus continuous on $[0,1]$. Therefore, since all $e_{n}\in [0,1]$, by the preservation of sequential limit under continuity, $e=\lim _{n\rightarrow \infty }G(e_{n})=G(e)$.
 
 Beyond the fact that $e$ is a solution to $G(x)=x$, we want to show $e$ is the smallest non-negative solution. Suppose $t$ is any non-negative solution to $G(x)=x$. Since the coefficients of $G(x)$ are non-negative, $G$ is a non-decreasing function, we have the following iteration:
 \[
@@ -283,7 +277,7 @@ e_{n}=G(e_{n- 1})\leq G(t)=t\dots .
 \]
 We now have $e_{n}$ is bounded above by $t$ for all $n$, and thus the limit $e\leq t$.
 
-Beyond this, the following theorem will tell us that extinction necessarily occurs ($e=1$) iff $\mu \leq 1$ (if we exclude the case $p_{1}=1$, which let $G(x)=x$ for all $x$). Intuitively the mean offspring $\mu =1$ is the most likely threshold of extinction. To show this, first of all restricting to $[0,1]$, we have $G$ being continuous, non-decreasing, and concave-up (by considering the 1st and 2nd derivative).
+Furthermore, the following theorem will tell us that extinction necessarily occurs ($e=1$) iff $\mu \leq 1$ (if we exclude the case $p_{1}=1$, which let $G(x)=x$ for all $x$). Intuitively the mean offspring $\mu =1$ is the most likely threshold of extinction. To show this, first of all restricting to $[0,1]$, we have $G$ being continuous, non-decreasing, and concave-up (by considering the 1st and 2nd derivative).
 
 The easiest way to “see” the result is to look at the two cases
 \[
@@ -303,7 +297,7 @@ Thus, $\mu \leq 1$ iff $e=1$, i.e., the branching process ultimately goes extinc
 % MadHat notebook page 3: Poisson Processes
 % ------------------------------------------------------------
 
-
+\newpage
 \section{Poisson Processes}
 
 A \textit{counting process} $N(t)$ for $t\geq 0$ is a continuous stochastic process such that
@@ -318,7 +312,7 @@ A \textit{counting process} $N(t)$ for $t\geq 0$ is a continuous stochastic proc
 
 \end{itemize}
 
-A \textit{Poisson process} with \textit{arrival rate} $\lambda $ is the particular counting process that “follows” the Poisson distribution:
+A \textit{Poisson process with arrival rate} $\lambda$ is the particular counting process that “follows” the Poisson distribution:
 
 \begin{itemize}
 

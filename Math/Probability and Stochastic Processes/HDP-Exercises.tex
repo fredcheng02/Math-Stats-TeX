@@ -1,0 +1,224 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{setspace,microtype}
+\usepackage{framed,xcolor}
+\usepackage[pdfusetitle,bookmarksnumbered,colorlinks]{hyperref} %load this at the end
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\where}{\,|\,}
+\newcommand{\inp}[2]{\langle #1, #2 \rangle}
+\newcommand{\nm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\ol}[1]{\overline{#1}}
+
+\renewcommand{\Pr}{\operatorname{P}}
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\I}[1]{\mathbf{1}_{\{#1\}}}
+\newcommand{\SE}{\operatorname{SE}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\argmax}{\operatorname*{arg\,max}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
+\newcommand{\convd}{\xrightarrow[]{\text D}}
+\newcommand{\convp}{\xrightarrow[]{\text P}}
+\newcommand{\convas}{\xrightarrow[]{\text{a.s.}}}
+\newcommand{\eqD}{\stackrel{\text D}{=}}
+
+\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
+% \newcommand{\codevar}[1]{\ensuremath{\mathtt{\textcolor{brown}{#1}}}} % variable in code
+
+\usepackage{thmtools}
+\declaretheoremstyle[headfont=\scshape]{plain}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem*{lem*}{Lemma}
+\declaretheoremstyle[headfont=\bfseries]{definition}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\declaretheoremstyle[headfont=\itshape]{remark}
+\theoremstyle{remark}
+\newtheorem{rmk}[thm]{Remark}
+\theoremstyle{definition}
+\newtheorem{sol}[thm]{Solution}
+\newtheorem{mansolinner}{Solution}
+\newenvironment{mansol}[1]{%
+  \renewcommand\themansolinner{#1}%
+  \mansolinner
+}{\endmansolinner}
+
+
+\usepackage{mathpazo}
+\usepackage[scaled=1.008]{inconsolata}
+\usepackage[scaled=0.842]{berasans}
+
+\onehalfspacing
+\setlength{\parskip}{0em}
+\setlist{listparindent=\parindent,parsep=0pt}
+
+\makeatletter
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
+\renewcommand{\maketitle}{
+    \begin{center}
+        {\Large \@title}
+        \@subtitle
+        \vspace{0.5em}
+        \\ \@author \\ \@date
+        \vspace{-0.5em}
+    \end{center}
+}
+\makeatother
+
+\title{HDP Exercises}
+\author{Cheng, Feng}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{mansol}{1.2.2}
+    We already know that for $X \geq 0$, \[\E X = \int_{0}^\infty \Pr(X > t) \, dt.\] In general for a real number $x$, \[
+    x = \I{x \geq 0} \cdot \int_0^\infty \I{t < x} \,dt - \I{x < 0} \cdot \int_{-\infty}^0 \I{x < t} \,dt.
+\]
+When $x<0$, $\I{t<x} = 0$ for all $t\geq 0$; when $x \geq 0$, $\I{x<t} = 0$ for all $t \leq 0$. Hence \[x = \int_0^\infty \I{t < x} \,dt - \int_{-\infty}^0 \I{x < t} \,dt,
+\]
+and by interchanging $\int$ and $\E$ (via Fubini-Tonelli's theorem), we have \[ \E X = \int_{0}^\infty \Pr(X > t) \, dt - \int_{-\infty}^0 \Pr(x < t) \,dt. \qedhere\]
+\end{mansol}
+
+\begin{mansol}{1.2.3}
+By the change of variables formula, since $g(t) = t^p$ is a strictly increasing function that maps $[0,\infty)$ onto $[0,\infty)$,
+\begin{align*}
+\text{RHS} & = \int_0^\infty \Pr(\abs X  > t) (t^p)'\,dt \\
+& = \int_0^\infty \Pr(\abs X > \sqrt[n]{u})\,du \\ & = \int_0^\infty \Pr(\abs X ^p > u) \,du = \text{LHS}.
+\end{align*}
+\end{mansol}
+
+\begin{mansol}{1.3.3}
+Lyapounov's inequality tells us $(\E X)^2 \leq \E X^2$ [from Jensen's inequality; true regardless of whether $X$ has finite second moment or not]. Now consider \[
+\Bigl(\E \Big\lvert\frac{1}{N} \sum_{i=1}^N X_i - \mu\Big\rvert \Bigr)^2 = \bigl[\E\bigl(\ol{X} - \E\ol{X}\bigr)\bigr]^2,
+\] which is
+\[
+\leq \E \bigl(\ol X - \E \ol X \bigr)^2 = \Var(\ol X) = \frac{\sigma^2}{N}.
+\]
+Taking the square root gives us the desired result.
+\end{mansol}
+
+\begin{mansol}{2.1.4}
+Let Z replace $g \sim N(0,1)$. By the law of unconscious statistician, 
+\[
+\E(Z^2 \I{Z > t}) = \int_t^\infty z^2 \frac{1}{\sqrt{2\pi}} e^{-z^2 / 2}\,dz 
+= \frac{1}{\sqrt{2\pi}}\int_t^\infty z \cdot \bigl(z e^{-z^2 / 2}\bigr)\,dz.
+\]
+Integration by parts gives us \begin{align*}
+\int_t^\infty z \cdot \bigl(z e^{-z^2 / 2}\bigr)\,dz & = \bigl[z \cdot \bigl(- e^{-z^2 / 2}\bigr)\bigr]_t^\infty - \int_t^\infty \bigl(- e^{-z^2/2}\bigr)\,dz \\
+& = t \bigl(e^{-t^2 / 2}\bigr) + \int_t^\infty \bigl(e^{-z^2/2}\bigr)\,dz.
+\end{align*}
+Hence \[
+\E(Z^2 \I{Z > t}) = t \cdot \frac{1}{\sqrt{2\pi}} e^{-t^2/2} + \Pr(Z > t),
+\] and the inequality on the right is obvious by proposition 2.1.2.
+\end{mansol}
+
+\begin{mansol}{2.2.7}[Proof of 2.2.6 Hoeffding's inequality for general bounded R.V.]\ \\
+We follow what we have done in the special case for Rademacher distribution (2.2.2): for any chosen $\lambda > 0$, 
+\begin{align}
+\Pr \biggl(\sum_{i=1}^N (X_i - \E X_i) \geq t \biggr) & = \Pr \biggl(\exp\Bigl(\lambda \sum_{i=1}^N (X_i - \E X_i)\Bigr) \geq e^{\lambda t}\biggr) \nonumber \\ 
+& \leq \frac{\E \exp\Bigl(\lambda \sum_{i=1}^N (X_i - \E X_i)\Bigr)}{e^{\lambda t}} \nonumber \\
+& = e^{-\lambda t} \prod_{i=1}^N \E \exp\bigl(\lambda (X_i - \E X_i)\bigr). \label{eq:1}
+\end{align}
+We know that $\E (X_i - \E X_i) = 0$. To show the exact bound given in the problem, we have to show that
+
+\begin{centering}
+for a zero-mean random variable $X \in [a,b]$, for any $\lambda \in \R$, \begin{equation}
+\E \exp(\lambda X) \leq \exp\biggl(\frac{1}{8} \lambda^2 (b - a)^2\biggr). \label{eq:2}
+\end{equation}
+\end{centering}
+
+This is called the \df{Hoeffding's lemma}. A proof of the inequality with 2 instead of 8 is in example 2.4 of HDS\footnote{\textit{High-Dimensional Statistics} by Wainwright. The proof of the original inequality is outlined in exercise 2.4 of the same book, and is given in full length in \textit{Concentration Inequalities} by Boucheron et al. This proof uses the \df{change of measure} technique.}. The technique used is called the \df{symmetrization argument}, and there is another proof of the inequality with 4 instead of 8 using the same technique at \href{https://marcromani.github.io/2021-05-01-hoeffding-lemma/}{this link}. For the most elementary proof, see \href{https://en.wikipedia.org/wiki/Hoeffding\%27s_lemma}{Wikipedia}, which is given below.
+
+\begin{proof}
+Since $e^{\lambda x}$ is convex, we have for $x \in [a,b]$ \[
+e^{\lambda x} \leq \frac{b-x}{b-a}e^{\lambda a} + \frac{x-a}{b-a}e^{\lambda b}.
+\]
+Taking expectation on both sides, and we have \begin{equation}
+\E \exp(\lambda X) \leq \frac{b}{b-a} e^{\lambda a} - \frac{a}{b-a} e^{\lambda b} = e^{L(\lambda(b-a))}, \label{eq:3}
+\end{equation}
+where for all $h \in \R$, $L(h) = - \gamma h + \log(1 - \gamma + \gamma e^h)$, with $\gamma = -\frac{a}{b - a} > 0$ [so that the log is well-defined].
+
+Notice that $L(0) = 0$, and $L'(0) = -\gamma + \frac{\gamma e^h}{1 - \gamma + \gamma e^h}\big|_{h = 0} = 0$. \begin{align*}
+L''(h) & = \biggl(\frac{\gamma e^h}{1 - \gamma + \gamma e^h}\biggr)' \\
+& = \frac{\gamma e^h}{1 - \gamma + \gamma e^h} - \frac{\gamma^2 e^{2h}}{(1 - \gamma + \gamma e^h)^2} \\
+& = t - t^2 \leq 1/4\quad \text{for any }t\in \R, 
+\end{align*}
+where we let $t = \frac{\gamma e^h}{1 - \gamma + \gamma e^h}$. Now we appeal to Taylor's theorem: for $h \neq 0$, there exists a $\xi$ between $h$ and 0 such that \[L(h) = 0 + 0\cdot h + \frac{L''(\xi)}{2} \cdot h^2 \leq \frac{1}{8} h^2.\] Now let $h = \lambda(b-a)$ and plug it back into \eqref{eq:3}, and we have shown \eqref{eq:2}.
+\end{proof}
+
+Now we return to \eqref{eq:1}. For any $t > 0$, \begin{align*}
+e^{-\lambda t} \prod_{i=1}^N \E \exp\bigl(\lambda (X_i - \E X_i)\bigr) & \leq e^{-\lambda t} \prod_{i=1}^N \exp\biggl(\frac{N}{8} \lambda^2 \bigl((M_i - \E X_i)-(m_i - \E X_i)\bigr)^2\biggr) \\ 
+& = \exp \biggl(\frac{\sum_{i = 1}^N (M_i - m_i)^2}{8}\lambda^2 - t \lambda \biggr)
+\end{align*}
+The expression in the large parentheses is minimized at $\lambda = \frac{4 t}{\sum(M_i - m_i)^2}$ by $- \frac{2t^2}{\sum(M_i - m_i)^2}$. We can thus conclude that \[
+\Pr \biggl(\sum_{i=1}^N (X_i - \E X_i) \geq t \biggr) \leq \exp \biggl(- \frac{2t^2}{\sum_{i=1}^N (M_i - m_i)^2}\biggr),
+\]
+as desired.
+\iffalse
+Before this we need to show: for a random variable $Y \in [m,M]$,
+\[\Var(Y) \leq \frac 1 4 (M-m)^2.\]
+
+\begin{proof}
+We know 
+\[\Var(Y) = \E (Y - \E Y)^2 \leq \E \biggl(Y - \frac{M+m}{2}\biggr)^2\]
+because $\E Y$ is the minimizer of the MSE. Notice that \begin{align*}
+\E \biggl(Y - \frac{M+m}{2}\biggr)^2 & = \frac 1 4 \E [(Y - M) + (Y - m)]^2 \\
+& \leq \frac 1 4 \E[(Y - m) - (Y - M)]^2
+\end{align*}
+because $Y - M \leq 0$. Hence $\Var(Y) \leq \frac 1 4 (M-m)^2.$
+\end{proof}
+
+Now we return to proving \eqref{eq:1}. Let $X'$ be an independent copy of $X$. Because here $\E X = \E X' = 0$, \begin{align*}
+\E_X \exp(\lambda X) & = \E_X \exp\bigl(\lambda (X - \E_{X'}X')\bigr) \\
+& \leq \E_X \E_{X'} \exp\bigl(\lambda (X - X') \bigr),
+\end{align*}
+by Jensen's inequality. Let $U = X - X'$. $U$ is a zero-mean symmetric\footnote{Clearly $\E U = \E X - \E X' = 0$. Since $X$ and $X'$ are i.i.d., $X$ and $X'$ are exchangeable, i.e., $(X,X') \eqD (X',X)$. Applying the function $g(a,b) = a - b$ to the two random vectors shows that $X - X' \eqD X' - X$, i.e., $U$ is symmetric.} random variable, and is always in $[m - M, M - m]$. Now by Taylor's theorem, for all $u \in [m - M, M - m]$, 
+\[
+e^{\lambda u} = 1 + (\lambda u) + \frac{\lambda^2 u^2}{2!} + \frac{\lambda^3 u^3}{3!}e^{\lambda \theta}
+\]
+for some $\theta$ between 0 and $u$. We want to take the expectation of the expression above. By symmetry we know that $\E U^3 = 0 = \E U$. Meanwhile, $\E U^2 = \Var(U) = 2 \Var(X)$. It follows that 
+\begin{align*}
+\E e^{\lambda U} & = 1 + \frac{\lambda^2}{2} \E U^2\\
+& = 1 + \lambda^2
+\end{align*}
+\fi
+\end{mansol}
+
+\begin{mansol}{2.2.8}[Boosting]
+Let $X_i = \I{\text{wrong $i$-th classification}}$. Then $\E X_i = \frac{1}{2} - \delta$. Basically we want to bound $\Pr \bigl(\sum_{i=1}^N X_i \geq \frac{N}{2}\bigr)$ above by $\epsilon$. We try to use Hoeffding's inequality 2.2.6:
+\begin{align*}
+\Pr \biggl(\sum_{i=1}^N X_i \geq \frac{N}{2}\biggr) & = \Pr \biggl(\sum_{i=1}^N X_i - N\Bigl(\frac{1}{2} - \delta \Bigr)\geq N\delta \biggr) \\
+& \leq \exp\biggl(-\frac{2 N^2\delta^2}{N}\biggr).
+\end{align*}
+We may just let $\exp\bigl(-2N \delta^2\bigr) \leq \epsilon$; equivalently this means $N \geq -\frac{1}{2\delta^2} \log(\epsilon).$
+\end{mansol}
+
+\begin{mansol}{2.2.9}
+
+\end{mansol}
+
+\begin{mansol}{2.2.10}
+\begin{enumerate}[label=(\alph*)]
+\item Easy; by $\int_0^\infty e^{-tx} dx = 1/t$.
+\item Easy; just follow the hint.
+\end{enumerate}
+\end{mansol}
+
+\begin{mansol}{}
+
+\end{mansol}
+\end{document}

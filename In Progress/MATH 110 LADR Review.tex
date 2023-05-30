@@ -1,9 +1,9 @@
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,tikz-cd,mathtools}
 \usepackage{enumitem}
-\usepackage{fullpage,setspace,microtype,soul}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace,microtype,soul}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
@@ -152,7 +152,7 @@
 \section{Linear Maps}
 \subsection{The Vector Space of Linear Maps}
 \begin{itemize}
-    \item A linear map(ping)/transformation is a homomorphism of vector spaces under addition and scalar multiplication. The linear structure is preserved after the transformation $T$. To use symbols, a linear map is a function $T: V \rightarrow W$ such that for all $u,v \in V$ and $\lambda \in \F$ (the field of $V$ and $W$),
+    \item A \df{linear map(ping)/transformation} is a homomorphism of vector spaces under addition and scalar multiplication. The linear structure is preserved after the transformation $T$. To use symbols, a linear map is a function $T: V \rightarrow W$ such that for all $u,v \in V$ and $\lambda \in \F$ (the field of $V$ and $W$),
     \begin{equation*}
         T(u+v) = Tu + Tv \quad \text{and} \quad
         T (\lambda u) = \lambda T(u).
@@ -295,16 +295,16 @@
     \begin{itemize}
         \item A basis from $V/U$ combined with a basis from $U$ form a basis of $V$. Suppose $v_1,\dots,v_n$ are the basis vectors of $V/U$ and $u_1,\dots,u_m$ are the basis vectors of $U$. If we write $$a_1v_1+\dots+a_nv_n + b_1u_1+\dots+b_mu_m = 0,$$ then necessarily $(a_1v_1+\dots+a_nv_n) \in U$, which implies that $$0+U = (a_1v_1+\dots+a_nv_n)+U = a_1(v_1+U)+\dots+a_n(v_n+U).$$ Because the $v+U$'s form a basis of $V/U$, the coefficients $a_1,\dots,a_n$ must be 0. Since $u_1,\dots,u_m$ form a basis of $U$, their coefficients $b_1,\dots,b_m$ must also be 0. And because $v_1,\dots,v_n,u_1,\dots,u_m$ is of length $n+m$, by the previous theorem this indeed is a basis of $V$.
     \end{itemize}
-    \item Now we define the induced map $\tilde{T}: V/(\n T) \to W$ of $T: V \to W$ by $$\tilde{T}(v+\n T) = Tv.$$ $u + \n T = v + \n T$ implies $u - v \in \n T$, and thus $Tu-Tv = 0$. Therefore the induced map is well defined. Checking the linearity of $\tilde{T}$ is routine. Note that $T = \tilde{T} \circ \pi$.
-    \begin{equation*}
+    \item Now we define the induced map $\widetilde{T}: V/(\n T) \to W$ of $T: V \to W$ by \[\widetilde{T}(v+\n T) = Tv.\] $u + \n T = v + \n T$ implies $u - v \in \n T$, and thus $Tu-Tv = 0$. Therefore the induced map is well defined. Checking the linearity of $\widetilde{T}$ is routine. Note that $T = \widetilde{T} \circ \pi$.
+        \[
             \begin{tikzcd}
                 V \arrow[rr,"T"] \arrow[dr,"\pi"] && W \\
-                & {V/\n T} \arrow[ur,"\tilde{T}"]
+                & {V/\n T} \arrow[ur,"\widetilde{T}"]
             \end{tikzcd}
-        \end{equation*}
-    \item The definition leads to the isomorphism theorem that exists for different algebraic structures. For $T \in \LVW$, $\tilde{T}$ is injective and $\r \tilde{T} = \r T$. The latter simply follows from the definition, while the first requires us to prove $\n \tilde{T} = \{0+\n T\}$, the identity. $\tilde{T}(v+\n T) = Tv = 0$ gives us $v-0 \in \n T$. Hence, $v+\n T = 0+\n T$, and the conclusion follows.
+        \]
+    \item The definition leads to the isomorphism theorem that exists for different algebraic structures. For $T \in \LVW$, $\widetilde{T}$ is injective and $\r \widetilde{T} = \r T$. The latter simply follows from the definition, while the first requires us to prove $\n \widetilde{T} = \{0+\n T\}$, the identity. $\widetilde{T}(v+\n T) = Tv = 0$ gives us $v-0 \in \n T$. Hence, $v+\n T = 0+\n T$, and the conclusion follows.
         \begin{itemize}
-            \item The two claims combined tell us $V/(\n T) \simeq \r T$ under the isomorphism $\tilde{T}$.
+            \item The two claims combined tell us $V/(\n T) \simeq \r T$ under the isomorphism $\widetilde{T}$.
         \end{itemize}
     \end{itemize}
     
@@ -380,7 +380,7 @@
     \end{align*}
     \item The \df{row rank} and \df{column rank} of matrix $A$ are defined to be the dimension of the span of the rows of $A$ in $\F^{1,n}$ and of the columns of $A$ in $\F^{m,1}$, respectively. As we know from lower-division matrix algebra, they are the same and represent the number of pivots in a reduced row echelon form of a matrix. We now prove this fact with the tools we have.
     
-    \item $\M(T') = (\M(T))^t$. Consider the dual basis $\psi_j$ ($1 \leq j \leq m$) of $W'$ and $\phi_j$ ($1 \leq k \leq n$) of $V'$. Then $$T'(\psi_j) = \sum_{r=1}^n C_{r,j}\phi_r,$$ which we evaluate at $v_k$: $$(\psi_j \circ T)(v_k) = \sum_{r=1}^n C_{r,j}\phi_r(v_k) = C_{k,j}.$$ On the other hand, we have $$(\psi_j)(Tv_k) = \psi_j\left(\sum_{r=1}^mA_{r,k}w_r\right) = \sum_{r=1}^m A_{r,k}\psi_j(w_r) = A_{j,k}.$$
+    \item $\M(T') = (\M(T))^t$. Consider the dual basis $\psi_j$ ($1 \leq j \leq m$) of $W'$ and $\phi_j$ ($1 \leq k \leq n$) of $V'$. Then \[T'(\psi_j) = \sum_{r=1}^n C_{r,j}\phi_r,\] which we evaluate at $v_k$: \[(\psi_j \circ T)(v_k) = \sum_{r=1}^n C_{r,j}\phi_r(v_k) = C_{k,j}.\] On the other hand, we have \[(\psi_j)(Tv_k) = \psi_j\biggl(\sum_{r=1}^mA_{r,k}w_r\biggr) = \sum_{r=1}^m A_{r,k}\psi_j(w_r) = A_{j,k}.\]
     
     \item First, $\d \r T = \text{column rank of } \M(T)$. From bases $\bv$ and $w_1,\dots,w_m$ of $V$ and $W$, we have $\s(Tv_1,\dots,Tv_n)$ is isomorphic to $\s(\M(Tv_1),\dots,\M(Tv_n))$ under the isomorphism $\M$. Thus, the two VS have the same dimensions, with \[\d \s(\M(Tv_1),\dots,\M(Tv_n)) = \text{column rank of } \M(T).\] Recall that $\s(Tv_1,\dots,Tv_n) = \r T$, thus $\d \r T = $ column rank of $\M(T)$, as desired.
     
@@ -500,7 +500,7 @@
     
     The first proof first shows that $U = \r(T - \lambda I)$ is invariant under $T$, which means that $U$ has an upper-triangular matrix with respect to a basis $u_1,\dots,u_m$ of $U$ (by the inductive hypothesis, and is equivalent to $Tu_j \in \s(u_1,\dots,u_j)$ for all $j$).
     
-    We extend $u_1,\dots,u_m$ to $u_1,\dots,u_m,v_1,\dots,v_n$, basis of $V$. Now set $Tv_k = (T-\lambda I)v_k+\lambda v_k$. Since $(T-\lambda I)v_k \in U$, $$Tv_k\ \in \s(u_1,\dots,u_m,v_1,\dots,v_k)$$ for all $1 \leq k \leq n$. This combined with $Tu_j \in \s(u_1,\dots,u_j)$ for all $j$ shows that $u_1,\dots,u_m,v_1,\dots,v_n$ is the basis of $V$ that has an upper-triangular matrix.
+    We extend $u_1,\dots,u_m$ to $u_1,\dots,u_m,v_1,\dots,v_n$, basis of $V$. Now set $Tv_k = (T-\lambda I)v_k+\lambda v_k$. Since $(T-\lambda I)v_k \in U$, $$Tv_k \in \s(u_1,\dots,u_m,v_1,\dots,v_k)$$ for all $1 \leq k \leq n$. This combined with $Tu_j \in \s(u_1,\dots,u_j)$ for all $j$ shows that $u_1,\dots,u_m,v_1,\dots,v_n$ is the basis of $V$ that has an upper-triangular matrix.
     
     The second proof is nonstandard but quite interesting. It sets $U = \s(v_1)$ and looks at $V/U$ of dimension $n-1$ instead. $T/U \in \mathcal{L}(V/U)$ by the inductive hypothesis should have (for all $j$ between 2 and $n$) $$(T/U)(v_j+U) \in \s(v_2+U,\dots,v_j+U).$$ This implies that $Tv_j = \s(v_1,\dots,v_j)$ for $j$ between 1 and $n$. Recall in \lk{3}{5} we showed that $v_2,\dots,v_n$ combined with the basis vector $v_1$ from $U$ is a basis of $V$, and the conclusion follows.
     
@@ -855,7 +855,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
             \inp{(T^2+bT+CI)v}{v} & = \inp{T^2v}{v}+b\inp{Tv}{v}+c\inp{v}{v} \\
             & = \inp{Tv}{Tv}+b\inp{Tv}{v}+c\inp{v}{v} \\
             & \geq \nm{Tv}^2+\nm{v}^2 -b\nm{Tv}\nm{v} \quad \text{by Cauchy-Schwarz}\\
-            & = \left(\nm{Tv}-\frac{\abs{b}\nm{v}}{2}\right)^2 + \left(c - \frac{b^2}{4})\right)\nm{v}^2 > 0,
+            & = \left(\nm{Tv}-\frac{\abs{b}\nm{v}}{2}\right)^2 + \left(c - \frac{b^2}{4}\right)\nm{v}^2 > 0,
         \end{align*}
         showing that $(T^2+bT+CI)v \not= 0$ for all nonzero vector $v$ and is thus injective.
     \end{itemize}
@@ -1664,14 +1664,8 @@ Since a normal operator restricted to an invariant subspace is still normal, we 
         
         % We know $T = S \sqrt{T^*T}$, where $\sqrt{T^*T}$ has nonnegative eigenvalues and thus cannot reverse the direction of vectors. Also, any $v \in V$ can be written as a linear combination of the orthonormal basis vectors of $V$ (with respect to which $\M(S)$ has the nice block diagonal form). We may then say \emph{whether the number of times vector $v$ reverses its direction is even or odd decides whether $\det T$ is positive or negative}. By reversing direction we mean reversing the sign of a component vector of $v$. It may be more illuminating to think about the statement in $\R^n$ in terms of matrices.
     \end{itemize}
-    The book continues with a pseudo-proof of the change of variables theorem. The pseudo-proof clearly illustrates where the determinant in the formula comes from. Some measure theory is required to make the proof actually rigorous.
-    
-    
-    
-    
-    
 \end{itemize}
 
-
+The book continues with a pseudo-proof of the change of variables theorem. The pseudo-proof clearly illustrates where the determinant in the formula comes from. Some measure theory is required to make the proof actually rigorous. Please check out the book for the exposition.
 \setcounter{secnumdepth}{3}
 \end{document}
