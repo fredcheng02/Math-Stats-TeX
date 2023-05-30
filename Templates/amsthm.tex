@@ -1,14 +1,22 @@
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{refstyle}
 \usepackage{amsmath,amssymb,amsthm}
-
 \usepackage{thmtools}
 
-\declaretheoremstyle[headfont=\bfseries]{plain}
+% if refstyle is used for formatted reference; or you can use \autoref{} for simple cases; or cleveref
+\newref{thm}{name=theorem~, names=theorems~, Name=Theorem~, Names=Theorems~}
+\newref{cor}{name=corollary~, names=corollaries~, Name=Corollary~, Names=Corollaries~}
+\newref{exa}{name=example~, names=examples~, Name=Example~, Names=Examples~}
+\newref{sec}{refcmd={\S\ref{#1}}}
+% \usepackage[colorlinks]{hyperref}
+% \usepackage[nameinlink,noabbrev]{cleveref}
+
+\declaretheoremstyle[headfont=\scshape]{plain}
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}
-\declaretheoremstyle[headfont=\scshape]{definition}
+\declaretheoremstyle[headfont=\bfseries]{definition}
 \theoremstyle{definition}
 \newtheorem{defn}[thm]{Definition}
 \declaretheoremstyle[headfont=\itshape]{remark}

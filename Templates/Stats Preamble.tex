@@ -1,13 +1,12 @@
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{enumitem}
-\usepackage{fullpage}
-\usepackage{setspace,microtype,soul}
-\usepackage{framed,xcolor}
-\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+\usepackage{setspace,microtype}
+\usepackage{soul,framed,xcolor}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref} %load this at the end
 
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
@@ -16,17 +15,15 @@
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
 \newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
-\newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
-\newcommand{\dx}{\diff x}
 
-\renewcommand{\phi}{\varphi}
-\renewcommand{\epsilon}{\varepsilon}
 \usepackage{bm,upgreek}
 \newcommand{\bbeta}{\bm{\upbeta}}
 
-\renewcommand{\hat}[1]{\widehat{#1}}
-\renewcommand{\tilde}[1]{\widetilde{#1}}
-\newcommand{\mn}[1]{\overline{#1}}
+% \renewcommand{\hat}[1]{\widehat{#1}}
+% \renewcommand{\tilde}[1]{\widetilde{#1}}
+
+% \newcommand{\mn}[1]{\overline{#1}}
+% \newcommand{\E}{\operatorname{E}}
 \newcommand{\SE}{\operatorname{SE}}
 \newcommand{\Var}{\operatorname{Var}}
 \newcommand{\Cov}{\operatorname{Cov}}
@@ -35,7 +32,7 @@
 \newcommand{\argmin}{\operatorname*{arg\,min}}
 
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
-\newcommand{\rmk}{\noindent\textit{Remark. }}
+% \newcommand{\rmk}{\noindent\textit{Remark. }}
 \newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
 \newcommand{\codevar}[1]{\ensuremath{\mathtt{\textcolor{brown}{#1}}}} % variable in code
 
@@ -46,12 +43,12 @@
 \makeatletter
 \let\@subtitle\@empty % default value
 \protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\newcommand{\makemytitle}{
+\renewcommand{\maketitle}{
     \begin{center}
         {\Large \@title}
         \@subtitle
         \vspace{0.5em}
-        \\ \@author
+        \\ \@author \\ \@date
         \vspace{-0.5em}
     \end{center}
 }
@@ -60,9 +57,9 @@
 \title{Title}
 \subtitle{Subtitle}
 \author{Cheng, Feng}
+\date{}
 
 \begin{document}
-\makemytitle
-
+\maketitle
 
 \end{document}

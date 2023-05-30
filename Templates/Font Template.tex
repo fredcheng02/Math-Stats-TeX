@@ -1,12 +1,30 @@
-% Use LuaTeX or XeLaTeX
+% Use LuaTeX or XeTeX
+% \usepackage{unicode-math}
+% \setmainfont{XCharter}
+% \setmathfont{XCharter-Math.otf}[CharacterVariant={6}] % phi replaced by varphi
+\usepackage[CharacterVariant={6}]{xcharter-otf}
+
 \usepackage{unicode-math}
-\setmainfont{XCharter}
-\setmathfont{XCharter-Math.otf}[CharacterVariant={6}] % phi replaced by varphi
+\setmainfont{EBGaramond-Regular}[
+  BoldFont = EBGaramond-Bold,
+  ItalicFont = EBGaramond-Italic,
+  BoldItalicFont = EBGaramond-BoldItalic
+]
+\setmathfont{Garamond Math}[Scale=MatchUppercase]
 
+\usepackage[CharacterVariant={6}]{euler-math}
+\setmainfont{CMU Concrete}
 
-\usepackage{sansmathfonts}
+\usepackage{concmath-otf}
+
+% only in pdfTeX
+% \usepackage{sansmathfonts}
+% \usepackage[T1]{fontenc}
+% \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+\usepackage{libertine}
+\usepackage{libertinust1math}
 \usepackage[T1]{fontenc}
-\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 
 \usepackage[sb]{libertine} % or \usepackage[sb]{libertinus}
 \usepackage[T1]{fontenc}
@@ -15,9 +33,21 @@
 \usepackage[amsthm]{libertinust1math} % slanted integrals, by default
 % \usepackage[scr=boondoxo,bb=boondox]{mathalpha} %Omit bb=boondox for default libertinus bb
 
-% \usepackage{newpxtext,newpxmath}
 % \usepackage{newtxtext,newtxmath}
 
-% \usepackage{beton}
-% \usepackage{euler}
-% \usepackage[OT1]{fontenc}
+
+
+% \usepackage[T1]{fontenc}
+% \usepackage{newpxtext,eulerpx}
+
+% \usepackage[scaled=0.95]{inconsolata}
+% \renewcommand{\ttdefault}{inconsolata}
+
+% \usepackage{bbm}; use \mathbbm for blackboard bold for Computer Modern
+
+\usepackage{newpxtext,eulerpx}
+% \usepackage{mathpazo}
+% \usepackage{newpxtext,newpxmath}
+\usepackage[scaled=1.008]{inconsolata}
+\usepackage[scaled=0.842]{berasans}
+\renewcommand{\mathbf}{\boldsymbol}

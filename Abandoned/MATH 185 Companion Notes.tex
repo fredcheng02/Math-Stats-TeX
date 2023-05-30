@@ -1,16 +1,19 @@
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{tikz-cd,mathtools}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
 \usepackage{enumitem}
-\usepackage{fullpage,setspace,microtype,soul,framed}
+\usepackage{setspace,microtype,soul,framed}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
-\newcommand{\df}[1]{\ul{\textit{\textsf{#1}}}} % definition
+\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
+\newcommand{\lb}{\llbracket}
+\newcommand{\rb}{\rrbracket}
 \newcommand{\N}{\mathbf{N}}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\Q}{\mathbf{Q}}
@@ -24,19 +27,13 @@
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
-\newcommand{\nm}[1]{\|#1\|}
+\newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
-\newcommand{\sgn}{\operatorname{sgn}}
-\newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
-\newcommand{\dx}{\diff x}
-\newcommand{\dt}{\diff t}
-\renewcommand{\phi}{\varphi}
-\renewcommand{\epsilon}{\varepsilon}
 
 \makeatletter
 \let\@subtitle\@empty % default value
 \protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\newcommand{\makemytitle}{
+\renewcommand{\maketitle}{
     \begin{center}
         {\Large \@title}
         \@subtitle
@@ -55,8 +52,13 @@
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
+\usepackage{newpxtext,eulerpx}
+\usepackage[scaled=1.008]{inconsolata}
+\usepackage[scaled=0.842]{berasans}
+\renewcommand{\mathbf}{\boldsymbol}
+
 \begin{document}
-\makemytitle
+\maketitle
 
 \section{The complex plane}
 \begin{itemize}
@@ -100,5 +102,15 @@
 \section{Holomorphic functions}
 
 \section{Complex series and power series}
+
+\section{A cornucopia of holomorphic functions}
+
+\setcounter{section}{9}
+\section{Integration in the complex plane}
+
+\section{Cauchy's theorem: basic track}
+\begin{itemize}
+    \item $\int_{[z,z+h]}1\,dw=\int_{z}^{z+h}1\,dw=h$ 
+\end{itemize}
 
 \end{document}

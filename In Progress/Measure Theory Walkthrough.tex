@@ -1,28 +1,18 @@
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
-\usepackage{setspace,enumitem}
-\usepackage{microtype}
-\usepackage{soul,framed,xcolor}
-
-% \usepackage{sectsty}
-% \allsectionsfont{\sffamily}
-
-\usepackage[pdfusetitle,bookmarksnumbered]{hyperref} %load this at the end
-
-\onehalfspacing
-\setlength{\parskip}{0em} % default parskip
-\setlist{listparindent=\parindent,parsep=0pt} % indentation and separation between list paragraphs
-
-\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
-\newcommand{\rmk}{\noindent\textit{Remark. }} % when amsthm is not loaded
-\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
-
-\usepackage{amsmath,amssymb}
-% \usepackage{amsthm}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{tikz-cd}
 % \usepackage{tikzit}
+\usepackage{enumitem}
+\usepackage{setspace,microtype}
+\usepackage{soul,framed,xcolor}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+
+\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
+\newcommand{\rmk}{\noindent\textit{Remark. }}
+\newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
 
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
@@ -34,13 +24,15 @@
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\where}{\,|\,}
-\newcommand{\blank}{\,\cdot\,}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
 \newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\diff}{\,d}% or {\mathop{}\!\mathrm{d}} as an operator
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
 
 % \usepackage{graphicx}
 % \graphicspath{ {image/} }
@@ -48,28 +40,30 @@
 % \newcommand{\tpurp}[1]{\textcolor{purple}{#1}}
 % \newcommand{bpurp}[1]{\colorbox{purple}{#1}}
 
+\onehalfspacing
+\setlength{\parskip}{0em}
+\setlist{listparindent=\parindent,parsep=0pt} % indentation and separation between list paragraphs
+
 \makeatletter
 \let\@subtitle\@empty % default value
 \protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\renewcommand{\maketitle}{
+\newcommand{\makemytitle}{
     \begin{center}
         {\Large \@title}
         \@subtitle
         \vspace{0.5em}
-        \\ \@author \\ \@date
+        \\ \@author
         \vspace{-0.5em}
     \end{center}
 }
 \makeatother
 
-\title{Title}
-\subtitle{Subtitle}
+\title{Measure Theory Walkthrough}
+% \subtitle{Subtitle}
 \author{Cheng, Feng}
-\date{}
 
 \begin{document}
-
-\maketitle
+\makemytitle
 
 
 \end{document}
