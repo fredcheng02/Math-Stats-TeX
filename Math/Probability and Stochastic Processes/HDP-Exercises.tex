@@ -12,13 +12,14 @@
 \newcommand{\ra}{\rangle}
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\where}{\,|\,}
+\newcommand{\blank}{\,\cdot\,}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
 \newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\ol}[1]{\overline{#1}}
 
 \renewcommand{\Pr}{\operatorname{P}}
-\newcommand{\E}{\mathrm{E}}
+\newcommand{\E}{\mathbf{E}}
 \newcommand{\I}[1]{\mathbf{1}_{\{#1\}}}
 \newcommand{\SE}{\operatorname{SE}}
 \newcommand{\Var}{\operatorname{Var}}
@@ -102,7 +103,7 @@ By the change of variables formula, since $g(t) = t^p$ is a strictly increasing 
 \end{mansol}
 
 \begin{mansol}{1.3.3}
-Lyapounov's inequality tells us $(\E X)^2 \leq \E X^2$ [from Jensen's inequality; true regardless of whether $X$ has finite second moment or not]. Now consider \[
+Jensen's inequality tells us $(\E X)^2 \leq \E X^2$ [true regardless of whether $X$ has finite second moment or not]. Now consider \[
 \Bigl(\E \Big\lvert\frac{1}{N} \sum_{i=1}^N X_i - \mu\Big\rvert \Bigr)^2 = \bigl[\E\bigl(\ol{X} - \E\ol{X}\bigr)\bigr]^2,
 \] which is
 \[
@@ -204,11 +205,22 @@ Let $X_i = \I{\text{wrong $i$-th classification}}$. Then $\E X_i = \frac{1}{2} -
 \Pr \biggl(\sum_{i=1}^N X_i \geq \frac{N}{2}\biggr) & = \Pr \biggl(\sum_{i=1}^N X_i - N\Bigl(\frac{1}{2} - \delta \Bigr)\geq N\delta \biggr) \\
 & \leq \exp\biggl(-\frac{2 N^2\delta^2}{N}\biggr).
 \end{align*}
-We may just let $\exp\bigl(-2N \delta^2\bigr) \leq \epsilon$; equivalently this means $N \geq -\frac{1}{2\delta^2} \log(\epsilon).$
+We may just let $\exp\bigl(-2N \delta^2\bigr) \leq \epsilon$; equivalently this means $N \geq -\frac{1}{2\delta^2} \log(\epsilon)$.
 \end{mansol}
 
 \begin{mansol}{2.2.9}
+\begin{enumerate}[label=(\alph*)]
+    \item Easy; by Chebyshev's inequality, let $N \geq 4 \sigma^2 / \epsilon^2$.
+    \item Let $\hat{\mu}_1,\hat{\mu}_2,\ldots,\hat{\mu}_K$ be $K$ weak estimates from part (a). The sample size $N$ is now $\geq 4K \sigma^2/\epsilon^2$.
 
+    Consider $\hat \mu = \operatorname{median}\{\hat \mu_i\}_{i=1}^K$, and let $Y_i = \I{\abs{\mu_i - \mu} > \epsilon}$ for $i$ between 1 and $K$. Then $\hat \mu - \mu > \epsilon$ (resp.\ $< -\epsilon$) implies that more than half of $\mu_i - \mu$ is $> \epsilon$ (resp.\ $< -\epsilon$). To be precise, let $K$ be an odd number, then \[\abs{\hat\mu - \mu} > \epsilon \implies \sum_{i=1}^K Y_i \geq K/2.\] It follows that \[
+        \Pr(\abs{\hat \mu - \mu} > \epsilon) \leq \Pr\Bigl(\sum_{i=1}^K Y_i \geq K/2\Bigr) \leq \Pr\Bigl(\sum_{i=1}^K (Y_i - \E Y_i) \geq K/4\Bigr),
+    \]
+    where the second inequality follows from \[\E Y_i = \Pr(\abs{\mu_i - \mu} > \epsilon) \leq 1/4\] given in part (a). Now by Hoeffding's inequality for bounded random variables (theorem 2.2.6) we have \[
+    \Pr\Bigl(\sum_{i=1}^K (Y_i - \E Y_i) \geq K/4\Bigr) \leq \exp(- K / 8).
+    \]
+    Therefore to let $\Pr(\abs{\hat \mu - \mu} > \epsilon) \leq \delta$, we may just let $\exp(- K / 8) \leq \delta$, or $K \geq 8 \log(\delta^{-1})$. This show that the median estimates from a sample of total size $\geq 32 \log(\delta^{-1}) \sigma^2/\epsilon^2$ gives an $\epsilon$-accurate estimate with probability at least $1-\delta$.
+\end{enumerate}
 \end{mansol}
 
 \begin{mansol}{2.2.10}
@@ -218,7 +230,97 @@ We may just let $\exp\bigl(-2N \delta^2\bigr) \leq \epsilon$; equivalently this 
 \end{enumerate}
 \end{mansol}
 
-\begin{mansol}{}
+\begin{mansol}{2.3.2}
+For $\lambda < 0$, \[\Pr(S_N \leq t) = \Pr\bigl(e^{\lambda S_N} \geq e^{\lambda t}\bigr) \leq e^{-\lambda t} \E \exp(\lambda S_N).\]
+Now follow the proof of theorem 2.3.1 and choose $\lambda = \log(t/\mu) < 0$ this time as well. \textit{Note that here $t > 0$.}
+\end{mansol}
 
+\begin{mansol}{2.3.3}
+Let us see $X \sim \text{Poisson}(\lambda)$ as the limit in distribution of a sum $S_N$ of Bernoulli random variables specified by the Poisson limit theorem. Take limits on the two sides of theorem 2.3.1 and we get \[\Pr(X \geq t) = \lim_{N\to \infty} \Pr(S_N \geq t) \leq \lim_{N\to \infty} e^{-\mu} \Bigl(\frac{e\mu}{t}\Bigr)^t = e^{-\lambda}\Bigl(\frac{e\lambda}{t}\Bigr)^t.\]
+\end{mansol}
+
+\begin{mansol}{2.3.5}
+    An important log inequality (via Padé approximation) says that 
+    \begin{align}
+        \frac{2x}{2+x} & \leq \log(1+x) \leq \frac{x}{2}\cdot\frac{2+x}{1+x}\quad \text{for }x\geq 0,\text{ and} \label{eq:4}\\
+        \frac{2x}{2+x} & \geq \log(1+x) \geq \frac{x}{2}\cdot\frac{2+x}{1+x}\quad \text{for }-1 < x\leq 0. \label{eq:5}
+    \end{align}
+    Note the expressions in \eqref{eq:4} and \eqref{eq:5} above all have Taylor expansions $x - \frac{x^2}{2} + O(x^3)$ within their radii of convergence. Also, rewriting $\log(1+x)$ in \eqref{eq:4} by $-\log\bigl(1 - \frac{x}{1+x}\bigr)$ gives us \eqref{eq:5}. Just to verify the inequalities, check the derivatives of the expressions as usual.
+
+    From $\Pr(S_N - \mu \geq \delta \mu) \leq \Bigl(\frac{e^\delta}{(1+\delta)^{1+\delta}}\Bigr)^\mu$, we want to show that $\frac{e^\delta}{(1+\delta)^{1+\delta}} \leq e^{-c_1\delta^2}$ for some $c_1 > 0$. Take the logarithm of the LHS gives \[
+    \delta - (1+\delta)\log(1+\delta), \text{ which is } \leq \delta - (1+\delta)\cdot\frac{2\delta}{2+\delta} = -\frac{\delta^2}{2+\delta}
+    \]
+    Since we let $\delta \leq 1$, we can let $c_1 = 1/3$.
+
+    By exercise 2.3.2 we know $\Pr(S_N - \mu \leq -\delta \mu) \leq \Bigl(\frac{e^{-\delta}}{(1-\delta)^{1-\delta}}\Bigr)^\mu$ given $\delta \in (0,1)$, and when $\delta = 1$ the inequality is trivally true. We want to find some $c_2 > 0$ such that \[
+    -\delta - (1-\delta)\log(1-\delta) \leq -c_2 \delta^2.
+    \]
+    For $-\delta \in [-1,0)$, \[
+    \text{LHS} \leq -\delta - (1 -\delta)\cdot \frac{-2\delta}{2-\delta} = -\frac{\delta^2}{2-\delta}.
+    \]
+    By $-\delta < 0$ we may choose $c_2 = 1/2$. 
+
+    Hence for $\delta \in (0,1]$, \[
+    \Pr(\abs{S_N - \mu} \geq \delta \mu) \leq e^{-\frac{1}{2}\mu \delta^2} + e^{-\frac{1}{3}\mu \delta^2} \leq 2 e^{-\frac{1}{2}\mu \delta^2}.
+    \]
+\end{mansol}
+
+\begin{mansol}{2.4.3}
+    We know $d \leq C$. 
+\end{mansol}
+
+\begin{mansol}{2.5.1}
+    \begin{align*}
+        \E \abs{X}^p & = \int_{x = -\infty}^{\infty} \abs{x}^p \frac{1}{\sqrt{2 \pi}}e^{-\frac{1}{2}x^2}\,dx \\
+        & = \sqrt{\frac{2}{\pi}}\int_{x=0}^\infty x^p e^{-\frac{1}{2}x^2}\,dx \\
+        & = \sqrt{\frac{2}{\pi}}\int_{t=0}^\infty (\sqrt{2t})^p e^{-t}\,d{\sqrt{2t}} \\
+        & = \frac{2^{\frac{p+1}{2}}}{\sqrt{\pi}} \int_{t=0}^\infty t^{p/2} e^{-t} \cdot \frac{1}{\sqrt{2}} t^{-\frac{1}{2}}\,dt \\
+        & = 2^{p/2}\frac{\int_{t=0}^\infty t^{\frac{p-1}{2}} e^{-t}\,dt}{\sqrt{\pi}} = \bigl(\sqrt{2}\bigr)^p\frac{\Gamma\bigl(\frac{p+1}{2}\bigr)}{\Gamma\bigl(\frac{1}{2}\bigr)}.
+    \end{align*}
+    Now take the $p$-th root on both sides to get $\nm{X}_{L^p} = \sqrt{2} \biggl[\frac{\Gamma\bigl(\frac{p+1}{2}\bigr)}{\Gamma\bigl(\frac{1}{2}\bigr)}\biggr]^{1/p}$. Note that when $p$ is even, \[\Gamma\Bigl(\frac{p+1}{2}\Bigr) = \frac{p-1}{2}\frac{p-3}{2}\cdots\frac{1}{2}\cdot\Gamma\Bigl(\frac{1}{2}\Bigr),\] and when $p$ is odd, $\Gamma\bigl(\frac{p+1}{2}\bigr) = \bigl(\frac{p-1}{2}\bigr)!$. Both cases show that \[\biggl[\frac{\Gamma\bigl(\frac{p+1}{2}\bigr)}{\Gamma\bigl(\frac{1}{2}\bigr)}\biggr]^{1/p} = O\bigl(((p-1)!!)^{1/p}\bigr) = 
+    O\bigl(\bigl(\sqrt{p!}\bigr)^{1/p}\bigr) = O\bigl(\sqrt{p}\bigr),\] and thus $\nm{X}_{L^p} = O(\sqrt{p})$.
+\end{mansol}
+
+\begin{mansol}{2.5.4}
+    Expand $\E \exp(\lambda X)$ to get \begin{align*}
+        \lambda \E X & = \E \exp(\lambda X) - 1 - \sum_{k=2}^\infty \frac{(\E X^k)\lambda^k}{k!} \\
+        & \leq \exp(K_5^2 \lambda^2) - 1 - \sum_{k=2}^\infty \frac{(\E X^k)\lambda^k}{k!}
+    \end{align*}
+    Now consider $\lambda \uparrow 0$ and $\downarrow 0$ respectively. By the uniform convergence and continuity of convergent power series we know that $\lim_{\lambda \to 0}\sum_{k=2}^\infty \frac{(\E X^k)\lambda^k}{k!} = 0$. Hence $\lambda \E X \leq 0$ for both $\lambda \uparrow 0$ and $\downarrow 0$. This shows that $\E X = 0$.
+\end{mansol}
+
+\begin{mansol}{2.5.5}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\E \exp(\lambda^2 X^2) = \frac{1}{\sqrt{2\pi}}\int_{x = -\infty}^\infty \exp\bigl(\bigl(\lambda^2 -\frac 1 2\bigr) x^2\bigr)\,dx$. We have to let $\lambda^2 < 1/2$, i.e., $\lambda \in \bigl(\frac{-1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\bigr)$, so that the improper integral converges and can be evaluated as a Gaussian integral.
+        \item $\nm{X}_\infty$ is defined to be $\sup\{M \in \R : \mu(\{\omega : \abs{X(\omega)} > M\}) > 0\}$. Consider \begin{align*}
+            \Pr (\abs{X} > M) & = \Pr\bigl(\exp(\lambda^2 X^2) > \exp(\lambda^2 M^2)\bigr) \\
+            & \leq \frac{\E \exp(\lambda^2 X^2)}{\exp(\lambda^2 M^2)} \\
+            & \leq \exp\bigl(\lambda^2(K^2 - M^2)\bigr).
+        \end{align*}
+        Choose $M > K$ to make the inequality nontrivial. Since the inequality above holds for all real $\lambda$, take $\lambda \to \infty$ and we see $\Pr(\abs{X} > M) = 0$ for any $M > K$. This shows that $X$ is a bounded random variable.
+    \end{enumerate}
+\end{mansol}
+
+\begin{mansol}{2.5.7}
+    First, \[X = 0 \implies \nm{X}_{\psi_2} = \inf\{t:t>0\} = 0.\] Now assuming $\nm{X}_{\psi_2} = 0$, if we assume that $X$ is not almost surely 0, then $\E X^2 \geq (\E X)^2 > 0$. By Jensen's inequality, given $0<t\leq 1$, \[
+    \bigl(e^{\E X^2}\bigr)^{1/t^2} \leq \bigl(\E e^{X^2}\bigr)^{1/t^2} \leq \E \exp(X^2 / t^2).
+    \]
+    Since $e^{\E X^2} > 1$, we can choose some $t > 0$ such that $\bigl(e^{\E X^2}\bigr)^{1/t^2} > 2$. By the definition of infimum we know that for some $0 < \delta < t$, \[
+         \bigl(e^{\E X^2}\bigr)^{1/t^2} \leq \bigl(e^{\E X^2}\bigr)^{1/\delta^2} \leq \E \exp(X^2 / \delta^2) \leq 2,
+    \]
+    which leads to contradiction. Hence $X = 0$ a.s.
+
+    Homogeneity is clear from definition, and now we prove the triangle inequality. Let $g(x) = \exp(x^2)$, which as a composition of convex functions is convex. Now let $t_X = \nm{X}_{\psi_2} + \epsilon/2$, and $t_Y = \nm{Y}_{\psi_2} + \epsilon/2$ for any $\epsilon > 0$, and we have \[
+        g \biggl(\frac{X+Y}{t_X + t_Y}\biggr) \leq \frac{t_X}{t_X + t_Y} g\biggl(\frac{X}{t_X}\biggr) + \frac{t_Y}{t_X + t_Y} g\biggl(\frac{Y}{t_Y}\biggr)
+    \]
+    Now take expectation on both sides [we can certainly ignore the case $t_X$ or $t_Y = 0$]. It follows that \[\E g \biggl(\frac{X+Y}{t_X + t_Y}\biggr) \leq 2.\]
+    This tells us that $\nm{X}_{\psi_2} + \nm{Y}_{\psi_2} + \epsilon = t_X + t_Y \in \{t>0 : \E g(\frac{X+Y}{t}) \leq 2\}$. Therefore \[
+        \nm{X+Y}_{\psi_2} \text{ exists and is } \leq \nm{X}_{\psi_2} + \nm{Y}_{\psi_2} + \epsilon.
+    \]
+    Since $\epsilon$ is arbitrary, the triangle inequality follows.
+\end{mansol}
+
+\begin{mansol}{}
+    
 \end{mansol}
 \end{document}
