@@ -17,6 +17,7 @@
 \newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\trp}{\mathrm T}
 
 \renewcommand{\Pr}{\operatorname{P}}
 \newcommand{\E}{\mathbf{E}}
@@ -85,6 +86,7 @@
 \begin{document}
 \maketitle
 
+\section{Preliminaries on random variables}
 \begin{mansol}{1.2.2}
     We already know that for $X \geq 0$, \[\E X = \int_{0}^\infty \Pr(X > t) \, dt.\] In general for a real number $x$, \[
     x = \I{x \geq 0} \cdot \int_0^\infty \I{t < x} \,dt - \I{x < 0} \cdot \int_{-\infty}^0 \I{x < t} \,dt.
@@ -98,7 +100,7 @@ and by interchanging $\int$ and $\E$ (via Fubini-Tonelli's theorem), we have \[ 
 By the change of variables formula, since $g(t) = t^p$ is a strictly increasing function that maps $[0,\infty)$ onto $[0,\infty)$,
 \begin{align*}
 \text{RHS} & = \int_0^\infty \Pr(\abs X  > t) (t^p)'\,dt \\
-& = \int_0^\infty \Pr(\abs X > \sqrt[n]{u})\,du \\ & = \int_0^\infty \Pr(\abs X ^p > u) \,du = \text{LHS}.
+& = \int_0^\infty \Pr(\abs X > \sqrt[p]{u})\,du \\ & = \int_0^\infty \Pr(\abs X ^p > u) \,du = \text{LHS}.
 \end{align*}
 \end{mansol}
 
@@ -111,6 +113,8 @@ Jensen's inequality tells us $(\E X)^2 \leq \E X^2$ [true regardless of whether 
 \]
 Taking the square root gives us the desired result.
 \end{mansol}
+
+\section{Concentration of sums of independent random variables}
 
 \begin{mansol}{2.1.4}
 Let Z replace $g \sim N(0,1)$. By the law of unconscious statistician, 
@@ -292,7 +296,7 @@ Let us see $X \sim \text{Poisson}(\lambda)$ as the limit in distribution of a su
 \begin{mansol}{2.5.5}
     \begin{enumerate}[label=(\alph*)]
         \item $\E \exp(\lambda^2 X^2) = \frac{1}{\sqrt{2\pi}}\int_{x = -\infty}^\infty \exp\bigl(\bigl(\lambda^2 -\frac 1 2\bigr) x^2\bigr)\,dx$. We have to let $\lambda^2 < 1/2$, i.e., $\lambda \in \bigl(\frac{-1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\bigr)$, so that the improper integral converges and can be evaluated as a Gaussian integral.
-        \item $\nm{X}_\infty$ is defined to be $\sup\{M \in \R : \mu(\{\omega : \abs{X(\omega)} > M\}) > 0\}$. Consider \begin{align*}
+        \item The \df{essential supremum} $\nm{X}_\infty$ is defined to be $\sup\{M \in \R : \mu(\{\omega : \abs{X(\omega)} > M\}) > 0\}$. Consider \begin{align*}
             \Pr (\abs{X} > M) & = \Pr\bigl(\exp(\lambda^2 X^2) > \exp(\lambda^2 M^2)\bigr) \\
             & \leq \frac{\E \exp(\lambda^2 X^2)}{\exp(\lambda^2 M^2)} \\
             & \leq \exp\bigl(\lambda^2(K^2 - M^2)\bigr).
@@ -320,7 +324,124 @@ Let us see $X \sim \text{Poisson}(\lambda)$ as the limit in distribution of a su
     Since $\epsilon$ is arbitrary, the triangle inequality follows.
 \end{mansol}
 
-\begin{mansol}{}
+\begin{mansol}{2.6.5}
+    The first inequality is just Lyaponouv's inequality.
+
+    To prove the second inequality, just use (2.15): 
+    \begin{align*}
+        \Big\lVert\sum_i a_iX_i\Big\rVert_{L^p} & \lesssim \Big\lVert\sum_i a_iX_i\Big\rVert_{\psi_2} \sqrt{p} \\
+        & \lesssim \Bigl(\sum_i \nm{a_i X_i}_{\psi_2}^2\Bigr)^{1/2} \sqrt{p} \\
+        & = \Bigl(\sum_i a_i^2\nm{ X_i}_{\psi_2}^2\Bigr)^{1/2} \sqrt{p} \\
+        & \leq K \sqrt{p} \nm{a}_2,
+    \end{align*}
+    where $K \coloneqq \max_i \nm{X_i}_{\psi_2}$.
+
     
+\end{mansol}
+
+\begin{mansol}{2.8.5 \& 2.8.6}[Bernstein's inequality for bounded distributions]\ \\
+    Just use the hint to solve 2.8.5. For the actually inequality, when approaching \begin{align*}
+    \Pr \Bigl(\sum_{i=1}^N X_i \geq t\Bigr) & \leq e^{-\lambda t } \prod_{i=1}^N \E \exp(\lambda X_i) \\ 
+    & \leq \exp\bigl(g(\lambda) \sigma^2 - \lambda t\bigr),
+    \end{align*}
+    we simply let $\lambda t = 2 g(\lambda)\sigma^2$. This is $g(\lambda) > 0$ under the constraint $\abs \lambda < 3/K$, so that \[g(\lambda) \sigma^2 - \lambda t < 0.\] Assuming $\lambda > 0$, we get $\lambda^* = \frac{t}{\sigma^2 + t\frac{K}{3}}$. Now plug this back into $\exp\bigl(g(\lambda) \sigma^2 - \lambda t\bigr)$ to give the desired upper bound to $\Pr \bigl(\sum_{i=1}^N X_i \geq t\bigr)$.
+\end{mansol}
+
+\newpage
+\section{Random vectors in high dimensions}
+\begin{mansol}{3.3.3}
+    \begin{enumerate}[label=(\alph*)]
+        \item By the property of normal distribution we may WLOG prove the following: for $g \sim N(0,I_n)$ and $u \in \R^n$ with $\nm{u}_2 = 1$, $\inp{g}{u}\sim N(0,1)$.
+        
+        Note that we can always find an orthogonal matrix $U$ such that $e_1 = Uu$. By rotational invariance we then have $Ug \sim N(0,I_n)$. By the definition of multivariate normal we know that $\inp{Ug}{e_1} \sim N(0,1)$. It follows that $\inp{g}{U^\trp e_1} = \inp{g}{u} \sim N(0,1)$, as desired.
+        \item We normalize each of the $X_i$'s to $Y_i$ by dividing $\sigma_i$. Then $Y \coloneqq 
+        \begin{bmatrix}
+            Y_1 \\ Y_2 \\ \vdots \\ Y_n
+        \end{bmatrix} \sim N(0,I_n)$. Now choose $u$ to be $\begin{bmatrix}
+            \sigma_1 \\ \sigma_2 \\ \vdots \\ \sigma_n
+        \end{bmatrix}$ and use (a).
+        \item By (b) it is easy to see that every entry of $Gu$ follows $N(0,1)$. This shows that $Gu$ is jointly normal. Every pair of coordinates of $Gu$ has covariances 0, and thus $Gu \sim N(0,I_m)$.
+    \end{enumerate}
+\end{mansol}
+
+\begin{mansol}{3.3.6}
+We showed in (c) above that both are $N(0,I_m)$ random vectors. We only need to show that the covariance between each entry of $Gu$ and each entry of $Gv$ is 0. This is because the joint distribution of two normal distributions is still normal, and we just need uncorrelatedness to prove independence (which is true for random vectors as well; see this \href{https://stats.stackexchange.com/questions/375217/definition-of-independence-of-two-random-vectors-and-how-to-show-it-in-the-joint}{stackexchange post} for the proof). Now we need to consider two cases: $\Cov(G_{1,\cdot}u,G_{1,\cdot}v)$ and $\Cov(G_{1,\cdot}u,G_{2,\cdot}v)$.
+
+In the first case, \begin{align*}
+\Cov(G_{1,\cdot}u,G_{1,\cdot}v) & = \Cov(G_{11}u_1 + \cdots + G_{1n}u_n, G_{11}v_1 + \cdots + G_{1n}v_n) \\ 
+& = \sum_{i=1}^n u_i v_i \Cov(G_{1i},G_{1i}) = \inp{u}{v} = 0;
+\end{align*}
+and in the second case, \[
+\Cov(G_{1,\cdot}u,G_{2,\cdot}v) = \sum_{i=1}^n u_i v_i \Cov(G_{1i},G_{2i}) = 0
+\] because all $\inp{G_{1i}}{G_{2i}} = 0$. This finishes the proof.
+\end{mansol}
+
+\begin{mansol}{3.3.9}
+    We want to prove \[\sum_{i=1}^N \inp{u_i}{x}^2 = A\nm{x}_2^2 \text{ for all }x \in \R^n \iff \sum_{i=1}^N u_i u_i^\trp = A I_n.\]
+
+    Clearly $\sum_{i=1}^N u_i u_i^\trp$, a sum of symmetric matrices is symmetric, and hence the two symmetric matrices $\sum_{i=1}^N u_i u_i^\trp$ and $AI_n$ are equal iff for all $x \in \R^n$, \[
+    \Big\la\sum_{i=1}^N u_i u_i^\trp x, x\Big\ra = \inp{A I_n x}{x}.
+    \]
+    Note that the LHS \[
+     \Big\la\sum_{i=1}^N u_i u_i^\trp x, x\Big\ra = \sum_{i=1}^N \inp{u_i^\trp X}{u_i^\trp X} = \sum_{i=1}^N \inp{u_i}{x}^2,
+    \]
+    while the RHS \[
+    \inp{A I_n x}{x} = A\inp{x}{x} = A \nm{x}_2^2.
+    \]
+    The proof is now finished.
+\end{mansol}
+
+\begin{mansol}{3.4.7}
+Let $Y \sim \operatorname{Uniform}(\sqrt{n} S^{n-1})$, $U \sim \operatorname{Uniform}([0,1])$ and define $X = U^{1/n}Y \sim \operatorname{Uniform}(B(0;\sqrt{n}))$. Let $X_1 = \inp{X}{e_1}$ and $Y_1 = \inp{Y}{e_1}$. We want to bound $\Pr(\abs{X_1} > t)$ for all $t \geq 0$, by proposition 2.5.2(i). Note that
+\[
+\Pr(\abs{X_1} > t) = \Pr\bigl(\big\lvert U^{1/n} \big\rvert \abs{Y_1} > t\bigr) \leq \Pr(\abs{Y_1} > t).
+\]
+We already know from theorem 3.4.6 that the $\Pr(\abs{Y_1} > t)$ satisfies the subgaussian condition 2.5.2(i), and the proof is completed.
+\end{mansol}
+
+
+
+\newpage
+\section{Random matrices}
+\begin{mansol}{4.1.6}
+By definition, \[\nm{A^\trp A - I_n} = \max_{\nm{x} = 1} \abs{\inp{(A^\trp A - I_n) x}{x}}.\]
+Simplification gives $\max_{\nm{x} = 1} \big\lvert\nm{Ax}_2^2 - 1\big\rvert$. Since $1 - \delta \leq \nm{Ax}_2 \leq 1 + \delta$ for $\nm{x} = 1$, we have \[
+\delta^2 - 2 \delta \leq \nm{Ax}_2^2 - 1 \leq \delta^2 + 2 \delta
+\]
+Hence under $\nm{x} = 1$, $\big\lvert\nm{Ax}_2^2 - 1\big\rvert \leq \max\{\delta^2 - 2\delta, \delta^2 + 2 \delta\} \leq 3 \max\{\delta, \delta^2\}$. Thus \[\nm{A^\trp A - I_n} \leq 3 \max\{\delta,\delta^2\}.\]
+\end{mansol}
+
+\begin{mansol}{4.5.3}[Weyl's inequality]
+By the min-max definition, we know \begin{align*}
+\lambda_i(S) & = \max_{\dim E = i} \min_{\nm{x} = 1} \inp{Sx}{x},\\
+\lambda_i(T) & = \max_{\dim E = i} \min_{\nm{x} = 1} \inp{Tx}{x}.
+\end{align*}
+Also, using Rayleigh's quotient we know \[
+\textstyle\nm{S-T} = \big\lvert\max_{\nm{x} = 1}\inp{(S-T)x}{x}\big\rvert \geq \text{ any } \inp{(S-T)x}{x} \text{ with }\nm{x} = 1.
+\]
+Hence \begin{align*}
+\lambda_i(S) - \nm{S-T} & \leq \max_{\dim E = i} \min_{\nm{x} = 1} [\inp{Sx}{x} - \inp{(S-T)x}{x}] \\
+& = \max_{\dim E = i} \min_{\nm{x} = 1} \inp{Tx}{x} = \lambda_i(T).
+\end{align*}
+Interchange $S$ and $T$ gives $\lambda_i(T) - \nm{T - S} \leq \lambda_i(S)$. These two combined gives $\abs{\lambda_i(S) - \lambda_i(T)} \leq \nm{S-T}$.
+\end{mansol}
+
+\section{Concentration without independence}
+\begin{mansol}{5.1.2 (b)} The gradient should be bounded here.
+
+Because $f$ is differentiable, by the multivariate MVT, we have \begin{align*}
+\abs{f(x_2) - f(x_1)} & = \inp{\nabla f(\lambda x_1 + (1-\lambda) x_2)}{x_2 - x_1} \text{ for some }\lambda \in (0,1) \\ 
+& \leq \nm{\nabla f(\lambda x_1 + (1-\lambda) x_2)}_2 \nm{x_2 - x_1}_2, \text{ by Cauchy-Schwarz} \\ 
+& \leq \sup_{x \in \R^n}\nm{\nabla f(x)}_2 \nm{x_2 - x_1}_2
+\end{align*}
+Thus $f$ is Lipschitz with the Lipschitz constant $\leq \sup_{x \in \R^n}$.
+\end{mansol}
+
+\begin{mansol}{5.1.3}
+\begin{enumerate}[label=(\alph*)]
+\item skipped.
+\item We know by the definition of operator norm that \[\nm{Ax_1 - Ax_2}_2 \leq \nm{A}\nm{x_1 - x_2}_2,\] where the equality is achieved when $x_1 - x_2$ is an eigenvector of $A^*A$ corresponding to the largest eigenvalue $s_1^2 = \nm{A}^2$. Hence $\nm{A}_\mathrm{Lip} = \nm{A}$.
+\item 
+\end{enumerate}
 \end{mansol}
 \end{document}
