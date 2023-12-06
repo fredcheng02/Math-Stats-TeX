@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{refstyle}
+% \usepackage{refstyle} before amsmath
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{thmtools}
 
@@ -12,6 +12,22 @@
 \newref{sec}{refcmd={\S\ref{#1}}}
 % \usepackage[colorlinks]{hyperref}
 % \usepackage[nameinlink,noabbrev]{cleveref}
+
+
+
+% \AtBeginDocument{\renewcommand{\ref}[1]{\mbox{\autoref{#1}}}}
+% \@ifundefined{extrasenglish}{\usepackage[english]{babel}}{}
+% \@ifpackageloaded{babel}{
+%  \addto\extrasenglish{%
+%   \renewcommand*{\equationautorefname}[1]{}%
+%   \renewcommand{\sectionautorefname}{\S\!}%
+%   \renewcommand{\subsectionautorefname}{\S\!}%
+%   \renewcommand{\subsubsectionautorefname}{\S\!}%
+%  }
+% }{}
+
+
+
 
 \declaretheoremstyle[headfont=\scshape]{plain}
 \theoremstyle{plain}

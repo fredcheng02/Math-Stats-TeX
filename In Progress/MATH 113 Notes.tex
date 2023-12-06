@@ -1,12 +1,10 @@
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage[T1]{fontenc}
 \usepackage{tikz-cd,mathtools}
 \usepackage{enumitem}
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace,microtype,soul,framed}
-\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#2}} % link to subsection
 \newcommand{\where}{\,|\,}
@@ -37,23 +35,32 @@
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+
 \makeatletter
 \let\@subtitle\@empty % default value
-\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\renewcommand{\maketitle}{
-    \begin{center}
-        {\Large \@title}
-        \@subtitle
-        \vspace{0.5em}
-        \\ \@author
-        \vspace{-0.5em}
-    \end{center}
-}
+\protected\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{%
+  \newpage
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large \@title \par}%
+    {\@subtitle \par}%
+    \vskip 0.5em%
+    {\lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    {\large \@date}%
+    \vskip -0.5em%
+  \end{center}%
+  \par}
 \makeatother
 
 \title{MATH 113 Notes}
 \author{Cheng, Feng}
 \subtitle{based on \textit{A First Course in Abstract Algebra}, seventh edition}
+\date{}
 
 \begin{document}
 \maketitle
@@ -203,7 +210,7 @@ The proof of these elementary results above about groups is quite routine by cor
     \begin{proof}
         ($\implies$) (a) was proved in the last bullet point. For $a,b \in H$, by condition (iii) from the last bullet point $b^{-1} \in H$, and so $ab^{-1} \in H$.
 
-        ($\impliedby$) Now $e = e_G = e_H$. By $(b)$, for $b \in H$, we have $b^{-1} = eb^{-1} \in H$.
+        ($\impliedby$) Now $e = e_G = e_H$. By (b), for $b \in H$, we have $b^{-1} = eb^{-1} \in H$.
         
         It suffices to check that condition (i) from the last bullet point is true. For $a,b \in H$, we now know $b^{-1} \in H$, and thus by (b) $ab = a(b^{-1})^{-1} \in H$.
     \end{proof}
@@ -221,11 +228,21 @@ The corresponding adjectives ``largest'' and ``maximal'' have the exact opposite
 \begin{itemize}
     \item Every cyclic group is abelian. This follows from the associativity of $\cdot$.
     \item A subgroup of a cyclic group is cyclic.
+    \begin{proof}
+        This is a consequence of the division algorithm. Let $G = \gen{a}$, and let $H \leq G$. If $a = e_G$, the our claim is trivial. Otherwise, let $a \neq e_G$. Now let $m$ be the least positive integer such that $a^m \in H$, subgroup of $G$ (by the well-ordering principle).
+
+        It turns out we can show that this $a^m$ generates $H$.
+        
+        For any $b = a^n \in H$, we have $b = a^n = (a^m)^q \cdot a^r$, where $q \in \Z^+$ and $0 \leq r \leq m-1$. It follows that $a^r = a^n \cdot a^{-mq}$. Since we know $a^n$ and $a^m$ are both in the group $H$, $a^r \in H$. By our definition of $m$, $r$ must be 0, and hence $\la a^m\ra = H$.
+    \end{proof}
     \begin{itemize}
-        \item Because $\la \Z,+ \ra$ is a cyclic group with generator $1$ or $-1$, its subgroups are precisely $n\Z$ under addition for all $n \in \Z$.
+        \item Because $\la \Z,+ \ra$ is a cyclic group with generator $1$ or $-1$, its subgroups must be cyclic subgroups with generators $n \in \Z$, that is, $\la n\Z, + \ra$.
     \end{itemize}
     \item Bezóut's identity tells us that for integers $x,y$, there always exists integers $a,b$ such that \[ax+by = \gcd(x,y).\] Since $\gcd(x,y) \mid (ax+by)$ [excluding the trivial case that $x$ or $y = 0$], and $H = \{ax+by \where a,b \in \Z\}$ is a subgroup of $\Z$ and is thus cyclic, $\gcd(x,y)$ is the only positive generator of $H$.
     \item Let $G$ be a cyclic group. If $\abs{G} = n$, then $G \simeq \la \Z_n,+_n \ra$; if $\abs{G} = \infty$, then $G \simeq \la \Z,+ \ra$. \emph{This theorem classifies all cyclic groups up to isomorphism.}
+    \begin{proof}
+        
+    \end{proof}
 \end{itemize}
 
 \subsection{Generating Sets and Cayley Digraphs}

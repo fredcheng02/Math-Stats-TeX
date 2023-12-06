@@ -4,25 +4,24 @@
 \usepackage{setspace,enumitem}
 \usepackage{microtype}
 \usepackage{soul,framed,xcolor}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+% \usepackage{mathabx}
+\mathtoolsset{showonlyrefs}
+% \usepackage{tikz-cd}
 
 % \usepackage{sectsty}
 % \allsectionsfont{\sffamily}
 
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref} %load this at the end
+% \usepackage{cleveref}
+% \usepackage[all]{hypcap}
 
 \onehalfspacing
 \setlength{\parskip}{0em} % default parskip
 \setlist{listparindent=\parindent,parsep=0pt} % indentation and separation between list paragraphs
 
-\newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
-\newcommand{\rmk}{\noindent\textit{Remark. }} % when amsthm is not loaded
 \newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
-
-\usepackage{amsmath,amssymb}
-% \usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{tikz-cd}
-% \usepackage{tikzit}
 
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
@@ -35,7 +34,7 @@
 \renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\where}{\,|\,}
 \newcommand{\blank}{\,\cdot\,}
-\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
 \newcommand{\nm}[1]{\lVert #1 \rVert}
@@ -44,22 +43,29 @@
 
 % \usepackage{graphicx}
 % \graphicspath{ {image/} }
+% \usepackage[all]{hypcap}
 
 % \newcommand{\tpurp}[1]{\textcolor{purple}{#1}}
 % \newcommand{bpurp}[1]{\colorbox{purple}{#1}}
 
 \makeatletter
 \let\@subtitle\@empty % default value
-\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\renewcommand{\maketitle}{
-    \begin{center}
-        {\Large \@title}
-        \@subtitle
-        \vspace{0.5em}
-        \\ \@author \\ \@date
-        \vspace{-0.5em}
-    \end{center}
-}
+\protected\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{%
+  \newpage
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large \@title \par}%
+    {\@subtitle \par}%
+    \vskip 0.5em%
+    {\lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    {\large \@date}%
+    \vskip -0.5em%
+  \end{center}%
+  \par}
 \makeatother
 
 \title{Title}

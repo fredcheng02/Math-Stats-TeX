@@ -6,6 +6,11 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace,microtype,soul,framed}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+\usepackage{mathpazo}
+\usepackage{eucal}
+\usepackage[scaled=1.008]{inconsolata}
+\usepackage[scaled=0.842]{berasans}
+
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
 \newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
@@ -41,27 +46,30 @@
 \usepackage{tikzit}
 \input{FtoBsty.tikzstyles}
 
-\usepackage{mathpazo}
-\usepackage[scaled=1.008]{inconsolata}
-\usepackage[scaled=0.842]{berasans}
-
 \makeatletter
 \let\@subtitle\@empty % default value
-\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\renewcommand{\maketitle}{
-    \begin{center}
-        {\Large \@title}
-        \@subtitle
-        \vspace{0.5em}
-        \\ \@author
-        \vspace{-0.5em}
-    \end{center}
-}
+\protected\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{%
+  \newpage
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large \@title \par}%
+    {\@subtitle \par}%
+    \vskip 0.5em%
+    {\lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    {\large \@date}%
+    \vskip -0.5em%
+  \end{center}%
+  \par}
 \makeatother
 
 \title{MATH 106 Companion}
 \author{Cheng, Feng}
 \subtitle{to Walsh's \\ \textit{Knowing the Odds \\ An Introduction to Probability}}
+\date{}
 
 \onehalfspacing
 \setlength{\parskip}{0em}

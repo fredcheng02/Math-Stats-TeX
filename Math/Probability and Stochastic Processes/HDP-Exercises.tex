@@ -17,9 +17,11 @@
 \newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\trp}{\mathrm T}
+\newcommand{\trace}{\operatorname{trace}}
 
-\renewcommand{\Pr}{\operatorname{P}}
+\renewcommand{\Pr}{\mathrm{P}}
 \newcommand{\E}{\mathbf{E}}
 \newcommand{\I}[1]{\mathbf{1}_{\{#1\}}}
 \newcommand{\SE}{\operatorname{SE}}
@@ -28,10 +30,10 @@
 \newcommand{\Corr}{\operatorname{Corr}}
 \newcommand{\argmax}{\operatorname*{arg\,max}}
 \newcommand{\argmin}{\operatorname*{arg\,min}}
-\newcommand{\convd}{\xrightarrow[]{\text D}}
-\newcommand{\convp}{\xrightarrow[]{\text P}}
-\newcommand{\convas}{\xrightarrow[]{\text{a.s.}}}
-\newcommand{\eqD}{\stackrel{\text D}{=}}
+\newcommand{\convd}{\xrightarrow[]{\mathrm D}}
+\newcommand{\convp}{\xrightarrow[]{\mathrm P}}
+\newcommand{\convas}{\xrightarrow[]{\mathrm{a.s.}}}
+\newcommand{\eqD}{\stackrel{\mathrm D}{=}}
 
 \newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
 % \newcommand{\codevar}[1]{\ensuremath{\mathtt{\textcolor{brown}{#1}}}} % variable in code
@@ -67,16 +69,22 @@
 
 \makeatletter
 \let\@subtitle\@empty % default value
-\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\renewcommand{\maketitle}{
-    \begin{center}
-        {\Large \@title}
-        \@subtitle
-        \vspace{0.5em}
-        \\ \@author \\ \@date
-        \vspace{-0.5em}
-    \end{center}
-}
+\protected\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{%
+  \newpage
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large \@title \par}%
+    {\@subtitle \par}%
+    \vskip 0.5em%
+    {\lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    {\large \@date}%
+    \vskip -0.5em%
+  \end{center}%
+  \par}
 \makeatother
 
 \title{HDP Exercises}
@@ -93,7 +101,7 @@
 \]
 When $x<0$, $\I{t<x} = 0$ for all $t\geq 0$; when $x \geq 0$, $\I{x<t} = 0$ for all $t \leq 0$. Hence \[x = \int_0^\infty \I{t < x} \,dt - \int_{-\infty}^0 \I{x < t} \,dt,
 \]
-and by interchanging $\int$ and $\E$ (via Fubini-Tonelli's theorem), we have \[ \E X = \int_{0}^\infty \Pr(X > t) \, dt - \int_{-\infty}^0 \Pr(x < t) \,dt. \qedhere\]
+and by interchanging $\int$ and $\E$ (via Fubini-Tonelli's theorem), we have \[ \E X = \int_{0}^\infty \Pr(X > t) \, dt - \int_{-\infty}^0 \Pr(X < t) \,dt. \qedhere\]
 \end{mansol}
 
 \begin{mansol}{1.2.3}
@@ -411,6 +419,73 @@ Simplification gives $\max_{\nm{x} = 1} \big\lvert\nm{Ax}_2^2 - 1\big\rvert$. Si
 Hence under $\nm{x} = 1$, $\big\lvert\nm{Ax}_2^2 - 1\big\rvert \leq \max\{\delta^2 - 2\delta, \delta^2 + 2 \delta\} \leq 3 \max\{\delta, \delta^2\}$. Thus \[\nm{A^\trp A - I_n} \leq 3 \max\{\delta,\delta^2\}.\]
 \end{mansol}
 
+\begin{mansol}{4.2.5}\label{ep-sep-equiv}
+\begin{enumerate}[label=(\alph*)]
+\item We want to show that two points $x,y \in T$ are separated by $> \epsilon$ iff $\ol{B}(x,\epsilon/2)$ and $\ol{B}(y,\epsilon/2)$ are disjoint.
+
+($\implies$) If the two closed balls are not disjoint, choose $z \in \ol{B}(x,\epsilon/2) \cap \ol{B}(y,\epsilon/2)$. Then \[(\epsilon/2)\cdot 2 \geq \nm{x - z} + \nm{z - y} \geq \nm{x - y} > \epsilon.\] Contradiction.
+
+($\impliedby$) If $\nm{x-y} \leq \epsilon$, consider $\frac{x+y}{2}$ such that $\bigl\lVert x - \frac{x+y}{2} \bigr\rVert = \bigl\lVert y - \frac{x+y}{2} \bigr\rVert = \frac{1}{2}\nm{x-y}$. This shows that $\frac{x+y}{2}$ belongs to both $\ol{B}(x,\epsilon/2)$ and $\ol{B}(y,\epsilon/2)$. \emph{Be aware of the role normed vector space plays here.}
+
+\item We want to give an example where $x,y$ have $\nm{x-y} \leq \epsilon$ while the two closed balls are disjoint. A discrete metric meets the requirement.
+
+Consider the metric space $T = \{0,1,2\}$ with the indicator metric $d(x,y) = \I{x\neq y}$. For $K = \{0,1\}$, we have $\nm{x-y} \leq 1$. However, $\ol{B}(0,1/2) = \{0\}$ and $\ol{B}(0,1/2) = \{1\}$, which are disjoint.
+
+In this example $\mathcal{P}(K,d,1) = 1$, while the largest number of disjoint balls is 2.
+\end{enumerate}
+\end{mansol}
+
+\begin{mansol}{4.2.9}
+The first inequality is obvious. To prove the second one, let $\{\ol{B}(x_i;\epsilon/2)\}$ be an exterior $\epsilon/2$-net with the smallest possible cardinality. Since this is the smallest net, every $\ol{B}(x_i;\epsilon/2)$ intersects $K$. Choose $y_i \in K$ from each of these closed balls. It follows that $\{\ol{B}(y_i;\epsilon)\}$ is a net over $K$. To see this, fix $i$. For every $a \in \ol{B}(x_i;\epsilon/2)$, \[
+d(a,y_i) \leq d(a,x_i) + d(x_i,y_i) = \epsilon/2 + \epsilon/2 = \epsilon.
+\]
+\end{mansol}
+
+\begin{mansol}{4.2.16}
+Fix an $x \in K = \{0,1\}^n$. By the definition of hamming distance, $\ol{B}(x;m)$ consists of all binary strings that differ from $x$ by at most $m$. It follows that \[
+\abs{\ol{B}(x;m)} = \sum_{k=0}^m \binom{n}{k}.
+\]
+By the definition of $m$-net, \begin{align*}
+\abs{K} = 2^n & \leq \abs{\ol{B}(x;m)} \cdot \mathcal{N}(K,d_H,m) \\
+& = \sum_{k=0}^m \binom{n}{k} \cdot \mathcal{N}(K,d_H,m),
+\end{align*} as desired.
+
+To show the upper bound to $\mathcal{P}(K,d_H,m)$, for $m$-separated balls we know \[\big \lvert \ol{B}(x;\floor{m/2}) \big \rvert = \sum_{k=0}^{\floor{m/2}}\binom{n}{k}.\] By \ref{ep-sep-equiv} we know $\mathcal{P}$ is at most the number of disjoint $\floor{m/2}$-closed balls. Hence \[\mathcal{P} \leq \frac{2^n}{\sum_{k=0}^{\floor{m/2}}\binom{n}{k}}.\]
+\end{mansol}
+
+\begin{mansol}{4.4.2}
+    WLOG we normalize $x$, i.e., now $x \in S^{n-1}$. Then we want to show that \[\sup_{y \in \mathcal{N}} \inp{x}{y} \leq 1 \leq \frac{1}{1-\epsilon} \sup_{y\in \mathcal{N}} \inp{x}{y}.\]
+    The first inequality follows straight from the Cauchy-Schwarz inequality. To prove \[1-\epsilon \leq \sup_{y \in \mathcal{N}} \inp{x}{y},\] by the definition of $\epsilon$-separated set we know for any $x \in S^{n-1}$, there exists $y$ such that \[
+    \nm{x-y}_2 \leq \epsilon.
+    \]
+    Now from \[\inp{x - y}{x - y} = \nm{x}^2 + \nm{y}^2 -2\inp{x}{y} = 2 - 2\inp{x}{y} \leq \epsilon^2\] we see that \[1 - \epsilon \leq 1 - \frac{\epsilon^2}{2} \leq \inp{x}{y}.\]
+\end{mansol}
+
+\begin{mansol}{4.4.3}
+    \begin{enumerate}[label=(\alph*)]
+        \item The first inequality is obvious. To prove the upper bound, choose $x_0 \in S^{n-1}$ and $y_0 \in S^{m-1}$ such that $\nm{A} = \inp{Ax_0}{y_0}$. Then there exists $x\in\mathcal{N}$ and $y \in \mathcal{M}$ such that $\nm{x - x_0}_2 \leq \epsilon$ and $\nm{y - y_0}_2 \leq \epsilon$.
+
+        Then we have \begin{align*}
+            & \inp{Ax}{y} - \inp{Ax_0}{y_0} \\
+            ={} & \inp{A(x-x_0)}{y} + \inp{Ax_0}{y-y_0} \\
+            \leq{} & \nm{A}\nm{x-x_0}_2\nm{y}_2 + \nm{A}\nm{x_0}_2\nm{y-y_0}_2 \\
+            \leq{} & 2 \epsilon \nm{A},
+        \end{align*}
+        and hence the desired inequality.
+        \item Same argument, instead we are using $\nm{A} = \max_{x \in S^{n-1}} \inp{Ax}{x}$.
+    \end{enumerate}
+\end{mansol}
+
+\begin{mansol}{4.4.6}
+    For the nonnegative $\nm{A}$, we have \begin{align*}
+        \E \nm{A} & = CK \int_0^\infty \Pr(\nm{A} > CKt)\,dt \\
+        & = CK \int_{-\sqrt{m}-\sqrt{n}}^\infty \Pr\bigl(\nm{A} > CK(t+ \sqrt{m} + \sqrt{n})\bigr)\,dt \\
+        & \leq CK\Big[\sqrt{m} + \sqrt{n} + 2 \int_0^\infty \exp(-t^2)\,dt\Bigr] \\
+        & = CK(\sqrt{m}+\sqrt{n} + \sqrt{\pi}) \leq C'(\sqrt{m} + \sqrt{n})
+    \end{align*}
+    for some absolute constant $C'$, as desired.
+\end{mansol}
+
 \begin{mansol}{4.5.3}[Weyl's inequality]
 By the min-max definition, we know \begin{align*}
 \lambda_i(S) & = \max_{\dim E = i} \min_{\nm{x} = 1} \inp{Sx}{x},\\
@@ -426,6 +501,8 @@ Hence \begin{align*}
 Interchange $S$ and $T$ gives $\lambda_i(T) - \nm{T - S} \leq \lambda_i(S)$. These two combined gives $\abs{\lambda_i(S) - \lambda_i(T)} \leq \nm{S-T}$.
 \end{mansol}
 
+\newpage
+
 \section{Concentration without independence}
 \begin{mansol}{5.1.2 (b)} The gradient should be bounded here.
 
@@ -434,14 +511,69 @@ Because $f$ is differentiable, by the multivariate MVT, we have \begin{align*}
 & \leq \nm{\nabla f(\lambda x_1 + (1-\lambda) x_2)}_2 \nm{x_2 - x_1}_2, \text{ by Cauchy-Schwarz} \\ 
 & \leq \sup_{x \in \R^n}\nm{\nabla f(x)}_2 \nm{x_2 - x_1}_2
 \end{align*}
-Thus $f$ is Lipschitz with the Lipschitz constant $\leq \sup_{x \in \R^n}$.
+Thus $f$ is Lipschitz with the Lipschitz constant $\leq \sup_{x \in \R^n}\nm{\nabla f(x)}_2$.
 \end{mansol}
 
 \begin{mansol}{5.1.3}
 \begin{enumerate}[label=(\alph*)]
 \item skipped.
 \item We know by the definition of operator norm that \[\nm{Ax_1 - Ax_2}_2 \leq \nm{A}\nm{x_1 - x_2}_2,\] where the equality is achieved when $x_1 - x_2$ is an eigenvector of $A^*A$ corresponding to the largest eigenvalue $s_1^2 = \nm{A}^2$. Hence $\nm{A}_\mathrm{Lip} = \nm{A}$.
-\item 
+\item There is a very important result from functional analysis that says any two norms on a finite-dimensional normed vector space are equivalent, in the sense that \[\nm{\blank}_a \asymp \nm{\blank}_b.\] The special case $\nm{x} \lesssim \nm{x}_2$ that we will use may be easily verified by breaking $x$ into a linear combination of orthonormal basis vectors.
+
+Since \begin{align*}
+\bigl\lvert\nm{x_1} - \nm{x_2}\bigr\rvert & \leq \nm{x_1 - x_2} \\
+& \lesssim \nm{x_1 - x_2}_2,
+\end{align*}
+we know $\nm{\blank}$ is Lipschitz. Because the first inequality above can be achieved when $x_1$ and $x_2$ are colinear in the same direction, the Lipschitz constant is simply the smallest $L$ as described.
 \end{enumerate}
 \end{mansol}
+\begin{mansol}{5.4.6}
+It is standard to use the Taylor expansion $e^X$ for this problem. We proceed on an alternative track: write $X = \sum_{i=1}^n \lambda_i u_i u_i^\trp$, then $e^X = \sum_{i=1}^n e^{\lambda_i} u_i u_i^\trp$.
+
+An important theorem states that commuting operators are simultaneously diagonalizable w.r.t.\ the same basis. Hence $e^Y = \sum_{j=1}^n e^{\mu_j}u_j u_j^\trp$. Now consider \[e^X e^Y = \Bigl(\sum_{i=1}^n e^{\lambda_i} u_i u_i^\trp\Bigr)\Bigl(\sum_{j=1}^n e^{\mu_j} u_j u_j^\trp\Bigr).\]
+
+Note that if $i = j$, then since $\inp{u_i}{u_j} = 1$ \[
+\bigl(e^{\lambda_i} u_i u_i^\trp\bigr)\bigl(e^{\mu_j} u_j u_j^\trp\bigr) = e^{\lambda_i + \mu_i}u_i u_i^\trp.
+\]
+Otherwise if $i \neq j$, then by $\inp{u_i}{u_j} = 0$ \[
+\bigl(e^{\lambda_i} u_i u_i^\trp\bigr)\bigl(e^{\mu_j} u_j u_j^\trp\bigr) = 0.
+\]
+Hence $e^Xe^Y = \sum_{i=1}^n e^{\lambda_i + \mu_i}u_i u_i^\trp$. Since $X(X+Y) = (X+Y)X$, and $(X+Y)u_i = Xu_i + Yu_i = (\lambda_i + \mu_i)u_i$, \[\sum_{i=1}^n e^{\lambda_i + \mu_i}u_i u_i^\trp = e^{X+Y}.\]
+\end{mansol}
+
+\newpage
+\section{Quadratic forms, symmetrization and contraction}
+\begin{mansol}{6.3.4}
+    \begin{enumerate}[label=(\alph*)]
+        \item We know there is an orthonormal basis $e_1,\ldots,e_d$ of $E$. We may extend this list to $e_1,\ldots,e_n$, an orthonormal basis of $\R^n$. We then have \begin{align*}
+        \operatorname{dist}(X,E)^2 & = \nm{\inp{X}{e_{d+1}}e_{d+1} + \cdots + \inp{X}{e_n}e_n}_2^2 \\ & = \inp{X}{e_{d+1}}^2 + \cdots + \inp{X}{e_n}^2.
+        \end{align*}
+    It suffice to prove that for $e \in \R^n$ with norm 1, $\E \inp{X}{e}^2 = 1$. This is easy: 
+    \begin{align*}
+        \E \inp{X}{e}^2 & = e^\trp \bigl(\E X X^\trp\bigr) e \\ & = \nm{e}_2^2 = 1.
+    \end{align*}
+    \item Let $\Pi$ be the projection matrix from $\R^n$ to $E$. Consider $B = I - \Pi$, then $\nm{BX}_2$ is just the distance. Recall $\nm{B}_{\mathrm F}$ is the sqrt of sum of squares of singular values of $B$. Since $B$ has $n - d$ singular values 1 and $d$ singular values 0, we now know $\sqrt{n-d} = \nm{B}_{\mathrm F}$.
+
+    Now because $\nm{B} = \text{the largest singular value of }B = 1$, the proof is complete.
+    \end{enumerate}
+\end{mansol}
+
+\begin{mansol}{6.5.2}
+    Just follow the hints. There is a 
+\end{mansol}
+
+\newpage
+\section{Random processes}
+\begin{mansol}{7.1.13}
+    First, \[\nm{X_{v_t} - X_{v_s}}_{L^2} = \Big\lVert\sum_{i=t}^s Z_i\Big\rVert_{L^2}.\] Since $\sum_{i=t}^s Z_i \sim N(0,t-s)$, the $\nm{v_t-v_s}_2^2 = t-s$ (where $v_t$ and $v_s$ are chosen in the canonical Gaussian process). This leads us to make the choice that $v_t = (\underbrace{1,\ldots,1}_{t},\underbrace{0,\ldots,0}_{N-t})$.
+\end{mansol}
+
+\begin{mansol}{}
+    
+\end{mansol}
+
+\begin{mansol}{}
+    
+\end{mansol}
+
 \end{document}

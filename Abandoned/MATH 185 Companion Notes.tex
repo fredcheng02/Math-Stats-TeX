@@ -1,12 +1,16 @@
 \documentclass[11pt]{article}
-\usepackage[T1]{fontenc}
+\usepackage{fontspec}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{mathtools}
+\usepackage{amsmath,amsthm}
+% \usepackage{amssymb,mathtools}
 \usepackage{stmaryrd}
 \usepackage{enumitem}
-\usepackage{setspace,microtype,soul,framed}
+\usepackage{setspace,soul,framed}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref}
+
+\setmainfont{Tex Gyre Pagella}
+\usepackage{euler-math}
+
 \newcommand{\lk}[2]{\hyperlink{subsection.#1.#2}{\S#1.#2}}
 \newcommand{\rmk}{\noindent\textit{Remark. }}
 \newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
@@ -20,15 +24,18 @@
 \newcommand{\R}{\mathbf{R}}
 \newcommand{\C}{\mathbf{C}}
 \newcommand{\eC}{\widetilde{\C}}
-\renewcommand{\Re}{\operatorname{Re}}
-\renewcommand{\Im}{\operatorname{Im}}
-\newcommand{\Bd}{\operatorname{Bd}}
 \newcommand{\where}{\,|\,}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
 \newcommand{\nm}[1]{\lVert #1 \rVert}
-\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\abs}[1]{\lvert #1 \rvert} 
+
+\AtBeginDocument{%
+    \renewcommand{\Re}{\operatorname{Re}}
+    \renewcommand{\Im}{\operatorname{Im}}
+    \newcommand{\Bd}{\operatorname{Bd}}
+}
 
 \makeatletter
 \let\@subtitle\@empty % default value
@@ -52,10 +59,6 @@
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
-\usepackage{newpxtext,eulerpx}
-\usepackage[scaled=1.008]{inconsolata}
-\usepackage[scaled=0.842]{berasans}
-\renewcommand{\mathbf}{\boldsymbol}
 
 \begin{document}
 \maketitle

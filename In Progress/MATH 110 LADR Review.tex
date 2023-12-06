@@ -36,28 +36,35 @@
 
 \makeatletter
 \let\@subtitle\@empty % default value
-\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\newcommand{\makemytitle}{
-    \begin{center}
-        {\Large \@title}
-        \@subtitle
-        \vspace{0.5em}
-        \\ \@author
-        \vspace{-0.5em}
-    \end{center}
-}
+\protected\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{%
+  \newpage
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large \@title \par}%
+    {\@subtitle \par}%
+    \vskip 0.5em%
+    {\lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    {\large \@date}%
+    \vskip -0.5em%
+  \end{center}%
+  \par}
 \makeatother
 
 \title{MATH 110 Notes}
 \author{Cheng, Feng}
 \subtitle{based on \textit{Linear Algebra Done Right}, third edition}
+\date{}
 
 \onehalfspacing
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
 \begin{document}
-\makemytitle
+\maketitle
 
 \tableofcontents
 \newpage
@@ -437,11 +444,11 @@
         p(x)=c(x-\lambda_1)\cdots(x-\lambda_m)(x^2+b_1x+c_1)\cdots(x^2+b_Mx+c_M),
     \end{equation} where the $c$ at the front, the $\lambda$'s, and the $b$'s and $c$'s at the end are all reals and each quadratic factors have negative discriminant.
     \begin{itemize}
-        \item (1) would be obviously true if all zeros are reals by the unique factorization theorem. Suppose $p$ has one pair of nonreal complex zeros $\lambda$ and $\conj{\lambda}$, then $$p(x) = (x-\lambda)(x-\conj{\lambda})q(x) = (x^2-2(\Re{\lambda})x+\abs{\lambda}^2)q(x).$$ What we want to show is that such $(x - \lambda)$ appear exactly the same number of times $(x - \conj{\lambda})$ in the factorization.
+        \item (1) would be obviously true if all zeros are reals by the unique factorization theorem. Suppose $p$ has one pair of nonreal complex zeros $\lambda$ and $\conj{\lambda}$, then \[p(x) = (x-\lambda)(x-\conj{\lambda})q(x) = (x^2-2(\Re{\lambda})x+\abs{\lambda}^2)q(x).\] What we want to show is that such $(x - \lambda)$ appear exactly the same number of times $(x - \conj{\lambda})$ in the factorization.
         
         Our idea is to use induction on the degree of $p$. We assume real nonconstant polynomials of degree less than $\deg p$ can be factorized according to (1). If we prove that $q$ (of degree $\deg p-2$) has real coefficients, then $p$ can be factorized according to (1).
         
-        Now for all $x \in \R$, $$q(x) = \frac{p(x)}{x^2-2(\Re{\lambda})x+\abs{\lambda}^2}.$$ Therefore, for all $x \in \R$, $q(x) \in \R$. If we write $q(x) = a_0+a_1x+\dots+a_{n-2}x^{n-2}$ ($n = \deg p$ and the $a$'s are complex-valued), then taking the imaginary parts on both sides gives us $$0 = (\Im a_0)+(\Im a_1)x+\dots+(\Im a_{n-2})x^{n-2}$$ for all $x \in \R$. Hence the imaginary-part coefficients must all be $0$, telling us $q$ is of real coefficients.
+        Now for all $x \in \R$, \[q(x) = \frac{p(x)}{x^2-2(\Re{\lambda})x+\abs{\lambda}^2}.\] Therefore, for all $x \in \R$, $q(x) \in \R$. If we write $q(x) = a_0+a_1x+\dots+a_{n-2}x^{n-2}$ ($n = \deg p$ and the $a$'s are complex-valued), then taking the imaginary parts on both sides gives us $$0 = (\Im a_0)+(\Im a_1)x+\dots+(\Im a_{n-2})x^{n-2}$$ for all $x \in \R$. Hence the imaginary-part coefficients must all be $0$, telling us $q$ is of real coefficients.
         
         Now we have a factorization of $p$ given by $(1)$, and we want to show its uniqueness. For the quadratic factors with negative discriminants at the end, each can be uniquely factorized into $(x-\lambda_j)(x-\conj{\lambda_j})$. Therefore, if we have two different factorizations of $p$ of the form in (1), then we would have two different standard factorizations ($\star$) of $p$ over $\C$ (as one of factors over $\R$ being different implies that one of the factors over $\C$ is different). This contradicts the unique factorization theorem.
     \end{itemize}

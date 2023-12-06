@@ -24,28 +24,35 @@
 
 \makeatletter
 \let\@subtitle\@empty % default value
-\protected\def\subtitle#1{\gdef\@subtitle{\\ #1}}
-\newcommand{\makemytitle}{
-    \begin{center}
-        {\Large \@title}
-        \@subtitle
-        \vspace{0.5em}
-        \\ \@author
-        \vspace{-0.5em}
-    \end{center}
-}
+\protected\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{%
+  \newpage
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large \@title \par}%
+    {\@subtitle \par}%
+    \vskip 0.5em%
+    {\lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    {\large \@date}%
+    \vskip -0.5em%
+  \end{center}%
+  \par}
 \makeatother
 
 \title{Notes on Elementary Stochastic Processes}
 \author{Cheng, Feng}
 \subtitle{based on MAT 135B}
+\date{}
 
 \onehalfspacing
 \setlength{\parskip}{0.25em}
 \setlist{listparindent=\parindent,parsep=0pt}
 
 \begin{document}
-\makemytitle
+\maketitle
 
 % ------------------------------------------------------------
 % MadHat notebook page 1: DTMC

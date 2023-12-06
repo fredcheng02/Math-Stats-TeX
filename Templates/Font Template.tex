@@ -2,7 +2,11 @@
 % \usepackage{unicode-math}
 % \setmainfont{XCharter}
 % \setmathfont{XCharter-Math.otf}[CharacterVariant={6}] % phi replaced by varphi
-\usepackage[CharacterVariant={6}]{xcharter-otf}
+% \usepackage[CharacterVariant={6}]{xcharter-otf}
+
+% \usepackage{unicode-math}
+% \setmainfont{TeX Gyre Termes}
+% \setmathfont{TeX Gyre Termes Math}
 
 \usepackage{unicode-math}
 \setmainfont{EBGaramond-Regular}[
@@ -35,19 +39,19 @@
 
 % \usepackage{newtxtext,newtxmath}
 
-
-
-% \usepackage[T1]{fontenc}
-% \usepackage{newpxtext,eulerpx}
+% \usepackage{newpxtext,newpxmath}
 
 % \usepackage[scaled=0.95]{inconsolata}
 % \renewcommand{\ttdefault}{inconsolata}
 
-% \usepackage{bbm}; use \mathbbm for blackboard bold for Computer Modern
+% \usepackage{dsfont}; use \mathbbm for blackboard bold for Computer Modern
 
-\usepackage{newpxtext,eulerpx}
-% \usepackage{mathpazo}
-% \usepackage{newpxtext,newpxmath}
+\setmainfont{CMU Concrete}
+\usepackage{euler-math}
+
+\usepackage{mathpazo}
+\usepackage{eucal}
 \usepackage[scaled=1.008]{inconsolata}
 \usepackage[scaled=0.842]{berasans}
-\renewcommand{\mathbf}{\boldsymbol}
+
+% when using unicode-math, operatorname should be defined using `AtBeginDocument`, after all fonts are known
