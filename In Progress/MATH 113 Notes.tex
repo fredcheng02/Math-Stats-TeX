@@ -24,7 +24,10 @@
 \newcommand{\irr}{\operatorname{irr}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\GF}{\operatorname{GF}} % Galois Field
-% \renewcommand{\phi}{\varphi}
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\impliedby}{\Leftarrow}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\simeq}{\cong}
 
 % table with math entries; use \text{} for actual text in table
 \usepackage{amstext} % for \text macro
@@ -95,7 +98,7 @@
 \subsection{Isomorphic Binary Structures}
 \begin{itemize}
     \item A binary algebraic structure $\la S,\ast \ra$ is a set $S$ endowed with a binary operation $\ast$.
-    \item Given two binary structures $\la S,\ast \ra$ and $\la S',\ast' \ra$, if there is a function $\phi: S \to S'$ such that for $x,y \in S$, we have $\phi(x \ast y) = \phi(x) \ast' \phi(y)$, then we say that \df{$S$ is homomorphic to $S'$} (i.e., $S$ and $S'$ are structurally alike, as shown by the $\phi$ function). Here the $\phi$ function is the \df{homomorphism of $S$ with $S'$}.
+    \item Given two binary structures $\la S,\ast \ra$ and $\la S',\ast' \ra$, if there is a function $\phi\colon S \to S'$ such that for $x,y \in S$, we have $\phi(x \ast y) = \phi(x) \ast' \phi(y)$, then we say that \df{$S$ is homomorphic to $S'$} (i.e., $S$ and $S'$ are structurally alike, as shown by the $\phi$ function). Here the $\phi$ function is the \df{homomorphism of $S$ with $S'$}.
 
     It is clear that under this homomorphism $\phi$, if $\ast$ is commutative/associative, then $\ast'$ should be commutative/associative as well, because $\ast$ on $S$ and $\ast'$ on $S'$ have the same purpose.
     
@@ -110,7 +113,7 @@
     The proof of this is very easy. By $e \ast s = s \ast e = s$ for all $s \in S$ we have \[\phi(e) \ast' \phi(s) = \phi(e \ast s) = \phi (s \ast e) = \phi(s) \ast' \phi(e) = \phi(s),\] as desired.
     \item Clearly for an isomorphism $\phi$ of $S$ with $S'$ desired above, $\phi^{-1}$ should be an isomorphism of $S'$ with $S$.
     
-    Because $\phi$ is bijective, $\phi^{-1}$ exists and is bijective. Moreover, for any $x' = \phi(x)$ and $y' = \phi(y)$ in $S'$, \[\phi^{-1}(x' \ast' y') = \phi^{-1}(\phi(x) \ast' \phi(y)) = \phi^{-1}(\phi(x \ast y)) = x \ast y = \phi^{-1}(x') \ast' \phi^{-1}(y').\]
+    Because $\phi$ is bijective, $\phi^{-1}$ exists and is bijective. Moreover, for any $x' = \phi(x)$ and $y' = \phi(y)$ in $S'$, \[\phi^{-1}(x' \ast' y') = \phi^{-1}\bigl(\phi(x) \ast' \phi(y)\bigr) = \phi^{-1}\bigl(\phi(x \ast y)\bigr) = x \ast y = \phi^{-1}(x') \ast' \phi^{-1}(y').\]
     \item Similarly we can also show that the composition of homomorphisms (resp.\ isomorphisms) is still a homomorphism (resp.\ an isomorphism, because the composition of bijective functions is bijective). The proof follows straight from the definition.
 \end{itemize}
 
@@ -159,13 +162,13 @@ The proof of these elementary results above about groups is quite routine by cor
 
         Finally we show that the left identity is exactly $e$ the right identity. For every $a \in G$, \[ea = (aa')a = a(a'a) = ae = a,\] which tells us that $e$ is the right identity.
     \end{proof}
-    \item The group of order 1 is the trivial group with only the identity. By listing the group table, $\la \Z_2,+_2 \ra$ and $\la \Z_3,+_3 \ra$ are the only groups of order 2 and 3, up to isomorphism. (Here $+_n$ is the addition modulo $n$ binary operation. We will usually abbreviate these group by the set $\Z_n$.) There are two groups of order 4 up to isomorphism: one is $\Z_4$ and the other is $V$ the Klein-4 group, and both are abelian. See their group tables below. \[\Z_4: \quad \begin{tabular}{C|C|C|C|C}
+    \item The group of order 1 is the trivial group with only the identity. By listing the group table, $\la \Z_2,+_2 \ra$ and $\la \Z_3,+_3 \ra$ are the only groups of order 2 and 3, up to isomorphism. (Here $+_n$ is the addition modulo $n$ binary operation. We will usually abbreviate these group by the set $\Z_n$.) There are two groups of order 4 up to isomorphism: one is $\Z_4$ and the other is $V$ the Klein-4 group, and both are abelian. See their group tables below. \[\Z_4\colon \quad \begin{tabular}{C|C|C|C|C}
         +_4 & 0 & 1 & 2 & 3 \\ \hline
         0 & 0 & 1 & 2 & 3 \\ \hline
         1 & 1 & 2 & 3 & 0 \\ \hline
         2 & 2 & 3 & 0 & 1 \\ \hline
         3 & 3 & 0 & 1 & 2
-        \end{tabular} \qquad V: \begin{tabular}{C|C|C|C|C}
+        \end{tabular} \qquad V\colon \quad \begin{tabular}{C|C|C|C|C}
         \ast & e & a & b & c \\ \hline
         e & e & a & b & c \\ \hline
         a & a & e & c & b \\ \hline
@@ -285,7 +288,7 @@ The corresponding adjectives ``largest'' and ``maximal'' have the exact opposite
     \end{proof}
 \end{itemize}
 \begin{framed}
-From the ($\implies$) above we know that for $a \in R$ that is not a left zero divisor, the left-multiplication-by-$a$ map $\lambda_a: R \to R$ given by $\lambda_a(x) = ax$ is injective because $ax = az$ implies that $x = z$. In particular, if $R$ is finite, then $R$ is injective means that $R$ is surjective. Thus for every $y \in R^*$, there is a unique $x \in R^*$ such that $\lambda_a(x)=ax=y$ [because $0x=0$]. A symmetric claim holds for right zero divisors. \textbf{This is a very important trick.}
+From the ($\implies$) above we know that for $a \in R$ that is not a left zero divisor, the left-multiplication-by-$a$ map $\lambda_a\colon R \to R$ given by $\lambda_a(x) = ax$ is injective because $ax = az$ implies that $x = z$. In particular, if $R$ is finite, then $R$ is injective means that $R$ is surjective. Thus for every $y \in R^*$, there is a unique $x \in R^*$ such that $\lambda_a(x)=ax=y$ [because $0x=0$]. A symmetric claim holds for right zero divisors. \textbf{This is a very important trick.}
 \end{framed}
 \begin{itemize}
     \item Let $R$ be a finite nontrivial unital ring, then every $a \in R^*$ is \textbf{either a unit or a zero divisor}. (We want to show: not being a zero divisor $\implies$ being a unit, and the two are mutually exclusive.)
@@ -314,7 +317,7 @@ From the ($\implies$) above we know that for $a \in R$ that is not a left zero d
 \setcounter{subsection}{25}
 \subsection{Homomorphisms and Factor Rings}
 \begin{itemize}
-    \item Let $\phi: R \to R'$ be a ring homomorphism, and $N$ be an ideal of $R$. Then $\phi(N)$ is an ideal of $\phi(R)$. If $N'$ is an ideal of either $\phi(R)$ or $R'$, then $\phi^{-1}(N')$ is an ideal of $R$.    
+    \item Let $\phi\colon R \to R'$ be a ring homomorphism, and $N$ be an ideal of $R$. Then $\phi(N)$ is an ideal of $\phi(R)$. If $N'$ is an ideal of either $\phi(R)$ or $R'$, then $\phi^{-1}(N')$ is an ideal of $R$.    
     \begin{proof}
         The image of an additive normal subgroup is still an additive normal subgroup. Pick any $a \in \phi(R)$, then $\phi^{-1}(a) \in R$ has $\phi^{-1}(a)N \subseteq N$ and $N\phi^{-1}(a) \subseteq N$. By the homomorphism property, $a \phi(N)$ and $\phi(N)a$ are both subsets of $\phi(N)$, as desired.
 
@@ -357,13 +360,13 @@ From the ($\implies$) above we know that for $a \in R$ that is not a left zero d
     \begin{proof}
         Nonconstant $f(x)$ can be factorized into irreducible polynomials over $F$, and it suffices to show that for one of these irreducible factors $p(x)$ we have $p(\alpha) = 0$.
 
-        Since $\gen{p(x)}$ is maximal, $F[x]/\gen{p(x)}$ is a field. Consider the map $\psi: F \to F[x]/\gen{p(x)}$ given by \[\psi(a) = a + \gen{p(x)}\] for $a \in F$.
+        Since $\gen{p(x)}$ is maximal, $F[x]/\gen{p(x)}$ is a field. Consider the map $\psi\colon F \to F[x]/\gen{p(x)}$ given by \[\psi(a) = a + \gen{p(x)}\] for $a \in F$.
 
-        First we have $a + \gen{p(x)} = b + \gen{p(x)} \implies a - b \in \gen{p(x)} \implies a = b$ because $p(x)$ is not a constant. Therefore, $\psi$ is injective. Furthermore, $\psi(ab) = ab+\gen{p(x)} = (a+\gen{p(x)})(b+\gen{p(x)}) = \psi(a)\psi(b)$. Therefore, $\psi$ is injective ring homomorphism that embeds $F$ into $F[x]/\gen{p(x)}$, which we call the extension field $E$.
+        First we have $a + \gen{p(x)} = b + \gen{p(x)} \implies a - b \in \gen{p(x)} \implies a = b$ because $p(x)$ is not a constant. Therefore, $\psi$ is injective. Furthermore, \[\psi(ab) = ab+\gen{p(x)} = \bigl(a+\gen{p(x)}\bigr)\bigl(b+\gen{p(x)}\bigr) = \psi(a)\psi(b).\] Therefore, $\psi$ is injective ring homomorphism that embeds $F$ into $F[x]/\gen{p(x)}$, which we call the extension field $E$.
         
-        \emph{Note that $\psi = \pi \circ \iota$, where $\iota$ is the natural inclusion map from $F$ into $F[x]$, and $\pi: F[x] \to F[x]/\gen{p(x)}$ is the canonical homomorphism. $\psi$ is a composition of two homomorphism and is therefore homomorphic as well.}
+        \emph{Note that $\psi = \pi \circ \iota$, where $\iota$ is the natural inclusion map from $F$ into $F[x]$, and $\pi\colon F[x] \to F[x]/\gen{p(x)}$ is the canonical homomorphism. $\psi$ is a composition of two homomorphism and is therefore homomorphic as well.}
 
-        It remains to show that some $\alpha \in E$ is a zero of $p(x)$ over $E$. Let $\alpha = x + \gen{p(x)}$. For $p(x) = a_0 + a_1x + \dots + a_n x^n \in F[x]$, the evaluation map $\phi_\alpha: F[x] \to E$ gives 
+        It remains to show that some $\alpha \in E$ is a zero of $p(x)$ over $E$. Let $\alpha = x + \gen{p(x)}$. For $p(x) = a_0 + a_1x + \dots + a_n x^n \in F[x]$, the evaluation map $\phi_\alpha\colon F[x] \to E$ gives 
         \begin{align*}
             p(\alpha) = \phi_\alpha(p(x)) & = (a_0 + \gen{p(x)}) + (a_1 + \gen{p(x)})(x + \gen{p(x)}) + \cdots \\ & \qquad \qquad \qquad \quad + (a_n + \gen{p(x)})(x+\gen{p(x)})^n \\ & = (a_0 + \gen{p(x)}) + (a_1x + \gen{p(x)}) + \dots + (a_nx^n + \gen{p(x)}) \\ & = (a_0 + a_1x + \dots + a_n x^n) + \gen{p(x)} = p(x) + \gen{p(x)} = \gen{p(x)} = 0
         \end{align*}
@@ -382,12 +385,12 @@ From the ($\implies$) above we know that for $a \in R$ that is not a left zero d
     \item An element $\alpha \in E$, where $E$ is an extension field of $F$, is \df{algebraic over $F$} if we can find a nonzero polynomial $f(x) \in F[x]$ such that $f(\alpha) = 0$. Otherwise, $\alpha \in E$ is \df{transcendental over $F$}.
     
     An element $\alpha \in \C$ algebraic (or transcendental) over $\Q$ is called an \df{algebraic number} (or a \df{transcendental number}). $\pi$ and $e$ are famous transcendental numbers, but showing they are transcendental is very complicated.
-    \item For an extension field $E$ of $F$ and $\alpha \in E$, and let $\phi_\alpha: F[x] \to E$ be the ``evaluation at $\alpha$'' homomorphism. Then $\alpha$ is transcendental over $F$ iff $\phi_\alpha$ is injective (or equivalently, iff $F[x]$ and a subdomain of $E$ are isomorphic).
+    \item For an extension field $E$ of $F$ and $\alpha \in E$, and let $\phi_\alpha\colon F[x] \to E$ be the ``evaluation at $\alpha$'' homomorphism. Then $\alpha$ is transcendental over $F$ iff $\phi_\alpha$ is injective (or equivalently, iff $F[x]$ and a subdomain of $E$ are isomorphic).
 
     Proof follows straight from the definition.
     \item Let $E$ be an extension field of $F$, and let $\alpha \in E$ be algebraic over $F$. Then there exists an irreducible polynomial $p(x)$ over $F$ such that $p(\alpha) = 0$. This irreducible polynomial is uniquely determined up to a constant factor in $F$ and is a polynomial of minimal degree $\geq 1$ in $F[x]$ having $\alpha$ as a zero. If $f(\alpha) = 0$ for $f(x) \in F[x]$, with $f(x) \neq 0$, then $p(x) \mid f(x)$.
     \begin{proof}
-        For the evaluation map $\phi_\alpha: F[x] \to E$, $\ker(\phi_\alpha)$ is an ideal of $F[x]$ and can thus be generated by $p(x) \in F[x]$. $\gen{p(x)}$ have precisely all the polynomials having $\alpha$ as a zero over $E$. This means that for any $f(x) \in F[x]$ having $\alpha$ as a zero over $E$, $p(x) \mid f(x)$, and shows that $p(x)$ is the polynomial of the minimal positive degree having $\alpha$ as a zero over $E$. Any other polynomials of $\deg(p)$ must be $p(x)$ times a nonzero constant factor in $F$.
+        For the evaluation map $\phi_\alpha\colon F[x] \to E$, $\ker(\phi_\alpha)$ is an ideal of $F[x]$ and can thus be generated by $p(x) \in F[x]$. $\gen{p(x)}$ have precisely all the polynomials having $\alpha$ as a zero over $E$. This means that for any $f(x) \in F[x]$ having $\alpha$ as a zero over $E$, $p(x) \mid f(x)$, and shows that $p(x)$ is the polynomial of the minimal positive degree having $\alpha$ as a zero over $E$. Any other polynomials of $\deg(p)$ must be $p(x)$ times a nonzero constant factor in $F$.
 
         To show $p(x)$ is irreducible, suppose $p(x) = r(x)s(x)$, where $r$ and $s$ are of degrees lower than $\deg(p)$. Then $p(\alpha) = r(\alpha)s(\alpha)$, so that $r(x)$ or $s(x)$ has $\alpha$ has a zero. Yet $p(x)$ is the polynomial of the minimal degree having $\alpha$ as a zero over $E$. Therefore, $p(x)$ is irreducible.
     \end{proof}  
@@ -398,7 +401,7 @@ From the ($\implies$) above we know that for $a \in R$ that is not a left zero d
 \begin{itemize}
     \item \textbf{Let $E$ be an arbitrary extension field of $F$}, and let $\alpha \in E$. We want to find the smallest extension containing $F$ and $\alpha$, which we denote by $F(\alpha)$.
     
-    (Case I.) \emph{When $\alpha$ is algebraic over $F$.} We can then construct the map $\phi_\alpha: F[x] \to E$ given by $\phi_\alpha(a) = a$ for all $a \in F$ and $\phi_\alpha(x) = \alpha$, because $E$ contains both $F$ and $\alpha$. This $\phi_\alpha$ is just the evaluation homomorphism. Since $\gen{\irr(\alpha,F)}$ is now a maximal ideal, $F[x]/\gen{\irr(\alpha,F)}$ is a field that is ring isomorphic to $\phi_\alpha(F[x]) \subseteq E$. \emph{Since a ring that is ring isomorphic to a field is a field itself (because being a field is a \emph{property} of a ring)}, $\phi_\alpha(F[x])$ is a subfield of $E$. Since any arbitrary $E$ containing $F$ and $\alpha$ has $\phi_\alpha(F[x])$ as a subfield, $\phi_\alpha(F[x]) \simeq F[x]/\la \irr(\alpha,F) \ra$ is the smallest subfield containing $F$ and $\alpha$. Isomorphically is the $F(\alpha)$ desired.
+    (Case I.) \emph{When $\alpha$ is algebraic over $F$.} We can then construct the map $\phi_\alpha\colon F[x] \to E$ given by $\phi_\alpha(a) = a$ for all $a \in F$ and $\phi_\alpha(x) = \alpha$, because $E$ contains both $F$ and $\alpha$. This $\phi_\alpha$ is just the evaluation homomorphism. Since $\gen{\irr(\alpha,F)}$ is now a maximal ideal, $F[x]/\gen{\irr(\alpha,F)}$ is a field that is ring isomorphic to $\phi_\alpha(F[x]) \subseteq E$. \emph{Since a ring that is ring isomorphic to a field is a field itself (because being a field is a \emph{property} of a ring)}, $\phi_\alpha(F[x])$ is a subfield of $E$. Since any arbitrary $E$ containing $F$ and $\alpha$ has $\phi_\alpha(F[x])$ as a subfield, $\phi_\alpha(F[x]) \simeq F[x]/\la \irr(\alpha,F) \ra$ is the smallest subfield containing $F$ and $\alpha$. Isomorphically is the $F(\alpha)$ desired.
     
     (Case II.) \emph{When $\alpha$ is transcendental over $F$.} Then $\phi_\alpha$ gives an isomorphism of $F[x]$ with a subdomain of $E$. $F[\alpha] \coloneqq \phi_\alpha(F[x])$ is thus an integral domain, from which we can create a field of quotients $\Quot(F[\alpha])$, which is the smallest subfield of $E$ that contains $F[\alpha]$ (which again is the smallest integral domain that contains $F$ and $\alpha$). Here $\Quot(F[\alpha])$ is isomorphically the $F(\alpha)$ desired.
     
@@ -407,7 +410,7 @@ From the ($\implies$) above we know that for $a \in R$ that is not a left zero d
         \item Pay attention to the difference between the case I here and the Kronecker's theorem we proved at the beginning. Kronecker's theorem tells us \textbf{how to create a specific extension field} $F[x]/\la p(x) \ra$ that contains a new zero $x + \la p(x) \ra$ of an irreducible factor $p(x)$ of $f(x)$. On the other hand, the case I above tells us that given an element $\alpha$ from \textbf{a given extension field} $E$ of $F$ such that $f(\alpha) = 0$ for some $f(x) \in F[x]$, we can create the smallest field $F[x]/\la \irr(\alpha,F) \ra$ containing $F$ and $\alpha$.
         
         The two results are the opposites of one another. Yet once we have created the new zero $\alpha = x + \la p(x) \ra$ in $F[x]/\la p(x) \ra$ by Kronecker's theorem, the extension field $F[x]/\la p(x) \ra$ of $F$ is exactly $F(\alpha)$ by case I. % At this stage we still do not know whether $x + \la p(x) \ra \in F[x]/\la p(x) \ra$ (from Kronecker's theorem) and $\alpha \in F[x]/\la \irr(\alpha,F) \ra$ (from case I)
-        \item Since $\pi$ is transcendental over $\Q$, the field $\Q(\pi)$ is isomorphic to \df{the field $\Q(x)$ of rational functions over $\Q$ in the indeterminate $x$}. Consider \[\Q(\pi) = \Quot(\phi_\pi(\Q[x])) = \left\{\frac{f(\pi)}{g(\pi)} \,\middle|\, f(x),g(x) \in \Q[x];\, g(x) \neq 0 \right\}.\] Here every $\frac{f(\pi)}{g(\pi)}$ has a one-to-one correspondence with $\frac{f(x)}{g(x)} \in \Q(x)$. From a structural viewpoint, in general, an element that is transcendental over a field $F$ behaves as though it were an indeterminate over $F$.
+        \item Since $\pi$ is transcendental over $\Q$, the field $\Q(\pi)$ is isomorphic to \df{the field $\Q(x)$ of rational functions over $\Q$ in the indeterminate $x$}. Consider \[\Q(\pi) = \Quot(\phi_\pi(\Q[x])) = \biggl\{\frac{f(\pi)}{g(\pi)} \,\biggm|\, f(x),g(x) \in \Q[x];\, g(x) \neq 0 \biggr\}.\] Here every $\frac{f(\pi)}{g(\pi)}$ has a one-to-one correspondence with $\frac{f(x)}{g(x)} \in \Q(x)$. From a structural viewpoint, in general, an element that is transcendental over a field $F$ behaves as though it were an indeterminate over $F$.
     \end{itemize}
     \item Say $E = F(\alpha)$, where this $\alpha$ is algebraic over $F$ and $\deg(\alpha,F) = n \geq 1$. Then every $\beta \in E = F(\alpha) = \phi_\alpha(F[x])$ can be uniquely expressed as $b_0 + b_1 \alpha + \dots + b_{n-1} \alpha^{n-1}$, where the $b_i$'s are all in $F$.
     \begin{proof}
@@ -587,7 +590,7 @@ It is natural to introduce splitting fields first before getting into finite fie
     
     \item The splitting field of $f(x)$ over $F$ is unique up to isomorphism.
     
-    We prove a stronger result. Let $\phi: F \to F'$ be an isomorphism between fields, and $f(x) \in F[x]$. $f'(x) \in F'[x]$ is obtained by applying $\phi$ to the coefficients of $f(x)$ in $F$. Let $E$ be a splitting field of $f(x)$ over $F$, and let $E'$ be a splitting field of $f'(x)$ over $F'$, respectively. Then the isomorphism $\phi: F \to F'$ can be extended to $\sigma: E \to E'$, i.e., $\sigma|_F = \phi$.
+    We prove a stronger result. Let $\phi\colon F \to F'$ be an isomorphism between fields, and $f(x) \in F[x]$. $f'(x) \in F'[x]$ is obtained by applying $\phi$ to the coefficients of $f(x)$ in $F$. Let $E$ be a splitting field of $f(x)$ over $F$, and let $E'$ be a splitting field of $f'(x)$ over $F'$, respectively. Then the isomorphism $\phi\colon F \to F'$ can be extended to $\sigma\colon E \to E'$, i.e., $\sigma|_F = \phi$.
     \begin{proof}
         
     \end{proof}
@@ -628,7 +631,7 @@ It is natural to introduce splitting fields first before getting into finite fie
         \begin{align*}
             (\alpha + \beta)^p & = \alpha^p + (p \cdot 1) \alpha^{p-1}\beta + (p\frac{p-1}{2} \cdot 1)\alpha^{p-2}\beta^2 + \dots + (p \cdot 1) \alpha\beta^{p-1} + \beta^p \\ & = \alpha^p + \beta^p.
         \end{align*}
-        All middle terms vanish by $p$ being a prime and $\kar(F) = p$. We can proceed to higher prime powers by induction. Suppose $(\alpha + \beta)^{p^k} = \alpha^{p^k} + \beta^{p^k}$ for some $k \in \Z^+$, then \[(\alpha + \beta)^{p^{k+1}} = \Big[(\alpha + \beta)^{p^k}\Big]^p = \Big[\alpha^{p^k} + \beta^{p^k}\Big]^p = \alpha^{p^{k+1}} + \beta^{p^{k+1}}.\qedhere\]
+        All middle terms vanish by $p$ being a prime and $\kar(F) = p$. We can proceed to higher prime powers by induction. Suppose $(\alpha + \beta)^{p^k} = \alpha^{p^k} + \beta^{p^k}$ for some $k \in \Z^+$, then \[(\alpha + \beta)^{p^{k+1}} = \Bigl[(\alpha + \beta)^{p^k}\Bigr]^p = \Bigl[\alpha^{p^k} + \beta^{p^k}\Bigr]^p = \alpha^{p^{k+1}} + \beta^{p^{k+1}}.\qedhere\]
     \end{proof}
     \item Now comes the main theorem. A finite field $\GF(p^n)$ of $p^n$ elements exists for every prime positive power $p^n$. 
     \begin{itemize}

@@ -147,7 +147,7 @@
         \item Corollary: for FDVS $V$ and its subspace $U$, if the two spaces have the same dimension, then they are the same space. This is an important result useful in many proofs.
     \end{itemize}
     \item There are two more things that deserve mentioning. For FDVS $V$ and its subspace $U$, we can always find subspace $W$ such that $V = U \oplus W$. The idea is to find a basis $B_U$ of $U$ and extend it to the basis $B_V$ of $V$. Using the set notation, $\s(B_V \backslash B_U)$ is our desired $W$. We then only have to show $V = U+W$ and $U \cap W = \{0\}$, which is not difficult.
-    \item The dimension of the sum of two vector spaces $U_1$ and $U_2$ can be expressed as follows: $$\d (U_1 + U_2) = \d U_1 + \d U_2 - \d (U_1 \cap U_2).$$
+    \item The dimension of the sum of two vector spaces $U_1$ and $U_2$ can be expressed as follows: \[\d (U_1 + U_2) = \d U_1 + \d U_2 - \d (U_1 \cap U_2).\]
     \begin{itemize}
         \item Despite the fact that it looks like the inclusion-exclusion formula, $+$ and $\cup$ are quite different, thus the formula cannot be similarly generalized to higher orders. To prove the formula, start from a basis $u_1,u_2,\dots,u_m$ of $U_1 \cap U_2$ (intersection is a subspace). $U_1$ and $U_2$ then have their respective bases $B_1$ and $B_2$. We can show $B_1 \cup B_2$ is a basis of $U_1 + U_2$. See page 47 of the book for the full proof.
         \item Note that when the sum is a direct sum, then the formula is just $\d(U_1 \oplus U_2) = \d U_1 + \d U_2$. We will generalize this result in \lk{3}{5}.
@@ -165,9 +165,9 @@
         T (\lambda u) = \lambda T(u).
     \end{equation*}
     \item The zero transformation maps every vector of $V$ to $0_W$. The identity transformation $I_V: V \rightarrow V$ maps each element of $V$ to itself in $V$.
-    \item We define the addition and scalar multiplication of linear maps in the vector-wise way: $$(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),$$ following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. In addition to the linear properties, we define the \df{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. Why the product is essential will become clear later. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties [$(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$] obviously hold as well.
+    \item We define the addition and scalar multiplication of linear maps in the vector-wise way: \[(S+T)(v) = Sv + Tv \quad \text{and} \quad (\lambda T)(v) = \lambda T(v),\] following which we can easily show that the set of linear maps $\mathcal{L}(V,W)$ from $V$ to $W$ is a vector space over $\F$. In addition to the linear properties, we define the \df{product} $ST$ of linear maps same as $S \circ T$, given the appropriate domain and codomain. Why the product is essential will become clear later. The theory of functions tells us this product is associative [$T_1(T_2 T_3) = (T_1 T_2) T_3$] and the identity works as usual ($I_W T = T I_V = T$). The distributive properties [$(S_1 + S_2) T = S_1 T + S_2 T \text{ and } S(T_1 + T_2) = S T_1 + S T_2$] obviously hold as well.
     % \item If $T(x_1,\dots,x_n) = (a_{11}x_1+\cdots+a_{1n}x_n,\dots,a_{m1}x_1+\cdots+a_{mn}x_n)$, then $T$ is obviously a linear map from $\F^n$ to $\F^m$. For a linear map $T \in \mathcal{L}(\F^n,\F^m)$, it must be of this form, and all the $a_{ij}$'s are determined by the mapping of the $n$ canonical basis vectors of $\F^n$.
-    \item The uniqueness of the linear map that takes basis vectors $v_1, v_2, \dots, v_n$ to corresponding vectors $w_1, w_2, \dots, w_n$ is the most fundamental theorem in this section. It is our first step toward showing that linear maps and matrices are isomorphic. To prove the theorem, for arbitrary $a_i$'s, let $$T: \sum_{i=1}^n a_i v_i \mapsto \sum_{i=1}^n a_i w_i.$$
+    \item The uniqueness of the linear map that takes basis vectors $v_1, v_2, \dots, v_n$ to corresponding vectors $w_1, w_2, \dots, w_n$ is the most fundamental theorem in this section. It is our first step toward showing that linear maps and matrices are isomorphic. To prove the theorem, for arbitrary $a_i$'s, let \[T: \sum_{i=1}^n a_i v_i \mapsto \sum_{i=1}^n a_i w_i.\]
     \item Here are a few properties that are useful in linear maps. The proofs are quite routine.
     \begin{itemize}
         \item $T(0_V) = 0_W;$
@@ -994,7 +994,7 @@ Therefore, a stronger condition on $T$ is required for the similar spectral theo
 
 Note that $T^*T$ by its form is already a positive operator, so we know it has a positive square root.
 
-There is a good analogy of this theorem with the polar decomposition of a complex number. For nonzero $z \in \C$, we have $z = \left(\frac{z}{\abs{z}}\right)\sqrt{\conj{z}z}$, where the first factor is a point on the unit circle and the second factor resembles $T^*T$. To prove the theorem, we need several steps:
+There is a good analogy of this theorem with the polar decomposition of a complex number. For nonzero $z \in \C$, we have $z = \bigl(\frac{z}{\abs{z}}\bigr)\sqrt{\conj{z}z}$, where the first factor is a point on the unit circle and the second factor resembles $T^*T$. To prove the theorem, we need several steps:
 \begin{itemize}
     \item \textit{Step I}. Define the function $S_1: \r \sqrt{T^*T} \to \r T$ by $S_1(\sqrt{T^*T}v)=Tv$.
     

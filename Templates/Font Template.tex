@@ -16,22 +16,30 @@
 ]
 \setmathfont{Garamond Math}[Scale=MatchUppercase]
 
-% euler-math loads unicode-math automatically
-\usepackage[CharacterVariant={6}]{euler-math}
-\setmainfont{CMU Concrete}
+\usepackage{ccfonts}
+\usepackage[euler-digits]{eulervm}
+\renewcommand{\mathbf}{\mathbold}
 
-\usepackage{concmath-otf}
+% if you want bold Concrete: 
+% \usepackage[math-style=upright]{unicode-math}
+% \setmainfont{CMU Concrete}
+% \setmathfont{Euler Math}
+
+% \usepackage{concmath-otf}
+
+% \usepackage{fourier} for pdfTeX
+% \usepackage{fourier-otf} for XeTeX and LuaTeX
 
 % only in pdfTeX
 % \usepackage{sansmathfonts}
 % \usepackage[T1]{fontenc}
 % \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 
-% \renewcommand{\familydefault}{\sfdefault}
-% \usepackage{sansmath}
-% \sansmath
+% \usepackage{mathspec}
+% \setmainfont{Liberation Sans}
+% \setmathfont(Digits,Latin,Greek){Liberation Sans}
 
-\usepackage{libertine}
+\usepackage{libertinus}
 \usepackage{libertinust1math}
 \usepackage[T1]{fontenc}
 

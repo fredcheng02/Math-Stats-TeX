@@ -8,7 +8,16 @@
 \usepackage{mathtools}
 % \usepackage{mathabx}
 \mathtoolsset{showonlyrefs}
-% \usepackage{tikz-cd}
+% \usepackage{tikz}
+% \makeatletter
+% \DeclareRobustCommand{\rvdots}{%
+%   \vbox{
+%     \baselineskip4\p@\lineskiplimit\z@
+%     \kern-\p@
+%     \hbox{.}\hbox{.}\hbox{.}
+%   }}
+% \makeatother
+% for centered vdots
 
 % \usepackage{sectsty}
 % \allsectionsfont{\sffamily}
@@ -40,6 +49,7 @@
 \newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\sgn}{\operatorname{sgn}}
+\renewcommand{\pmod}[1]{\ (\mathrm{mod}\ #1)}
 
 % \usepackage{graphicx}
 % \graphicspath{ {image/} }

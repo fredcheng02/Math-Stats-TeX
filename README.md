@@ -1,2 +1,2 @@
 ### Math-Stats-TeX
-TeX files for math and stats notes, pushed from Overleaf
+TeX files for math and stats notes, pulled from Overleaf
