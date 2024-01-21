@@ -368,7 +368,7 @@ From the ($\implies$) above we know that for $a \in R$ that is not a left zero d
 
         It remains to show that some $\alpha \in E$ is a zero of $p(x)$ over $E$. Let $\alpha = x + \gen{p(x)}$. For $p(x) = a_0 + a_1x + \dots + a_n x^n \in F[x]$, the evaluation map $\phi_\alpha\colon F[x] \to E$ gives 
         \begin{align*}
-            p(\alpha) = \phi_\alpha(p(x)) & = (a_0 + \gen{p(x)}) + (a_1 + \gen{p(x)})(x + \gen{p(x)}) + \cdots \\ & \qquad \qquad \qquad \quad + (a_n + \gen{p(x)})(x+\gen{p(x)})^n \\ & = (a_0 + \gen{p(x)}) + (a_1x + \gen{p(x)}) + \dots + (a_nx^n + \gen{p(x)}) \\ & = (a_0 + a_1x + \dots + a_n x^n) + \gen{p(x)} = p(x) + \gen{p(x)} = \gen{p(x)} = 0
+            p(\alpha) = \phi_\alpha(p(x)) & = (a_0 + \gen{p(x)}) + (a_1 + \gen{p(x)})(x + \gen{p(x)}) + \cdots \\ & \hphantom{{}= (a_0 + \gen{p(x)})} + (a_n + \gen{p(x)})(x+\gen{p(x)})^n \\ & = (a_0 + \gen{p(x)}) + (a_1x + \gen{p(x)}) + \dots + (a_nx^n + \gen{p(x)}) \\ & = (a_0 + a_1x + \dots + a_n x^n) + \gen{p(x)} = p(x) + \gen{p(x)} = \gen{p(x)} = 0
         \end{align*}
         in $E = F[x]/\gen{p(x)}$. \emph{The coefficients in the first line above are the images of $a_0,a_1,\dots,a_n \in F$ in $E$. Note that the zero is a particular coset from the factor ring $E$ of a polynomial ring modulo an irreducible polynomial of the given $f(x)$.}
     \end{proof}
