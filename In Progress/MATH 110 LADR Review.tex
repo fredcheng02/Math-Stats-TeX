@@ -419,7 +419,7 @@
     
     \item Recall the remark on polynomials we made in Chapter 2. Now we prove that polynomial functions over an infinite field $\F$ have a unique representation. Suppose $f,g \in \PF$ and $f(z)=g(z)$ for all $z \in \F$, we want to show that $f=g$.
     
-    Define $h = f-g$, and then we have $\forall z\in\F, h(z) = 0$. Suppose $h$ is a nonzero polynomial of degree $n$, then by the $h$ has at most $n$ zeros by the theorem above, yet $\F$ is an infinite field. Contradiction! Thus $h = f-g$ is the zero polynomial, and $f = g$ as a result.
+    Define $h = f-g$, and then we have $\forall z\in\F, h(z) = 0$. Suppose $h$ is a nonzero polynomial of degree $n$, then $h$ has at most $n$ zeros by the theorem above, yet $\F$ is an infinite field. Contradiction! Thus $h = f-g$ is the zero polynomial, and $f = g$ as a result.
     
     \begin{itemize}
         \item In the case of $\F = \C$ or $\R$, the book gives another proof of the contraposition that if one coefficient out of $$h(z) = a_0+a_1z+\dots+a_mz^m$$ is not zero, then $h(z) \not= 0$ for some $z \in \F$. Assume $m \not= 0$ and pick $$z = \frac{\abs{a_0} + \dots + \abs{a_{m-1}}}{\abs{a_m}}+1 \geq 1.$$ Thus, $z^j \leq z^{m-1}$ for all $j \leq m-1$. By triangle inequality and $\abs{a_m}z > \abs{a_0} + \dots + \abs{a_{m-1}}$, \[\abs{a_0+a_1z+\dots+a_{m-1}z^{m-1}} \leq (\abs{a_0}+\dots+\abs{a_{m-1}})z^{m-1} < \abs{a_m z^m}.\] Therefore $a_0+a_1z+\dots+a_{m-1}z^{m-1} \not= -a_m z^m$.

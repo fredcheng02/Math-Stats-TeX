@@ -1,0 +1,21 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheoremstyle{plain}{\topsep}{\topsep}{}{}{\scshape}{.}{.5em}{}
+\newtheoremstyle{definition}{\topsep}{\topsep}{}{}{\bfseries}{.}{.5em}{}
+\newtheoremstyle{remark}{\topsep}{\topsep}{}{}{\itshape}{.}{.5em}{}
+%\usepackage{thmtools}
+%\declaretheoremstyle[headfont=\scshape]{plain}
+%\declaretheoremstyle[headfont=\bfseries]{definition}
+%\declaretheoremstyle[headfont=\itshape]{remark}
+\theoremstyle{remark}
+\newtheorem*{rem*}{\protect\remarkname}
+\theoremstyle{plain}
+\newtheorem*{prop*}{\protect\propositionname}
+\providecommand{\propositionname}{Proposition}
+\providecommand{\remarkname}{Remark}
+
+\begin{document}
+\begin{prop*}
+This is a prop.
+\end{prop*}
+\end{document}

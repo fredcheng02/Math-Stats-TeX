@@ -1,0 +1,60 @@
+\documentclass[11pt,twoside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in,headheight=13.6pt,headsep=16.4pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{setspace,microtype}
+\usepackage{soul,framed,xcolor}
+\usepackage[pdfusetitle,bookmarksnumbered]{hyperref} %load this at the end
+% \usepackage[noabbrev]{cleveref}
+\usepackage[all]{hypcap}
+\usepackage{blindtext}
+
+\author{Feng Cheng}
+\title{MATH XXX}
+
+\makeatletter
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{%
+  \newpage
+  \begin{flushleft}
+  \let \footnote \thanks
+    {\LARGE \scshape \@title \par}%
+    \vskip .5em%
+    {\large \@subtitle\par}%
+    \vskip .5em%
+    {\lineskip .5em%
+      \begin{tabular}[t]{@{}l@{}}%
+        \@author
+      \end{tabular}\par}%
+    {\@date}%
+    \vskip -.5em%
+  \end{flushleft}
+  \par}
+\makeatother
+
+\title{Title}
+\subtitle{Subtitle\thanks{some}}
+\author{Feng Cheng\thanks{other}}
+\date{date}
+
+\pagestyle{fancy}
+\pagenumbering{roman}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[C]{\textsl{\rightmark}}
+\renewcommand{\sectionmark}[1]{\markright{#1}} %gets rid of section number
+\fancyfoot[]{}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+\maketitle\thispagestyle{plain}
+
+\Blindtext\Blindtext
+\section{Like}
+\Blindtext
+\section{wise}
+
+\end{document}
