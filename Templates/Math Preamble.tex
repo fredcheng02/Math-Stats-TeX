@@ -7,7 +7,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 % \usepackage{mathabx}
-\mathtoolsset{showonlyrefs}
+% \mathtoolsset{showonlyrefs} incomp. w. cleveref
 % \usepackage{tikz}
 % \makeatletter
 % \DeclareRobustCommand{\rvdots}{%
@@ -21,15 +21,21 @@
 
 % \usepackage{sectsty}
 % \allsectionsfont{\sffamily}
+% \usepackage{titlesec}
+% \titleformat*{\section}{\normalfont\mdseries\Large}
+% \titleformat*{\subsection}{\normalfont\mdseries\large}
 
 % \usepackage{thmtools}
 \usepackage[pdfusetitle,bookmarksnumbered]{hyperref} %load this at the end
-% \usepackage{cleveref}
-% \usepackage[all]{hypcap}
 
-\onehalfspacing
+\renewcommand{\arraystretch}{1.2}
+% \onehalfspacing
+% \usepackage{xpatch}
+% \xpatchcmd{\env@cases}{1.2}{0.99}{}{} when onehalfspacing; 0.72 when doublespacing
+
 \setlength{\parskip}{0em} % default parskip
 \setlist{listparindent=\parindent,parsep=0pt} % indentation and separation between list paragraphs
+\setenumerate[1]{label=(\alph*)}
 
 \newcommand{\df}[1]{\textit{\textsf{#1}}} % definition
 
@@ -50,11 +56,11 @@
 \newcommand{\nm}[1]{\lVert #1 \rVert}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\sgn}{\operatorname{sgn}}
-\renewcommand{\pmod}[1]{\ (\mathrm{mod}\ #1)}
+% \renewcommand{\pmod}[1]{\ (\mathrm{mod}\ #1)}
 
 % \usepackage{graphicx}
 % \graphicspath{ {image/} }
-% \usepackage[all]{hypcap}
+% usepackage[all]{hypcap}
 
 % \newcommand{\tpurp}[1]{\textcolor{purple}{#1}}
 % \newcommand{bpurp}[1]{\colorbox{purple}{#1}}
@@ -66,8 +72,8 @@
   \newpage
   \begin{center}%
   \let \footnote \thanks
-    {\Large \@title \par}%
-    {\@subtitle \par}%
+    {\Large \@title \par}% % LARGE
+    {\@subtitle \par}% % large
     \vskip 0.5em%
     {\lineskip .5em%
       \begin{tabular}[t]{c}%

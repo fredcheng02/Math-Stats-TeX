@@ -1,0 +1,343 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{setspace,microtype}
+\usepackage{soul,framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[pdfusetitle,bookmarksnumbered,colorlinks,
+citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
+\usepackage[capitalize]{cleveref}
+\usepackage[all]{hypcap}
+
+\usepackage{titlesec}
+\titleformat*{\section}
+{\sffamily\Large}
+\titleformat*{\subsection}{\sffamily\large}
+
+% no parentheses
+\newtheoremstyle{plain-star}{\topsep}{\topsep}{}{}{\sffamily}{.}{5pt plus 1pt minus 1pt}{\thmnumber{#2 }\thmname{#1}\thmnote{ #3}}
+
+\newtheoremstyle{definition-star}{\topsep}{\topsep}{}{}{\sffamily}{.}{5pt plus 1pt minus 1pt}{\thmnumber{#2 }\thmname{#1}\thmnote{ (#3)}}
+\newtheoremstyle{remark-star}{.5\topsep}{.5\topsep}{}{}{\itshape\sffamily}{.}{5pt plus 1pt minus 1pt}{\thmnumber{#2 }\thmname{#1}\thmnote{ (#3)}}
+
+\numberwithin{equation}{section}
+\theoremstyle{plain-star}
+\newtheorem{thm}[equation]{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{prop}[equation]{Proposition}
+% \newtheorem*{prop*}[equation]{Proposition}
+\newtheorem{fact}[equation]{Fact}
+\newtheorem{lem}[equation]{Lemma}
+\newtheorem{cor}[equation]{Corollary}
+\theoremstyle{definition-star}
+\newtheorem{defn}[equation]{Definition}
+\theoremstyle{remark-star}
+\newtheorem{rem}[equation]{Remark}
+\newtheorem*{rem*}{Remark}
+
+\makeatletter
+\newcommand\thmsname{\protect\theoremname}
+\newcommand\nm@thmtype{theorem}
+\theoremstyle{plain-star}
+\newtheorem{namedtheorem}[equation]{\thmsname}
+\newenvironment{namedthm}[1][Undefined Theorem Name]{
+    \ifx{#1}{Undefined Theorem Name}
+    \renewcommand\nm@thmtype{theorem}
+    \else\renewcommand\thmsname{#1}
+    \renewcommand\nm@thmtype{namedtheorem}\def\@currentlabelname{#1}
+    \fi
+    \begin{\nm@thmtype}}
+    {\end{\nm@thmtype}}
+
+\newtheorem*{namedtheorem*}{\thmsname}
+\newenvironment{namedthm*}[1][Undefined Theorem Name]{
+    \ifx{#1}{Undefined Theorem Name} \renewcommand\nm@thmtype{theorem*}
+    \else\renewcommand\thmsname{#1}
+    \renewcommand\nm@thmtype{namedtheorem*}
+    \fi
+    \begin{\nm@thmtype}}
+    {\end{\nm@thmtype}}
+\makeatother
+
+\renewcommand{\arraystretch}{1.2}
+
+\setlength{\parskip}{0em} % default parskip
+\setlist{listparindent=\parindent,parsep=0pt} % indentation and separation between list paragraphs
+\setenumerate[1]{label=(\alph*)}
+
+\makeatletter
+% \onehalfspacing
+\usepackage{xpatch}
+% \xpatchcmd{\env@cases}{1.2}{0.99}{}{} % when onehalfspacing; 0.72 when doublespacing
+\xpatchcmd{\proof}{\itshape}{\normalfont\proofnamefont}{}{}
+\newcommand{\proofnamefont}{\itshape\sffamily}
+
+\let\@subtitle\@empty % default value
+\protected\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{%
+  \newpage
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large\sffamily \@title \par}% % LARGE
+    {\sffamily \@subtitle \par}% % large
+    \vskip 0.5em%
+    {\lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \sffamily \@author
+      \end{tabular}\par}%
+    {\sffamily \@date}%
+    \vskip -0.5em%
+  \end{center}%
+  \par}
+\makeatother
+
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\F}{\mathbf{F}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\s}{\operatorname{span}}
+\newcommand{\nul}{\operatorname{null}}
+\newcommand{\ran}{\operatorname{range}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\inp}[2]{\langle #1, #2 \rangle}
+\newcommand{\nm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\LV}{\mathcal{L}(V)}
+\newcommand{\LVW}{\mathcal{L}(V,W)}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\PF}{\mathcal{P}(\F)}
+\newcommand{\bv}{v_1,\dotsc,v_n}
+\newcommand{\bw}{w_1,\dotsc,w_n}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\impliedby}{\Leftarrow}
+
+\newcommand{\df}[1]{\textit{#1}}
+
+\usepackage[style=alphabetic,doi=false,url=false,isbn=false]{biblatex}
+\addbibresource{CRLA.bib}
+\renewbibmacro{in:}{}
+
+% disable automatic page designation
+\DeclareFieldFormat{postnote}{#1}
+
+
+\title{Complete Reference on Linear Algebra}
+\subtitle{Comments on \textit{Linear Algebra Done Right, 4th Edition}\thanks{The order of exposition will be based on \cite{axler2024}, but we will incorporate materials from other linear algebra texts, including the famous \cite{friedberg2003linear}. This note assumes familiarity with basic results and definitions in linear algebra. It aims to provide reference for applications mostly in statistics, and sometimes in algebra, topology, functional analysis, and probability.}}
+\author{Feng Cheng}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{rem*}
+    In Sections 1 to 5 below, we assume by default that $V$ is a finite-dimensional vector space (FDVS) over $\F$.
+\end{rem*}
+
+\section{Vector Spaces}
+The corresponding Chapter 1 in LADR deals with vector spaces and subspaces. Sums and direct sums of subspaces are introduced.
+
+\section{Finite-Dimensional Vector Spaces}
+The corresponding Chapter 2 in LADR discusses spanning lists, linear dependence and independence, bases, and dimensions.
+
+Axler works with lists (i.e., ordered sets) instead of sets throughout. This is mainly for consistency purpose: the matrix representation of a linear map ultimately requires an order on the basis. Moreover it makes proving the relations between spanning sets, linearly independent sets, and bases more straightforward, with the following important lemma: 
+
+\begin{namedthm}[Linear dependence lemma {\cite[2.19]{axler2024}}]
+    Suppose $v_1,\dotsc,v_m$ is a linearly dependent list in $V$. Then there exists $k \in [m]$ such that \[
+        v_k \in \s(v_1,\dotsc,v_{k-1}).
+    \] Furthermore removing the $v_k$ does not change the span of the list.
+\end{namedthm}
+
+The next selected result from this chapter shows the existence of a complement for any subspace of a FDVS. 
+\begin{thm}[{\cite[2.33]{axler2024}}] \label{thm:exist-comp}
+    Let $V$ be a FDVS and $U$ be its subspace, then there exists a subspace $W$ of $V$ such that $U\oplus W = V$.
+\end{thm}
+Such $W$ is called a \df{complement} for $U$. We can work with finite bases in FDVS, and this is how the theorem above is proved. The analog of finite basis in infinite dimensional vector spaces is the Hamel basis,\footnote{The existence of Hamel basis in an infinite-dimensional vector space is ensured by Zorn's lemma.} which is a purely algebraic concept. In general for a vector space $V$ and its subspace $U$, $W$ is called the \df{algebraic complement} of $V$ if \[
+    U + W = V \quad \text{and} \quad U \cap W = \{0\}.
+\] We denote this by $U \oplus W = V$.
+
+The generalization of \cref{thm:exist-comp} says that every vector subspace of a general vector space has an algebraic complement. This can be proved by Zorn's lemma: one consider the poset of all subspaces $W_j$ of $V$ such that $U \cap W_j = {0}$, ordered by inclusion. It has a maximal element $W$, which one can show by contradiction that $U + W = V$.
+
+This leads us to a natural digression to infinite-dimensional topological vector spaces, where we have the related notion of \emph{topologically complementary spaces}. In particular, we consider the case where $X$ is a Banach space, and $M$ and $N$ are two \emph{closed} subspaces of $X$. (The topological constraint certainly makes the question more interesting.) We have the following nice result: 
+\begin{thm*}[{\cite[Theorem~13.1]{conway2007func}}]
+    If $M$ and $N$ are algebraically complementary in $X$, then they are topologically complementary.
+\end{thm*}
+And hence there is no distinction between the two definitions when the space is Banach.
+
+It turns out that if $M$ is of finite dimension or if $X/M$ is of finite dimension, then $M$ can be complemented. However, not every closed subspace $M$ has a complement.
+
+Moving on to Section 2C, we emphasize two results concerning the dimension of a vector space. The first one is a neat tool sometimes useful in proofs: 
+\begin{prop}[{\cite[2.39]{axler2024}}]
+    Subspace of the full dimension equals the whole space.
+\end{prop}
+The second one is about the dimension of the sum of two subspaces: 
+\begin{thm}[{\cite[2.43]{axler2024}}] \label{thm:sum-dim-two-spaces}
+    Let $V_1$ and $V_2$ be two subspaces of an FDVS, then \[
+        \dim(V_1+V_2) = \dim(V_1) + \dim(V_2) - \dim(V_1 \cap V_2).
+    \]
+\end{thm}
+Despite the resemblance between the sum of vector subspaces and the union of two sets, they are ultimately distinct notions. \Cref{thm:sum-dim-two-spaces} does not generalize, in the sense of inclusion-exclusion formula, to a sum of $3$ subspaces.
+
+\section{Linear Maps}
+\begin{rem*}
+    To show a map $T\colon V\to W$ is linear, it suffices to show that for any $c \in \F$ and $v_1,v_2\in V$, \[T(cv_1 + v_2) = cTv_1 + Tv_2.\]
+\end{rem*}
+
+\begin{thm}
+    A linear map $T \in \LVW$ is uniquely determined by its action on any chosen basis of $V$.
+\end{thm}
+
+\begin{namedthm}[Rank-nullity theorem]
+    Let $V$ be finite-dimensional and $T\in \LVW$, then $\ran T$ is finite-dimensional and \[
+        \dim V = \nullity T + \rank T.
+    \]
+\end{namedthm}
+
+\section{Inner Product Spaces}
+\begin{thm} Let $P\in \LV$.
+    \begin{enumerate}
+        \item Then $P$ is an orthogonal projection onto its range if and only if it is self-adjoint and idempotent. (Same argument applies in the Hilbert space setting.)
+        \item Let $P$ be idempotent and $\dim V = n$. Then $P$ have exactly $n$ eigenvalues of $0$'s and $1$'s counting multiplicity, where the number of $1$'s corresponds to the rank of the matrix $P$. If $P$ is an orthogonal projection onto the subspace $U$, then the number of $1$'s is exactly $\dim U$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}\leavevmode
+    \begin{enumerate}
+        \item ($\implies$) Say $P=P_U$. For any $v\in V$, we have $Pv = u$ for some $u \in U$. We know $Pu = u$, and thus \[P^2v = P(Pv) = Pu = u = Pv.\] To show $P$ is idempotent, we need to prove that for any $v,w\in V$, \[
+            \inp{Pv}{w} = \inp{v}{Pw}.
+        \]
+        Orthogonal decomposition gives us $v = v_1 + v_2$ and $w = w_1 + w_2$, where $v_1, w_1 \in U$ and $v_2, w_2 \in U^\perp$. Therefore \[
+            \inp{Pv}{w} = \inp{v_1}{w_1+w_2} = \inp{v_1}{w_1},
+        \] and meanwhile \[
+            \inp{v}{Pw} = \inp{v_1+v_2}{w_1} = \inp{v_1}{w_1}.
+        \] This finishes the proof in the ($\implies$) direction.
+
+        ($\impliedby$) It suffices to show that $\inp{Pv}{v - Pv} = 0$: \begin{align*}
+            \inp{Pv}{v - Pv} & = \inp{Pv}{v} - \inp{Pv}{Pv} \\ 
+            & = \inp{Pv}{v} - \inp{P^*Pv}{v} \\
+            & = \inp{Pv - Pv}{v} = 0.
+        \end{align*}
+        \item  \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{defn}
+    For a self-adjoint operator $T \in \LV$, its \df{Rayleigh quotient} for $v \in V - \{0\}$ is the scalar \[R(v) = \frac{\inp{Tv}{v}}{\nm{v}^2}.\]
+\end{defn}
+
+\begin{prop}\label{prop:rayleigh-eigen}
+    For a self-adjoint operator $T \in \LV$, where $\dim V = n$, it holds that \[
+        \max_{v \neq 0} R(v) = \lambda_1(T)\quad \text{and} \quad \min_{v \neq 0} R(v) = \lambda_n(T).
+    \]
+\end{prop}
+
+\begin{proof}
+    Without loss of generality we may restrict $v$ to be a unit vector (because scaling in norm does not change the Rayleigh quotient). According to the spectral theorems, we may let $e_1,\dotsc,e_n$ be the orthonormal basis of eigenvectors corresponding to the (real) eigenvalues $\lambda_1\geq\dotsb\geq\lambda_n$. Thus \[
+        v = a_1 e_1 + \dotsb + a_n e_n
+    \] for some scalars $a_1,\dotsc,a_n$. 
+    \begin{align} \begin{split} \label{eq:rayleigh-expansion}
+        R(v) & = \biggl\la \sum_{j=1}^n a_jTe_j,\sum_{j=1}^n a_je_j\biggr\ra \\
+        & \leq \lambda_1 \biggl\la \sum_{j=1}^n a_je_j, \sum_{j=1}^n a_je_j\biggr\ra = \lambda_1 \nm{v}^2 = \lambda_1. \end{split}
+    \end{align} 
+    The other half is proved in the same way.
+\end{proof}
+
+\begin{cor}[{\cite[Exercise~7E.4]{axler2024}}]\label{cor:rayleigh-sing}
+    For $T \in \LVW$, where $\dim V = n$, it holds that \[
+        \max\{\nm{Tv}:\nm{v} = 1\} = \sigma_1(T)\quad \text{and}\quad \min\{\nm{Tv}:\nm{v} = 1\} = \sigma_n(T).
+    \]
+\end{cor}
+\begin{proof}
+    By definition, the singular values of $T$ are the nonnegative square roots of the eigenvalues of $T^*T$ (which is self-adjoint on $V$).
+\end{proof}
+The first part of the corollary above shows that the operator norm of $T$ is attained and is exactly the singular value of $T$. In particular the maximum is attained when $v$ is a left singular vector corresponding to $\sigma_1$. Alternatively Axler proved this with SVD and Bessel's inequality (see \cite[Section 7F]{axler2024}).
+
+The generalization of \cref{prop:rayleigh-eigen} and \cref{cor:rayleigh-sing} is the theorem below.
+
+\begin{namedthm}[Min-max theorem]\leavevmode
+    \begin{enumerate}
+        \item \label{enu:min-max-self-adjoint} For a self-adjoint operator $T \in \LV$, where $\dim V = n$, we have 
+        \begin{align}
+            \lambda_j(T) & = \max_{\dim M = j}\min_{v \in M-\{0\}} R(v) \label{eq:max-min}\\ & = \min_{\dim N = n - j + 1}\max_{v \in N-\{0\}} R(v). \label{eq:min-max}
+        \end{align}
+        \item \label{enu:min-max-singular} For $T \in \LVW$, where $\dim V = n$, we have \begin{align*}
+            \sigma_j(T) & = \max_{\dim M = j}\min_{v \in S(M)}\nm{Tv} \\ & = \min_{\dim N = n - j + 1}\max_{v \in S(N)}\nm{Tv},
+        \end{align*}
+        where $S(M)$ is the set of unit vectors in the subspace $M$.
+    \end{enumerate}
+\end{namedthm}
+\begin{proof}
+    Part~\ref{enu:min-max-singular} is the consequence of part~\ref{enu:min-max-self-adjoint} as we have seen in \cref{cor:rayleigh-sing}. Now we prove \eqref{eq:max-min}. The proof idea is the same as before.
+    
+    First we show that for any subspace $M$ of dimension $j$, there exists a unit vector $v \in M$ such that $\inp{Tv}{v} \leq \lambda_j$. Again let $e_1, \dotsc, e_n$ be the orthonormal basis of eigenvectors corresponding to the eigenvalues $\lambda_1\geq \dotsb \geq \lambda_n$. Consider $N = \s(e_j,\dotsc,e_n)$, which is of dimension of $n-j+1$. This implies that we can choose a unit vector $v \in M \cap N$. We then have \[
+        v = a_j e_j + \dotsb + a_n e_n
+    \] for some scalars $a_j,\dotsc,a_n$. We can get $R(v)\leq \lambda_j$, as in \eqref{eq:rayleigh-expansion}.
+
+    Next we need to show that for some subspace $M$ of dimension $j$, the equality in \[
+        \lambda_j \geq \max_{\dim M = j}\min_{v \in M-\{0\}} R(v)
+    \] can be achieved. Let $M=\s(e_1,\dotsc,e_j)$, and choose $v = e_j$ gives us $R(v) = \inp{Te_j}{e_j} = \lambda_j$. This concludes our proof for \eqref{eq:max-min}.
+
+   Now instead let $N$ be any subspace of dimension $n-j+1$. Since there is a unit vector $v \in N$ such that $\inp{Tv}{v}\leq \lambda_{n-j+1}$, we know that \[\inp{-Tv}{v} \leq -\lambda_j,\] which is now the $(n-j+1)$\textsuperscript{th} largest eigenvalue for the operator $-T$. Therefore \[
+        \inp{Tv}{v} \geq \lambda_j,
+   \] which implies that \[
+        \lambda_j \leq \min_{\dim N = n-j+1} \max_{v \in N-\{0\}} R(v).
+   \] Here the equality can be achieved when $N = \s(e_j,\dotsc,e_n)$ and $v = e_j$.
+\end{proof}
+
+For a self-adjoint operator, $\sigma_j = \abs{\lambda_j}$. If the operator is furthermore positive semidefinite, then $\sigma_j = \lambda_j$.
+
+\newpage
+\appendix
+\section{Special Matrices and Norms}
+
+\begin{defn}
+    On the vector space of matrices $\operatorname{Mat}_{m\times n}(\F)$, we can define a canonical inner product by \[
+        \inp{A}{B} = \tr B^*A = \sum_{j=1}^m\sum_{k=1}^n a_{jk}\ol{b_{jk}}.
+    \] We call its associated norm the \df{Frobenius/Hilbert-Schmidt norm}: \[
+        \nm{A}_{\mathrm F} = \sqrt{\tr{A^*A}} = \sqrt{\sum_{j=1}^m\sum_{k=1}^n \abs{a_{jk}}^2}.
+    \] Since \[\tr A^*A = \sum_{k=1}^n \lambda_j(A^*A) = \sum_{k=1}^n \sigma_k(A)^2,\] we have in addition that \[
+        \nm{A}_{\mathrm{F}} = \sqrt{\sum_{k=1}^n \sigma_k(A)^2}.
+    \] If we let $s = (\sigma_1,\dotsc,\sigma_n)$, notice that $\nm{s}_2 = \nm{A}_\mathrm{F}$, while $\nm{s}_\infty = \nm{A}_\mathrm{op}$.
+\end{defn}
+
+\begin{namedthm}[Eckart-Young-Mirsky theorem (Frobenius norm)]
+    
+\end{namedthm}
+
+\begin{prop}\label{prop:dual-norm}
+    For conjugate exponents $q$ and $p$, where $1 \leq q \leq \infty$, we have for $x \in \F^d$, \[
+        \nm{x}_q = \sup\{\inp{x}{y}: \nm{y}_p = 1\}.
+    \]
+\end{prop}
+\begin{proof}
+    This is a special $\ell^q$ case of \cite[Proposition 6.13]{folland1999}. Note that $\inp{x}{y} = \sum_{j=1}^n x_j \ol{y_j}$.
+\end{proof}
+
+\begin{fact}
+    The operator norm of a matrix $A\in \operatorname{Mat}_{m\times n}(\F)$ \[
+        \nm{A}_{\mathrm{op}} = \max_{x \in S^{n-1}} \nm{Ax}_2 = \max_{x \in S^{n-1}, y \in S^{m-1}} \inp{Ax}{y}.\footnote{The order of two supremums can be interchanged, and hence the $\max_{x,y}$ makes sense.}
+    \]
+\end{fact}
+\begin{proof}
+    The second equality follows from the equality condition for Cauchy-Schwarz inequality (or from \cref{prop:dual-norm}): \[
+        \max_{y \in S^{m-1}}\inp{Ax}{y} = \nm{Ax}_2\nm{y}_2 = \nm{Ax}_2.\qedhere
+    \]
+\end{proof}
+
+
+\section{Operators on Real Vector Spaces}
+
+\newpage
+\printbibliography
+\end{document}

@@ -21,8 +21,8 @@
 \newcommand{\trp}{\mathrm T}
 \newcommand{\trace}{\operatorname{trace}}
 
-\renewcommand{\Pr}{\mathrm{P}}
-\newcommand{\E}{\mathbf{E}}
+\renewcommand{\Pr}{\operatorname{P}}
+\newcommand{\E}{\mathop{}\!\mathbf{E}}
 \newcommand{\I}[1]{\mathbf{1}_{\{#1\}}}
 \newcommand{\SE}{\operatorname{SE}}
 \newcommand{\Var}{\operatorname{Var}}
@@ -49,7 +49,7 @@
 \newtheorem{defn}[thm]{Definition}
 \declaretheoremstyle[headfont=\itshape]{remark}
 \theoremstyle{remark}
-\newtheorem{rmk}[thm]{Remark}
+\newtheorem*{rmk*}{Remark}
 \theoremstyle{definition}
 \newtheorem{sol}[thm]{Solution}
 \newtheorem{mansolinner}{Solution}
@@ -58,8 +58,8 @@
   \mansolinner
 }{\endmansolinner}
 
-
 \usepackage{mathpazo}
+\usepackage{eucal}
 \usepackage[scaled=1.008]{inconsolata}
 \usepackage[scaled=0.842]{berasans}
 
@@ -87,7 +87,7 @@
   \par}
 \makeatother
 
-\title{HDP Exercises}
+\title{HDP Selected Exercises}
 \author{Cheng, Feng}
 \date{}
 
@@ -277,10 +277,6 @@ Let us see $X \sim \text{Poisson}(\lambda)$ as the limit in distribution of a su
     \]
 \end{mansol}
 
-\begin{mansol}{2.4.3}
-    We know $d \leq C$. 
-\end{mansol}
-
 \begin{mansol}{2.5.1}
     \begin{align*}
         \E \abs{X}^p & = \int_{x = -\infty}^{\infty} \abs{x}^p \frac{1}{\sqrt{2 \pi}}e^{-\frac{1}{2}x^2}\,dx \\
@@ -330,6 +326,18 @@ Let us see $X \sim \text{Poisson}(\lambda)$ as the limit in distribution of a su
         \nm{X+Y}_{\psi_2} \text{ exists and is } \leq \nm{X}_{\psi_2} + \nm{Y}_{\psi_2} + \epsilon.
     \]
     Since $\epsilon$ is arbitrary, the triangle inequality follows.
+\end{mansol}
+
+\begin{rmk*}
+    When the infimum exists, it is attained by the monotone convergence theorem. Therefore we can directly plug the subgaussian norm in when proving the triangular inequality.
+\end{rmk*}
+
+\begin{mansol}{2.5.10}
+    
+\end{mansol}
+
+\begin{mansol}{2.5.11}
+
 \end{mansol}
 
 \begin{mansol}{2.6.5}

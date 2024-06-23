@@ -1,21 +1,56 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm}
-\newtheoremstyle{plain}{\topsep}{\topsep}{}{}{\scshape}{.}{.5em}{}
-\newtheoremstyle{definition}{\topsep}{\topsep}{}{}{\bfseries}{.}{.5em}{}
-\newtheoremstyle{remark}{\topsep}{\topsep}{}{}{\itshape}{.}{.5em}{}
+\swapnumbers
+\newtheoremstyle{plain}{\topsep}{\topsep}{\slshape}{}{\scshape}{.}{5pt plus 1pt minus 1pt}{}
+\newtheoremstyle{definition}{\topsep}{\topsep}{}{}{\bfseries}{.}{5pt plus 1pt minus 1pt}{}
+\newtheoremstyle{remark}{.5\topsep}{.5\topsep}{}{}{\itshape}{.}{5pt plus 1pt minus 1pt}{}
 %\usepackage{thmtools}
 %\declaretheoremstyle[headfont=\scshape]{plain}
 %\declaretheoremstyle[headfont=\bfseries]{definition}
 %\declaretheoremstyle[headfont=\itshape]{remark}
 \theoremstyle{remark}
 \newtheorem*{rem*}{\protect\remarkname}
+\newtheorem{rem}{\protect\remarkname}
 \theoremstyle{plain}
 \newtheorem*{prop*}{\protect\propositionname}
+\newtheorem{prop}{\protect\propositionname}
+
+\makeatletter
+\newcommand\thmsname{\protect\theoremname}
+\newcommand\nm@thmtype{theorem}
+\newtheorem{namedtheorem}[rem]{\thmsname}
+\newenvironment{namedthm}[1][Undefined Theorem Name]{
+    \ifx{#1}{Undefined Theorem Name}
+    \renewcommand\nm@thmtype{theorem}
+    \else\renewcommand\thmsname{#1}
+    \renewcommand\nm@thmtype{namedtheorem}\def\@currentlabelname{#1}
+    \fi
+    \begin{\nm@thmtype}}
+    {\end{\nm@thmtype}}
+
+\newtheorem*{namedtheorem*}{\thmsname}
+\newenvironment{namedthm*}[1][Undefined Theorem Name]{
+    \ifx{#1}{Undefined Theorem Name} \renewcommand\nm@thmtype{theorem*}
+    \else\renewcommand\thmsname{#1}
+    \renewcommand\nm@thmtype{namedtheorem*}
+    \fi
+    \begin{\nm@thmtype}}
+    {\end{\nm@thmtype}}
+\makeatother
+
 \providecommand{\propositionname}{Proposition}
 \providecommand{\remarkname}{Remark}
-
+\providecommand{\theoremname}{Theorem}
 \begin{document}
 \begin{prop*}
 This is a prop.
 \end{prop*}
+
+\begin{rem}
+This is a remark.
+\end{rem}
+
+\begin{namedthm}[Zorn's lemma]
+
+\end{namedthm}
 \end{document}

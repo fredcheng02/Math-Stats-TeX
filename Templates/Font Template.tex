@@ -35,18 +35,6 @@
 % \usepackage[T1]{fontenc}
 % \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 
-% use the following locally when mtpro2 is installed
-% \usepackage{newtxtext}
-% \usepackage[lite]{mtpro2}
-% Alter \fontdimen20 in the math symbol font
-% \DeclareFontShape{LMP2}{mtt}{m}{n}{%
-%   <-7> mt2syf
-%   <7-9> mt2sys
-%   <9-> mt2syt
-% }{% Default is 2.39. We change it to 2.38
-%   \fontdimen20\font=2.38\fontdimen6\font
-% }
-
 % \usepackage{mathspec}
 % \setmainfont{Liberation Sans}
 % \setmathfont(Digits,Latin,Greek){Liberation Sans}
@@ -77,3 +65,18 @@
 \usepackage[scaled=0.842]{berasans}
 
 % when using unicode-math, operatorname should be defined using `AtBeginDocument`, after all fonts are known
+
+% use the following locally when mtpro2 is installed
+% \renewcommand{\rmdefault}{ptm}
+% \usepackage[lite]{mtpro2}
+% \usepackage[cal=stixtwoplain]{mathalpha}
+% Alter \fontdimen20 in the math symbol font
+% \DeclareFontShape{LMP2}{mtt}{m}{n}{%
+%   <-7> mt2syf
+%   <7-9> mt2sys
+%   <9-> mt2syt
+% }{% Default is 2.39. We change it to 2.38
+%   \fontdimen20\font=2.38\fontdimen6\font
+% }
+% \DeclareMathAlphabet{\mathbbb}{U}{bbold}{m}{n}
+% \newcommand{\ind}{\mathbbb{1}}

@@ -3,6 +3,8 @@
 \usepackage{enumitem}
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace}
+\usepackage{hyperref}
+\hypersetup{pdftitle={DarbouxRiemann}}
 
 \onehalfspacing
 \pagestyle{empty}
@@ -14,17 +16,18 @@
 \begin{document}
 
 \begin{center}
-    \Large Equivalency between Darboux and Riemann Integrals
+    \sffamily
+    \Large Equivalence between Darboux and Riemann Integrals
 \end{center}
 
 \begin{proof}
     Recall the Cauchy condition states that a function $f$ is Darboux integrable iff 
     \begin{equation}
-        \forall \epsilon>0, \exists \text{ a partition } P_\epsilon \text{ such that } U(f, P_\epsilon) - L(f, P_\epsilon) < \epsilon.
+        \forall\,\epsilon>0, \exists\,\text{a partition } P_\epsilon \text{ such that } U(f, P_\epsilon) - L(f, P_\epsilon) < \epsilon.
     \end{equation}
     We may first show that the Riemann integral definition is equivalent to saying that
     \begin{equation}
-        \forall \epsilon > 0, \exists \delta > 0 \text{ such that for any partition } P \text{ with } \nm{P} < \delta, U(f, P) - L(f, P) < \epsilon,
+        \forall\,\epsilon > 0, \exists\,\delta > 0 \text{ such that for any partition } P \text{ with } \nm{P} < \delta, U(f, P) - L(f, P) < \epsilon,
     \end{equation}
     which we will then show is equivalent to the Cauchy condition above. 
     
