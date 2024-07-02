@@ -38,6 +38,8 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \newtheorem{rem}[equation]{Remark}
 \newtheorem*{rem*}{Remark}
 
+\newenvironment{sketch}[1][Sketch]{\begin{proof}[#1]\renewcommand*{\qedsymbol}{$\triangle$}}{\end{proof}}
+
 \makeatletter
 \newcommand\thmsname{\protect\theoremname}
 \newcommand\nm@thmtype{theorem}
@@ -98,14 +100,16 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \newcommand{\C}{\mathbf{C}}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\F}{\mathbf{F}}
+\newcommand{\Mat}{\operatorname{Mat}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\s}{\operatorname{span}}
 \newcommand{\nul}{\operatorname{null}}
-\newcommand{\ran}{\operatorname{range}}
+\newcommand{\rng}{\operatorname{range}}
 \newcommand{\nullity}{\operatorname{nullity}}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\trp}{\mathrm{t}}
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
 \newcommand{\inp}[2]{\langle #1, #2 \rangle}
@@ -142,7 +146,7 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \maketitle
 
 \begin{rem*}
-    In Sections 1 to 5 below, we assume by default that $V$ is a finite-dimensional vector space (FDVS) over $\F$.
+    In Sections 1 to 5 below, we assume by default that $V$ is a finite-dimensional vector space (FDVS) over $\F$ ($\R$ or $\C$).
 \end{rem*}
 
 \section{Vector Spaces}
@@ -199,10 +203,54 @@ Despite the resemblance between the sum of vector subspaces and the union of two
 \end{thm}
 
 \begin{namedthm}[Rank-nullity theorem]
-    Let $V$ be finite-dimensional and $T\in \LVW$, then $\ran T$ is finite-dimensional and \[
+    Let $V$ be finite-dimensional and $T\in \LVW$, then $\rng T$ is finite-dimensional and \[
         \dim V = \nullity T + \rank T.
-    \]
+    \] (Recall $\nullity$ is the dimension of the nullspace, and $\rank$ is the dimension of the range of a linear map.)
 \end{namedthm}
+\begin{sketch}
+    Choose a basis for $\nul T$ and extend it to a basis of $V$. The length of the extension should correspond to $\dim \rng T$.
+\end{sketch}
+
+Some key facts about matrix ranks have been omitted from Axler's text. We mention them here.
+\begin{defn}
+    For a matrix $A$, the \df{column rank} of $A$ is defined to be the number of linearly independent columns of $A$, i.e., the dimension of the column space of $A$. Define the \df{row rank} of $A$ similarly to be the number of linearly independent rows of $A$.
+\end{defn}
+It is clear that the column rank of $A$ we defined above is exactly the $\rank$ of left-multiplication linear map of the matrix $A$ (from $\F^n$ to $\F^m$). We will show below the important fact that \[
+    \text{column rank} = \text{row rank},
+\] and hence the rank of a linear map and the rank of a matrix are the same concept.
+
+\begin{prop}[{\cite[3.56]{axler2024}}]
+    Let $A \in \Mat_{m\times n}(\F)$ with column rank $c$. Then $A = CR$, where $C\in \Mat_{m\times c}(\F)$ and $R\in \Mat_{c\times n}(\F)$.
+\end{prop}
+\begin{proof}
+    Take out $c$ linearly independent columns from $A$ and we get a $m$-by-$c$ matrix $C$. Each column $k$ of $A$ is a (unique) linear combination of the columns of $C$, and we may define the matrix $R$ such that its $k$\textsuperscript{th} column corresponds to the $c$ coefficients in the linear combination.
+\end{proof}
+\begin{cor}\label{cor:rank-result}
+    The column rank of $A$ is equal to the row rank of $A$. Therefore we may simply refer to both as the \df{rank} of $A$.
+\end{cor}
+\begin{proof}
+    Each row of $A = CR$ is a linear combination of the $c$ rows of $R$. Therefore the row rank of $A$ is $\leq c$.
+
+    To prove the opposite direction, apply the above to the transpose of $A$ :
+    \begin{align*}
+        c & = \text{row rank of } A^\trp \\
+        & \leq \text{column rank of } A^\trp \\
+        & = \text{row rank of } A. \qedhere
+    \end{align*}
+\end{proof}
+
+See \cref{sec:elem-mat-op} for materials on the elementary matrix operations, which gives an alternative proof to \cref{cor:rank-result}. That proof also requires knowledge on invertible matrices, and therefore the proof above by Axler is a bit more elementary. Axler provides a second proof of \cref{cor:rank-result} at the very end of Section 3F (using dual spaces and annihilators), and a third proof in the Exercises of Section 7A (using adjoint operators).
+
+For completeness we state a result from \cref{sec:elem-mat-op}.
+
+\begin{prop}
+    Let $\dim V = n$. A linear operator $T \in \LV$ is injective if and only if it is surjective if and only if it is bijective.
+
+    If $T$ is the left-multiplication map of a matrix $A$ in addition, then the above is equivalent to $A$ is of full rank (by the definition of the rank of a matrix).
+\end{prop}
+\begin{cor}
+    
+\end{cor}
 
 \section{Inner Product Spaces}
 \begin{thm} Let $P\in \LV$.
@@ -299,14 +347,72 @@ For a self-adjoint operator, $\sigma_j = \abs{\lambda_j}$. If the operator is fu
 
 \newpage
 \appendix
+\section{Elementary Matrix Operations}\label{sec:elem-mat-op}
+\begin{rem*}
+    Most of the material here is adapted from \cite[Chapter 3]{friedberg2003linear}.
+\end{rem*}
+
+For an $m$-by-$n$ matrix $A$, an \df{elementary row/column operation} on $A$ if we are performing one of the following three: 
+\begin{description}[font=\sffamily]
+    \item[Type 1] interchanging any two rows/columns of $A$; 
+    \item[Type 2] multiplying any row/column of $A$ by a nonzero scalar; 
+    \item[Type 3] adding any scalar multiple of a row/column of A to another row/column.
+\end{description}
+
+An elementary matrix (of type 1/2/3) is obtained from the identity matrix by performing the corresponding elementary matrix operation (of type 1/2/3).
+
+It is easy to see that each elementary row/column operation can be represented uniquely by the left/right-multiplication by a matrix. This matrix is obtained by performing the same elementary row/column matrix on the identity matrix. The corollary of this is that every elementary matrix is invertible, and its inverse is an elementary matrix of the same type.
+
+The first goal of this section is to give an alternative proof of \cref{cor:rank-result}. We need to two results. The first result says that the column rank of a matrix is invariant under left/right-multiplication by invertible matrices.
+\begin{prop}\label{prop:rank-same}
+    For $A \in \Mat_{m\times n}(\F)$, $P \in \Mat_{m \times m}(\F)$, and $Q \in \Mat_{n \times n}(\F)$, where $P$ and $Q$ are invertible, we have \[
+        \text{column rank of } PA = \text{column rank of } A = \text{column rank of } AQ.
+    \]
+\end{prop}
+\begin{proof}
+    A simple exercise using properties of linear isomorphisms.
+\end{proof}
+
+The second result is an important theoretical fact that is a little tedious to prove.
+\begin{thm}[{\cite[Theorem 3.6]{friedberg2003linear}}]\label{thm:reduced-form}
+    Let $A \in \Mat_{m\times n}(\F)$ be of column rank $r$. Then by means of a finite number of elementary row and column operations, $A$ can be reduced to the form \[
+        D = \begin{bmatrix}
+            I_r & O_1 \\
+            O_2 & O_3
+        \end{bmatrix}.
+    \]
+\end{thm}
+It follows easily that \[D = BAC,\] where $B$ and $C$ are two invertible matrices of dimension $m$ and $n$ respectively. We then have \[
+    D^\trp = C^\trp A^\trp B^\trp,
+\] where $C^\trp$ and $B^\trp$ are still invertible. Therefore by \cref{prop:rank-same}, we have \begin{align*}
+    r & = \text{column/row rank of } D \\
+    & = \text{column rank of } D^\trp \\
+    & = \text{column rank of } A^\trp \\
+    & = \text{row rank of } A,
+\end{align*}
+as desired.
+
+The column rank in \cref{prop:rank-same} and \cref{thm:reduced-form} can now be replaced by rank.
+
+\begin{cor}
+    Every invertible matrix is a product of elementary matrices.
+\end{cor}
+This fact is the key to prove the multivariate change of variables integration formula in real analysis. We reduces $C^1$ diffeomorphisms to invertible linear maps, which is further reduced to elementary matrices. Recall $\det (E_1 E_2 \dotsm E_m) = \prod_{j=1}^m \det E_j$.
+
+Note that the above corollary also justifies that the Gaussian elimination method is always successful in finding the matrix inverse. For an invertible $n$-by-$n$ matrix $A$, we consider the augmented matrix $[A \,\vert\, I_n]$. Essentially \[
+    A^{-1}[A \,\vert\, I_n] = [I_n \,\vert\, A^{-1}],
+\] and by the corollary above, $A^{-1}$ can be broken into a product of elementary matrices, each corresponding to an elementary row operation.
+
+Further materials on solving systems of linear equations can be found in \cite[Sections 3.3 and 3.4]{friedberg2003linear}.
+
 \section{Special Matrices and Norms}
 
 \begin{defn}
-    On the vector space of matrices $\operatorname{Mat}_{m\times n}(\F)$, we can define a canonical inner product by \[
-        \inp{A}{B} = \tr B^*A = \sum_{j=1}^m\sum_{k=1}^n a_{jk}\ol{b_{jk}}.
+    On the vector space of matrices $\Mat_{m\times n}(\F)$, we can define a canonical inner product by \[
+        \inp{A}{B} = \tr (B^*A) = \sum_{j=1}^m\sum_{k=1}^n a_{jk}\ol{b_{jk}}.
     \] We call its associated norm the \df{Frobenius/Hilbert-Schmidt norm}: \[
-        \nm{A}_{\mathrm F} = \sqrt{\tr{A^*A}} = \sqrt{\sum_{j=1}^m\sum_{k=1}^n \abs{a_{jk}}^2}.
-    \] Since \[\tr A^*A = \sum_{k=1}^n \lambda_j(A^*A) = \sum_{k=1}^n \sigma_k(A)^2,\] we have in addition that \[
+        \nm{A}_{\mathrm F} = \sqrt{\tr(A^*A)} = \sqrt{\sum_{j=1}^m\sum_{k=1}^n \abs{a_{jk}}^2}.
+    \] Since \[\tr (A^*A) = \sum_{k=1}^n \lambda_j(A^*A) = \sum_{k=1}^n \sigma_k(A)^2,\] we have in addition that \[
         \nm{A}_{\mathrm{F}} = \sqrt{\sum_{k=1}^n \sigma_k(A)^2}.
     \] If we let $s = (\sigma_1,\dotsc,\sigma_n)$, notice that $\nm{s}_2 = \nm{A}_\mathrm{F}$, while $\nm{s}_\infty = \nm{A}_\mathrm{op}$.
 \end{defn}
@@ -325,7 +431,7 @@ For a self-adjoint operator, $\sigma_j = \abs{\lambda_j}$. If the operator is fu
 \end{proof}
 
 \begin{fact}
-    The operator norm of a matrix $A\in \operatorname{Mat}_{m\times n}(\F)$ \[
+    The operator norm of a matrix $A\in \Mat_{m\times n}(\F)$ \[
         \nm{A}_{\mathrm{op}} = \max_{x \in S^{n-1}} \nm{Ax}_2 = \max_{x \in S^{n-1}, y \in S^{m-1}} \inp{Ax}{y}.\footnote{The order of two supremums can be interchanged, and hence the $\max_{x,y}$ makes sense.}
     \]
 \end{fact}

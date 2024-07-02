@@ -61,22 +61,24 @@
 
 \usepackage{mathpazo}
 \usepackage{eucal}
-\usepackage[scaled=1.008]{inconsolata}
-\usepackage[scaled=0.842]{berasans}
+\usepackage[scaled=0.842]{berasans} % \usepackage[scaled=1.008]{inconsolata}
+\usepackage[scaled=1.107]{couriers}
 
 % when using unicode-math, operatorname should be defined using `AtBeginDocument`, after all fonts are known
 
-% use the following locally when mtpro2 is installed
+% use the following locally when mtpro2 and classico are installed
 % \renewcommand{\rmdefault}{ptm}
+% \usepackage[scaled=0.955]{classico} % biolinum
+% \usepackage[scaled=0.822]{beramono} % nimbusmononarrow
 % \usepackage[lite]{mtpro2}
 % \usepackage[cal=stixtwoplain]{mathalpha}
-% Alter \fontdimen20 in the math symbol font
-% \DeclareFontShape{LMP2}{mtt}{m}{n}{%
-%   <-7> mt2syf
-%   <7-9> mt2sys
-%   <9-> mt2syt
-% }{% Default is 2.39. We change it to 2.38
-%   \fontdimen20\font=2.38\fontdimen6\font
-% }
-% \DeclareMathAlphabet{\mathbbb}{U}{bbold}{m}{n}
-% \newcommand{\ind}{\mathbbb{1}}
+% %Alter \fontdimen20 in the math symbol font
+%  \DeclareFontShape{LMP2}{mtt}{m}{n}{%
+%    <-7> mt2syf
+%    <7-9> mt2sys
+%    <9-> mt2syt
+%  }{% Default is 2.39. We change it to 2.38
+%    \fontdimen20\font=2.38\fontdimen6\font
+%  }
+%  \DeclareMathAlphabet{\mathbbb}{U}{bbold}{m}{n}
+%  \newcommand{\ind}{\mathbbb{1}}
