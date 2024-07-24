@@ -1,13 +1,14 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
+\usepackage{tikz-cd}
 \usepackage{enumitem}
 \usepackage{setspace,microtype}
 \usepackage{soul,framed}
 \usepackage[dvipsnames]{xcolor}
-\usepackage[pdfusetitle,bookmarksnumbered,colorlinks,
+\usepackage[pdfusetitle,bookmarks,bookmarksnumbered,bookmarksopen,bookmarksopenlevel=1,colorlinks,
 citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \usepackage[capitalize]{cleveref}
 \usepackage[all]{hypcap}
@@ -21,6 +22,7 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \newtheoremstyle{plain-star}{\topsep}{\topsep}{}{}{\sffamily}{.}{5pt plus 1pt minus 1pt}{\thmnumber{#2 }\thmname{#1}\thmnote{ #3}}
 
 \newtheoremstyle{definition-star}{\topsep}{\topsep}{}{}{\sffamily}{.}{5pt plus 1pt minus 1pt}{\thmnumber{#2 }\thmname{#1}\thmnote{ (#3)}}
+
 \newtheoremstyle{remark-star}{.5\topsep}{.5\topsep}{}{}{\itshape\sffamily}{.}{5pt plus 1pt minus 1pt}{\thmnumber{#2 }\thmname{#1}\thmnote{ (#3)}}
 
 \numberwithin{equation}{section}
@@ -41,7 +43,7 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \newenvironment{sketch}[1][Sketch]{\begin{proof}[#1]\renewcommand*{\qedsymbol}{$\triangle$}}{\end{proof}}
 
 \makeatletter
-\newcommand\thmsname{\protect\theoremname}
+\newcommand\thmsname{Theorem}
 \newcommand\nm@thmtype{theorem}
 \theoremstyle{plain-star}
 \newtheorem{namedtheorem}[equation]{\thmsname}
@@ -49,9 +51,9 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
     \ifx{#1}{Undefined Theorem Name}
     \renewcommand\nm@thmtype{theorem}
     \else\renewcommand\thmsname{#1}
-    \renewcommand\nm@thmtype{namedtheorem}\def\@currentlabelname{#1}
+    \renewcommand\nm@thmtype{namedtheorem}
     \fi
-    \begin{\nm@thmtype}}
+    \begin{\nm@thmtype}\def\@currentlabelname{#1}}
     {\end{\nm@thmtype}}
 
 \newtheorem*{namedtheorem*}{\thmsname}
@@ -64,7 +66,7 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
     {\end{\nm@thmtype}}
 \makeatother
 
-\renewcommand{\arraystretch}{1.2}
+% \renewcommand{\arraystretch}{1.2}
 
 \setlength{\parskip}{0em} % default parskip
 \setlist{listparindent=\parindent,parsep=0pt} % indentation and separation between list paragraphs
@@ -73,7 +75,8 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \makeatletter
 % \onehalfspacing
 \usepackage{xpatch}
-% \xpatchcmd{\env@cases}{1.2}{0.99}{}{} % when onehalfspacing; 0.72 when doublespacing
+\xpatchcmd{\env@cases}{1.2}{1.2}{}{}
+\delimiterfactor=801
 \xpatchcmd{\proof}{\itshape}{\normalfont\proofnamefont}{}{}
 \newcommand{\proofnamefont}{\itshape\sffamily}
 
@@ -121,8 +124,7 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \newcommand{\LVW}{\mathcal{L}(V,W)}
 \newcommand{\M}{\mathcal{M}}
 \newcommand{\PF}{\mathcal{P}(\F)}
-\newcommand{\bv}{v_1,\dotsc,v_n}
-\newcommand{\bw}{w_1,\dotsc,w_n}
+\newcommand{\blank}{\,\cdot\,}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\implies}{\Rightarrow}
 \renewcommand{\impliedby}{\Leftarrow}
@@ -193,6 +195,16 @@ The second one is about the dimension of the sum of two subspaces:
 \end{thm}
 Despite the resemblance between the sum of vector subspaces and the union of two sets, they are ultimately distinct notions. \Cref{thm:sum-dim-two-spaces} does not generalize, in the sense of inclusion-exclusion formula, to a sum of $3$ subspaces.
 
+At last we state a direct sum result from Section 3E, where we introduce product spaces.
+\begin{prop}[{\cite[3.94]{axler2024}}]
+    A sum of subspaces is a direct sum if and only if their dimensions adds up to the dimension of the whole space.
+\end{prop}
+\begin{sketch}
+    This is a consequence of two results. First, \[
+        \dim(V_1 \times \dotsb \times V_m) = \sum_{j=1}^m \dim V_j.
+    \] Second, the linear map $\Gamma\colon V_1 \times \dotsb \times V_m \to V_1 + \dotsb + V_m$ that adds up the components is injective if and only if the image of $\Gamma$ is a direct sum.
+\end{sketch}
+
 \section{Linear Maps}
 \begin{rem*}
     To show a map $T\colon V\to W$ is linear, it suffices to show that for any $c \in \F$ and $v_1,v_2\in V$, \[T(cv_1 + v_2) = cTv_1 + Tv_2.\]
@@ -202,7 +214,7 @@ Despite the resemblance between the sum of vector subspaces and the union of two
     A linear map $T \in \LVW$ is uniquely determined by its action on any chosen basis of $V$.
 \end{thm}
 
-\begin{namedthm}[Rank-nullity theorem]
+\begin{namedthm}[Rank-nullity theorem] \label{thm:rank-nullity}
     Let $V$ be finite-dimensional and $T\in \LVW$, then $\rng T$ is finite-dimensional and \[
         \dim V = \nullity T + \rank T.
     \] (Recall $\nullity$ is the dimension of the nullspace, and $\rank$ is the dimension of the range of a linear map.)
@@ -241,22 +253,93 @@ It is clear that the column rank of $A$ we defined above is exactly the $\rank$ 
 
 See \cref{sec:elem-mat-op} for materials on the elementary matrix operations, which gives an alternative proof to \cref{cor:rank-result}. That proof also requires knowledge on invertible matrices, and therefore the proof above by Axler is a bit more elementary. Axler provides a second proof of \cref{cor:rank-result} at the very end of Section 3F (using dual spaces and annihilators), and a third proof in the Exercises of Section 7A (using adjoint operators).
 
-For completeness we state a result from \cref{sec:elem-mat-op}.
+For completeness we state a result from \cref{sec:elem-mat-op} here.
 
 \begin{prop}
-    Let $\dim V = n$. A linear operator $T \in \LV$ is injective if and only if it is surjective if and only if it is bijective.
-
-    If $T$ is the left-multiplication map of a matrix $A$ in addition, then the above is equivalent to $A$ is of full rank (by the definition of the rank of a matrix).
+    For $A \in \Mat_{m\times n}(\F)$, $P \in \Mat_{m \times m}(\F)$, and $Q \in \Mat_{n \times n}(\F)$, where $P$ and $Q$ are invertible, we have \[
+        \rank PA = \rank A = \rank AQ.
+    \]
 \end{prop}
-\begin{cor}
-    
-\end{cor}
+
+Now we move onto invertible linear maps.
+\begin{thm}
+    Let $\dim V = n$. A linear operator $T \in \LV$ is injective if and only if it is surjective if and only if it is bijective. (This is in general true for any linear map with the same dimension for its domain and codomain.)
+
+    If $T$ is the left-multiplication map of a square matrix $A$ in addition, then the above is equivalent to $A$ is of full rank (by the definition of the rank of a matrix).
+\end{thm}
+
+This theorem directly implies that when solving a system of $n$ linear equations with $n$ unknowns $Ax = b$, having only the trivial solution when $b = 0$ (injective) is equivalent to having a unique solution for all possible $b$'s.
+
+\begin{prop}
+    Two vector spaces are linearly isomorphic if and only if they have the same dimension.
+\end{prop}
+
+\begin{thm}
+    Consider the space of linear maps $\LVW$, where we fix the basis $v_1,\dotsc,v_n$ of $V$ and $w_1,\dotsc,w_m$ of $W$. Then the matrix representation of $\mathcal{M}\colon \LVW \to \Mat_{m\times n}(\F)$ is a bijection.
+\end{thm}
+
+\begin{namedthm}[Change of basis]
+    Let $T \in \LV$, and $u_1,\dotsc,u_n$ and $v_1,\dotsc,v_n$ be two bases of $V$. If we let \[
+        A = \mathcal{M}\bigl(T,(u_1,\dotsc,u_n)\bigr), \quad
+        B = \mathcal{M}\bigl(T,(v_1,\dotsc,v_n)\bigr), \] and
+    \[
+        C = \mathcal{M}\bigl(T,(v_1,\dotsc,v_n),(u_1,\dotsc,u_n)\bigr),
+    \] then $A = CBC^{-1}$.
+\end{namedthm}
+
+For $V$ and its subspace $U$, with the \nameref{thm:rank-nullity} on the quotient map, we obtain \[
+    \dim V/U = \dim V - \dim U.
+\]
+And of course we have the first isomorphism theorem for vector spaces. We have $V/\nul T \cong \rng T$ in the diagram below. \[
+            \begin{tikzcd}
+                V \arrow[rr,"T"] \arrow[dr,"\pi"] && W \\
+                & {V/\nul T} \arrow[ur,"\widetilde{T}"]
+            \end{tikzcd}
+        \]
+
+The dual space (space of linear functionals) of a vector space $V$ is easy to characterize when $V$ is finite-dimensional.
+
+First we have the following result: 
+\begin{thm}
+    If $X$ is a finite-dimensional normed vector space and $Y$ is a normed vector space, then every linear map $T\colon X\to Y$ is bounded.
+\end{thm}
+\begin{proof}
+    Let $v_1,v_2,\dotsc,v_n$ be a basis of $X$. Then we have when $
+        x = a_1v_1+\dotsb+a_nv_n$, \[
+        \nm{Tx}_Y\leq \sum_{k=1}^n \abs{a_k} \nm{Tv_k}_Y.
+    \] Note $\sum_{k=1}^n \abs{a_k}$ is a norm for every $x \in X$, which we write as $\nm{x}_1$. Let $M = \max_{1\leq k \leq n} \nm{Tv_k}_Y$, then \[
+        \nm{Tx}_Y \leq M\nm{x}_1.
+    \] Now invoke the fact that all norms are equivalent in a finite-dimensional space.
+\end{proof}
+\begin{fact}
+    $\dim V^* = \dim V \cdot \dim \F = \dim V$.
+\end{fact}
+\begin{thm}[(dual basis)]
+    Fix a basis $v_1,\dotsc,v_n$ of $V$. Consider the list of elements $\phi_1,\dotsc,\phi_n$ in the dual space $V^*$ given by \[
+        \phi_j(v_k) = \begin{cases}
+            1 & \text{if } k = j, \\
+            0 & \text{if } k \neq j.
+        \end{cases}
+    \]
+\end{thm}
+
+\begin{defn}
+    For $T \in \LVW$, the \df{adjoint/transpose/dual map} of the $T$ is the map $T'\colon W^* \to V^*$ such that \[
+        T'\phi(v) = (\phi \circ T)(v).
+    \]
+\end{defn}
+
+The adjoint of a linear map is also linear. If $X$ and $Y$ are normed vector spaces and $T$ is bounded, then furthermore $\nm{T'}_{\mathcal{L}(W',V')} = \nm{T}_{\LVW}$.
+
+The adjoint of above is related the (Hermitian) adjoint in inner product spaces via the Riesz representation theorem.
+
+The double dual \emph{hat map} is very important in the study of functional analysis.
 
 \section{Inner Product Spaces}
 \begin{thm} Let $P\in \LV$.
     \begin{enumerate}
         \item Then $P$ is an orthogonal projection onto its range if and only if it is self-adjoint and idempotent. (Same argument applies in the Hilbert space setting.)
-        \item Let $P$ be idempotent and $\dim V = n$. Then $P$ have exactly $n$ eigenvalues of $0$'s and $1$'s counting multiplicity, where the number of $1$'s corresponds to the rank of the matrix $P$. If $P$ is an orthogonal projection onto the subspace $U$, then the number of $1$'s is exactly $\dim U$.
+        \item Let $P$ be idempotent and $\dim V = n$. Then $P$ have exactly $n$ eigenvalues of $0$'s and $1$'s counting multiplicity, where the number of $1$'s corresponds to the rank of $P$. If $P$ is an orthogonal projection onto the subspace $U$, then the number of $1$'s is exactly $\dim U$.
     \end{enumerate}
 \end{thm}
 
@@ -276,7 +359,11 @@ For completeness we state a result from \cref{sec:elem-mat-op}.
             & = \inp{Pv}{v} - \inp{P^*Pv}{v} \\
             & = \inp{Pv - Pv}{v} = 0.
         \end{align*}
-        \item  \qedhere
+        \item  For every $v\in V$ we have $P^2 v = Pv$, which means that $Pv \in E(1,P)$. Also we have $P(v - Pv) = 0$, which implies that $v - Pv \in E(0,P)$. Since \[
+            v = Pv + v - Pv
+        \] for any $v\in V$, we have \[
+            V = E(1,P) + E(0,P),
+        \] showing that $P$ is diagonalizable with eigenvalues $0$ and $1$. Note $\rng P = E(1,P)$, and hence their dimensions are the same. \qedhere
     \end{enumerate}
 \end{proof}
 
@@ -397,7 +484,7 @@ The column rank in \cref{prop:rank-same} and \cref{thm:reduced-form} can now be 
 \begin{cor}
     Every invertible matrix is a product of elementary matrices.
 \end{cor}
-This fact is the key to prove the multivariate change of variables integration formula in real analysis. We reduces $C^1$ diffeomorphisms to invertible linear maps, which is further reduced to elementary matrices. Recall $\det (E_1 E_2 \dotsm E_m) = \prod_{j=1}^m \det E_j$.
+This fact is the key to proving the multivariate change of variables integration formula in real analysis. We reduces $C^1$ diffeomorphisms to invertible linear maps, which is further reduced to elementary matrices. Recall $\det (E_1 E_2 \dotsm E_m) = \prod_{j=1}^m \det E_j$. (Alternatively one may use polar decomposition to prove this result.)
 
 Note that the above corollary also justifies that the Gaussian elimination method is always successful in finding the matrix inverse. For an invertible $n$-by-$n$ matrix $A$, we consider the augmented matrix $[A \,\vert\, I_n]$. Essentially \[
     A^{-1}[A \,\vert\, I_n] = [I_n \,\vert\, A^{-1}],
@@ -416,6 +503,10 @@ Further materials on solving systems of linear equations can be found in \cite[S
         \nm{A}_{\mathrm{F}} = \sqrt{\sum_{k=1}^n \sigma_k(A)^2}.
     \] If we let $s = (\sigma_1,\dotsc,\sigma_n)$, notice that $\nm{s}_2 = \nm{A}_\mathrm{F}$, while $\nm{s}_\infty = \nm{A}_\mathrm{op}$.
 \end{defn}
+
+\begin{namedthm}[Eckart-Young-Mirsky theorem (operator norm)]
+    
+\end{namedthm}
 
 \begin{namedthm}[Eckart-Young-Mirsky theorem (Frobenius norm)]
     

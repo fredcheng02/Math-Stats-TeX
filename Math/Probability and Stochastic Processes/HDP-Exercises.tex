@@ -576,7 +576,14 @@ Hence $e^Xe^Y = \sum_{i=1}^n e^{\lambda_i + \mu_i}u_i u_i^\trp$. Since $X(X+Y) =
     First, \[\nm{X_{v_t} - X_{v_s}}_{L^2} = \Big\lVert\sum_{i=t}^s Z_i\Big\rVert_{L^2}.\] Since $\sum_{i=t}^s Z_i \sim N(0,t-s)$, the $\nm{v_t-v_s}_2^2 = t-s$ (where $v_t$ and $v_s$ are chosen in the canonical Gaussian process). This leads us to make the choice that $v_t = (\underbrace{1,\ldots,1}_{t},\underbrace{0,\ldots,0}_{N-t})$.
 \end{mansol}
 
-\begin{mansol}{}
+\begin{mansol}{7.3.2}The LHS: \begin{align*}
+    \bigl\Vert uv^\trp - w z^\trp\bigr\Vert ^2_\mathrm{F} & = \trace \bigl((uv^\trp -wz^\trp)^\trp (uv^\trp -wz^\trp)\bigr)\\
+    & = 2 - 2 u^\trp w v^\trp z.
+\end{align*}
+The RHS: \[
+    \nm{u-w}_2^2 + \nm{v-z}_2^2 = 4 - 2u^\trp w - 2v^\trp z.
+\]
+By Cauchy-Schwarz we know that $u^\trp w\leq 1$ and $v^\trp z \leq 1$, which gives us the correct inequality.
     
 \end{mansol}
 

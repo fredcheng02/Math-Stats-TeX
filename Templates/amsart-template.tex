@@ -1,0 +1,142 @@
+\documentclass[12pt,draft]{amsart}
+% \usepackage[foot]{amsaddr}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\usepackage{soul,framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{mathtools}
+% \usepackage{mathabx}
+% \mathtoolsset{showonlyrefs} incomp. w. cleveref
+% \usepackage{tikz}
+% \makeatletter
+% \DeclareRobustCommand{\rvdots}{%
+%   \vbox{
+%     \baselineskip4\p@\lineskiplimit\z@
+%     \kern-\p@
+%     \hbox{.}\hbox{.}\hbox{.}
+%   }}
+% \makeatother
+% for centered vdots
+
+% \usepackage{sectsty}
+% \allsectionsfont{\sffamily}
+% \usepackage{titlesec}
+% \titleformat*{\section}{\normalfont\mdseries\Large}
+% \titleformat*{\subsection}{\normalfont\mdseries\large}
+
+% \usepackage{thmtools}
+\usepackage[pdfusetitle,bookmarksnumbered,pagebackref,colorlinks,
+citecolor=ForestGreen,urlcolor=Bittersweet,linkcolor=WildStrawberry]{hyperref} %load this at the end
+
+% \swapnumbers
+% \newtheoremstyle{plain}{.5\baselineskip plus .2\baselineskip minus .2\baselineskip}{.5\baselineskip plus .2\baselineskip minus .2\baselineskip}{\slshape}{0pt}{\scshape}{.}{5pt plus 1pt minus 1pt}{}
+% \newtheoremstyle{definition}{.5\baselineskip plus .2\baselineskip minus .2\baselineskip}{.5\baselineskip plus .2\baselineskip minus .2\baselineskip}{\normalfont}{0pt}{\bfseries}{.}{5pt plus 1pt minus 1pt}{}
+% \newtheoremstyle{remark}{.5\baselineskip plus .2\baselineskip minus .2\baselineskip}{.5\baselineskip plus .2\baselineskip minus .2\baselineskip}{\normalfont}{0pt}{\itshape}{.}{5pt plus 1pt minus 1pt}{}
+
+% \usepackage{cleveref}
+% if you load cleveref, you should not use protect below
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+\newtheorem{prop}[thm]{\protect\propositionname}
+% \newtheorem*{prop*}{\protect\propositionname}
+\newtheorem{lem}[thm]{\protect\lemmaname}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{\protect\definitionname}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{\protect\remarkname}
+\newtheorem*{rem*}{\protect\remarkname}
+
+\makeatletter
+\newcommand\thmsname{\protect\theoremname}
+\newcommand\nm@thmtype{theorem}
+\theoremstyle{plain}
+\newtheorem{namedtheorem}[thm]{\thmsname}
+\newenvironment{namedthm}[1][Undefined Theorem Name]{
+    \ifx{#1}{Undefined Theorem Name}
+    \renewcommand\nm@thmtype{theorem}
+    \else\renewcommand\thmsname{#1}
+    \renewcommand\nm@thmtype{namedtheorem}\def\@currentlabelname{#1}
+    \fi
+    \begin{\nm@thmtype}}
+    {\end{\nm@thmtype}}
+
+\newtheorem*{namedtheorem*}{\thmsname}
+\newenvironment{namedthm*}[1][Undefined Theorem Name]{
+    \ifx{#1}{Undefined Theorem Name} \renewcommand\nm@thmtype{theorem*}
+    \else\renewcommand\thmsname{#1}
+    \renewcommand\nm@thmtype{namedtheorem*}
+    \fi
+    \begin{\nm@thmtype}}
+    {\end{\nm@thmtype}}
+\makeatother
+
+\providecommand{\theoremname}{Theorem}
+\providecommand{\propositionname}{Proposition}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\definitionname}{Definition}
+\providecommand{\remarkname}{Remark}
+% \renewcommand{\arraystretch}{1.2}
+% \usepackage{setspace}
+% \onehalfspacing
+% \usepackage{xpatch}
+% \xpatchcmd{\env@cases}{1.2}{0.99}{}{} when 11pt onehalfspacing
+
+\setlength{\parskip}{0em} % default parskip
+\setlist{listparindent=\parindent,parsep=0pt} % indentation and separation between list paragraphs
+\setenumerate[1]{label=(\alph*)}
+
+\newcommand{\df}[1]{\textit{#1}} % definition
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\where}{\,|\,}
+\newcommand{\blank}{\,\cdot\,}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\clos}[1]{\overline{#1}}
+\newcommand{\inp}[2]{\langle #1, #2 \rangle}
+\newcommand{\nm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\sgn}{\operatorname{sgn}}
+% \renewcommand{\pmod}[1]{\ (\mathrm{mod}\ #1)}
+
+% \usepackage{graphicx}
+% \graphicspath{ {image/} }
+\usepackage[all]{hypcap}
+
+% \newcommand{\tpurp}[1]{\textcolor{purple}{#1}}
+% \newcommand{bpurp}[1]{\colorbox{purple}{#1}}
+
+\title{Title}
+\author{Feng Cheng}
+\address{Department of Mathematics\\ University of Washington\\ Seattle, WA 98195\\ USA}
+\thanks{thanks}
+\email{fecheng@uw.edu}
+\subjclass[2020]{Primary ⟨primary class⟩; Secondary (secondary class)}
+\keywords{something}
+
+\setlength{\textwidth}{\paperwidth-2in}
+\setlength{\textheight}{\paperheight-2in}
+% \setlength{\footskip}{\baselineskip}
+\calclayout
+
+\begin{document}
+
+\begin{abstract}
+    We study something.
+\end{abstract}
+
+\maketitle
+% \tableofcontents
+
+\section{Introduction}
+
+
+
+\end{document}
