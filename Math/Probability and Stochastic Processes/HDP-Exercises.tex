@@ -20,6 +20,8 @@
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\trp}{\mathrm T}
 \newcommand{\trace}{\operatorname{trace}}
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\impliedby}{\Leftarrow}
 
 \renewcommand{\Pr}{\operatorname{P}}
 \newcommand{\E}{\mathop{}\!\mathbf{E}}
@@ -66,6 +68,7 @@
 \onehalfspacing
 \setlength{\parskip}{0em}
 \setlist{listparindent=\parindent,parsep=0pt}
+\setenumerate[1]{label=(\alph*)}
 
 \makeatletter
 \let\@subtitle\@empty % default value
@@ -329,7 +332,7 @@ Let us see $X \sim \text{Poisson}(\lambda)$ as the limit in distribution of a su
 \end{mansol}
 
 \begin{rmk*}
-    When the infimum exists, it is attained by the monotone convergence theorem. Therefore we can directly plug the subgaussian norm in when proving the triangular inequality.
+    When the infimum exists, it is attained by the monotone convergence theorem. Therefore we can directly plug the subgaussian norm in when proving the triangular inequality. No need for the epsilon argument above.
 \end{rmk*}
 
 \begin{mansol}{2.5.10}
@@ -567,7 +570,7 @@ Hence $e^Xe^Y = \sum_{i=1}^n e^{\lambda_i + \mu_i}u_i u_i^\trp$. Since $X(X+Y) =
 \end{mansol}
 
 \begin{mansol}{6.5.2}
-    Just follow the hints. There is a 
+    Just follow the hints. % There is a 
 \end{mansol}
 
 \newpage
@@ -584,11 +587,30 @@ The RHS: \[
     \nm{u-w}_2^2 + \nm{v-z}_2^2 = 4 - 2u^\trp w - 2v^\trp z.
 \]
 By Cauchy-Schwarz we know that $u^\trp w\leq 1$ and $v^\trp z \leq 1$, which gives us the correct inequality.
-    
 \end{mansol}
-
-\begin{mansol}{}
+\begin{mansol}{7.5.3}
+    \begin{enumerate}
+        \item ($\implies$) Let $\E \sup_{t\in T} \inp{g}{t} <\infty$. Assume $\sup_{t \in T} \nm{t} =\infty$, which is attained in the direction of some unit vector $e$. We know the subspace orthogonal to $e$ is of dimension $n - 1$. Since the Lebesgue measure $m$ of a lower dimensional hyperplane is $0$, and the Gaussian measure $\gamma \ll m$ by definition (in fact they are equivalent measures), therefore $g \in \operatorname{span}\{e\}^\perp$ does not contribute to $\E \sup_{t \in T} \inp{g}{t}$. For $g \in \R^n - \operatorname{span}\{e\}^\perp$, we can choose $t$ to be in the direction $e$, which implies $\sup_{t\in T}\inp{g}{t} = \infty$ with probability at least $1/2$. This contradicts the assumption, and hence $T$ is bounded.
     
+    ($\impliedby$) Now assume $\sup_{t \in T}\nm{t} <\infty$. Notice \[
+        \E \sup_{t\in T}\inp{g}{t} \leq \sup_{t\in T}\nm{t} \E \nm{g}.
+    \] Since $\E \nm{g} \leq \sqrt{n}$, the conclusion follows.
+    \end{enumerate}
+\end{mansol}
+\begin{mansol}{7.5.4}
+    Let $g \sim N(0,I_m)$ and $h \sim N(0,I_n)$. Then \[
+        w(AT) = \E \sup_{t\in T} \inp{g}{At} \quad \text{and} \quad 
+        w(T) = \E \sup_{t\in T} \inp{h}{t}.
+    \] Therefore we want to show \[
+        \E \sup_{t\in T} \inp{g}{At} \leq \E \sup_{t\in T} \inp{h}{\nm{A}t}.
+    \] By Sudakov-Fernique, it suffices to show that \[
+        \E \inp{g}{A(t-s)}^2 \leq \E \inp{h}{\nm{A}(t-s)}^2.
+    \] Note \[
+        \E \inp{g}{A(t-s)}^2 = \sum_{j=1}^m [A(t-s)]_j^2 = \nm{A(t-s)}_2^2,
+    \] and also \[
+        \E \inp{h}{\nm{A}(t-s)}^2 = \sum_{k=1}^n \bigl[\nm{A}(t-s)\bigr]_k^2 = \nm{A}^2\nm{t-s}_2^2.
+    \] The inequality is now obvious.
+    % \[w(AT) = \E \sup_{} \leq \nm{A}w(T)\]
 \end{mansol}
 
 \end{document}

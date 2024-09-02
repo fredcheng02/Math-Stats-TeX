@@ -9,14 +9,28 @@
 \usepackage{soul,framed}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[pdfusetitle,bookmarks,bookmarksnumbered,bookmarksopen,bookmarksopenlevel=1,colorlinks,
-citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
+citecolor=CornflowerBlue,urlcolor=CornflowerBlue,linkcolor=BurntOrange]{hyperref}
 \usepackage[capitalize]{cleveref}
 \usepackage[all]{hypcap}
 
 \usepackage{titlesec}
-\titleformat*{\section}
-{\sffamily\Large}
+\titleformat*{\section}{\sffamily\Large}
 \titleformat*{\subsection}{\sffamily\large}
+
+\usepackage{titletoc}
+\contentsmargin{2.4em}
+\titlecontents{section}
+[2em] 
+{\addvspace{.5\baselineskip}}
+{\contentslabel{2em}}
+{\hspace*{-2em}}
+{\hfill\contentspage}
+\titlecontents{subsection}
+[4.8em]
+{}
+{\contentslabel{2.8em}}
+{\hspace*{-2.8em}}
+{\titlerule*[1pc]{.}\contentspage}
 
 % no parentheses
 \newtheoremstyle{plain-star}{\topsep}{\topsep}{}{}{\sffamily}{.}{5pt plus 1pt minus 1pt}{\thmnumber{#2 }\thmname{#1}\thmnote{ #3}}
@@ -36,6 +50,7 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \newtheorem{cor}[equation]{Corollary}
 \theoremstyle{definition-star}
 \newtheorem{defn}[equation]{Definition}
+\newtheorem{exa}[equation]{Example}
 \theoremstyle{remark-star}
 \newtheorem{rem}[equation]{Remark}
 \newtheorem*{rem*}{Remark}
@@ -75,8 +90,7 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 \makeatletter
 % \onehalfspacing
 \usepackage{xpatch}
-\xpatchcmd{\env@cases}{1.2}{1.2}{}{}
-\delimiterfactor=801
+\xpatchcmd{\env@cases}{1.2}{1.1}{}{}
 \xpatchcmd{\proof}{\itshape}{\normalfont\proofnamefont}{}{}
 \newcommand{\proofnamefont}{\itshape\sffamily}
 
@@ -146,6 +160,9 @@ citecolor=CadetBlue,urlcolor=CadetBlue,linkcolor=RedOrange]{hyperref}
 
 \begin{document}
 \maketitle
+
+\tableofcontents
+\newpage
 
 \begin{rem*}
     In Sections 1 to 5 below, we assume by default that $V$ is a finite-dimensional vector space (FDVS) over $\F$ ($\R$ or $\C$).
