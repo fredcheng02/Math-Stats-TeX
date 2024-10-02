@@ -6,7 +6,7 @@
 \usepackage{tikz-cd}
 \usepackage{enumitem}
 \usepackage{setspace,microtype}
-\usepackage{soul,framed}
+\usepackage{soul,mdframed}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{imakeidx}
 \usepackage{xifthen}
@@ -91,8 +91,15 @@ citecolor=CornflowerBlue,urlcolor=CornflowerBlue,linkcolor=BurntOrange]{hyperref
 
 \setlength{\parskip}{0em} % default parskip
 \setlist{listparindent=\parindent,parsep=0pt,left=\parindent} % indentation and separation between list paragraphs
-\setenumerate[1]{label=(\alph*)}
+\setlist[enumerate,1]{label=(\alph*)}
+\setlist[enumerate,2]{label=(\roman*)}
 \counterwithin*{footnote}{section} %footnote changes based on section
+\mdfdefinestyle{simple}{%
+    innerleftmargin=0pt,
+    innerrightmargin=0pt,
+    innertopmargin=2pt,
+    innerbottommargin=2pt
+}
 
 \makeatletter
 % \onehalfspacing
@@ -140,6 +147,7 @@ citecolor=CornflowerBlue,urlcolor=CornflowerBlue,linkcolor=BurntOrange]{hyperref
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\eR}{\ol{\R}}
 \newcommand{\cpl}{\mathrm{c}}
 \newcommand{\trp}{\mathrm{T}}
 \newcommand{\la}{\langle}
@@ -176,8 +184,8 @@ citecolor=CornflowerBlue,urlcolor=CornflowerBlue,linkcolor=BurntOrange]{hyperref
 \newpage
 
 \phantomsection
-\addcontentsline{toc}{part}{Acknowledgement}
-\part*{\Large Acknowledgement}
+\addcontentsline{toc}{part}{Prologue}
+\part*{\Large Prologue}
 
 This is the most ambitious writing project undertaken by the author so far as a math student, and he hopes he can finish it in two years. The author, as a probability student, did not excel in his real analysis courses (MATH 202AB at UC Berkeley) during his senior year. To compensate, the author aims to write an extensive and detailed note that surveys through all the major measure theory results of interest to a rigorous-minded mathematical probabilist.
 
@@ -195,10 +203,10 @@ This entire survey will be based on multiple sources, listed in the bibliography
 We let $X$ be a nonempty set in Part I.
 \begin{defn}
     For $\{A_n\}_{n=1}^\infty\subseteq \wp(X)$, we define \[
-        \limsup_{n \to \infty} A_n = \bigcap_{n=0}^\infty \bigcup_{m=n}^\infty A_m \quad \text{and}\quad \liminf_{n \to \infty} A_n = \bigcup_{n = 0}^\infty \bigcap_{m = n}^\infty A_m.
+        \limsup_{n \to \infty} A_n = \bigcap_{n=1}^\infty \bigcup_{m=n}^\infty A_m \quad \text{and}\quad \liminf_{n \to \infty} A_n = \bigcup_{n = 1}^\infty \bigcap_{m = n}^\infty A_m.
     \]
 \end{defn}
-Note $\bigcap$ can be seen as ``for all'' and $\bigcup$ can be seen as ``there exists''. Therefore $\limsup_n A_n$ consists of elements that belong to infinitely many $A_n$'s (spread out across $n \in \N$), while $\liminf_n A_n$ consists of elements that belong to all but finitely $A_n$ (the $n$'s at the beginning). Compare this with the $\limsup$ and $\liminf$ of a sequence of numbers; for example, one may try the following exercise.
+Note $\bigcap$ can be seen as ``for all'' and $\bigcup$ can be seen as ``there exists''. Therefore $\limsup_n A_n$ consists of elements that belong to infinitely many $A_n$'s (spread out across $n \in \N$), while $\liminf_n A_n$ consists of elements that belong to all but finitely $A_n$ (the $n$'s at the beginning). To compare this with the $\limsup$ and $\liminf$ of a sequence of numbers, one may try the following exercise.
 
 \begin{xca}
     Show that \begin{align*}
@@ -223,6 +231,16 @@ If $\{A_n\}_{n=1}^\infty$ is an increasing sequence of sets, then \[
     \limsup_n A_n^\cpl = \bigl(\liminf_n A_n\bigr)^\cpl \quad \text{and}\quad 
     \liminf_n A_n^\cpl = \bigl(\limsup_n A_n \bigr)^\cpl.
 \]
+
+Here is another exercise.
+
+\begin{xca}
+    Consider a sequence of functions $f_n$ that convergences to $f$ pointwise on some set $E$. If we define \[
+        E_{n,\epsilon} = \{x:\abs{f_n(x) - f(x)} < \epsilon\}
+    \] for $\epsilon > 0$ and $n\in \N$, then \[
+        E = \bigcap_{k=1}^\infty \liminf_m E_m^{1/k} = \bigcap_{k=1}^\infty \bigcup_{m=1}^\infty \bigcap_{n\geq m} E_n^{1/k}.
+    \]
+\end{xca}
 
 \begin{defn}
     A nonempty collection of subsets of $X$ is an \df{algebra} if \begin{enumerate}
@@ -257,16 +275,16 @@ Given a $\sigma$-algebra $\A$ on $X$, the couplet $(X,\mathcal{A})$ is called a 
 
 Also in analysis, ``$\sigma$'' means countable union while ``$\delta$'' means countable intersection. An \df[F-sigma set@$F_\sigma$ set]{$F_{\sigma}$ set} is a countable union\footnote{\emph{somme} in French} of closed\footnote{\emph{fermé} in French} sets, while a \df[G-delta set@$G_\delta$ set]{$G_\delta$ set} is a countable intersection\footnote{\emph{Durchschnitt} in German} of open\footnote{\emph{Gebiet} in German} sets.
 
-We know that the preimage of a function preserves unions, intersections, and complements, which are also operations in the definition of a $\sigma$-algebra. The next result makes the relationship between the two explicit.
+We know that the preimage of a function $f\colon X \to Y$ is a mapping $f^{-1}\colon \wp(Y) \to \wp(X)$ that preserves unions, intersections, and complements, which are also operations in the definition of a $\sigma$-algebra. The next result makes the relationship between the two explicit. See \cref{sec:measurable-functions} for the use.
 \begin{prop}[{\cite[Lemma 1.3]{Kallenberg_2002}}] \label{prop:induce-s-alg-meas-map}
-    Let $f\colon X \to Y$ be a map, and $\mathcal{M}$ and $\mathcal{N}$ be two respective $\sigma$-algebra on $X$ and $Y$. The preimage $f^{-1}$ induces two $\sigma$-algebras: \begin{enumerate}
-        \item $\mathcal{M}' =\{f^{-1}(A) : A \in \mathcal{N}\}$ on $X$, in the backward direction; 
+    Consider $f\colon X \to Y$, and $\mathcal{M}$ and $\mathcal{N}$ be two respective $\sigma$-algebras on $X$ and $Y$. The preimage $f^{-1}$ induces two $\sigma$-algebras: \begin{enumerate}
+        \item \label{enu:backward-ind-s-alg} $\mathcal{M}' =\{f^{-1}(A) : A \in \mathcal{N}\}$ on $X$, in the backward direction; 
         \item \label{enu:forward-ind-s-alg} $\mathcal{N}' = \{B \subseteq Y : f^{-1}(B) \in \mathcal{M}\}$ on $Y$, in the forward direction.
     \end{enumerate}
 \end{prop}
 
 \begin{defn}
-    Within $X$, given a family of subsets $\mathcal{S}$, the smallest $\sigma$-algebra containing $\mathcal{S}$, i.e., the intersection of all $\sigma$-algebras that contains $\mathcal{S}$, is called the \df[sigma-algebra generated by@$\sigma$-algebra generated by]{$\sigma$-algebra generated by} $\mathcal{S}$, denoted by $\sigma(\mathcal{S})$.
+    Within $X$, given a family of subsets $\mathcal{S}$, the smallest $\sigma$-algebra containing $\mathcal{S}$, i.e., the intersection of all $\sigma$-algebras that contains $\mathcal{S}$, is called the \df[sigma-algebra generated by@$\sigma$-algebra generated by!sets]{$\sigma$-algebra generated by $\mathcal{S}$} , denoted by $\sigma(\mathcal{S})$.
 
     Similar definitions hold for other types of structures.
 \end{defn}
@@ -309,6 +327,11 @@ It is clear that probability measure is a finite measure, which is in turn a $\s
 
 A $\sigma$-finite measure means it is a normal kind of measure. The Lebesgue measure that we will rigorously see soon, for example, is $\sigma$-finite. Some major results in measure theory, for example the Fubini--Tonelli theorem (see \cref{sec:prod-integrate}), are only true for $\sigma$-finite measure spaces. A measure that is not $\sigma$-finite is considered, in some sense, a little pathological.
 
+The following fact will come up a couple of times.
+\begin{fact}
+    Fix some $A \in \A$. The function $\nu\colon \A\to [0,\infty]$ given by $\nu(E) = \mu(E \cap A)$ is still a measure.
+\end{fact}
+
 Below are some important basic properties about measures that are used all the time.
 \begin{prop}\label{prop:basic-properties-measure}
     We have the following properties about a measure $\mu$ on $(X,\A)$.
@@ -316,7 +339,7 @@ Below are some important basic properties about measures that are used all the t
         \item monotonicity: for $A,B\in \A$, \[
             A\subseteq B \implies \mu(A)\leq \mu(B);
         \]
-        \item \df[sigma-subadditivity@$\sigma$-subadditivity]{$\sigma$-subadditivity}: for possibly intersecting sets\footnote{Notice there is no such condition in $\sigma$-additivity that we mentioned previously.} $\{E_n\}_{n=1}^\infty \subseteq \A$, \[
+        \item \df[sigma-subadditivity@$\sigma$-subadditivity]{$\sigma$-subadditivity}: for possibly intersecting sets\footnote{Recall in $\sigma$-additivity the sets must be mutually disjoint.} $\{E_n\}_{n=1}^\infty \subseteq \A$, \[
             \mu\biggl(\bigcup_{n=1}^\infty E_n\biggr) \leq \sum_{n=1}^\infty \mu(E_n).
         \]
         \item continuity from below: for a sequence of sets $\{E_n\}_{n=1}^\infty \subseteq \A$ that increases to $E$, we have \[
@@ -455,7 +478,7 @@ Here are some forewords to what we will construct.
 \item Let $X=\R$, $\mathcal{C}$ be the collection of all left-open right-closed
 intervals, and $\ell\bigl((a,b]\bigr)=b-a$. This gives the Lebesgue
 outer measure $m^{*}$ used to construct the Lebesgue measure $m$.
-\item Let $f\colon\R\to\R$ be an increasing right continuous\footnote{We will use ``increasing'' and ``strictly increasing'' in our note. Right continuity at $x$ means continuity from $x^{+}$.}
+\item Let $f\colon\R\to\R$ be an increasing right-continuous\footnote{We will use ``increasing'' and ``strictly increasing'' in our note. Right-continuity at $x$ means continuity from $x^{+}$.}
 function. we let $\ell\bigl((a,b]\bigr)=f(b)-f(a)$. The $\mu^{*}$
 that arises from this is used to construct the Lebesgue--Stieltjes measure.
 \end{itemize}
@@ -550,9 +573,70 @@ where the second equality follows from what we have previously.
     If we assume the Axiom of Choice, then we can use Zorn's lemma to prove $\mathcal{L} \neq \wp(X)$.
 \end{fact}
 
+\begin{thm}
+    Lebesgue--Stieltjes measures can be approximated inside by compact sets (in particular, closed sets) and outside by open sets.
+\end{thm}
+
+\begin{thm}
+    For a finite measure $\mu$ on a metric space $X$ with the Borel $\sigma$-algebra, $\mu$ can be approximated inside by closed sets and outside by open sets.
+\end{thm}
+
+Bill Theorem 12.3
+
+
+This theorem is of particular importance in probability theory.
+
+\begin{thm}[{\cite[Theorem~1.16]{folland1999}}] \label{thm:increasing-rcont-Borel-measure-connection} \leavevmode
+    \begin{enumerate}
+        \item \label{enu:CDF-measure} Let $F\colon \R \to \R$ be an increasing, right-continuous function, then there is a unique associated Borel measure $\mu_F$ on $\R$ such that \[
+        \mu_F(a,b] = F(b) - F(a)\quad \text{for all }a,b\in \R.
+    \] If $G$ is another increasing, right-continuous function, then $\mu_F = \mu_G$ if and only if $F$ and $G$ differ by a constant.
+        \item \label{enu:measure-CDF} Conversely, if $\mu$ is a finite Borel measure on $\R$, then the function $F\colon \R \to \R$ given by $F(x) = \mu(-\infty,x]$ is increasing and right-continuous. Furthermore $\mu = \mu_F$, and the function has left limit, i.e., $\lim_{y \to x^-} F(y)$ exists at every $x \in \R$. More specifically, \begin{equation} \label{eq:CDF-left-limits}
+             \lim_{y \to x^-} F(y) = \mu(-\infty,x).
+        \end{equation}
+    \end{enumerate}
+\end{thm}
+
+Regarding equation \eqref{eq:CDF-left-limits}, it is customary to write $F(x-) = \lim_{y \to x^-} F(y)$ when the limit exists. Note that having left limits implies \[\mu(\{x\}) = F(x) - F(x-)\] for all $x \in \R$.
+
+\begin{proof}
+    Caratheodory, pi-lambda
+\end{proof}
+
+    For part~\ref{enu:measure-CDF}, more generally, if $\mu$ is a Borel measure on $\R$ that is finite on all bounded Borel sets, then $F$ can be instead defined by \[
+        F(x) = \begin{cases*}
+            \mu (0,x] & if $x > 0$, \\
+            0 & if $x = 0$, \\
+            -\mu(x,0] & if $x < 0$,
+        \end{cases*}
+    \] and the same conclusions still hold.
 
 \section{Measurable functions and integration}
-\subsection{Measurable functions}
+\subsection{Measurable functions}\label{sec:measurable-functions}
+
+\begin{defn}
+    Given two measurable spaces $(X,\mathcal{M})$ and $(Y,\mathcal{N})$, a function $f\colon X \to Y$ is called a \df{measurable function} if $f^{-1}(A) \in \M$ for all $A \in \mathcal{N}$.
+    
+    We would stress that the function is $\M/\mathcal{N}$-measurable if the context is not clear. When $(Y,\mathcal{N}) = (\R,\B)$, we usually say $f$ is $\M$-measurable\footnote{Now be aware that either a set or a function may be called $\M$-measurable.}. Therefore when $\M=\B_X$ or $\mathcal{L}_X$, $f$ would be called Borel or Lebesgue measurable, respectively.
+\end{defn}
+
+Check on your own that compositions of measurable functions is measurable.
+
+To check measurability, it suffices to just check preimage condition for a collection of subsets that generates the image $\sigma$-algebra $\mathcal{N}$. This is the content of the next proposition, and is a direct consequence of \cref{prop:induce-s-alg-meas-map}\ref{enu:forward-ind-s-alg}.
+\begin{prop}\label{prop:measurability-generate}
+    If $\mathcal{N}$ is generated by $\mathcal{E}$, then $f\colon X \to Y$ is $\M/\mathcal{N}$-measurable if and only if $f^{-1}(E) \in \M$ for all $E \in \mathcal{E}$.    
+\end{prop}
+
+With this sufficient condition in mind, it is easy to check that continuous functions between topological spaces are measurable, and increasing/decreasing functions from $\R$ to $\R$ are Borel-measurable.
+
+Given a set $X$, a measurable space $(Y,\mathcal{N})$, and a function $f\colon X \to Y$, then by \cref{prop:induce-s-alg-meas-map}\ref{enu:forward-ind-s-alg} we know \[
+    \{f^{-1}(A):A\in \mathcal{N}\}
+\] is the smallest $\sigma$-algebra on $X$ that makes $f$ measurable. We call it the \df[sigma-algebra generated by@$\sigma$-algebra generated by!a function]{$\sigma$-algebra generated by $f$}, denoted by $\sigma(f)$.
+
+More generally, consider a collection of measurable spaces $(Y_\alpha,\mathcal{N}_\alpha)$ over all $\alpha \in I$. Suppose we are given $f_\alpha\colon X \to Y_\alpha$ for all $\alpha$. The \df[sigma-algebra generated by@$\sigma$-algebra generated by functions]{$\sigma$-algebra generated by the class of functions $\{f_\alpha\}_{\alpha \in I}$} on $X$ is defined to be 
+\[
+    \sigma(\{f_\alpha\}_{\alpha\in I}) = \sigma\bigl(\cup_{\alpha \in I} \{f^{-1}(A_\alpha):A_\alpha\in \mathcal{N}_\alpha\}\bigr).
+\] (Recall that union of $\sigma$-algebras is not necessarily a $\sigma$-algebra.)
 
 \begin{namedthm}[Simple function approximation]
     Given $f \in L^+(X,\A)$, there exists a sequence of nonnegative simple functions $\{s_n\}_{n=1}^\infty$ such that $s_n \uparrow f$ pointwise. Furthermore $s_n \to f$ uniformly on any set on which $f$ is bounded.
@@ -560,6 +644,10 @@ where the second equality follows from what we have previously.
 
 Note that the ``furthermore'' part essentially means that every nonnegative bounded measurable function is the increasing uniform limit of nonnegative simple functions.
 \subsection{Nonnegative Lebesgue integrals}
+
+Repartition function is cadlag
+
+
 \begin{namedthm}[Monotone convergence theorem]
     If $\{f_n\} \subseteq L^+$ such that $f_n \uparrow f$ , then \[
         \int f = \lim_n \int f_n
@@ -699,12 +787,20 @@ These two definitions are quite obviously related, as stated by the next proposi
     
 \end{prop}
 
+\begin{xca}
+    Suppose there exists some $p > 1$ such that $\sup_{n\in \N} \int \abs{f_n}\,d\mu <\infty$, then the collection $\{f_n\}_n$ is uniformly integrable.
+\end{xca}
+
 \begin{namedthm}[Vitali's convergence theorem]
-    
+    Suppose $\mu$ is finite. Let $\{f_n\} \subseteq L^1(X,\A,\mu)$, then the following are equivalent: 
+    \begin{enumerate}
+        \item $f \in L^1$ with $f_n \to f$ in $L^1$.
+        \item $f_n \to f$ in measure, and $\{f_n\}$ is uniformly integrable.
+    \end{enumerate}
 \end{namedthm}
 \subsection{Continuity and differentiability of parametrized functions}
 
-\subsection{Image measures}
+\subsection{Image measures} \label{sec:image-measure}
 Consider a measure space $(X,\mathcal{M},\mu)$ and a measurable space $(Y,\mathcal{N})$. If we have an $(\mathcal{M},\mathcal{N})$-measurable function $\phi\colon X \to Y$, then we can define a function $\mu_{*}\colon \mathcal{N} \to [0,\infty]$ given by \[
     \mu_{*}(E) =  \mu(\phi^{-1}E)
 \] for all $E\in \mathcal{N}$. This turns out to a measure on $(Y,\mathcal N)$, and we call this the \df{image/pushforward measure} of $\mu$ by $\phi$, denoted by $\mu_*\phi$ or $\mu_{\#}\phi$.
@@ -713,17 +809,16 @@ Image measure characterizes change of variables, which is of basic importance in
 
 We state the main result below.
 \begin{prop}
-    Under the conditions stated above, let $g\in L^+(Y,\mathcal{N})$. Then we have \begin{equation}
-        \int_X g\bigl(\phi(x)\bigr) \,d\mu(x) = \int_Y g(y) \,d\mu_*(y). \label{eq:image-m}
-    \end{equation}
+    Under the conditions stated above, let $g\in L^+(Y,\mathcal{N})$ or $g \circ \phi \in L^1(X,\mathcal{M},\mu)$. Then \begin{equation*}
+        \int_X g\bigl(\phi(x)\bigr) \,d\mu(x) = \int_Y g(y) \,d\mu_*(y). %\label{eq:image-m}
+    \end{equation*}
 \end{prop}
 \begin{proof}
     When $g = \ind_E$ for $E \in \mathcal{N}$, we have \[
         \text{LHS} = \mu\{x : \phi(x) \in E\} = \mu(\phi^{-1} E) \quad \text{and} \quad 
         \text{RHS} = \mu_{*}(E).
-    \] Now extend this to simple functions and then nonnegative functions.
+    \] Now extend this to simple functions, then nonnegative functions, and then integrable functions.
 \end{proof}
-Of course the result \eqref{eq:image-m} continues to hold for $g \circ \phi \in L^1(X,\mathcal{M},\mu)$.
 
 \section{Product spaces}
 \subsection{Construction of product measures}
@@ -734,7 +829,7 @@ For topological spaces $(X_\alpha,\mathcal{T}_\alpha)$ ($\alpha \in I$), recall 
     \{\pi_\alpha^{-1}(U_\alpha): U_\alpha\in \mathcal{T}_\alpha, \alpha \in I\}.
 \end{equation}
     
-For measurable spaces $(X_\alpha, \A_\alpha)$ ($\alpha \in I$), the \df[product sigma-algebra@product $\sigma$-algebra]{product $\sigma$-algebra} $\A = \bigotimes_{\alpha\in I} \A_\alpha$ on $X = \prod_{\alpha \in I} X_\alpha$ is the $\sigma$-algebra generated by \begin{equation} \label{eq:1d-cylinder-sa}
+For measurable spaces $(X_\alpha, \A_\alpha)$ ($\alpha \in I$), the \df[product sigma-algebra@product $\sigma$-algebra]{product $\sigma$-algebra} $\A = \bigotimes_{\alpha\in I} \A_\alpha$ on $X = \prod_{\alpha \in I} X_\alpha$ is the $\sigma$-algebra generated by all coordinate projections $\pi_\alpha$. Explicitly $\A$ is generated by the collection of sets \begin{equation} \label{eq:1d-cylinder-sa}
      \{\pi_\alpha^{-1}(E_\alpha): E_\alpha\in \A_\alpha, \alpha \in I\}.
 \end{equation}
 
@@ -759,7 +854,7 @@ In fact we can work with even simpler cylinder sets. The next result is somethin
     \] which contains $\mathcal{E}_\alpha$ and hence $\A_\alpha$. This means $\pi_\alpha^{-1}(E) \in \sigma(\mathcal{K})$ for all $\alpha \in I$ and $E \in \A_\alpha$. Hence $\mathcal{J} \subseteq \sigma(\mathcal{K})$. The proof is now complete.
 \end{proof}
 
-We have introduced very general definitions above, but in practice we only deal with cases where the index set $I$ is countable. Although we will not need this result, the reader should verify on their own that when $I$ is countable, $\A = \bigotimes_{n=1}^\infty \A_n$ is generated by \[
+We have introduced very general definitions above, but in practice we only deal with cases where the index set $I$ is countable. The reader should verify on their own that when $I$ is countable, $\A = \bigotimes_{n=1}^\infty \A_n$ is generated by \[
     \biggl\{\prod_{n=1}^\infty E_n :E_n \in \A_n \biggr\}.
 \]
 
@@ -780,10 +875,15 @@ Since the Borel $\sigma$-algebra is the $\sigma$-algebra generated by open set, 
     Since $\mathcal{J}$ consists entirely of open sets, and $\text{RHS} = \sigma(\mathcal{J})$ by \cref{prop:prod-s-algebra-generate}, we have $\text{LHS} \supseteq \text{RHS}$. \emph{Note that this inclusion does not use any topological assumptions on the $X_n$'s.}
     
     If we can now show that $\mathcal{T} \subseteq \sigma(\mathcal{J})$, the proof will be complete. Now $(X,\mathcal{T})$, as a product of separable metric spaces, is still a separable metric space. Here we cite a result from \cite{Bogachev_2020}.
-    \begin{thm*}[{\cite[Theorem 1.2.13]{Bogachev_2020}}]
+    
+    \begin{center}
+    \noindent\begin{minipage}[t]{0.9\columnwidth}
+        \begin{thm*}[{\cite[Theorem 1.2.13]{Bogachev_2020}}]
         Every collection of open sets in a separable metric space contains an at most countable subcollection with the same union.
-    \end{thm*}
-
+        \end{thm*}
+    \end{minipage}
+    \end{center}
+    
     Therefore every open set in $X$ is a countable union of basic open sets. Since a topological basis is given by finite intersections of the cylinder sets in $\mathcal{J}$, we then have $\mathcal{T} \subseteq \sigma(\mathcal{J})$.
     % For the countable dense subset $D_k$ of $X_k$, we 
     % Let $\mathcal{T}$ be the product topology on $X_1 \times X_2 \times \dotsb$.Then \[
@@ -797,6 +897,11 @@ Since the Borel $\sigma$-algebra is the $\sigma$-algebra generated by open set, 
 
 The direct corollary is that $\B(\R^d) = \bigotimes^d \B(\R^1)$. This theorem overall shows the fundamental importance of Borel $\sigma$-algebra in measure theory and its applications: it connects measurability to the underlying topological spaces.
 
+As an exercise, use \cref{prop:measurability-generate} to show the following: 
+\begin{xca}[{\cite[Proposition~2.4]{folland1999}}]
+    Given measurable spaces $(X,\M)$ and $(Y_\alpha,\mathcal{N}_\alpha)$ over all $\alpha \in I$. Let $Y = \prod Y_\alpha$ and $\mathcal{N} = \bigotimes \mathcal{N}_\alpha$. Then $f\colon X \to Y$ is $\M/\mathcal{N}$-measurable if and only if each $f_\alpha = \pi_\alpha \circ f$ is $\M/\mathcal{N}_\alpha$-measurable.
+\end{xca}
+
 \subsection{Integration on product spaces} \label{sec:prod-integrate}
 \begin{namedthm}[Fubini--Tonelli theorem]
     
@@ -804,23 +909,83 @@ The direct corollary is that $\B(\R^d) = \bigotimes^d \B(\R^1)$. This theorem ov
 
 \subsection{Change of variables} \label{sec:cov}
 \subsection{Gamma functions and polar coordinates} \label{sec:polar}
+Let $z \in \C$ with $\Re z > 0$, and we define $f_z\colon (0,\infty)\to \C$ by \[f_z(t) = t^{z-1} e^{-t} = \exp\bigl((z-1)\log t\bigr)\cdot e^{-t}.\] Since 
+
+$\sigma(S^{n-1})=\frac{2\pi^{n/2}}{\Gamma(n/2)}$ and $m(B^{n})=\frac{1}{n}\sigma(S^{n-1})=\frac{\pi^{n/2}}{\Gamma\bigl(\frac{n}{2}+1\bigr)}$.
+For any $\epsilon>0$, we have $S^{n-1}\subseteq B^{n}(0;1+\epsilon)-B^{n}(0;1)$
+\begin{align*}
+m(S^{n-1}) & \leq m\bigl(B^{n}(0;1+\epsilon)\bigr)-m\bigl(B^{n}(0;1)\bigr)\\
+ & \leq(1+\epsilon)^{n}m(B^{n})-m(B^{n}).
+\end{align*}
+Take $\epsilon\to0^{+}$, it is easy to see that $m(S^{n-1})=0$.
+surface area
 
 \section{Structure of measures}
 \subsection{Hahn--Jordan decomposition of signed measures} \label{sec:signed}
 
-\begin{defn} 
-    Let $\mu$ and $\nu$ be two positive/signed/complex measures on $(X, \A)$. We say $\mu$ and $\nu$ are \df{mutually singular}, denoted by $\mu \perp \nu$, if $X$ can be partitioned into two measurable subsets $A$ and $B$, such that \[
-        \mu(B) = 0 \quad \text{and} \quad \nu(A) = 0,
-    \] or equivalently, \[
-        \mu(E) = \mu(E\cap A) \quad \text{and} \quad \nu(E) = \nu(E \cap B).
-    \]
+\begin{defn}
+    Given a measurable space $(X,\A)$, a \df{signed/real measure} (resp.\ \df{complex measure}) on the space is a function $\mu\colon \A \to \R$ (resp.\ $\mu\colon \A \to \C$) such that \begin{enumerate}
+        \item $\mu(\emptyset) = 0$; 
+        \item \label{enu:abs-conv-cond-signed} $\mu(E) = \sum_{n=1}^\infty \mu(E_n)$ for all measurable partitions $\{E_n\}$ of $E$.
+    \end{enumerate}
+\end{defn}
+
+Note condition~\ref{enu:abs-conv-cond-signed} implicitly requires the series $\sum \mu(E_n)$ to be absolutely convergent. An important result that says a series is absolutely convergent if and only if any rearrangement of terms in a series yields the same limiting sum; see \cite[Theorems~3.54 and 3.55]{Rudin_principles_1976}.
+
+Many textbooks define the codomain of a signed measure to include one of $+\infty$ or $-\infty$. We do not adopt this convention because it is hardly used in applications, and many complications are avoided. Furthermore, restricting the codomain to the reals allows us to discuss signed and complex measures simultaneously. We will state our proofs for signed measures. To distinguish signed/complex measures from the measures we have been discussing previously, we call measures that take nonnegative values \df[positive measure]{positive measures}.
+
+Continuity from above and below still holds for signed and complex measures. The proof here is the same as the one for positive measures.
+\begin{xca}
+    Let $\mu$ be a signed/complex measure. If $E_n \uparrow E$ or $E_n \downarrow E$ in $\A$, then $\mu(E) = \lim_n(E_n)$.
+\end{xca}
+However monotonicity no longer holds for signed/complex measures, but we may make the following definitions for a signed measure.
+
+\begin{defn}
+    For a signed measure $\mu$, a measurable set $A$ is a \df[positive/negative/null set for a signed measure]{positive (negative, or null) set} if for every measurable subset $B$ of $A$, $\mu(B)\geq0$ ($\leq 0$, or $=0$). Equivalently, the measurable set $A$ is positive (negative, or null) if for all $E\in \A$, $\mu(E\cap A) \geq 0$ ($\leq 0$, or $= 0$).
 \end{defn}
 
 \begin{namedthm}[Hahn decomposition]
     Let $\mu$ be a signed measure on $(X,\A)$. Then $X$ has a partition into $P$ and $N$ such that $P$ is a positive set and $N$ is a negative set.
 
-    Furthermore, if $P'$ and $N'$ is another such partition, then $P \triangle P' = N \triangle N'$ is $\mu$-null.
+    Furthermore, if $P'$ and $N'$ is another such partition, then $P \triangle P' = N \triangle N'$ is null. This means that the Hahn decomposition is \emph{essentially unique}.
 \end{namedthm}
+\begin{proof}
+    First we show the essential uniqueness. Consider a measurable set $E_1 \subseteq P - P'$. This $E_1$, as a subset of $P$, must have measure $\geq 0$. Yet at the same time $E_1 \subseteq N' - N\subseteq N'$, which implies that $\mu(E_1)\leq 0$. Therefore $\mu(E_1) = 0$. By the same reasoning with $P'$ switching $P$ and $N$ switching $N'$, we should have $\mu(E_2) = 0$ for all measurable subsets $E_2$ of $P'-P$. Since $P\triangle P' = N \triangle N' = (P - P')\cup(P' - P)$, it is clear that this is a null set with respect to the signed measure $\mu$.
+
+    Now we prove the existence. We follow the presentation in \cite{Falkner_2019}, which avoids the axiom of dependent choice used in the proofs of most textbook authors.
+
+    To show the existence of the partition $X = P \cup N$, it suffices\footnote{This is also a necessary condition.} to find some measurable $N$ such that for all $E \in \A$, $\mu(E)\geq \mu(N)$. Now we prove this claim. By assumption we have $\mu(N)\leq \mu(\emptyset) = 0$. Now for any $A \in \A$, we have \[
+        \mu(N) + \mu(N\cap A) \leq \mu(N-A) + \mu(N\cap A) = \mu(N).
+    \] Therefore $N$ is a negative set. For any $A \in \A$, we also have $P\cap A = A - N$ and \[
+        \mu(N) \leq \mu(A) = \mu(A - N) + \mu(N).
+    \] Therefore $\mu(P\cap A)\geq 0$, which means $P$ is a positive set.
+    
+    Now we find such an $N$ with the smallest measure over all measurable sets. Let $L = \inf\{\mu(A): A\in \A\}$, then we need to find $N \in \A$ such that $L = \mu(N)$. Since $\A \neq \emptyset$, by countable choice we can take a sequence $\{D_n\}\subseteq \A$ with $\mu(D_n)\to L$.
+
+    Let $\A_n$ be the algebra of subsets of $\cup_{n=1}^\infty D_n$ generated by $\{D_k\}_{k=1}^n$, which is a finite collection\footnote{As an exercise, show that the $\sigma$-algebra generated by a collection of $n$ sets can have at most $2^{2^n}$ sets.}. Therefore $\mu_n \coloneqq \mu|_{\A_n}$ achieves its minimum on the collection $\A_n$, say at $E_n$. Note the same argument that proved the sufficient condition for finding a Hahn decomposition clearly works for the premeasure $\mu|_{\A_n}$ on the algebra $\A_n$: we have $E_n$ is a $\mu_n$-negative set and $E_n^\cpl$ is a $\mu_n$-positive set on $\A_n$.
+
+    We claim that the desired $N = \liminf_m E_m$. First let $A_m^n=\cap_{k=m}^n E_m$ and let $A_m = \cap_{k\geq m}E_m$. Then  \[\mu(A_m^n)\to \mu(A_m)\] as $n\to \infty$. Furthermore the limit above is a decreasing one: note \begin{align*}
+        \mu(A_m^{n-1}) & = \mu(A_m^n) + \mu(A_m^{n-1} - E_k) \\
+        & = \mu(A_m^n) + \mu(A_m^{n-1}\cap E_n^\cpl) \\
+        & \geq \mu(A_m^n), 
+    \end{align*}
+    where the last inequality follows from the observation that $E_n^\cpl$ is $\mu_n$-positive set on $\A_n$ and $A_m^{n-1} \in \A_n$.
+
+    Now by our choice of $E_m$, we have \[
+        \mu(D_m) \geq \mu(E_m) = \mu(A_m^m)\geq \mu(A_m^{m+1}) \geq \dotsb.
+    \] Therefore \[\mu(D_m) \geq \mu(A_m) \geq L,\] and taking $m \to \infty$ gives us $\mu(A_m) \to L$ as $m\to \infty$. Now the magic takes place. We know $A_m \uparrow \liminf_m E_m$, and thus $\mu(\liminf E_m) = \lim \mu(A_m)$. The two limits must agree, and hence $L = \mu(\liminf E_m)$. This finishes the proof. 
+\end{proof}
+
+signed/complex measures are bounded.
+
+\begin{defn}
+    Let $\mu$ and $\nu$ be two positive/signed/complex measures on $(X, \A)$. We say $\mu$ and $\nu$ are \df{mutually singular}, denoted by $\mu \perp \nu$, if $X$ can be partitioned into two measurable subsets $A$ and $B$, such that \[
+        \mu(B) = 0 \quad \text{and} \quad \nu(A) = 0,
+    \] or equivalently, for all $E\in \A$, \[
+        \mu(E) = \mu(E\cap A) \quad \text{and} \quad \nu(E) = \nu(E \cap B).
+    \]
+\end{defn}
+
 \begin{namedthm}[Jordan decomposition]
     Let $\mu$ be a signed measure on $(X,\A)$. Then there exist unique two finite positive measures $\mu^+$ and $\mu^-$ on $(X,\A)$ such that \[
         \mu = \mu^+ - \mu^- \quad \text{and} \quad \mu^+ \perp \mu^-.
@@ -875,7 +1040,7 @@ We briefly discuss Lebesgue decomposition for other types of measures below.
     \item If $\nu$ is given as a positive/finite/$\sigma$-finite measure instead, then ``positive'' becomes ``positive''/``finite''/``$\sigma$-finite'' in conclusion~\ref{enu:decomp}.
     \item If $\nu$ is given as a $\sigma$-finite measure instead, then in conclusion~\ref{enu:decomp} $\nu_a$ and $\nu_s$ become $\sigma$-finite.
     \item Conclusion~\ref{enu:decomp} continues to hold if $\mu$ and $\nu$ are both signed or complex. Recall the definition of absolute continuity in this case from \eqref{eq:def-abs-cont-sign-cplx}.
-    \item The theorems can be generalized to the case when $\mu$ has no assumption while $\nu$ is \df[s-finite measures@$s$-finite measures]{$s$-finite measures}, which are sums of countably many finite measures. See \cite{Falkner_2019}.
+    \item The theorems can be generalized to the case when $\mu$ has no assumption while $\nu$ is an \df[s-finite measure@$s$-finite measure]{$s$-finite measure}, which is a sum of countably many finite measures. See \cite{Falkner_2019}.
 \end{itemize}
 \begin{rem}
     % This paragraph is borrowed from \cite[Section 3.2]{Bogachev_2007}.
@@ -894,6 +1059,20 @@ We briefly discuss Lebesgue decomposition for other types of measures below.
     \] holds for any finite family of pairwise disjoint open intervals $\{(a_i,b_i)\}_{i=1}^n$ contained in $I$.
 \end{defn}
 \subsection{Fundamental theorem of calculus}
+\begin{namedthm}[Fundamental theorem of calculus (for Lebesgue integrals)]
+    For $f\colon [a,b]\to \R$, the following are equivalent: 
+    \begin{enumerate}
+        \item $f$ is absolutely continuous; 
+        \item there exists a Lebesgue integrable function $g$ on $[a,b]$ such that \[
+            f(x) = f(a) + \int_a^x g(t)\,dt
+        \] for all $x \in [a,b]$.
+        \item $f$ has derivative $f'$ almost everywhere, and $f'$ is Lebesgue integrable with \[
+            f(x) = f(a) + \int_{a}^x f'(t)\,dt
+        \] for all $x \in [a,b]$.
+    \end{enumerate}
+\end{namedthm}
+
+Bogachev 5.4.5 4.7.60
 
 \section{Lebesgue spaces}
 \subsection{When \texorpdfstring{$1 \leq p < \infty$}{1 <= p < infinity}}
@@ -912,18 +1091,76 @@ We briefly discuss Lebesgue decomposition for other types of measures below.
 \newpage
 
 \part{Probability}
-\section{Probability spaces and distributions}
+\section{Interpreting probability using measure theory}
+\subsection{Transfer of terminology}
+From now on the measure space $(X,\A,\mu)$ will be replaced by $(\Omega,\F,P)$ with $P(\Omega)=1$, which we call a \df{probability space}. Given two measurable spaces $(\Omega,\F)$ and $(S,\mathcal{S})$, an $\F/\mathcal{S}$-measurable function $X\colon \Omega \to S$ is called a \df{random variable}. If $(S,\mathcal{S}) = (\R,\B)$, we call the random variable \df[real-valued random variable]{real-valued}.
+
+Given a probability measure $P$ and a random variable $X$, following \cref{sec:image-measure} we may define a probability measure $\mu$ on $(S,\mathcal{S})$ given by \[
+    \mu(E) = P\bigl(X^{-1}(E)\bigr) = P(X\in E) \text{ for all }E\in \mathcal{S}.
+\] We call this the \df{probability distribution} of $X$. The $X \in E$ above is a shorthand for $\{\omega\in \Omega:X(\omega)\in E\}$, and this convention is widely adopted throughout probability, as long as the context is clear. It also corresponds to the intuitive understanding of a random variable $X$ as a ``variable'' taking random values by ignoring the underlying $\omega$, but we must not take this formally.
+
+The \df[cumulative distribution function@(cumulative) distribution function]{(cumulative) distribution function} of a real-valued random variable $X$ is defined to be a function $F\colon \R \to [0,1]$ given by \[
+    F(x) = P(X \leq x) = \mu(-\infty,x].
+\]
+
+We now slightly modify \cref{thm:increasing-rcont-Borel-measure-connection}\ref{enu:CDF-measure}\ref{enu:measure-CDF} to suit our purpose. Note now we instead start with the original part~\ref{enu:measure-CDF}.
+\begin{thm} \label{thm:measure-CDF-prob}
+    Let $X$ be a real-valued random variable with distribution $\mu$, then its distribution function $F$ has the following properties:
+        \begin{itemize}
+            \item $\lim_{x \to -\infty} F(x) = 0$ and $\lim_{x \to \infty} F(x) = 1$;
+            \item it is increasing and right-continuous; 
+            \item it has left limits in the sense that \[
+                F(x-) = \lim_{y \to x^-} F(y) = \mu(-\infty,x),
+            \] which also implies $\mu(\{x\}) = F(x) - F(x-)$.
+        \end{itemize}
+\end{thm}
+Since $\mu$ is now a probability measure, the first bullet point follows directly. The rest has been proved already before.
+
+Recall \cref{thm:increasing-rcont-Borel-measure-connection}\ref{enu:CDF-measure}. We can slightly modify its statement and proof to get the version for obtaining a unique Borel probability measure.
+
+\begin{thm} \label{thm:CDF-measure-prob}
+    Conversely, let $F\colon \R\to [0,1]$ be an increasing, right-continuous function with \[
+        \lim_{x \to -\infty} F(x) = 0\quad \text{and} \quad \lim_{x \to \infty} F(x) = 1,
+    \] then there is a unique probability measure $\mu$ on $(\R,\B)$ such that \[
+        \mu(-\infty,x] = F(x) \quad \text{for all }x\in \R.
+    \]
+\end{thm}
+
+\Cref{thm:CDF-measure-prob} tells us that as long as we have the distribution function of a random variable $X$, which increases from $0$ to $1$ and is right-continuous, then the distribution function determines the distribution of the random variable. Formally we can state 
+\begin{cor}
+    For two real-valued random variables $X$ and $Y$, we have $F_X = F_Y$ if and only if $\mu_X = \mu_Y$.
+\end{cor}
+
+This observation further suggests that given a random variable, we may specify its distribution solely in terms of a function $F\colon \R \to [0,1]$ that is increasing, right-continuous, with \[
+        \lim_{x \to -\infty} F(x) = 0\quad \text{and} \quad \lim_{x \to \infty} F(x) = 1.
+\] We call such a function $F$ a \df[cumulative distribution function@(cumulative) distribution function]{(cumulative) distribution function} on its own.
+
+\begin{thm}
+    Indeed any distribution function $F \colon \R \to [0,1]$ can be realized as the distribution function of some random variable $X$ on some probability space $(\Omega,\F,P)$.
+\end{thm}
+\begin{proof}[First Proof]
+    By \cref{thm:CDF-measure-prob}, we know every distribution function $F$ gives rise to a unique probability measure $\mu$ on $(\R,\B)$. Now let $(\Omega,\F,P) = (\R,\B,\mu)$ and let $X$ be the identity map on $\R$.
+\end{proof}
+As long as one knows \cref{thm:CDF-measure-prob}, this first proof is indeed a very trivial construction. The second proof, independent of \cref{thm:CDF-measure-prob}, might be a bit more interesting to us now.
+\begin{proof}[Second Proof]
+    Let $(\Omega,\F,P) = ([0,1],\B_{[0,1]},m)$, and we define \[
+        X = \sup\{y : F(y) < \omega\} = \inf\{y : F(y) \geq \omega\}
+    \]
+\end{proof}
+
+
+The \df[probability density function@(probability) density function]{(probability) density function} of a random variable $X$ is the Radon--Nikodym derivative $d\mu/dm$ of the probability distribution with respect to the Lebesgue measure.
+
+A polish space is separable and admits a complete metrization.
 
 \subsection{Gaussian measures}
 \begin{namedthm}[Kolmogorov’s extension theorem]
     
 \end{namedthm}
 
-\section{Random variables and expected values}\label{sec:rv-expec}
-\begin{defn}
-    The \df[probability density function@(probability) density function]{(probability) density function} of a random variable $X$ is the Radon--Nikodym derivative $d\mu/dm$ of the probability distribution with respect to the Lebesgue measure.
-\end{defn}
+Bogachev Theorem 1.4.3.
 
+\section{Random variables and expected values}\label{sec:rv-expec}
 \subsection{Independence}
 
 \section{Convergence of probability measures}
@@ -950,12 +1187,17 @@ Notice that the function $\nu\colon \mathcal{G} \to \R$ given by \begin{equation
     Define the conditional probability of $A \in \F$ given a sub-$\sigma$-field $\G$ of $\F$ to be $\E(\ind_A \giv \G)$, which we denote by $P(A\giv \G)$.
 \end{defn}
 
-When $X = \ind_A$, the $\nu(G)$ in \eqref{eq:cond-expec-signed-meas} now becomes $P(A\cap G)$. The conditional probability $P(A \giv \G)$ is therefore the Radon--Nikodym derivative of the probability measure $\nu$ (that takes the information $\G$ into account) with respect to the original probability measure $P$.
+When $X = \ind_A$, the $\nu(G)$ in \eqref{eq:cond-expec-signed-meas} now becomes $P(A\cap G)$. The conditional probability $P(A \giv \G)$ is therefore the Radon--Nikodym derivative of the probability measure $\nu$ (that takes the information $\G$) with respect to the original probability measure $P$.
 
 \section{Some ergodic theory}
 \begin{defn}
     
 \end{defn}
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{part}{Epilogue}
+\part*{\Large Epilogue}
 
 \newpage
 % \nocite{*}
